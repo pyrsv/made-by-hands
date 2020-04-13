@@ -1,31 +1,36 @@
 import React from 'react';
-import { logo } from './logo.svg';
-import './App.css';
 
-const object = {
-	type: 'TEST',
-	payload: 'tt',
-	xx: 'yy',
-	as: 1234,
-};
+import { Route, Link, Switch } from 'react-router-dom';
+import ListOfItems from './Components/Pages/ListOfItems'
+import Cart from './Components/Pages/Cart'
+import Filter from './Components/Pages/Filter'
+import Profile from './Components/Pages/Profile'
+
+
 
 function App() {
 	return (
-		<div className="Appp">
-			<header className="App-header">
-				{/* <img src={logo} className="App-logo" alt="logo" /> */}
-				<p>
-					Edit <code>src/App.js</code> and save to reload.
-				</p>
-				<a
-					className="App-link"
-					href="https://reactjs.org"
-					target="_blank"
-					rel="noopener noreferrer"
-				>
-					Learn React
-				</a>
-			</header>
+		<div>
+			<nav className="navigation">
+				<Link to="">Home </Link>
+				<Link to="/cart">Cart </Link>
+				<Link to="/filter">Filter </Link>
+				<Link to="/profile">Profile </Link>
+			</nav>
+			<Switch>
+				<Route exact path="/" >
+				<ListOfItems/>
+				</Route>
+				<Route path="/cart" >
+				<Cart/>
+				</Route>
+				<Route path="/filter" >
+				<Filter/>	
+				</Route>
+				<Route path="/profile" >
+				<Profile/>	
+				</Route>
+			</Switch>
 		</div>
 	);
 }
