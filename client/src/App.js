@@ -1,22 +1,29 @@
 import React from 'react';
-import './App.css';
+import { Route, Switch } from 'react-router-dom';
+import ListOfItems from './Components/Pages/ListOfItems';
+import Cart from './Components/Pages/Cart';
+import Filter from './Components/Pages/Filter';
+import Profile from './Components/Pages/Profile';
+import Header from './Components/Header';
 
 function App() {
 	return (
-		<div className="Appp">
-			<header className="App-header">
-				<p>
-					Edit <code>src/App.js</code> and save to reload.
-				</p>
-				<a
-					className="App-link"
-					href="https://reactjs.org"
-					target="_blank"
-					rel="noopener noreferrer"
-				>
-					Learn React
-				</a>
-			</header>
+		<div>
+			<Header />
+			<Switch>
+				<Route exact path="/">
+					<ListOfItems />
+				</Route>
+				<Route path="/cart">
+					<Cart />
+				</Route>
+				<Route path="/filter">
+					<Filter />
+				</Route>
+				<Route path="/profile">
+					<Profile />
+				</Route>
+			</Switch>
 		</div>
 	);
 }

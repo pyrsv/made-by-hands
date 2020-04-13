@@ -25,6 +25,8 @@
 		],
 		"no-alert": "error",
 		"no-console": "warn",
-		"no-debugger": "error"
+		"no-debugger": "error",
+		"jsx-a11y/anchor-is-valid": "off",
+		"react/jsx-props-no-spreading": "off"
 	}
 }
