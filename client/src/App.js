@@ -1,19 +1,15 @@
 import React from 'react';
-import { Route, Link, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import ListOfItems from './Components/Pages/ListOfItems';
 import Cart from './Components/Pages/Cart';
 import Filter from './Components/Pages/Filter';
 import Profile from './Components/Pages/Profile';
+import Header from './Components/Header';
 
 function App() {
 	return (
 		<div>
-			<nav className="navigation">
-				<Link to="">Home </Link>
-				<Link to="/cart">Cart </Link>
-				<Link to="/filter">Filter </Link>
-				<Link to="/profile">Profile </Link>
-			</nav>
+			<Header />
 			<Switch>
 				<Route exact path="/">
 					<ListOfItems />
