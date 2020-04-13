@@ -1,19 +1,10 @@
 import React from 'react';
-import { logo } from './logo.svg';
 import './App.css';
-
-const object = {
-	type: 'TEST',
-	payload: 'tt',
-	xx: 'yy',
-	as: 1234,
-};
 
 function App() {
 	return (
 		<div className="Appp">
 			<header className="App-header">
-				{/* <img src={logo} className="App-logo" alt="logo" /> */}
 				<p>
 					Edit <code>src/App.js</code> and save to reload.
 				</p>
