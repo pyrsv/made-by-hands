@@ -22,8 +22,6 @@
 			"allowNamedFunctions": false 
 			}
 		],
-		"object-curly-newline": ["error", { "multiline": true, "minProperties": 2 }
-		],
 		"no-alert": "error",
 		"no-console": "warn",
 		"no-debugger": "error",
