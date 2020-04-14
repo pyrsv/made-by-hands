@@ -11,7 +11,7 @@ const Nav = styled.nav`
 	width: 100%;
 `;
 
-export default function Header(props) {
+export default function Header() {
 	return (
 		<>
 			<ThemeProvider theme={theme}>
