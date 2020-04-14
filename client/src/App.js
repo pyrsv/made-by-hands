@@ -1,9 +1,9 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import ListOfItems from './Components/Pages/ListOfItems';
-import Cart from './Components/Pages/Cart';
-import Filter from './Components/Pages/Filter';
-import Profile from './Components/Pages/Profile';
+import ListOfItems from './Pages/ListOfItems';
+import Cart from './Pages/Cart';
+import Filter from './Pages/Filter';
+import Profile from './Pages/Profile';
 import Header from './Components/Header';
 
 function App() {
