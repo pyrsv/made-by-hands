@@ -100,4 +100,4 @@ fabric.properties
 
 # Local History for Visual Studio Code
 .history/
-./**/.log
+./**/*.log
