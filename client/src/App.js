@@ -5,11 +5,15 @@ import Cart from './Pages/Cart';
 import Filter from './Pages/Filter';
 import Profile from './Pages/Profile';
 import Header from './Components/Header';
+import Button from './Components/UI/Button';
 
 function App() {
 	return (
 		<div>
 			<Header />
+			<Button text="Отправить" color="light" icon="envelope" />
+			<Button text="Подробнее" color="dark" />
+			<Button text="Отправить" color="light" type="wide" />
 			<Switch>
 				<Route exact path="/">
 					<ListOfItems />
