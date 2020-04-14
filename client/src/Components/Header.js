@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ThemeProvider } from 'styled-components';
-import styled from 'styled-components';
+import styled , { ThemeProvider } from 'styled-components';
 
 const theme = {};
 
@@ -11,7 +10,7 @@ const Nav = styled.nav`
 	width: 100%;
 `;
 
-export default function Header(props) {
+export default function Header() {
 	return (
 		<>
 			<ThemeProvider theme={theme}>
