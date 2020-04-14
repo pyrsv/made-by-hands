@@ -20,8 +20,11 @@ const Button = ({ text, onClick, color, type, icon }) => {
 		background-color: ${themeProps =>
 			color === 'dark' ? themeProps.theme.mainDark : 'transparent'};
 		color: ${themeProps =>
-			color === 'dark' ? themeProps.theme.darkButtonColor : themeProps.theme.mainDark};
-		border: ${themeProps => (color === 'dark' ? 'none' : `1px solid ${themeProps.theme.mainDark}`)};
+			color === 'dark'
+				? themeProps.theme.darkButtonColor
+				: themeProps.theme.mainDark};
+		border: ${themeProps =>
+			color === 'dark' ? 'none' : `1px solid ${themeProps.theme.mainDark}`};
 		outline: none;
 	`;
 
