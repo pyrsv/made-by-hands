@@ -32,7 +32,7 @@ const Button = ({ text, onClick, color, type, icon }) => {
 		display: inline-block;
 		position: relative;
 		width: 16px;
-		height: 16px
+		height: 16px;
 		color: inherit;
 		margin-left: 5px;
 		bottom: -1px;
