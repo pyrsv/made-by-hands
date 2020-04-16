@@ -16,6 +16,7 @@ const theme = {
 	whiteBackground: '#FFFCFC', // background for modals and dropdowns
 	lightBorder: '#747A82', // ligtht border color, used in modal forms
 	darkButtonColor: '#DEE0DF', // font color for dark controls
+	accentRed: '#DE3019', // bright red color for discounted price and FavoriteHeart
 };
 
 ReactDOM.render(
