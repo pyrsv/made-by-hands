@@ -53,8 +53,8 @@ const Button = ({ text, onClick, color, type, icon }) => {
 Button.propTypes = {
 	text: PropTypes.string.isRequired,
 	onClick: PropTypes.string.isRequired,
-	color: PropTypes.oneOf('dark', 'light'),
-	type: PropTypes.oneOf('wide', 'default'),
+	color: PropTypes.oneOf(['dark', 'light']),
+	type: PropTypes.oneOf(['wide', 'default']),
 	icon: PropTypes.string,
 };
 

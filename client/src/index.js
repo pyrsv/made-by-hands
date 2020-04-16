@@ -4,9 +4,21 @@ import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faEnvelope } from '@fortawesome/free-regular-svg-icons';
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware, compose } from 'redux';
+import thunk from 'redux-thunk';
+import rootReducer from './store/reducers/rootReducer';
 import App from './App';
 
 library.add(faEnvelope);
+
+const store = createStore(
+	rootReducer,
+	compose(
+		applyMiddleware(thunk),
+		window.devToolsExtension ? window.devToolsExtension() : f => f
+	)
+);
 
 const theme = {
 	lightPink: '#F9ECEF', // main light background color
@@ -15,15 +27,18 @@ const theme = {
 	whiteBackground: '#FFFCFC', // background for modals and dropdowns
 	lightBorder: '#747A82', // ligtht border color, used in modal forms
 	darkButtonColor: '#DEE0DF', // font color for dark controls
+	accentRed: '#DE3019', // bright red color for discounted price and FavoriteHeart
 };
 
 ReactDOM.render(
-	<BrowserRouter>
-		<React.StrictMode>
-			<ThemeProvider theme={theme}>
-				<App />
-			</ThemeProvider>
-		</React.StrictMode>
-	</BrowserRouter>,
+	<Provider store={store}>
+		<BrowserRouter>
+			<React.StrictMode>
+				<ThemeProvider theme={theme}>
+					<App />
+				</ThemeProvider>
+			</React.StrictMode>
+		</BrowserRouter>
+	</Provider>,
 	document.getElementById('root')
 );
