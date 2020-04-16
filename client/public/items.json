@@ -1,0 +1,68 @@
+{ "items":
+[
+    {
+        "name": "Karl Kani Signature corduroy tape waist bag in camel",
+        "currentPrice": 25.00,
+        "categories": "waist bags",
+        "imageUrls":["https://res.cloudinary.com/dnorz3pyf/image/upload/v1586854755/waist%20bags/13977708-1-camelblack_ncxpsa.jpg","https://res.cloudinary.com/dnorz3pyf/image/upload/v1586854755/waist%20bags/13977708-2_prydxs.jpg","https://res.cloudinary.com/dnorz3pyf/image/upload/v1586854755/waist%20bags/13977708-3_yx1emi.jpg","https://res.cloudinary.com/dnorz3pyf/image/upload/e_improve,w_300,h_600,c_thumb,g_auto/v1586854755/waist%20bags/13977708-3_yx1emi.jpg","https://res.cloudinary.com/dnorz3pyf/image/upload/v1586854755/waist%20bags/13977708-4_gnqr8z.jpg"],
+        "quantity": 50,
+        "color": "yellow",
+        "productUrl":"/waist-bags",
+        "brand":"Karl Kani",
+        "parametrs":["Adjustable body strap","Secure clasp fastening","External pocket","Zip closure"],
+        "description":[ "Lorem ipsum dolor sit amet consectetur adipisicing elit.",  
+          "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur temporibus ea amet numquam nihil in officiis explicabo pariatur totam nam, veritatis, ratione veniam maiores deserunt vitae voluptas nesciunt sed inventore. "]
+    },
+    {
+        "name": "Karl Kani faux fur waist bag in black",
+        "currentPrice": 25.00,
+        "categories": "waist bags",
+        "imageUrls":["https://res.cloudinary.com/dnorz3pyf/image/upload/v1586855992/waist%20bags/13977710-1-blackwhite_uhh5ol.jpg","https://res.cloudinary.com/dnorz3pyf/image/upload/v1586855992/waist%20bags/13977710-2_fglpsu.jpg","https://res.cloudinary.com/dnorz3pyf/image/upload/v1586855992/waist%20bags/13977710-4_ejff0r.jpg","https://res.cloudinary.com/dnorz3pyf/image/upload/v1586855993/waist%20bags/13977710-3_qvlrpi.jpg"],
+        "quantity": 50,
+        "color":"black",
+        "productUrl":"/waist-bags",
+        "brand":"Karl Kani",
+        "parametrs":["Adjustable strap","Secure fastening","Branded design","Zip closure"],
+        "description":[ "Lorem ipsum dolor sit amet consectetur adipisicing elit."  
+          ,"Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur temporibus ea amet numquam nihil in officiis explicabo pariatur totam nam, veritatis, ratione veniam maiores deserunt vitae voluptas nesciunt sed inventore. "]
+    },
+    {
+        "name": "Puma Sole waist bag with logo strap in black",
+        "currentPrice": 15.00,
+        "categories": "waist bags",
+        "imageUrls":["https://res.cloudinary.com/dnorz3pyf/image/upload/v1586856971/waist%20bags/14542123-1-black_f4g1nm.jpg","https://res.cloudinary.com/dnorz3pyf/image/upload/v1586856971/waist%20bags/14542123-2_d14exx.jpg","https://res.cloudinary.com/dnorz3pyf/image/upload/v1586856971/waist%20bags/14542123-4_f96mbk.jpg","https://res.cloudinary.com/dnorz3pyf/image/upload/v1586856971/waist%20bags/14542123-3_ccoqdo.jpg"],
+        "quantity": 100,
+        "color":"black",
+        "productUrl":"/waist-bags",
+        "brand":"Puma",
+        "parametrs":["External pocket","Zip closure","Branded design","Adjustable body strap"],
+        "description":[ "Lorem ipsum dolor sit amet consectetur adipisicing elit.",  
+          "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur temporibus ea amet numquam nihil in officiis explicabo pariatur totam nam, veritatis, ratione veniam maiores deserunt vitae voluptas nesciunt sed inventore. "]
+    },
+    {
+        "name": "Versace Jeans Couture studded waist bag",
+        "currentPrice": 165.00,
+        "categories": "waist bags",
+        "imageUrls":["https://res.cloudinary.com/dnorz3pyf/image/upload/v1586857494/waist%20bags/13545772-1-black_dzs9ti.jpg","https://res.cloudinary.com/dnorz3pyf/image/upload/v1586857494/waist%20bags/13545772-4_jkrocv.jpg","https://res.cloudinary.com/dnorz3pyf/image/upload/v1586857494/waist%20bags/13545772-2_l8pt64.jpg","https://res.cloudinary.com/dnorz3pyf/image/upload/v1586857494/waist%20bags/13545772-3_nf7bsa.jpg"],
+        "quantity": 40,
+        "color": "black","productUrl":"/waist-bags",
+        "brand":"Versace",
+        "parametrs":["Adjustable body strap","Secure buckle","External pocket","Zip closure"],
+        "description":[ "Lorem ipsum dolor sit amet consectetur adipisicing elit.",  
+          "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur temporibus ea amet numquam nihil in officiis explicabo pariatur totam nam, veritatis, ratione veniam maiores deserunt vitae voluptas nesciunt sed inventore. "]
+    },
+    {
+        "name": "Puma Lux waist bag in clear plastic",
+        "currentPrice": 13.00,
+        "categories": "waist bags",
+        "imageUrls":["https://res.cloudinary.com/dnorz3pyf/image/upload/v1586857979/waist%20bags/13645098-3_zcubir.jpg","https://res.cloudinary.com/dnorz3pyf/image/upload/v1586857979/waist%20bags/13645098-1-clear_angeru.jpg","https://res.cloudinary.com/dnorz3pyf/image/upload/v1586857979/waist%20bags/13645098-4_jzqemy.jpg","https://res.cloudinary.com/dnorz3pyf/image/upload/v1586857979/waist%20bags/13645098-2_dyeesr.jpg"],
+        "quantity": 50,
+        "color": "white",
+        "productUrl":"/waist-bags",
+        "brand":"Puma",
+        "parametrs":["Adjustable webbed strap with buckle clasp","Because your pockets can only fit so much ","Zip-front fastening","PUMA logo print "],
+        "description":[ "Lorem ipsum dolor sit amet consectetur adipisicing elit.",  
+          "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur temporibus ea amet numquam nihil in officiis explicabo pariatur totam nam, veritatis, ratione veniam maiores deserunt vitae voluptas nesciunt sed inventore. "]
+    }
+]
+}
