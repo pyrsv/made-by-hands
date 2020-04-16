@@ -8,9 +8,11 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import rootReducer from './store/reducers/rootReducer';
+import { faEnvelope, far } from '@fortawesome/free-regular-svg-icons';
+import { fas } from '@fortawesome/free-solid-svg-icons';
 import App from './App';
 
-library.add(faEnvelope);
+library.add(faEnvelope, fas, far);
 
 const store = createStore(
 	rootReducer,
