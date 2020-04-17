@@ -1,7 +1,6 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { Route, Switch } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
 import ListOfItems from './Pages/ListOfItems';
 import Cart from './Pages/Cart';
 import Filter from './Pages/Filter';
@@ -9,14 +8,8 @@ import Profile from './Pages/Profile';
 import Header from './Components/Header';
 import Button from './Components/UI/Button';
 import Multicarousel from './Components/Carousels/Multicarousel';
-import { getItemsAction } from './store/actions/getItemsAction';
 
 function App() {
-	const dispatch = useDispatch();
-
-	useEffect(() => {
-		dispatch(getItemsAction());
-	}, [dispatch]);
 	return (
 		<div>
 			<AppContainer>
