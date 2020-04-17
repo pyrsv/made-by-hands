@@ -2,11 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
+import thunk from 'redux-thunk';
+
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faEnvelope } from '@fortawesome/free-regular-svg-icons';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
-import thunk from 'redux-thunk';
 import rootReducer from './store/reducers/rootReducer';
 import { faEnvelope, far } from '@fortawesome/free-regular-svg-icons';
 import { fas } from '@fortawesome/free-solid-svg-icons';
