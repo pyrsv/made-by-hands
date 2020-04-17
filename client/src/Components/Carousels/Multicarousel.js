@@ -9,7 +9,7 @@ const Multicarousel = () => {
 	const items = useSelector(state => state.itemsReducer.items);
 	const shuffled = items.sort(() => 0.5 - Math.random());
 	const selected = shuffled.slice(0, 4);
-	
+
 	const responsive = {
 		desktop: {
 			breakpoint: { max: 3000, min: 1024 },
@@ -46,8 +46,6 @@ const Multicarousel = () => {
 				itemClass="carousel-item-padding-10-px"
 			>
 				{selected.map(item => {
-					// Shuffle array
-
 					return (
 						<>
 							<ProductCardContainer>
