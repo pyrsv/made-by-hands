@@ -1,8 +1,15 @@
 import React from 'react';
 import Carousel from 'react-multi-carousel';
+import styled from 'styled-components';
 import 'react-multi-carousel/lib/styles.css';
+import { useSelector } from 'react-redux';
+import ProductCard from '../ProductCard';
 
 const Multicarousel = () => {
+	const items = useSelector(state => state.itemsReducer.items);
+	const shuffled = items.sort(() => 0.5 - Math.random());
+	const selected = shuffled.slice(0, 4);
+	
 	const responsive = {
 		desktop: {
 			breakpoint: { max: 3000, min: 1024 },
@@ -29,23 +36,39 @@ const Multicarousel = () => {
 				showDots
 				ssr // means to render carousel on server-side.
 				infinite
-				//   autoPlay={this.props.deviceType !== "mobile" ? true : false}
 				autoPlaySpeed={1000}
 				keyBoardControl
 				customTransition="all .5"
 				transitionDuration={500}
 				containerClass="carousel-container"
 				removeArrowOnDeviceType={['tablet', 'mobile']}
-				//   deviceType={this.props.deviceType}
 				dotListClass="custom-dot-list-style"
-				itemClass="carousel-item-padding-40-px"
+				itemClass="carousel-item-padding-10-px"
 			>
-				<div>Item 1</div>
-				<div>Item 2</div>
-				<div>Item 3</div>
-				<div>Item 4</div>
+				{selected.map(item => {
+					// Shuffle array
+
+					return (
+						<>
+							<ProductCardContainer>
+								<ProductCard
+									key={item.name}
+									name={item.name}
+									img={item.imageUrls[0]}
+									price={item.currentPrice}
+								/>
+							</ProductCardContainer>
+						</>
+					);
+				})}
 			</Carousel>
 		</div>
 	);
 };
+
+const ProductCardContainer = styled.div`
+	width: 80%;
+	margin: auto;
+`;
+
 export default Multicarousel;
