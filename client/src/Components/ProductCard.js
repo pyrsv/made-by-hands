@@ -2,21 +2,34 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import Button from './UI/Button';
+import FavoriteHeart from './UI/FavoriteHeart';
 
-const ProductCard = ({ name, img, oldPrice, price, onAddToCart, type }) => {
+const ProductCard = ({
+	name,
+	img,
+	oldPrice,
+	price,
+	onAddToCart,
+	type,
+	isInCart,
+	isFavorite,
+	onAddToFavorites,
+}) => {
 	return (
 		<Card>
 			<CardImage src={img} alt={name} />
 			<CardInfo type={type}>
 				<CardInfoRow>
 					<ProductName>{name}</ProductName>
+					<FavoriteHeart onClick={onAddToFavorites} isFavorite={isFavorite} />
 				</CardInfoRow>
 				<CardInfoRow>
 					<Button
 						type="default"
 						color="dark"
-						text="Buy"
+						text={isInCart ? 'In Cart' : 'Buy'}
 						onClick={onAddToCart}
+						disabled={isInCart}
 					/>
 					<PriceContainer>
 						{oldPrice && <OldPrice>{oldPrice}€</OldPrice>}
@@ -90,10 +103,10 @@ ProductCard.propTypes = {
 	img: PropTypes.string.isRequired,
 	oldPrice: PropTypes.string,
 	price: PropTypes.string.isRequired,
-	// isInCart: PropTypes.bool.isRequired,
-	// isFavorite: PropTypes.bool.isRequired,
+	isInCart: PropTypes.bool.isRequired,
+	isFavorite: PropTypes.bool.isRequired,
 	onAddToCart: PropTypes.func.isRequired,
-	// onAddToFavorites: PropTypes.func.isRequired,
+	onAddToFavorites: PropTypes.func.isRequired,
 	type: PropTypes.oneOf(['light', 'olive']),
 };
 

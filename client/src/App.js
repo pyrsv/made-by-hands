@@ -1,22 +1,14 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { Route, Switch } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
 import ListOfItems from './Pages/ListOfItems';
 import Cart from './Pages/Cart';
 import Filter from './Pages/Filter';
 import Profile from './Pages/Profile';
 import Header from './Components/Header';
-import Button from './Components/UI/Button';
 import Multicarousel from './Components/Carousels/Multicarousel';
-import { getItemsAction } from './store/actions/getItemsAction';
 
 function App() {
-	const dispatch = useDispatch();
-
-	useEffect(() => {
-		dispatch(getItemsAction());
-	}, [dispatch]);
 	return (
 		<div>
 			<AppContainer>
@@ -24,9 +16,7 @@ function App() {
 				<MulticarouselContainer>
 					<Multicarousel />
 				</MulticarouselContainer>
-				<Button text="Отправить" color="light" icon="envelope" />
-				<Button text="Подробнее" color="dark" />
-				<Button text="Отправить" color="light" type="wide" />
+				<Header />
 
 				<Switch>
 					<Route exact path="/">
