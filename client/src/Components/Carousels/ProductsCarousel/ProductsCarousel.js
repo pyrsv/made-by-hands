@@ -1,11 +1,10 @@
 import React, { useEffect } from 'react';
 import Carousel from 'react-multi-carousel';
-import styled from 'styled-components';
 import 'react-multi-carousel/lib/styles.css';
 import { useSelector, useDispatch } from 'react-redux';
-import ProductCard from '../ProductCard';
-import { getItemsAction } from '../../store/actions/getItemsAction';
-
+import ProductCard from '../../ProductCard/ProductCard';
+import { getItemsAction } from '../../../store/actions/getItemsAction';
+import { ProductCardContainer } from './styles';
 
 const Multicarousel = () => {
 	const dispatch = useDispatch();
@@ -13,7 +12,7 @@ const Multicarousel = () => {
 	useEffect(() => {
 		dispatch(getItemsAction());
 	}, [dispatch]);
-	
+
 	const items = useSelector(state => state.itemsReducer.items);
 	const shuffled = items.sort(() => 0.5 - Math.random());
 	const selected = shuffled.slice(0, 4);
@@ -71,10 +70,5 @@ const Multicarousel = () => {
 		</div>
 	);
 };
-
-const ProductCardContainer = styled.div`
-	width: 80%;
-	margin: auto;
-`;
 
 export default Multicarousel;
