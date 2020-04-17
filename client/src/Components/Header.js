@@ -1,26 +1,32 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import styled , { ThemeProvider } from 'styled-components';
+import styled from 'styled-components';
+import Logo from './Logo/Logo';
+import LayoutContainer from './LayoutContainer/LayoutContainer';
 
-const theme = {};
+const Header = () => {
+	return (
+		<StyledHeader>
+			<LayoutContainer>
+				<Logo />
+				<div style={{ backgroundColor: 'red', height: '50px' }}>aaaa</div>
+			</LayoutContainer>
+		</StyledHeader>
+	);
+};
 
-const Nav = styled.nav`
-	display: flex;
-    justify-content: space-around;
-	width: 100%;
+const StyledHeader = styled.header`
+	background-color: ${props => props.theme.lightPink};
 `;
 
-export default function Header() {
-	return (
-		<>
-			<ThemeProvider theme={theme}>
-				<Nav>
-					<Link to="">Home </Link>
+const Nav = styled.nav``;
+
+export default Header;
+
+// eslint-disable-next-line no-lone-blocks
+{
+	/* <Link to="">Home </Link>
 					<Link to="/cart">Cart </Link>
 					<Link to="/filter">Filter </Link>
-					<Link to="/profile">Profile </Link>
-				</Nav>
-			</ThemeProvider>
-		</>
-	);
+					<Link to="/profile">Profile </Link> */
 }
