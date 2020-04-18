@@ -103,7 +103,6 @@ const ProductCarousel = () => {
 	};
 	return (
 		<div>
-			<h2> Multiple items </h2>
 			<Slider {...settings}>
 				{selected.map(item => {
 					return (
