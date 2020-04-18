@@ -1,6 +1,6 @@
 import React from 'react';
-import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import { InputContainer, Input, Label } from './styles';
 
 const InputField = ({
 	label,
@@ -28,27 +28,6 @@ const InputField = ({
 		</InputContainer>
 	);
 };
-
-const InputContainer = styled.div`
-	font-family: 'Raleway', sans-serif;
-	margin-bottom: 22px;
-`;
-
-const Input = styled.input`
-	display: inline-block;
-	border: 1px solid #16161c;
-	box-sizing: border-box;
-	border-radius: 4px;
-	padding: 6px 12px;
-	font-family: Raleway;
-	font-size: 16px;
-	outline: none;
-`;
-
-const Label = styled.label`
-	display: block;
-	margin-bottom: 5px;
-`;
 
 InputField.propTypes = {
 	label: PropTypes.string,

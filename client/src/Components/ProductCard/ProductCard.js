@@ -1,8 +1,17 @@
 import React from 'react';
-import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import Button from './UI/Button';
-import FavoriteHeart from './UI/FavoriteHeart';
+import Button from '../UI/Button/Button';
+import FavoriteHeart from '../UI/FavoriteHeart/FavoriteHeart';
+import {
+	Card,
+	CardImage,
+	CardInfo,
+	CardInfoRow,
+	OldPrice,
+	Price,
+	PriceContainer,
+	ProductName,
+} from './styles';
 
 const ProductCard = ({
 	name,
@@ -40,63 +49,6 @@ const ProductCard = ({
 		</Card>
 	);
 };
-
-const Card = styled.div`
-	font-family: 'Raleway', sans-serif;
-	color: ${props => props.theme.mainDark};
-`;
-
-const CardImage = styled.img`
-	width: 100%;
-	height: 315px;
-	object-fit: cover;
-	vertical-align: middle;
-`;
-const CardInfo = styled.div`
-	background-color: ${props =>
-		props.type === 'light' ? props.theme.lightPink : props.theme.mainOlive};
-	padding: 16px 12px 19px;
-`;
-
-const ProductName = styled.p`
-	font-family: Raleway;
-	font-weight: 600;
-	font-size: 22px;
-	line-height: 25px;
-	max-width: 85%;
-	min-height: 46px;
-	margin-bottom: 10px;
-	line-height: 22px;
-`;
-
-const PriceContainer = styled.div`
-	position: relative;
-	text-align: right;
-`;
-
-const Price = styled.span`
-	display: inline-block;
-	font-family: 'Open Sans', sans-serif;
-	width: 100%;
-	color: ${props =>
-		props.discounted ? props.theme.accentRed : props.theme.mainDark};
-	font-size: 24px;
-`;
-
-const OldPrice = styled.span`
-	display: inline-block;
-	font-size: 14px;
-	text-decoration-line: line-through;
-	position: absolute;
-	top: -15px;
-	left: 0;
-`;
-
-const CardInfoRow = styled.div`
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-`;
 
 ProductCard.propTypes = {
 	name: PropTypes.string.isRequired,
