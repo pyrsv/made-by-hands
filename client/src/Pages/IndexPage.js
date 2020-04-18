@@ -7,11 +7,7 @@ const IndexPage = () => {
 	return (
 		<>
 			<Header />
-			<LayoutContainer>
-				<ProductCarouselContainer>
-					<ProductsCarousel />
-				</ProductCarouselContainer>
-			</LayoutContainer>
+			<ProductsCarousel />
 		</>
 	);
 };

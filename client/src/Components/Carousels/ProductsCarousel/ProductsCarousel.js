@@ -3,6 +3,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import ProductCard from '../../ProductCard/ProductCard';
 import { getItemsAction } from '../../../store/actions/getItemsAction';
 import { ProductCardContainer } from './styles';
+import LayoutContainer from '../../LayoutContainer/LayoutContainer';
+import { ProductCarouselContainer } from '../ProductsCarousel/styles';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -103,22 +105,26 @@ const ProductCarousel = () => {
 	};
 	return (
 		<div>
-			<Slider {...settings}>
-				{selected.map(item => {
-					return (
-						<>
-							<ProductCardContainer>
-								<ProductCard
-									key={item.name}
-									name={item.name}
-									img={item.imageUrls[0]}
-									price={item.currentPrice}
-								/>
-							</ProductCardContainer>
-						</>
-					);
-				})}
-			</Slider>
+			<LayoutContainer>
+				<ProductCarouselContainer>
+					<Slider {...settings}>
+						{selected.map(item => {
+							return (
+								<>
+									<ProductCardContainer>
+										<ProductCard
+											key={item.name}
+											name={item.name}
+											img={item.imageUrls[0]}
+											price={item.currentPrice}
+										/>
+									</ProductCardContainer>
+								</>
+							);
+						})}
+					</Slider>
+				</ProductCarouselContainer>
+			</LayoutContainer>
 		</div>
 	);
 };
