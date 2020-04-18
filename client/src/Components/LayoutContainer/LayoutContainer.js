@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import StyledContainer from './styles';
+import { StyledContainer } from './styles';
 
 const LayoutContainer = ({ children }) => (
 	<StyledContainer>{children}</StyledContainer>
