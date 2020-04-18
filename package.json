@@ -5,7 +5,9 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "server": "nodemon server.js"
+    "server": "nodemon server.js",
+    "client": "cd client && yarn start",
+    "dev": "concurrently \"npm run client\" \"nodemon server.js\""
   },
   "repository": {
     "type": "git",
@@ -16,6 +18,7 @@
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
+    "concurrently": "^5.1.0",
     "dotenv": "^8.1.0",
     "express": "^4.17.1",
     "fs-extra": "^8.1.0",
