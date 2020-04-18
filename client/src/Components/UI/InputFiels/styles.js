@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const InputContainer = styled.div`
 	font-family: 'Raleway', sans-serif;
-	margin-bottom: 22px;
+	margin-bottom: ${props => (props.target === 'form' ? '22px' : 0)};
 `;
 
 export const Input = styled.input`
@@ -14,6 +14,7 @@ export const Input = styled.input`
 	font-family: Raleway;
 	font-size: 16px;
 	outline: none;
+	background-color: transparent;
 `;
 
 export const Label = styled.label`
