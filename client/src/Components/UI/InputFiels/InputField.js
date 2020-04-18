@@ -10,9 +10,10 @@ const InputField = ({
 	name,
 	type,
 	value,
+	target,
 }) => {
 	return (
-		<InputContainer>
+		<InputContainer target={target}>
 			{label && (
 				<Label htmlFor={name}>
 					{label} {required && '*'}
@@ -37,6 +38,7 @@ InputField.propTypes = {
 	onChange: PropTypes.func.isRequired,
 	type: PropTypes.string.isRequired,
 	value: PropTypes.string.isRequired,
+	target: PropTypes.oneOf(['form', 'search']).isRequired,
 };
 
 InputField.defaultProps = {
