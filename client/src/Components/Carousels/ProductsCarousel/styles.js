@@ -6,7 +6,7 @@ margin: auto;
 `;
 
 export const MulticarouselContainer = styled.div`
-width: 80%;
+width: 60%;
 margin: auto;
 `;
 

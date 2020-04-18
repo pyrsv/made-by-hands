@@ -1,6 +1,4 @@
 import React, { useEffect, Component } from 'react';
-// import Carousel from 'react-multi-carousel';
-// import 'react-multi-carousel/lib/styles.css';
 import { useSelector, useDispatch } from 'react-redux';
 import ProductCard from '../../ProductCard/ProductCard';
 import { getItemsAction } from '../../../store/actions/getItemsAction';
@@ -8,82 +6,55 @@ import { ProductCardContainer } from './styles';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
 import Slider from 'react-slick';
 
-function SampleNextArrow(props) {
-	const { className, style, onClick } = props;
+const SampleNextArrow = props => {
+	const { onClick } = props;
 	return (
 		<div
 			className="slick-arrow"
 			style={{
-				...style,
 				display: 'inlineBlock',
-				position: 'relative',
-				bottom: '250px',
+				position: 'absolute',
+				bottom: '45%',
 				padding: '10px',
 				width: '10px',
-				left: '1730px',
+				left: '100%',
 			}}
 			onClick={onClick}
 		>
-			<FontAwesomeIcon size="2x" icon={['fas', 'chevron-circle-right']}></FontAwesomeIcon>
+			<FontAwesomeIcon
+				size="2x"
+				icon={['fas', 'chevron-circle-right']}
+			></FontAwesomeIcon>
 		</div>
 	);
-}
-const SamplePrevArrow = (props) => {
-    const { className, onClick, style } = props
-    return (
-        <div 
+};
+
+const SamplePrevArrow = props => {
+	const { onClick } = props;
+	return (
+		<div
 			className="slick-arrow"
 			style={{
-				// ...style,
 				display: 'inlineBlock',
-				position: 'relative',
+				position: 'absolute',
 				padding: '10px',
 				width: '10px',
-				top: "230px",
-				right:"50px",
+				top: '45%',
+				right: '105%',
 			}}
-            onClick={onClick}
-        >
-<FontAwesomeIcon size="2x" icon={['fas', 'chevron-circle-left']}></FontAwesomeIcon>
-        </div>
-    );
-}
-// function SamplePrevArrow(props) {
-// 	const { className, style, onClick } = props;
-// 	return (
-// 		<div
-// 			className="slick-arrow"
-			// style={{
-			// 	...style,
-			// 	display: 'inlineBlock',
-			// 	position: 'relative',
-			// 	padding: '10px',
-			// 	width: '10px',
-			// 	top: "230px"
-			// }}
-// 			onClick={onClick}
-// 		>
-// 			<FontAwesomeIcon icon={['fas', 'chevron-circle-left']}></FontAwesomeIcon>
-// 		</div>
-// 	);
-// }
-//   function LeftNavButton(props) {
-//     const {className, style, onClick} = props
-//     return (
-//         <div
-//             className="slick-arrow"
-//             style={{...style, display: 'block'}}
-//             onClick={onClick}
-//         >
-//    <FontAwesomeIcon icon={['fas', 'arrow-left']} style={{}} />
-//         </div>
-//     );
-// }
+			onClick={onClick}
+		>
+			<FontAwesomeIcon
+				size="2x"
+				icon={['fas', 'chevron-circle-left']}
+			></FontAwesomeIcon>
+		</div>
+	);
+};
 
-const MultipleItems = () => {
+const ProductCarousel = () => {
 	const dispatch = useDispatch();
 
 	useEffect(() => {
@@ -102,8 +73,33 @@ const MultipleItems = () => {
 		speed: 500,
 		slidesToShow: 3,
 		slidesToScroll: 3,
-		//   nextArrow: <SampleNextArrow />,
-		//   prevArrow: <SamplePrevArrow />
+		responsive: [
+			{
+				breakpoint: 1024,
+				settings: {
+					slidesToShow: 3,
+					slidesToScroll: 3,
+					infinite: true,
+					dots: true,
+				},
+			},
+			{
+				breakpoint: 800,
+				settings: {
+					slidesToShow: 2,
+					slidesToScroll: 2,
+					initialSlide: 2,
+				},
+			},
+			{
+				breakpoint: 654,
+				settings: {
+					slidesToShow: 1,
+					slidesToScroll: 1,
+					arrows: false,
+				},
+			},
+		],
 	};
 	return (
 		<div>
@@ -128,72 +124,4 @@ const MultipleItems = () => {
 	);
 };
 
-export default MultipleItems;
-
-// const Multicarousel = () => {
-// 	const dispatch = useDispatch();
-
-// 	useEffect(() => {
-// 		dispatch(getItemsAction());
-// 	}, [dispatch]);
-
-// 	const items = useSelector(state => state.itemsReducer.items);
-// 	const shuffled = items.sort(() => 0.5 - Math.random());
-// 	const selected = shuffled.slice(0, 4);
-
-// 	const responsive = {
-// 		desktop: {
-// 			breakpoint: { max: 3000, min: 1024 },
-// 			items: 3,
-// 			slidesToSlide: 3, // optional, default to 1.
-// 		},
-// 		tablet: {
-// 			breakpoint: { max: 1024, min: 464 },
-// 			items: 2,
-// 			slidesToSlide: 2, // optional, default to 1.
-// 		},
-// 		mobile: {
-// 			breakpoint: { max: 464, min: 0 },
-// 			items: 1,
-// 			slidesToSlide: 1, // optional, default to 1.
-// 		},
-// 	};
-// 	return (
-// 		<div>
-// 			<Carousel
-// 			customRightArrow={<CustomRightArrow />}
-// 				responsive={responsive}
-// 				swipeable={false}
-// 				draggable={false}
-// 				showDots
-// 				ssr // means to render carousel on server-side.
-// 				infinite
-// 				autoPlaySpeed={1000}
-// 				keyBoardControl
-// 				customTransition="all .5"
-// 				transitionDuration={500}
-// 				containerClass="carousel-container"
-// 				removeArrowOnDeviceType={['tablet', 'mobile']}
-// 				dotListClass="custom-dot-list-style"
-// 				itemClass="carousel-item-padding-10-px"
-// 			>
-// 				{selected.map(item => {
-// 					return (
-// 						<>
-// 							<ProductCardContainer>
-// 								<ProductCard
-// 									key={item.name}
-// 									name={item.name}
-// 									img={item.imageUrls[0]}
-// 									price={item.currentPrice}
-// 								/>
-// 							</ProductCardContainer>
-// 						</>
-// 					);
-// 				})}
-// 			</Carousel>
-// 		</div>
-// 	);
-// };
-
-// export default Multicarousel;
+export default ProductCarousel;
