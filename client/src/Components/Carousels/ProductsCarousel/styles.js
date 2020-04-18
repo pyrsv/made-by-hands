@@ -5,8 +5,8 @@ width: 80%;
 margin: auto;
 `;
 
-export const MulticarouselContainer = styled.div`
-width: 60%;
-margin: auto;
+export const ProductCarouselContainer = styled.div`
+width: 80%;
+margin: 20px auto;
 `;
 
