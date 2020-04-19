@@ -68,7 +68,6 @@ const ProductCarousel = () => {
 	const items = useSelector(state => state.itemsReducer.items);
 	const shuffled = items.sort(() => 0.5 - Math.random());
 	const selected = shuffled.slice(0, 4);
-
 	const settings = {
 		nextArrow: <SampleNextArrow />,
 		prevArrow: <SamplePrevArrow />,
@@ -79,16 +78,7 @@ const ProductCarousel = () => {
 		slidesToScroll: 3,
 		responsive: [
 			{
-				breakpoint: 1400,
-				settings: {
-					slidesToShow: 3,
-					slidesToScroll: 3,
-					infinite: true,
-					dots: true,
-				},
-			},
-			{
-				breakpoint: 1250,
+				breakpoint: 1280,
 				settings: {
 					slidesToShow: 2,
 					slidesToScroll: 1,
@@ -96,15 +86,7 @@ const ProductCarousel = () => {
 				},
 			},
 			{
-				breakpoint: 1001,
-				settings: {
-					slidesToShow: 2,
-					slidesToScroll: 1,
-					arrows: false,
-				},
-			},
-			{
-				breakpoint: 800,
+				breakpoint: 576,
 				settings: {
 					slidesToShow: 1,
 					slidesToScroll: 1,
