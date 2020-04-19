@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 import ProductCard from '../../ProductCard/ProductCard';
 import { getItemsAction } from '../../../store/actions/getItemsAction';
-import { ProductCardContainer, ProductCarouselContainer  } from './styles';
+import { ProductCardContainer, ProductCarouselContainer } from './styles';
 import LayoutContainer from '../../LayoutContainer/LayoutContainer';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -14,7 +14,7 @@ const SampleNextArrow = props => {
 	const { onClick, onKeyUp } = props;
 	return (
 		<div
-			role = "button"
+			role="button"
 			tabIndex="0"
 			className="slick-arrow"
 			style={{
@@ -23,15 +23,13 @@ const SampleNextArrow = props => {
 				bottom: '45%',
 				padding: '10px',
 				width: '10px',
-				left: '100%',
+				left: '100.5%',
+				zIndex: '99',
 			}}
 			onClick={onClick}
 			onKeyUp={onKeyUp}
 		>
-			<FontAwesomeIcon
-				size="2x"
-				icon={['fas', 'chevron-circle-right']}
-			/>
+			<FontAwesomeIcon size="2x" icon={['fas', 'chevron-circle-right']} />
 		</div>
 	);
 };
@@ -40,7 +38,7 @@ const SamplePrevArrow = props => {
 	const { onClick, onKeyUp } = props;
 	return (
 		<div
-			role = "button"
+			role="button"
 			tabIndex="0"
 			className="slick-arrow"
 			style={{
@@ -49,15 +47,13 @@ const SamplePrevArrow = props => {
 				padding: '10px',
 				width: '10px',
 				top: '45%',
-				right: '105%',
+				right: '102.4%',
+				zIndex: '99',
 			}}
 			onClick={onClick}
 			onKeyUp={onKeyUp}
 		>
-			<FontAwesomeIcon
-				size="2x"
-				icon={['fas', 'chevron-circle-left']}
-			/>
+			<FontAwesomeIcon size="2x" icon={['fas', 'chevron-circle-left']} />
 		</div>
 	);
 };
@@ -83,7 +79,7 @@ const ProductCarousel = () => {
 		slidesToScroll: 3,
 		responsive: [
 			{
-				breakpoint: 1024,
+				breakpoint: 1400,
 				settings: {
 					slidesToShow: 3,
 					slidesToScroll: 3,
@@ -92,15 +88,23 @@ const ProductCarousel = () => {
 				},
 			},
 			{
-				breakpoint: 800,
+				breakpoint: 1250,
 				settings: {
-					slidesToShow: 2,
-					slidesToScroll: 2,
-					initialSlide: 2,
+					slidesToShow: 3,
+					slidesToScroll: 1,
+					arrows: false,
 				},
 			},
 			{
-				breakpoint: 654,
+				breakpoint: 1001,
+				settings: {
+					slidesToShow: 2,
+					slidesToScroll: 1,
+					arrows: false,
+				},
+			},
+			{
+				breakpoint: 800,
 				settings: {
 					slidesToShow: 1,
 					slidesToScroll: 1,
@@ -137,11 +141,11 @@ const ProductCarousel = () => {
 
 SampleNextArrow.propTypes = {
 	onClick: PropTypes.func.isRequired,
-	onKeyUp: PropTypes.func.isRequired
+	onKeyUp: PropTypes.func.isRequired,
 };
 SamplePrevArrow.propTypes = {
 	onClick: PropTypes.func.isRequired,
-	onKeyUp: PropTypes.func.isRequired
+	onKeyUp: PropTypes.func.isRequired,
 };
 
 export default ProductCarousel;
