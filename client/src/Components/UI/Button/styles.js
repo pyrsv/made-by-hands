@@ -8,7 +8,7 @@ export const StyledButton = styled.button`
 	font-size: 16px;
 	min-width: 127px;
 	cursor: pointer;
-	width: ${props => (props.type === 'wide' ? '100%' : 'auto')};
+	width: ${props => (props.size === 'wide' ? '100%' : 'auto')};
 	padding: 8px 12px;
 	text-transform: ${props =>
 		props.color === 'dark' ? 'uppercase' : 'titlecase'};

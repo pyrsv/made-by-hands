@@ -1,7 +1,8 @@
-import React, { useState} from 'react';
+import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Logo from './Logo/Logo';
 import LayoutContainer from '../LayoutContainer/LayoutContainer';
+import AuthModal from '../AuthModal/AuthModal';
 import Navigation from './Navigation/Navigation';
 import SearchField from './SearchField/SearchField';
 import UserNavigation from './UserNavigation/UserNavigation';
@@ -36,11 +37,18 @@ const Header = () => {
 		profile: false,
 	});
 
+	const [isModal, setModal] = useState(false);
+	const [isLoggedIn] = useState(false);
+
 	const handleDropdownToggle = key => {
 		setDropdown({
 			...dropdown,
 			[key]: !dropdown[key],
 		});
+	};
+
+	const handleModalToggle = () => {
+		setModal(!isModal);
 	};
 
 	return (
@@ -61,6 +69,8 @@ const Header = () => {
 								isDropdown={dropdown.profile}
 								routes={profileRoutes}
 								onDropdownOpen={() => handleDropdownToggle('profile')}
+								onModalOpen={handleModalToggle}
+								isLoggedIn={isLoggedIn}
 							/>
 						</Info>
 						<Navigation
@@ -71,6 +81,7 @@ const Header = () => {
 					</Content>
 				</Container>
 			</LayoutContainer>
+			{isModal && <AuthModal onToggle={handleModalToggle} />}
 		</StyledHeader>
 	);
 };

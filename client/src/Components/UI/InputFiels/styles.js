@@ -15,6 +15,7 @@ export const Input = styled.input`
 	font-size: 16px;
 	outline: none;
 	background-color: transparent;
+	width: 100%;
 `;
 
 export const Label = styled.label`
