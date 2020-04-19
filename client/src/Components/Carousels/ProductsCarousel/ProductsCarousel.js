@@ -1,19 +1,21 @@
-import React, { useEffect, Component } from 'react';
+import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 import ProductCard from '../../ProductCard/ProductCard';
 import { getItemsAction } from '../../../store/actions/getItemsAction';
-import { ProductCardContainer } from './styles';
+import { ProductCardContainer, ProductCarouselContainer  } from './styles';
 import LayoutContainer from '../../LayoutContainer/LayoutContainer';
-import { ProductCarouselContainer } from '../ProductsCarousel/styles';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Slider from 'react-slick';
 
 const SampleNextArrow = props => {
-	const { onClick } = props;
+	const { onClick, onKeyUp } = props;
 	return (
 		<div
+			role = "button"
+			tabIndex="0"
 			className="slick-arrow"
 			style={{
 				display: 'inlineBlock',
@@ -24,19 +26,22 @@ const SampleNextArrow = props => {
 				left: '100%',
 			}}
 			onClick={onClick}
+			onKeyUp={onKeyUp}
 		>
 			<FontAwesomeIcon
 				size="2x"
 				icon={['fas', 'chevron-circle-right']}
-			></FontAwesomeIcon>
+			/>
 		</div>
 	);
 };
 
 const SamplePrevArrow = props => {
-	const { onClick } = props;
+	const { onClick, onKeyUp } = props;
 	return (
 		<div
+			role = "button"
+			tabIndex="0"
 			className="slick-arrow"
 			style={{
 				display: 'inlineBlock',
@@ -47,11 +52,12 @@ const SamplePrevArrow = props => {
 				right: '105%',
 			}}
 			onClick={onClick}
+			onKeyUp={onKeyUp}
 		>
 			<FontAwesomeIcon
 				size="2x"
 				icon={['fas', 'chevron-circle-left']}
-			></FontAwesomeIcon>
+			/>
 		</div>
 	);
 };
@@ -127,6 +133,15 @@ const ProductCarousel = () => {
 			</LayoutContainer>
 		</div>
 	);
+};
+
+SampleNextArrow.propTypes = {
+	onClick: PropTypes.func.isRequired,
+	onKeyUp: PropTypes.func.isRequired
+};
+SamplePrevArrow.propTypes = {
+	onClick: PropTypes.func.isRequired,
+	onKeyUp: PropTypes.func.isRequired
 };
 
 export default ProductCarousel;
