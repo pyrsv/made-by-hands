@@ -53,18 +53,22 @@ const ProductCard = ({
 ProductCard.propTypes = {
 	name: PropTypes.string.isRequired,
 	img: PropTypes.string.isRequired,
-	oldPrice: PropTypes.string,
-	price: PropTypes.string.isRequired,
-	isInCart: PropTypes.bool.isRequired,
-	isFavorite: PropTypes.bool.isRequired,
-	onAddToCart: PropTypes.func.isRequired,
-	onAddToFavorites: PropTypes.func.isRequired,
+	oldPrice: PropTypes.oneOfType([PropTypes.number, PropTypes.object]),
+	price: PropTypes.number.isRequired,
+	isInCart: PropTypes.bool,
+	isFavorite: PropTypes.bool,
+	onAddToCart: PropTypes.func,
+	onAddToFavorites: PropTypes.func,
 	type: PropTypes.oneOf(['light', 'olive']),
 };
 
 ProductCard.defaultProps = {
 	type: 'light',
 	oldPrice: null,
+	isInCart: false,
+	isFavorite: false,
+	onAddToCart: () => {},
+	onAddToFavorites: () => {},
 };
 
 export default ProductCard;

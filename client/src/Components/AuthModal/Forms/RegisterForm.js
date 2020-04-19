@@ -1,41 +1,32 @@
 import React from 'react';
 import Button from '../../UI/Button/Button';
 import InputField from '../../UI/InputFiels/InputField';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { Formik } from 'formik';
 import { FormFields } from './styles';
 
-const AuthForm = () => {
+const RegisterForm = ({ onSubmit }) => {
 	return (
 		<div>
 			<Formik
-				initialValues={{ email: '', password: '', name: '', phone: '' }}
-				validate={values => {
-					const errors = {};
-					if (!values.email) {
-						errors.email = 'Required';
-					} else if (
-						!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
-					) {
-						errors.email = 'Invalid email address';
-					}
-					return errors;
+				initialValues={{
+					email: '',
+					login: '',
+					password: '',
+					firstName: '',
+					lastName: '',
+					phone: '',
 				}}
 				onSubmit={(values, { setSubmitting }) => {
-					setTimeout(() => {
-						alert(JSON.stringify(values, null, 2));
-						setSubmitting(false);
-					}, 400);
+					console.log('form submitted');
+					onSubmit(values);
 				}}
 			>
 				{({
 					values,
-					errors,
-					touched,
 					handleChange,
 					handleBlur,
 					handleSubmit,
-					isSubmitting,
 					/* and other goodies */
 				}) => (
 					<form onSubmit={handleSubmit}>
@@ -51,6 +42,16 @@ const AuthForm = () => {
 								required
 							/>
 							<InputField
+								type="text"
+								name="login"
+								onChange={handleChange}
+								onBlur={handleBlur}
+								value={values.login}
+								target="form"
+								label="Login"
+								required
+							/>
+							<InputField
 								type="password"
 								name="password"
 								onChange={handleChange}
@@ -62,12 +63,22 @@ const AuthForm = () => {
 							/>
 							<InputField
 								type="text"
-								name="name"
+								name="firstName"
 								onChange={handleChange}
 								onBlur={handleBlur}
-								value={values.name}
+								value={values.firstName}
 								target="form"
-								label="Name"
+								label="First Name"
+								required
+							/>
+							<InputField
+								type="text"
+								name="lastName"
+								onChange={handleChange}
+								onBlur={handleBlur}
+								value={values.lastName}
+								target="form"
+								label="Last name"
 								required
 							/>
 							<InputField
@@ -90,4 +101,8 @@ const AuthForm = () => {
 	);
 };
 
-export default AuthForm;
+RegisterForm.propTypes = {
+	onSubmit: PropTypes.func.isRequired,
+};
+
+export default RegisterForm;

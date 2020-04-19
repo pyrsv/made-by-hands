@@ -26,7 +26,7 @@ const Dropdown = ({ isOpen, heading, onOpen, routes }) => {
 
 		window.addEventListener('mousedown', handleDocumentClick);
 		return document.removeEventListener('mousedown', handleDocumentClick);
-	}, [isOpen]);
+	}, [isOpen, onOpen]);
 
 	return (
 		<DropdownWrapper>
@@ -55,7 +55,7 @@ const Dropdown = ({ isOpen, heading, onOpen, routes }) => {
 Dropdown.propTypes = {
 	isOpen: PropTypes.bool.isRequired,
 	heading: PropTypes.string.isRequired,
-	onOpen: PropTypes.string.isRequired,
+	onOpen: PropTypes.func.isRequired,
 	routes: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 

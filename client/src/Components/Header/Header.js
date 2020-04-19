@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Logo from './Logo/Logo';
 import LayoutContainer from '../LayoutContainer/LayoutContainer';
@@ -6,6 +7,7 @@ import AuthModal from '../AuthModal/AuthModal';
 import Navigation from './Navigation/Navigation';
 import SearchField from './SearchField/SearchField';
 import UserNavigation from './UserNavigation/UserNavigation';
+import { fetchUserRegister } from '../../store/actions/authActions';
 import {
 	StyledHeader,
 	Container,
@@ -32,6 +34,8 @@ const profileRoutes = [
 ];
 
 const Header = () => {
+	const dispatch = useDispatch();
+
 	const [dropdown, setDropdown] = useState({
 		catalog: false,
 		profile: false,
@@ -50,6 +54,13 @@ const Header = () => {
 	const handleModalToggle = () => {
 		setModal(!isModal);
 	};
+
+	const handleRegister = data => {
+		dispatch(fetchUserRegister(data));
+		handleModalToggle();
+	};
+
+	// const handleLogin = async data => {};
 
 	return (
 		<StyledHeader>
@@ -81,7 +92,13 @@ const Header = () => {
 					</Content>
 				</Container>
 			</LayoutContainer>
-			{isModal && <AuthModal onToggle={handleModalToggle} />}
+			{isModal && (
+				<AuthModal
+					onRegister={handleRegister}
+					// onLogin={handleLogin}
+					onToggle={handleModalToggle}
+				/>
+			)}
 		</StyledHeader>
 	);
 };

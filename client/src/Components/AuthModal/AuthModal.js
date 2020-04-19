@@ -13,7 +13,7 @@ import {
 	RegisterLink,
 } from './styles';
 
-const AuthModal = ({ onToggle }) => {
+const AuthModal = ({ onToggle, onLogin, onRegister }) => {
 	const [form, setForm] = useState({ login: true });
 
 	const handleFormChange = () => {
@@ -30,7 +30,7 @@ const AuthModal = ({ onToggle }) => {
 				<Content>
 					{form.login ? (
 						<>
-							<LoginForm />
+							<LoginForm onSubmit={onLogin} />
 							<Register>
 								No Account?
 								<RegisterLink role="button" onClick={handleFormChange}>
@@ -39,7 +39,7 @@ const AuthModal = ({ onToggle }) => {
 							</Register>
 						</>
 					) : (
-						<RegisterForm />
+						<RegisterForm onSubmit={onRegister} />
 					)}
 				</Content>
 			</ModalWrapper>
@@ -49,7 +49,9 @@ const AuthModal = ({ onToggle }) => {
 };
 
 AuthModal.propTypes = {
-	onToggle: PropTypes.bool.isRequired,
+	onToggle: PropTypes.func.isRequired,
+	onRegister: PropTypes.func.isRequired,
+	onLogin: PropTypes.func.isRequired,
 };
 
 export default AuthModal;

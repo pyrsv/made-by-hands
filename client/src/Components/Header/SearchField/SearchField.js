@@ -12,6 +12,7 @@ const SearchField = () => {
 				onChange={() => {}}
 				placeholder="Search"
 				target="search"
+				value=""
 			/>
 			<SearchButton>
 				<FontAwesomeIcon icon={['fas', 'search']} />

@@ -24,7 +24,7 @@ const Button = ({ text, onClick, color, size, type, icon, disabled }) => {
 
 Button.propTypes = {
 	text: PropTypes.string.isRequired,
-	onClick: PropTypes.string.isRequired,
+	onClick: PropTypes.func.isRequired,
 	color: PropTypes.oneOf(['dark', 'light']),
 	size: PropTypes.oneOf(['wide', 'default']),
 	type: PropTypes.string,
