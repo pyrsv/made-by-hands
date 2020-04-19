@@ -33,7 +33,7 @@ const InputField = ({
 InputField.propTypes = {
 	label: PropTypes.string,
 	placeholder: PropTypes.string,
-	required: PropTypes.bool.isRequired,
+	required: PropTypes.bool,
 	name: PropTypes.string.isRequired,
 	onChange: PropTypes.func.isRequired,
 	type: PropTypes.string.isRequired,
@@ -44,6 +44,7 @@ InputField.propTypes = {
 InputField.defaultProps = {
 	label: '',
 	placeholder: '',
+	required: false,
 };
 
 export default InputField;

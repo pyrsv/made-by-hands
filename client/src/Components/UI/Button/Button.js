@@ -3,9 +3,15 @@ import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { StyledButton, Icon } from './styles';
 
-const Button = ({ text, onClick, color, type, icon }) => {
+const Button = ({ text, onClick, color, size, type, icon, disabled }) => {
 	return (
-		<StyledButton type={type} color={color} onClick={onClick}>
+		<StyledButton
+			disabled={disabled}
+			type={type}
+			size={size}
+			color={color}
+			onClick={onClick}
+		>
 			<span>{text}</span>
 			{icon && (
 				<Icon>
@@ -18,16 +24,20 @@ const Button = ({ text, onClick, color, type, icon }) => {
 
 Button.propTypes = {
 	text: PropTypes.string.isRequired,
-	onClick: PropTypes.string.isRequired,
+	onClick: PropTypes.func.isRequired,
 	color: PropTypes.oneOf(['dark', 'light']),
-	type: PropTypes.oneOf(['wide', 'default']),
+	size: PropTypes.oneOf(['wide', 'default']),
+	type: PropTypes.string,
 	icon: PropTypes.string,
+	disabled: PropTypes.bool,
 };
 
 Button.defaultProps = {
 	color: 'dark',
-	type: 'default',
+	type: 'button',
+	size: 'default',
 	icon: null,
+	disabled: false,
 };
 
 export default Button;

@@ -35,11 +35,9 @@ const theme = {
 ReactDOM.render(
 	<Provider store={store}>
 		<BrowserRouter>
-			<React.StrictMode>
-				<ThemeProvider theme={theme}>
-					<App />
-				</ThemeProvider>
-			</React.StrictMode>
+			<ThemeProvider theme={theme}>
+				<App />
+			</ThemeProvider>
 		</BrowserRouter>
 	</Provider>,
 	document.getElementById('root')

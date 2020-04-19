@@ -5,19 +5,29 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Dropdown from '../Dropdown/Dropdown';
 import { Container, UserNavItem, UserNavIcon } from './styles';
 
-const UserNavigation = ({ isDropdown, onDropdownOpen, routes }) => {
+const UserNavigation = ({
+	isDropdown,
+	isLoggedIn,
+	onDropdownOpen,
+	onModalOpen,
+	routes,
+}) => {
 	return (
 		<Container>
-			<UserNavItem>
+			<UserNavItem onClick={!isLoggedIn && onModalOpen}>
 				<UserNavIcon>
 					<FontAwesomeIcon icon={['far', 'user']} />
 				</UserNavIcon>
-				<Dropdown
-					isOpen={isDropdown}
-					heading="Profile"
-					onOpen={onDropdownOpen}
-					routes={routes}
-				/>
+				{isLoggedIn ? (
+					<Dropdown
+						isOpen={isDropdown}
+						heading="Profile"
+						onOpen={onDropdownOpen}
+						routes={routes}
+					/>
+				) : (
+					'Login'
+				)}
 			</UserNavItem>
 			<UserNavItem>
 				<NavLink to="/">
@@ -41,7 +51,9 @@ const UserNavigation = ({ isDropdown, onDropdownOpen, routes }) => {
 
 UserNavigation.propTypes = {
 	isDropdown: PropTypes.bool.isRequired,
+	isLoggedIn: PropTypes.bool.isRequired,
 	onDropdownOpen: PropTypes.func.isRequired,
+	onModalOpen: PropTypes.func.isRequired,
 	routes: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 

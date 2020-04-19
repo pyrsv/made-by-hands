@@ -11,6 +11,8 @@ export const UserNavItem = styled.li`
 	font-weight: 600;
 	font-size: 16px;
 	text-transform: uppercase;
+	cursor: pointer;
+	outline: none;
 	&:not(:last-child) {
 		margin-right: 25px;
 	}
