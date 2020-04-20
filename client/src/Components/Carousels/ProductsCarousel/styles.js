@@ -26,5 +26,4 @@ export const StyledTitle = styled.span`
 	font-size: 72px;
 	line-height: 85px;
 	letter-spacing: 0.08em;
-	color: #f9ecef;
 `;

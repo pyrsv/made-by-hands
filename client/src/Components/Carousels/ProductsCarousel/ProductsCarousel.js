@@ -106,7 +106,7 @@ const ProductCarousel = () => {
 		<div>
 			<NewArrivalsBackground>
 				<LayoutContainer>
-					<Title  text="new arrivals" color="dark"/>
+					<Title  text="new arrivals" />
 					<ProductCarouselContainer>
 						<Slider {...settings}>
 							{selected.map(item => {
