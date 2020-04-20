@@ -1,9 +1,18 @@
 import axios from 'axios';
 
-export default axios.create({
-	baseURL: 'http://localhost:5000',
-	proxy: {
-		host: '127.0.0.1',
-		port: 5000,
-	},
-});
+export const handleUserLogin = async (loginOrEmail, password) => {
+	const data = { loginOrEmail, password };
+	return axios.post('/customers/login', JSON.stringify(data), {
+		headers: {
+			'Content-Type': 'application/json',
+		},
+	});
+};
+
+export const handleGetUser = async token => {
+	return axios.get('customers/customer', token, {
+		headers: {
+			'Content-Type': 'application/json',
+		},
+	});
+};

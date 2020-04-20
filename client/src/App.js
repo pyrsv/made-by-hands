@@ -5,7 +5,7 @@ import CatalogPage from './Pages/CatalogPage';
 import ProfilePage from './Pages/ProfilePage';
 import IndexPage from './Pages/IndexPage';
 
-function App() {
+const App = () => {
 	return (
 		<div>
 			<Switch>
@@ -24,6 +24,6 @@ function App() {
 			</Switch>
 		</div>
 	);
-}
+};
 
 export default App;
