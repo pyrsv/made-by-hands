@@ -11,7 +11,7 @@ const initialState = {
 	error: null,
 };
 
-export default (state = initialState, { type, payload }) => {
+export const authReducer = (state = initialState, { type, payload }) => {
 	switch (type) {
 		case USER_LOGIN_INIT:
 			return { ...state, isLoading: true };

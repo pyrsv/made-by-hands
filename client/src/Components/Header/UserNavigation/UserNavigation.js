@@ -4,21 +4,22 @@ import { NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Dropdown from '../Dropdown/Dropdown';
 import { Container, UserNavItem, UserNavIcon } from './styles';
+import { useSelector } from 'react-redux';
 
 const UserNavigation = ({
 	isDropdown,
-	isLoggedIn,
 	onDropdownOpen,
 	onModalOpen,
 	routes,
 }) => {
+	const user = useSelector(state => state.auth.currentUser);
 	return (
 		<Container>
-			<UserNavItem onClick={!isLoggedIn && onModalOpen}>
+			<UserNavItem onClick={!user && onModalOpen}>
 				<UserNavIcon>
 					<FontAwesomeIcon icon={['far', 'user']} />
 				</UserNavIcon>
-				{isLoggedIn ? (
+				{user ? (
 					<Dropdown
 						isOpen={isDropdown}
 						heading="Profile"
@@ -51,7 +52,6 @@ const UserNavigation = ({
 
 UserNavigation.propTypes = {
 	isDropdown: PropTypes.bool.isRequired,
-	isLoggedIn: PropTypes.bool.isRequired,
 	onDropdownOpen: PropTypes.func.isRequired,
 	onModalOpen: PropTypes.func.isRequired,
 	routes: PropTypes.arrayOf(PropTypes.object).isRequired,

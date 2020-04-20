@@ -2,25 +2,15 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
-import thunk from 'redux-thunk';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware, compose } from 'redux';
-import rootReducer from './store/reducers/rootReducer';
 import { faEnvelope, far } from '@fortawesome/free-regular-svg-icons';
 import { fas } from '@fortawesome/free-solid-svg-icons';
+import store from './store/configreStore';
 import App from './App';
 import './main.scss';
 
 library.add(faEnvelope, fas, far);
-
-const store = createStore(
-	rootReducer,
-	compose(
-		applyMiddleware(thunk),
-		window.devToolsExtension ? window.devToolsExtension() : f => f
-	)
-);
 
 const theme = {
 	lightPink: '#F9ECEF', // main light background color

@@ -1,11 +1,15 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Formik } from 'formik';
 import Button from '../../UI/Button/Button';
 import InputField from '../../UI/InputFiels/InputField';
-import PropTypes from 'prop-types';
-import { Formik } from 'formik';
 import { FormFields } from './styles';
+import { userRegister } from '../../../store/actions/authActions';
 
-const RegisterForm = ({ onSubmit }) => {
+const RegisterForm = () => {
+	const dispatch = useDispatch();
+	const isLoading = useSelector(state => state.auth.isLoading);
+
 	return (
 		<div>
 			<Formik
@@ -17,9 +21,8 @@ const RegisterForm = ({ onSubmit }) => {
 					lastName: '',
 					phone: '',
 				}}
-				onSubmit={(values, { setSubmitting }) => {
-					console.log('form submitted');
-					onSubmit(values);
+				onSubmit={values => {
+					dispatch(userRegister(values));
 				}}
 			>
 				{({
@@ -93,16 +96,17 @@ const RegisterForm = ({ onSubmit }) => {
 							/>
 						</FormFields>
 
-						<Button text="Register" type="submit" size="wide" />
+						<Button
+							disabled={isLoading}
+							text="Register"
+							type="submit"
+							size="wide"
+						/>
 					</form>
 				)}
 			</Formik>
 		</div>
 	);
-};
-
-RegisterForm.propTypes = {
-	onSubmit: PropTypes.func.isRequired,
 };
 
 export default RegisterForm;

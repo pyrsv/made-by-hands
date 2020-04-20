@@ -1,5 +1,6 @@
 import axios from 'axios';
 import setAuthToken from '../../utils/setAuthToken';
+import { handleUserLogin, handleGetUser } from '../../utils/API';
 
 export const USER_LOGIN_INIT = 'USER_LOGIN_INIT';
 export const USER_LOGIN_SUCCESS = 'USER_LOGIN_SUCCESS';
@@ -25,25 +26,27 @@ export const userLogout = () => dispatch => {
 	dispatch({ type: USER_LOGOUT });
 };
 
-export const userLogin = customer => dispatch => {
-
-	const data = {
-		loginOrEmail: customer.loginOrEmail || customer.login,
-		password: customer.password,
-	};
-	axios
-		.post('/customers/login', JSON.stringify(data), {
-			headers: {
-				'Content-Type': 'application/json',
-			},
+export const userLogin = ({ loginOrEmail, password }) => dispatch => {
+	dispatch(userLoginInit());
+	handleUserLogin(loginOrEmail, password)
+		.then(res => {
+			const { token } = res.data;
+			setAuthToken(token);
+			handleGetUser(token)
+				.then(customer => {
+					dispatch(userLoginSuccess(customer.data));
+				})
+				.catch(err => {
+					dispatch(userLoginError(err));
+				});
 		})
-		.then(loginResult => {
-			setAuthToken(loginResult.token);
-			dispatch(userLoginSuccess(customer));
+		.catch(err => {
+			dispatch(userLoginError(err));
 		});
 };
 
 export const userRegister = data => async dispatch => {
+	dispatch(userLoginInit());
 	axios
 		.post('/customers', JSON.stringify(data), {
 			headers: {
@@ -51,11 +54,17 @@ export const userRegister = data => async dispatch => {
 			},
 		})
 		.then(customer => {
-			console.log('customer', customer);
-			dispatch(userLogin);
+			const { login, password } = data;
+			handleUserLogin(login, password)
+				.then(res => {
+					setAuthToken(res.data.token);
+					dispatch(userLoginSuccess(customer.data));
+				})
+				.catch(err => {
+					dispatch(userLoginError(err));
+				});
 		})
 		.catch(err => {
-			console.log('err.response.data', err.response.data);
 			dispatch(userLoginError(err));
 		});
 };
