@@ -1,12 +1,8 @@
 import styled from 'styled-components';
-import Slider from 'react-slick'
 
 export const ProductCardContainer = styled.div`
-  width: 98%;
-  margin: auto;
-	/* @media (max-width: 1400px) {
-		width: 80%;
-	} */
+	width: 98%;
+	margin: auto;
 `;
 
 export const ProductCarouselContainer = styled.div`
@@ -18,7 +14,11 @@ export const NewArrivalsBackground = styled.div`
 	background: ${props => props.theme.mainOlive};
 `;
 
-export const NewArrivals = styled.span`
+
+
+export const StyledTitle = styled.span`
+	color: ${props => {
+	return	props.color === "dark" ? props.theme.mainDark : props.theme.lightPink}};
 	text-transform: uppercase;
 	font-family: Raleway, sans-serif;
 	font-style: normal;
@@ -28,4 +28,3 @@ export const NewArrivals = styled.span`
 	letter-spacing: 0.08em;
 	color: #f9ecef;
 `;
-

@@ -7,13 +7,15 @@ import {
 	ProductCardContainer,
 	ProductCarouselContainer,
 	NewArrivalsBackground,
-	NewArrivals,
 } from './styles';
+import { Title } from '../../UI/Title/title'
 import LayoutContainer from '../../LayoutContainer/LayoutContainer';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Slider from 'react-slick';
+
+
 
 const SampleNextArrow = props => {
 	const { onClick, onKeyUp } = props;
@@ -104,7 +106,7 @@ const ProductCarousel = () => {
 		<div>
 			<NewArrivalsBackground>
 				<LayoutContainer>
-					<NewArrivals>new arrivals</NewArrivals>
+					<Title  text="new arrivals" color="dark"/>
 					<ProductCarouselContainer>
 						<Slider {...settings}>
 							{selected.map(item => {
@@ -128,6 +130,8 @@ const ProductCarousel = () => {
 		</div>
 	);
 };
+
+
 
 SampleNextArrow.propTypes = {
 	onClick: PropTypes.func.isRequired,
