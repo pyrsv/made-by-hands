@@ -4,9 +4,9 @@ import Slider from 'react-slick'
 export const ProductCardContainer = styled.div`
   width: 98%;
   margin: auto;
-	@media (max-width: 1400px) {
+	/* @media (max-width: 1400px) {
 		width: 80%;
-	}
+	} */
 `;
 
 export const ProductCarouselContainer = styled.div`
@@ -29,11 +29,3 @@ export const NewArrivals = styled.span`
 	color: #f9ecef;
 `;
 
-export const StyledSlider = styled(Slider)`
-	@media (max-width: 1280px) {
-	right: 4.5%;
-	}
-position: relative;
-
-background-size: cover
-`

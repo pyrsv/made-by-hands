@@ -3,7 +3,12 @@ import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 import ProductCard from '../../ProductCard/ProductCard';
 import { getItemsAction } from '../../../store/actions/getItemsAction';
-import { StyledSlider, ProductCardContainer, ProductCarouselContainer, NewArrivalsBackground, NewArrivals } from './styles';
+import {
+	ProductCardContainer,
+	ProductCarouselContainer,
+	NewArrivalsBackground,
+	NewArrivals,
+} from './styles';
 import LayoutContainer from '../../LayoutContainer/LayoutContainer';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -101,7 +106,7 @@ const ProductCarousel = () => {
 				<LayoutContainer>
 					<NewArrivals>new arrivals</NewArrivals>
 					<ProductCarouselContainer>
-						<StyledSlider {...settings}>
+						<Slider {...settings}>
 							{selected.map(item => {
 								return (
 									<>
@@ -116,7 +121,7 @@ const ProductCarousel = () => {
 									</>
 								);
 							})}
-						</StyledSlider>
+						</Slider>
 					</ProductCarouselContainer>
 				</LayoutContainer>
 			</NewArrivalsBackground>
