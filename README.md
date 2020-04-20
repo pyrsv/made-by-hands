@@ -70,12 +70,11 @@ P.S Ожидаемое поведение:
 1. `git checkout -b branch-name ` создать новую ветку
 2. `yarn add npm-package-name`  установить новый пакет 
    ( пакеты устанавливать после перехода в новую ветку находясь
-    в директории `./client/` )
-
-.... // работа с фичей
-3.` git add .`  добавить все измененные файлы
+    в директории `./client/`)  
+...
+3. `git add .`  добавить все измененные файлы
 4. `git commit -m "commit message"`
-5.` git push origin branch-name`  запушить ветку в удаленный репозиторий
+5. `git push origin branch-name`  запушить ветку в удаленный репозиторий
 6. создать пулл реквест и сообщить об этом в беседу
 
 
@@ -84,24 +83,27 @@ P.S Ожидаемое поведение:
 1. `git checkout develop `
 2. `git pull origin develop`
 3. `git checkout branch-name`
-4. `git merge develop `
+4. `git merge develop `  
 ......
-5.` git add .`
+5. `git add .`
 6. `git commit -m "commit message"`
 7. `git push origin branch-name`
 
 запуск проекта
 
-фронт:
+фронт:  
 1. `cd client/`
-2. `yarn start`
-бек :
-1. `yarn start`  из корня
-фронт + бек:
+2. `yarn start`  
+
+бек :  
+1. `yarn start` из корня  
+
+фронт + бек:  
 1. `yarn dev`  из корня
 
 
-авторизация в postman
+авторизация в postman  
+
 0. запустить бек
 1. POST запрос на` http://localhost:5000/customers/login`
    во вкладке `BODY`, выбрать `JSON` и вставить это:
