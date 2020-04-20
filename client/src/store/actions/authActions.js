@@ -1,43 +1,61 @@
-export const LOGIN_USER = 'LOGIN_USER';
-export const LOGOUT_USER = 'LOGOUT_USER';
+import axios from 'axios';
+import setAuthToken from '../../utils/setAuthToken';
 
-const userLogin = user => ({
-	type: LOGIN_USER,
+export const USER_LOGIN_INIT = 'USER_LOGIN_INIT';
+export const USER_LOGIN_SUCCESS = 'USER_LOGIN_SUCCESS';
+export const USER_LOGOUT = 'USER_LOGOUT';
+export const USER_LOGIN_ERROR = 'USER_LOGIN_ERROR';
+
+const userLoginInit = () => ({
+	type: USER_LOGIN_INIT,
+});
+
+const userLoginSuccess = user => ({
+	type: USER_LOGIN_SUCCESS,
 	payload: user,
 });
 
-export const userLogout = () => ({
-	type: LOGOUT_USER,
+const userLoginError = error => ({
+	type: USER_LOGIN_ERROR,
+	payload: error,
 });
 
-export const fetchUserRegister = data => async dispatch => {
-	fetch('/customers', {
-		method: 'POST',
-		headers: {
-			'Content-Type': 'application/json',
-		},
-		body: JSON.stringify(DataTransfer),
-	})
-		.then(res => res.json())
-		.then(customer => {
-			if (customer.enabled) {
-				fetch('customers/login', {
-					method: 'POST',
-					headers: {
-						'Content-Type': 'application/json',
-					},
-					body: JSON.stringify({
-						loginOrEmail: data.login,
-						password: data.password,
-					}),
-				})
-					.then(loginResult => loginResult.json())
-					.then(loginResult => {
-						localStorage.setItem('token', loginResult.token);
-						dispatch(userLogin(customer));
-					});
-			}
-		})
-		.catch(err => err);
+export const userLogout = () => dispatch => {
+	setAuthToken();
+	dispatch({ type: USER_LOGOUT });
 };
 
+export const userLogin = customer => dispatch => {
+
+	const data = {
+		loginOrEmail: customer.loginOrEmail || customer.login,
+		password: customer.password,
+	};
+	axios
+		.post('/customers/login', JSON.stringify(data), {
+			headers: {
+				'Content-Type': 'application/json',
+			},
+		})
+		.then(loginResult => {
+			setAuthToken(loginResult.token);
+			dispatch(userLoginSuccess(customer));
+		});
+};
+
+export const userRegister = data => async dispatch => {
+	axios
+		.post('/customers', JSON.stringify(data), {
+			headers: {
+				'Content-Type': 'application/json',
+			},
+		})
+		.then(customer => {
+			console.log('customer', customer);
+			dispatch(userLogin);
+		})
+		.catch(err => {
+			console.log('err.response.data', err.response.data);
+			dispatch(userLoginError(err));
+		});
+};

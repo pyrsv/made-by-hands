@@ -7,7 +7,7 @@ import AuthModal from '../AuthModal/AuthModal';
 import Navigation from './Navigation/Navigation';
 import SearchField from './SearchField/SearchField';
 import UserNavigation from './UserNavigation/UserNavigation';
-import { fetchUserRegister } from '../../store/actions/authActions';
+// import { fetchUserRegister } from '../../store/actions/authActions';
 import {
 	StyledHeader,
 	Container,
@@ -56,7 +56,7 @@ const Header = () => {
 	};
 
 	const handleRegister = data => {
-		dispatch(fetchUserRegister(data));
+		// dispatch(fetchUserRegister(data));
 		handleModalToggle();
 	};
 
