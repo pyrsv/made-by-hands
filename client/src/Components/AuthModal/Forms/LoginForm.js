@@ -24,6 +24,7 @@ const AuthForm = () => {
 				onSubmit={(values, { setSubmitting }) => {
 					setTimeout(() => {
 						alert(JSON.stringify(values, null, 2));
+						console.log('a')
 						setSubmitting(false);
 					}, 400);
 				}}
