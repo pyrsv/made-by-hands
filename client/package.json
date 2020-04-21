@@ -62,7 +62,7 @@
     "redux-thunk": "^2.3.0"
   },
   "lint-staged": {
-    "./src/*.{js, jsx}": [
+    "./src/**/*.{js, jsx}": [
       "node_modules/.bin/eslint --max-warnings=0 --fix",
       "prettier --write",
       "git add"

@@ -1,53 +1,34 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import Button from '../../UI/Button/Button';
 import InputField from '../../UI/InputFiels/InputField';
-// import PropTypes from 'prop-types';
 import { Formik } from 'formik';
 import { FormFields } from './styles';
+import { userLogin } from '../../../store/actions/authActions';
 
 const AuthForm = () => {
+	const dispatch = useDispatch();
+	const isLoading = useSelector(state => state.auth.isLoading);
+
 	return (
 		<div>
 			<Formik
-				initialValues={{ email: '', password: '' }}
-				validate={values => {
-					const errors = {};
-					if (!values.email) {
-						errors.email = 'Required';
-					} else if (
-						!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
-					) {
-						errors.email = 'Invalid email address';
-					}
-					return errors;
-				}}
-				onSubmit={(values, { setSubmitting }) => {
-					setTimeout(() => {
-						alert(JSON.stringify(values, null, 2));
-						setSubmitting(false);
-					}, 400);
+				initialValues={{ loginOrEmail: '', password: '' }}
+				onSubmit={values => {
+					dispatch(userLogin(values));
 				}}
 			>
-				{({
-					values,
-					errors,
-					touched,
-					handleChange,
-					handleBlur,
-					handleSubmit,
-					isSubmitting,
-					/* and other goodies */
-				}) => (
+				{({ values, handleChange, handleBlur, handleSubmit }) => (
 					<form onSubmit={handleSubmit}>
 						<FormFields>
 							<InputField
 								type="text"
-								name="email"
+								name="loginOrEmail"
 								onChange={handleChange}
 								onBlur={handleBlur}
 								value={values.email}
 								target="form"
-								label="Email"
+								label="Login or Email"
 								required
 							/>
 							<InputField
@@ -62,9 +43,12 @@ const AuthForm = () => {
 							/>
 						</FormFields>
 
-						<Button text="login" type="submit" size="wide">
-							Submit
-						</Button>
+						<Button
+							disabled={isLoading}
+							text="login"
+							type="submit"
+							size="wide"
+						/>
 					</form>
 				)}
 			</Formik>

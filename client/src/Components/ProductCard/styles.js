@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 
 export const Card = styled.div`
+	margin: 0 auto;
+	max-width: 370px;
 	font-family: 'Raleway', sans-serif;
 	color: ${props => props.theme.mainDark};
 `;
@@ -24,7 +26,7 @@ export const ProductName = styled.p`
 	font-size: 22px;
 	line-height: 25px;
 	max-width: 85%;
-	min-height: 46px;
+	min-height: 66px;
 	margin-bottom: 10px;
 	line-height: 22px;
 `;
@@ -55,5 +57,9 @@ export const OldPrice = styled.span`
 export const CardInfoRow = styled.div`
 	display: flex;
 	justify-content: space-between;
-	align-items: center;
+	align-items: flex-start;
+
+	&:last-child {
+		align-items: center;
+	}
 `;
