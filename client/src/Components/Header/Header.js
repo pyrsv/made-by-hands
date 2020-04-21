@@ -6,7 +6,6 @@ import AuthModal from '../AuthModal/AuthModal';
 import Navigation from './Navigation/Navigation';
 import SearchField from './SearchField/SearchField';
 import UserNavigation from './UserNavigation/UserNavigation';
-// import { fetchUserRegister } from '../../store/actions/authActions';
 import {
 	StyledHeader,
 	Container,

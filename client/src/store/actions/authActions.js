@@ -26,13 +26,26 @@ export const userLogout = () => dispatch => {
 	dispatch({ type: USER_LOGOUT });
 };
 
+export const getUser = () => dispatch => {
+	const token = localStorage.getItem('token');
+
+	if (token) {
+		setAuthToken(token);
+		handleGetUser(token)
+			.then(customer => {
+				dispatch(userLoginSuccess(customer.data));
+			})
+			.catch(err => dispatch(userLoginError(err)));
+	}
+};
+
 export const userLogin = ({ loginOrEmail, password }) => dispatch => {
 	dispatch(userLoginInit());
 	handleUserLogin(loginOrEmail, password)
 		.then(res => {
 			const { token } = res.data;
 			setAuthToken(token);
-			handleGetUser(token)
+			handleGetUser()
 				.then(customer => {
 					dispatch(userLoginSuccess(customer.data));
 				})

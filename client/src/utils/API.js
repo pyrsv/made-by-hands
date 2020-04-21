@@ -9,8 +9,8 @@ export const handleUserLogin = async (loginOrEmail, password) => {
 	});
 };
 
-export const handleGetUser = async token => {
-	return axios.get('customers/customer', token, {
+export const handleGetUser = async () => {
+	return axios.get('customers/customer', {
 		headers: {
 			'Content-Type': 'application/json',
 		},
