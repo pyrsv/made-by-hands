@@ -1,14 +1,17 @@
+import axios from 'axios';
+
 export const getItemsAction = () => {
 	return dispatch => {
-		fetch('../items.json')
+		axios
+			.get('/products')
 			.then(res => {
-				return res.json();
-			})
-			.then(data => {
 				dispatch({
 					type: 'GET_ITEMS',
-					payload: [...data.items],
+					payload: [...res.data],
 				});
-			});
+			})
+			.catch
+			// err => console.log(err.response.data)
+			();
 	};
 };
