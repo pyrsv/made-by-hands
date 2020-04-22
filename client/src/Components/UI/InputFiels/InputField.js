@@ -10,9 +10,10 @@ const InputField = ({
 	name,
 	type,
 	value,
+	target,
 }) => {
 	return (
-		<InputContainer>
+		<InputContainer target={target}>
 			{label && (
 				<Label htmlFor={name}>
 					{label} {required && '*'}
@@ -32,16 +33,18 @@ const InputField = ({
 InputField.propTypes = {
 	label: PropTypes.string,
 	placeholder: PropTypes.string,
-	required: PropTypes.bool.isRequired,
+	required: PropTypes.bool,
 	name: PropTypes.string.isRequired,
 	onChange: PropTypes.func.isRequired,
 	type: PropTypes.string.isRequired,
 	value: PropTypes.string.isRequired,
+	target: PropTypes.oneOf(['form', 'search']).isRequired,
 };
 
 InputField.defaultProps = {
 	label: '',
 	placeholder: '',
+	required: false,
 };
 
 export default InputField;
