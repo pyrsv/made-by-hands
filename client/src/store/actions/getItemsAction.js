@@ -1,17 +1,23 @@
 import axios from 'axios';
 
-export const getItemsAction = () => {
-	return dispatch => {
-		axios
-			.get('/products')
-			.then(res => {
-				dispatch({
-					type: 'GET_ITEMS',
-					payload: [...res.data],
-				});
-			})
-			.catch
-			// err => console.log(err.response.data)
-			();
-	};
+const GET_ITEMS_SUCCESS = 'GET_ITEMS_SUCCESS';
+const GET_ITEMS_ERROR = 'GET_ITEMS_ERROR';
+
+const itemsSuccess = data => ({
+	type: GET_ITEMS_SUCCESS,
+	payload: data,
+});
+
+const itemsError = error => ({
+	type: GET_ITEMS_ERROR,
+	payload: error,
+});
+
+export const getItemsAction = () => dispatch => {
+	axios
+		.get('/products')
+		.then(res => {
+			dispatch(itemsSuccess([...res.data]));
+		})
+		.catch(err => dispatch(itemsError(err)));
 };
