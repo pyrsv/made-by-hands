@@ -18,7 +18,7 @@ const Button = ({ text, onClick, color, size, type, icon, disabled }) => {
 					<FontAwesomeIcon icon={['far', icon]} />
 				</Icon>
 			)}
-		</StyledButton>
+		</StyledButton>			
 	);
 };
 
