@@ -112,7 +112,7 @@ const ProductCarousel = () => {
 									<>
 										<ProductCardContainer>
 											<ProductCard
-												key={item.name}
+												key={item.customID}
 												name={item.name}
 												img={item.imageUrls[0]}
 												price={item.currentPrice}
