@@ -1,0 +1,44 @@
+.carousel-root{
+    .carousel-slider{
+        .slider-wrapper{
+            .slide{
+                .sliderIMG{
+                    opacity: 0.7;
+                    position: absolute;
+                    width: 100%;
+                    height: 100%;
+                    top: 0;
+                    left: 0;
+                }
+            }
+        }
+    }
+    .thumbs-wrapper{
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        .thumb {
+            border-radius: 10px;
+            padding: 0;
+            width: 100px !important;
+            @media screen and (max-width: 992px) {
+                width: 80px !important;
+            }
+            @media screen and (max-width: 576px) {
+                width: 60px !important;
+            }
+            .sliderIMG {
+                display:block;
+                width: 100%;
+                height: 50px; 
+                @media screen and (max-width: 992px) {
+                    height: 45px;
+                }
+                @media screen and (max-width: 576px) {
+                    height: 35px;
+                }
+            }
+            
+        }
+    }
+}

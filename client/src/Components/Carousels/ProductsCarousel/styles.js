@@ -14,11 +14,12 @@ export const NewArrivalsBackground = styled.div`
 	background: ${props => props.theme.mainOlive};
 `;
 
-
-
 export const StyledTitle = styled.span`
 	color: ${props => {
-	return	props.color === "dark" ? props.theme.mainDark : props.theme.lightPink}};
+		return props.color === 'dark'
+			? props.theme.mainDark
+			: props.theme.lightPink;
+	}};
 	text-transform: uppercase;
 	font-family: Raleway, sans-serif;
 	font-style: normal;

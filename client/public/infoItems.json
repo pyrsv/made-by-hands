@@ -1,0 +1,24 @@
+{"infoItems": [
+    {
+        "_id": "1",
+        "customId": "bagInfoCarousel",
+        "imageUrl": "https://baltic-grlk5lagedl.stackpathdns.com/production/baltic/images/1561118804824258-lv.gif?w=1920&h=800&fit=clip&crop=faces&fm=gif&auto=compress",
+        "title": "What women’s bags are in our store right now ?",
+        "description": "-20% for the entire collection"
+    },
+    {
+        "_id": "2",
+        "customId": "bagInfoCarousel",
+        "imageUrl": "https://www.tusting.co.uk/wp-content/uploads/Tusting-Gainsborough-Item-Banner-Image.jpg",
+        "title": "See all men's bags this season",
+        "description": "-20% for the entire collection"
+    },
+    {
+        "_id": "3",
+        "customId": "bagInfoCarousel",
+        "imageUrl": "https://blogscdn.thehut.net/wp-content/uploads/sites/35/2019/01/11162336/Header2-1.png",
+        "title": "You can buy these bags at a bargain price",
+        "description": "-20% for the entire collection"
+    }
+    
+]}
