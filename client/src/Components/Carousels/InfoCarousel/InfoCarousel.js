@@ -32,13 +32,17 @@ const InfoCarousel = () => {
 		dispatch(getInfoCarouselAction());
 	}, [dispatch]);
 
+	const changePage = () => {
+		window.location.assign('https://www.google.com/');
+	};
+
 	return (
 		<InfoCarouselContainer>
 			<LayoutContainer>
 				<Carousel {...settings}>
 					{items.map(item => {
 						return (
-							<SliderContainer key={item.id}>
+							<SliderContainer key={item.customId}>
 								<img
 									className="sliderIMG"
 									alt={item.customId}
@@ -46,7 +50,7 @@ const InfoCarousel = () => {
 								/>
 								<CarouselTextContainer>
 									<CarouselTitle>{item.title}</CarouselTitle>
-									<Button text="More details" />
+									<Button text="More details" onClick={() => changePage()} />
 								</CarouselTextContainer>
 							</SliderContainer>
 						);

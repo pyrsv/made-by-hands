@@ -8,7 +8,7 @@ const getItems = data => ({
 });
 
 export const getInfoCarouselAction = () => dispatch => {
-	axios.get('../infoItems.json').then(data => {
-		dispatch(getItems(data.data.infoItems));
+	axios.get('/slides').then(res => {
+		dispatch(getItems(res.data));
 	});
 };
