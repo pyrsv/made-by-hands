@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Logo from './Logo/Logo';
 import LayoutContainer from '../LayoutContainer/LayoutContainer';
@@ -38,7 +38,27 @@ const Header = () => {
 	});
 
 	const [isModal, setModal] = useState(false);
-	const [isLoggedIn] = useState(false);
+	const [isMobile, setMobile] = useState({ mobile: false });
+
+	const handleWindowResize = () => {
+		if (!isMobile.mobile && window.innerWidth <= 992) {
+			// console.log('breakpoint', isMobile);
+			setMobile(state => ({ ...state, mobile: !state.mobile }));
+		}
+
+		if (!isMobile.mobile && window.innerWidth > 992) {
+			// console.log('breakpoint2', isMobile);
+
+			setMobile(state => ({ ...state, mobile: !state.mobile }));
+		}
+	};
+
+	useEffect(() => {
+		window.addEventListener('resize', handleWindowResize);
+		return () => {
+			window.remove('resize', handleWindowResize);
+		};
+	}, []);
 
 	const handleDropdownToggle = key => {
 		setDropdown({
@@ -58,19 +78,21 @@ const Header = () => {
 					<Logo />
 					<Content>
 						<Info>
-							<Phone href="tel:+62896706255135">
-								<PhoneIcon>
-									<FontAwesomeIcon icon={['fas', 'phone-volume']} />
-								</PhoneIcon>
-								+38 (050) 960-28-85
-							</Phone>
+							{!isMobile.mobile && (
+								<Phone href="tel:+62896706255135">
+									<PhoneIcon>
+										<FontAwesomeIcon icon={['fas', 'phone-volume']} />
+									</PhoneIcon>
+									+38 (050) 960-28-85
+								</Phone>
+							)}
+
 							<SearchField />
 							<UserNavigation
 								isDropdown={dropdown.profile}
 								routes={profileRoutes}
 								onDropdownOpen={() => handleDropdownToggle('profile')}
 								onModalOpen={handleModalToggle}
-								isLoggedIn={isLoggedIn}
 							/>
 						</Info>
 						<Navigation
