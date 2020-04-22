@@ -1,13 +1,14 @@
-import {GET_INFO_ITEMS} from '../reducers/infoCarouselReducer'
+import axios from 'axios';
+
+export const GET_INFO_ITEMS = 'GET_INFO_ITEMS';
+
+const getItems = data => ({
+	type: GET_INFO_ITEMS,
+	payload: data,
+});
 
 export const getInfoCarouselAction = () => dispatch => {
-        fetch("../infoItems.json")
-        .then(res => {
-        return res.json()})
-        .then(data => {
-            dispatch({
-            type: GET_INFO_ITEMS,
-            payload: [...data.infoItems],
-            });
-        });
+	axios.get('../infoItems.json').then(data => {
+		dispatch(getItems(data.data.infoItems));
+	});
 };

@@ -1,7 +1,12 @@
-import {combineReducers} from 'redux'
-import {itemsReducer} from "./itemsReducer";
-import { infoCarouselReducer } from "./infoCarouselReducer"
+import { combineReducers } from 'redux';
+import { itemsReducer } from './itemsReducer';
+import { authReducer } from './authReducer';
+import { infoCarouselReducer } from './infoCarouselReducer';
 
- const rootReducer = combineReducers({itemsReducer,infoCarouselReducer});
+const rootReducer = combineReducers({
+	itemsReducer,
+	auth: authReducer,
+	infoCarousel: infoCarouselReducer,
+});
 
- export default rootReducer
+export default rootReducer;

@@ -3,7 +3,12 @@ import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 import ProductCard from '../../ProductCard/ProductCard';
 import { getItemsAction } from '../../../store/actions/getItemsAction';
-import { ProductCardContainer, ProductCarouselContainer } from './styles';
+import {
+	ProductCardContainer,
+	ProductCarouselContainer,
+	NewArrivalsBackground,
+} from './styles';
+import Title from '../../UI/Title/title';
 import LayoutContainer from '../../LayoutContainer/LayoutContainer';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -97,26 +102,29 @@ const ProductCarousel = () => {
 	};
 	return (
 		<div>
-			<LayoutContainer>
-				<ProductCarouselContainer>
-					<Slider {...settings}>
-						{selected.map(item => {
-							return (
-								<>
-									<ProductCardContainer>
-										<ProductCard
-											key={item.name}
-											name={item.name}
-											img={item.imageUrls[0]}
-											price={item.currentPrice}
-										/>
-									</ProductCardContainer>
-								</>
-							);
-						})}
-					</Slider>
-				</ProductCarouselContainer>
-			</LayoutContainer>
+			<NewArrivalsBackground>
+				<LayoutContainer>
+					<Title text="new arrivals" />
+					<ProductCarouselContainer>
+						<Slider {...settings}>
+							{selected.map(item => {
+								return (
+									<>
+										<ProductCardContainer>
+											<ProductCard
+												key={item.name}
+												name={item.name}
+												img={item.imageUrls[0]}
+												price={item.currentPrice}
+											/>
+										</ProductCardContainer>
+									</>
+								);
+							})}
+						</Slider>
+					</ProductCarouselContainer>
+				</LayoutContainer>
+			</NewArrivalsBackground>
 		</div>
 	);
 };

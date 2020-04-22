@@ -1,18 +1,15 @@
-export const GET_INFO_ITEMS = 'GET_INFO_ITEMS';
+import { GET_INFO_ITEMS } from '../actions/getInfoCarouselAction';
 
-const initialItems = {items:[]}
+const initialItems = { items: [], error: null };
 
-export const infoCarouselReducer = (state = initialItems, action) => {
-    switch (action.type) {
-    case GET_INFO_ITEMS:
-        return {
-            ...state,
-            items: action.payload,
-        };
-    default: {
-        return {
-            ...state,
-            };
-        }
-    }
+export const infoCarouselReducer = (
+	state = initialItems,
+	{ type, payload }
+) => {
+	switch (type) {
+		case GET_INFO_ITEMS:
+			return { ...state, items: payload };
+		default:
+			return state;
+	}
 };
