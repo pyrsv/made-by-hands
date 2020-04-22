@@ -3,15 +3,22 @@ import styled from 'styled-components';
 export const Foot = styled.div`
 	display: flex;
 	align-items: center;
-	flex-direction: columns;
-	
-	width:100vw;
-	/* justify-content: space-around; */
-
-	border: 1px solid #000000;
-	box-sizing: border-box;
+	flex-direction: column;
 	background: #f9ecef;
+	justify-content: space-evenly;
+	min-height: ${props => props.height};
 `;
 
+export const FooterContainer = styled.section`
+	display: flex;
+	align-items: center;
+	flex-direction: row;
+	justify-content: space-between;
+	height: ${props => props.height};
+`;
 
-
+export const FootLine = styled.div`
+	width: 100%;
+	border-top: 2px solid #e5e5e5;
+	margin: 0 30px;
+`;
