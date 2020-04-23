@@ -17,7 +17,7 @@ export const getItemsAction = () => dispatch => {
 	axios
 		.get('/products')
 		.then(res => {
-			dispatch(itemsSuccess([...res.data]));
+			dispatch(itemsSuccess(res.data));
 		})
 		.catch(err => dispatch(itemsError(err)));
 };
