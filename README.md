@@ -327,30 +327,65 @@ export const userRegister = data => async dispatch => {
 };
 ```
  
- ## Товары ##
- **Пример объекта товара**
- ```json
+ ## Товары ##  
+ 
+ Товары берем в магазине [SHIFT](https://shift.ua/).  
+ Сайт на русском языке, по этому свойства `description` и `parameters` прогоняем через гугл переводчик.
+ 
+ **Пример объекта товара**   
+ _*вопросительным знаком помечены необязательные свойства, но каждый должен создать хотя бы 2 товара
+ со скидкой и 4-5 со свойством parameters_
+ ```
 {
     "name": "Karl Kani Signature corduroy tape waist bag ",
     "currentPrice": 25.00,
+  ? "previousPrice": 20, 
     "categories": "waist bags",
-    "imageUrls":["https://res.cloudinary.com/dnorz3pyf/image/upload/v1586854755/waist%20bags/13977708-1-camelblack_ncxpsa.jpg","https://res.cloudinary.com/dnorz3pyf/image/upload/v1586854755/waist%20bags/13977708-2_prydxs.jpg","https://res.cloudinary.com/dnorz3pyf/image/upload/v1586854755/waist%20bags/13977708-3_yx1emi.jpg","https://res.cloudinary.com/dnorz3pyf/image/upload/e_improve,w_300,h_600,c_thumb,g_auto/v1586854755/waist%20bags/13977708-3_yx1emi.jpg","https://res.cloudinary.com/dnorz3pyf/image/upload/v1586854755/waist%20bags/13977708-4_gnqr8z.jpg"],
+    "imageUrls": [
+        "https://res.cloudinary.com/dnorz3pyf/image/upload/v1586854755/waist%20bags/13977708-1-camelblack_ncxpsa.jpg",
+        "https://res.cloudinary.com/dnorz3pyf/image/upload/v1586854755/waist%20bags/13977708-2_prydxs.jpg",
+        "https://res.cloudinary.com/dnorz3pyf/image/upload/v1586854755/waist%20bags/13977708-3_yx1emi.jpg","https://res.cloudinary.com/dnorz3pyf/image/upload/e_improve,w_300,h_600,c_thumb,g_auto/v1586854755/waist%20bags/13977708-3_yx1emi.jpg",
+        "https://res.cloudinary.com/dnorz3pyf/image/upload/v1586854755/waist%20bags/13977708-4_gnqr8z.jpg"
+    ],
     "quantity": 50,
     "color": "yellow",
     "productUrl":"/waist-bags",
     "brand":"Karl Kani",
-    "parametrs":["Adjustable body strap","Secure clasp fastening","External pocket","Zip closure"],
-    "description":[ "Lorem ipsum dolor sit amet consectetur adipisicing elit.",  
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur temporibus ea amet numquam nihil in officiis explicabo pariatur totam nam, veritatis, ratione veniam maiores deserunt vitae voluptas nesciunt sed inventore. "]
+  ? "parameters":[
+        "Adjustable body strap",
+        "Secure clasp fastening",
+        "External pocket",
+        "Zip closure"
+    ],
+    "description":[ 
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur temporibus ea amet numquam nihil in officiis explicabo pariatur totam nam, veritatis, ratione veniam maiores deserunt vitae voluptas nesciunt sed inventore. "
+    ]
 }
 ```
- 
+
+**name** - название товара, ДО 40 символов, больше не позволяет верстка  
+**currentPrice** - текущая цена, со скидкой   
+**previousPrice** - предыдущая цена, без скидки  
+**categories** - пока указывает ту категорию к которой принадлежит наш товар, в дальнейшем возможно все изменится  
+**imageUrls** - массив ссылок на фото товара, от 2 до 4  
+**quantity** - количество в наличии, пока указывает рандомно, но в рамках разумного
+**color** - цвет, одним словом, на английском  
+**productUrl** - статическая ссылка на товар, пока указываем так, если категория _bags_, то _/bags_  
+**brand** - название бренда, маленькими буквами без подчеркиваний, дефисов и прочего,
+если слов несколько, то стввим пробел     
+**parameters** - массив параметров, 2-5 свойств, будут выводится списком, по этому и массив  
+**description** - описание, массив потому что абзацев у нас может быть много, по этому каждый 
+отдельный обзац - элемент массива.
+
  **Доступные категории**
  
  В каждой категории должно быть 10-20 товаров. Те у кого 2 категории, создают по 7-10
- товаров КАЖДОЙ категории, те у кого 1 - создают 15-20 товаров. Больше - только приветствуется.
- Каждый товар нужно добавить в базу данных через POSTMAN
- предварительно авторизовавшись и положив токен в заголовок запроса. Инструкция по авторизации есть выше, инструкция по
+ товаров КАЖДОЙ категории, те у кого 1 - создают 15-20 товаров. Больше - только приветствуется. 
+ 
+ Каждый товар можно добавить в базу данных через POSTMAN
+  предварительно авторизовавшись и положив токен в заголовок запроса, но скорее всего придумаем что-то более эффективное что бы не делать руками работу ;)   
+Инструкция по авторизации есть выше, инструкция по
  добавлению товаров есть [тут](https://saribeg.github.io/DAN.IT-API-Documentation/?language=JavaScript#add-new-product).
   
  - рюкзаки - _Вадим_
@@ -362,5 +397,5 @@ export const userRegister = data => async dispatch => {
  - сумки - _Ксюша_
  
  **Цвета**    
-Доступны любые цвета, главное не брать сильно много разных, в приоритете:
+Доступны любые цвета, главное не брать много разных, в приоритете:
 _белый, черный, желтый, коричневый, красный, синий, зеленый_. 
