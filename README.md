@@ -1,3 +1,5 @@
+### Настройка проекта и работа с терминалом ###
+
 **Подготовка**
 
 
@@ -125,6 +127,188 @@ P.S Ожидаемое поведение:
 
 все последующие запросы отправлять с этим заголовком(хедером)
 
+## Файловая структура проекта ##
+
+```
+--- assets
+|   |   //  global assets for whole app
+|   |   --- img 
+|   |   --- fonts ?
+--- Components
+|   --- ExampleComponent
+|   |   --- ExampleComponent.js  
+|   |   --- styles.js
+|   |   --- img ?
+|   --- UI
+|       //  interface reusable dumb components (have no logic) and prohibited for editing
+--- Pages
+|   --- IndexPage.js
+|   --- CartPage.js
+|   --- etc.
+    //  No styles and no logic here, only COMPLETED components please!
+--- store
+|   --- actions
+|   |   --- exampleActions.js
+|   |   --- authActions.js
+|   --- types
+|   |   --- exampleTypes.js
+|   |   --- authTypes.js
+|   --- middlewares
+|   |   --- localStorageMiddleware.js
+|   |   --- exampleMiddleware.js
+|   --- reducers
+|   |   --- exampleReducer.js
+|   |   --- authReducer.js
+|   |   --- rootReducer.js
+|   --- configureStore.js
+--- utils
+|   --- API
+|   |   --- exampleReusableApiFunction.js
+|   |   --- anotherReusabeFunctionInteractingWithApi.js
+|   |   --- setAuthToken.js
+|   --- someReusableFunction.js
+```
+
+## Работа с Redux ##
+
+В Redux выносим исколючитено ту логику которая необходима для функционирования нескольких компонентов.
+
+Каждая логическая единица должна быть разбита на 3 структурных. Примеры ниже.
+
+Типы описываем в отдельном файле, который созадем в директории `types`.     
+_client/src/store/types/authTypes.js_
+```
+export const USER_LOGIN_INIT = 'USER_LOGIN_INIT';
+export const USER_LOGIN_SUCCESS = 'USER_LOGIN_SUCCESS';
+export const USER_LOGOUT = 'USER_LOGOUT';
+export const USER_LOGIN_ERROR = 'USER_LOGIN_ERROR';
+```
+Редьюсер описываем в отдельном файле в деректории `reducers`. Аргумент `action` ДОЛЖЕН быть деструризован
+как `{ type, payload }`.  
+_client/src/store/reducers/authReducer.js_
+```
+import {
+	USER_LOGIN_INIT,
+	USER_LOGIN_ERROR,
+	USER_LOGIN_SUCCESS,
+	USER_LOGOUT,
+} from '../types/authTypes';
+
+const initialState = {
+	currentUser: null,
+	isLoading: false,
+	error: null,
+};
+
+export const authReducer = (state = initialState, { type, payload }) => {
+	switch (type) {
+		case USER_LOGIN_INIT:
+			return { ...state, isLoading: true };
+		case USER_LOGIN_SUCCESS:
+			return { ...state, currentUser: payload, error: null, isLoading: false };
+		case USER_LOGIN_ERROR:
+			return { ...state, error: payload, isLoading: false };
+		case USER_LOGOUT:
+			return { ...state, currentUser: null };
+		default:
+			return state;
+	}
+};
+
+```
 
 
+Actions и ActionCreators описываем в отдельном файле в деректории `actions`.
+ActionCreator ДОЛЖЕН быть описан отдельной функцией, даже если имеет только тип и не имеет
+ `payload` , и ДОЛЖЕН НАХОДИТСЯ  в начале файла после импортов.  
+ Название файла должно быть множественным, то есть `actionS`, даже если экшн один.
+ _client/src/store/reducers/authReducer.js_
+```
+import setAuthToken from '../../utils/setAuthToken';
+import { handleUserLogin, handleGetUser } from '../../utils/API';
+import {
+	USER_LOGIN_INIT,
+	USER_LOGIN_ERROR,
+	USER_LOGIN_SUCCESS,
+	USER_LOGOUT,
+} from '../types/authTypes';
+
+
+
+const userLoginInit = () => ({
+	type: USER_LOGIN_INIT,
+});
+
+const userLoginSuccess = user => ({
+	type: USER_LOGIN_SUCCESS,
+	payload: user,
+});
+
+const userLoginError = error => ({
+	type: USER_LOGIN_ERROR,
+	payload: error,
+});
+
+export const userLogout = () => dispatch => {
+	setAuthToken();
+	dispatch({ type: USER_LOGOUT });
+};
+
+export const getUser = () => dispatch => {
+	const token = localStorage.getItem('token');
+
+	if (token) {
+		setAuthToken(token);
+		handleGetUser(token)
+			.then(customer => {
+				dispatch(userLoginSuccess(customer.data));
+			})
+			.catch(err => dispatch(userLoginError(err)));
+	}
+};
+
+export const userLogin = ({ loginOrEmail, password }) => dispatch => {
+	dispatch(userLoginInit());
+	handleUserLogin(loginOrEmail, password)
+		.then(res => {
+			const { token } = res.data;
+			setAuthToken(token);
+			handleGetUser()
+				.then(customer => {
+					dispatch(userLoginSuccess(customer.data));
+				})
+				.catch(err => {
+					dispatch(userLoginError(err));
+				});
+		})
+		.catch(err => {
+			dispatch(userLoginError(err));
+		});
+};
+
+export const userRegister = data => async dispatch => {
+	dispatch(userLoginInit());
+	axios
+		.post('/customers', JSON.stringify(data), {
+			headers: {
+				'Content-Type': 'application/json',
+			},
+		})
+		.then(customer => {
+			const { login, password } = data;
+			handleUserLogin(login, password)
+				.then(res => {
+					setAuthToken(res.data.token);
+					dispatch(userLoginSuccess(customer.data));
+				})
+				.catch(err => {
+					dispatch(userLoginError(err));
+				});
+		})
+		.catch(err => {
+			dispatch(userLoginError(err));
+		});
+};
+```
+ 
 
