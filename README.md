@@ -177,7 +177,7 @@ P.S Ожидаемое поведение:
 
 Типы описываем в отдельном файле, который созадем в директории `types`.     
 _client/src/store/types/authTypes.js_
-```
+```javascript
 export const USER_LOGIN_INIT = 'USER_LOGIN_INIT';
 export const USER_LOGIN_SUCCESS = 'USER_LOGIN_SUCCESS';
 export const USER_LOGOUT = 'USER_LOGOUT';
@@ -186,7 +186,7 @@ export const USER_LOGIN_ERROR = 'USER_LOGIN_ERROR';
 Редьюсер описываем в отдельном файле в деректории `reducers`. Аргумент `action` ДОЛЖЕН быть деструризован
 как `{ type, payload }`.  
 _client/src/store/reducers/authReducer.js_
-```
+```javascript
 import {
 	USER_LOGIN_INIT,
 	USER_LOGIN_ERROR,
@@ -216,14 +216,30 @@ export const authReducer = (state = initialState, { type, payload }) => {
 };
 
 ```
+Редьюсер необходимо добавить в rootReducer который находится по пути _client/src/store/reducers/rootReducer.js_
+ВАЖНО, ключ по которому кладем редьюсер, должен быть сокращением от имени редьюсера, например:
+`authReducer => auth, exampleReducer => example`.  
+В итоге должно получится так:  
+_ _client/src/store/reducers/rootReducer.js__
+```javascript
+import { combineReducers } from 'redux';
+import { authReducer } from './authReducer';
+import { infoCarouselReducer } from './infoCarouselReducer';
 
+const rootReducer = combineReducers({
+	auth: authReducer,
+	infoCarousel: infoCarouselReducer,
+});
 
+export default rootReducer;
+
+```
 Actions и ActionCreators описываем в отдельном файле в деректории `actions`.
 ActionCreator ДОЛЖЕН быть описан отдельной функцией, даже если имеет только тип и не имеет
  `payload` , и ДОЛЖЕН НАХОДИТСЯ  в начале файла после импортов.  
  Название файла должно быть множественным, то есть `actionS`, даже если экшн один.
  _client/src/store/reducers/authReducer.js_
-```
+```javascript
 import setAuthToken from '../../utils/setAuthToken';
 import { handleUserLogin, handleGetUser } from '../../utils/API';
 import {
@@ -311,4 +327,40 @@ export const userRegister = data => async dispatch => {
 };
 ```
  
-
+ ## Товары ##
+ **Пример объекта товара**
+ ```json
+{
+    "name": "Karl Kani Signature corduroy tape waist bag ",
+    "currentPrice": 25.00,
+    "categories": "waist bags",
+    "imageUrls":["https://res.cloudinary.com/dnorz3pyf/image/upload/v1586854755/waist%20bags/13977708-1-camelblack_ncxpsa.jpg","https://res.cloudinary.com/dnorz3pyf/image/upload/v1586854755/waist%20bags/13977708-2_prydxs.jpg","https://res.cloudinary.com/dnorz3pyf/image/upload/v1586854755/waist%20bags/13977708-3_yx1emi.jpg","https://res.cloudinary.com/dnorz3pyf/image/upload/e_improve,w_300,h_600,c_thumb,g_auto/v1586854755/waist%20bags/13977708-3_yx1emi.jpg","https://res.cloudinary.com/dnorz3pyf/image/upload/v1586854755/waist%20bags/13977708-4_gnqr8z.jpg"],
+    "quantity": 50,
+    "color": "yellow",
+    "productUrl":"/waist-bags",
+    "brand":"Karl Kani",
+    "parametrs":["Adjustable body strap","Secure clasp fastening","External pocket","Zip closure"],
+    "description":[ "Lorem ipsum dolor sit amet consectetur adipisicing elit.",  
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur temporibus ea amet numquam nihil in officiis explicabo pariatur totam nam, veritatis, ratione veniam maiores deserunt vitae voluptas nesciunt sed inventore. "]
+}
+```
+ 
+ **Доступные категории**
+ 
+ В каждой категории должно быть 10-20 товаров. Те у кого 2 категории, создают по 7-10
+ товаров КАЖДОЙ категории, те у кого 1 - создают 15-20 товаров. Больше - только приветствуется.
+ Каждый товар нужно добавить в базу данных через POSTMAN
+ предварительно авторизовавшись и положив токен в заголовок запроса. Инструкция по авторизации есть выше, инструкция по
+ добавлению товаров есть [тут](https://saribeg.github.io/DAN.IT-API-Documentation/?language=JavaScript#add-new-product).
+  
+ - рюкзаки - _Вадим_
+ - поясные сумки - _Саша_
+ - кошельки - _Никита_
+ - кепки - _Стас_
+ - шапки- _Стас_
+ - часы - _Никита_
+ - сумки - _Ксюша_
+ 
+ **Цвета**    
+Доступны любые цвета, главное не брать сильно много разных, в приоритете:
+_белый, черный, желтый, коричневый, красный, синий, зеленый_. 

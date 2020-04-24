@@ -7,7 +7,17 @@ export const StyledLogo = styled.span`
 	font-weight: 900;
 	text-transform: uppercase;
 	color: ${props => props.theme.maindark};
-	width: 25%;
+	width: 20%;
+	@media (max-width: 1030px) {
+		width: 15%;
+		font-size: 30px;
+	}
+	@media (max-width: 900px) {
+		width: auto;
+	}
+	@media (max-width: 576px) {
+		font-size: 24px;
+	}
 `;
 
 export const LogoAccent = styled.span`
