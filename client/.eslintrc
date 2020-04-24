@@ -21,10 +21,16 @@
 			"allowNamedFunctions": false 
 			}
 		],
-		"object-curly-newline": ["error", { "multiline": true, "minProperties": 2 }
-		],
 		"no-alert": "error",
 		"no-console": "warn",
-		"no-debugger": "error"
+		"no-debugger": "error",
+		"jsx-a11y/anchor-is-valid": "off",
+		"react/jsx-props-no-spreading": "off",
+		"no-unused-vars": "error",
+		"sort-imports": "off",
+		"import/order": "off",
+		"import/prefer-default-export": "off",
+		"react-hooks/exhaustive-deps": "off",
+		"react/no-unsafe": "off"
 	}
 }

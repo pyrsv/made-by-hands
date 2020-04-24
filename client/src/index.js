@@ -1,15 +1,34 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import { BrowserRouter } from 'react-router-dom';
+import { ThemeProvider } from 'styled-components';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { Provider } from 'react-redux';
+import { faEnvelope, far } from '@fortawesome/free-regular-svg-icons';
+import { fas } from '@fortawesome/free-solid-svg-icons';
+import store from './store/configreStore';
 import App from './App';
+import './main.scss';
+
+library.add(faEnvelope, fas, far);
+
+const theme = {
+	lightPink: '#F9ECEF', // main light background color
+	mainDark: '#16161C', // color for text, buttons and dark borders
+	mainOlive: '#BBC8A9', // main olive background
+	whiteBackground: '#FFFCFC', // background for modals and dropdowns
+	lightBorder: '#747A82', // ligtht border color, used in modal forms
+	darkButtonColor: '#DEE0DF', // font color for dark controls
+	accentRed: '#DE3019', // bright red color for discounted price and FavoriteHeart
+};
 
 ReactDOM.render(
-	<React.StrictMode>
-		<App />
-	</React.StrictMode>,
+	<Provider store={store}>
+		<BrowserRouter>
+			<ThemeProvider theme={theme}>
+				<App />
+			</ThemeProvider>
+		</BrowserRouter>
+	</Provider>,
 	document.getElementById('root')
 );
-
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA

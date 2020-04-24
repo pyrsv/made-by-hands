@@ -1,33 +1,35 @@
-import React from 'react';
-import { logo } from './logo.svg';
-import './App.css';
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { Route, Switch } from 'react-router-dom';
+import CartPage from './Pages/CartPage';
+import CatalogPage from './Pages/CatalogPage';
+import ProfilePage from './Pages/ProfilePage';
+import IndexPage from './Pages/IndexPage';
+import { getUser } from './store/actions/authActions';
 
-const object = {
-	type: 'TEST',
-	payload: 'tt',
-	xx: 'yy',
-	as: 1234,
-};
+const App = () => {
+	const dispatch = useDispatch();
 
-function App() {
+	useEffect(() => dispatch(getUser()));
+
 	return (
-		<div className="Appp">
-			<header className="App-header">
-				{/* <img src={logo} className="App-logo" alt="logo" /> */}
-				<p>
-					Edit <code>src/App.js</code> and save to reload.
-				</p>
-				<a
-					className="App-link"
-					href="https://reactjs.org"
-					target="_blank"
-					rel="noopener noreferrer"
-				>
-					Learn React
-				</a>
-			</header>
+		<div>
+			<Switch>
+				<Route exact path="/">
+					<IndexPage />
+				</Route>
+				<Route path="/cart">
+					<CartPage />
+				</Route>
+				<Route path="/filter">
+					<CatalogPage />
+				</Route>
+				<Route path="/profile">
+					<ProfilePage />
+				</Route>
+			</Switch>
 		</div>
 	);
-}
+};
 
 export default App;
