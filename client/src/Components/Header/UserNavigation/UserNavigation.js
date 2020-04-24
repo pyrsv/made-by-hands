@@ -15,7 +15,7 @@ const UserNavigation = ({
 	const user = useSelector(state => state.auth.currentUser);
 	return (
 		<Container>
-			<UserNavItem onClick={!user && onModalOpen}>
+			<UserNavItem onClick={!user ? onModalOpen : null}>
 				<UserNavIcon>
 					<FontAwesomeIcon icon={['far', 'user']} />
 				</UserNavIcon>

@@ -26,7 +26,7 @@ const AuthForm = () => {
 								name="loginOrEmail"
 								onChange={handleChange}
 								onBlur={handleBlur}
-								value={values.email}
+								value={values.loginOrEmail}
 								target="form"
 								label="Login or Email"
 								required
@@ -48,6 +48,7 @@ const AuthForm = () => {
 							text="login"
 							type="submit"
 							size="wide"
+							onClick={() => {}}
 						/>
 					</form>
 				)}

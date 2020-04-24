@@ -2,6 +2,14 @@ import styled from 'styled-components';
 
 export const SearchForm = styled.form`
 	position: relative;
+
+	@media (max-width: 900px) {
+		position: absolute;
+		top: 90px;
+		right: 15px;
+		background-color: ${props => props.theme.lightPink};
+		width: 80%;
+	}
 `;
 
 export const SearchButton = styled.button`

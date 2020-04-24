@@ -1,6 +1,5 @@
 import React, { useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { NavLink } from 'react-router-dom';
 import {
 	DropdownItem,
 	DropdownWrapper,
@@ -41,9 +40,12 @@ const Dropdown = ({ isOpen, heading, onOpen, routes }) => {
 			</DropdownHeading>
 			{isOpen && (
 				<DropdownList ref={node}>
-					{routes.map(item => (
-						<DropdownItem key={item.name}>
-							<NavLink to={item.route}>{item.name}</NavLink>
+					{routes.map((item, key) => (
+						<DropdownItem
+							accent={routes.length === 4 && key === 3}
+							key={item.props.children}
+						>
+							{item}
 						</DropdownItem>
 					))}
 				</DropdownList>
