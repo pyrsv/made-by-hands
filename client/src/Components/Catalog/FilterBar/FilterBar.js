@@ -11,6 +11,7 @@ import { getInitialFields } from '../../../utils/getFilterFields';
 import Button from '../../UI/Button/Button';
 import Checkbox from '../../UI/Checkbox/Checkbox';
 import { FiltersContainer } from './styles';
+import PriceRange from '../PriceRange/PriceRange';
 
 const FilterBar = () => {
 	const dispatch = useDispatch();
@@ -20,7 +21,8 @@ const FilterBar = () => {
 	const [fields, setFields] = useState({});
 	const categories = useSelector(state => state.catalog.categories);
 	const color = useSelector(state => state.catalog.colors);
-
+	const minPrice = useSelector(state => state.catalog.minPrice);
+	const maxPrice = useSelector(state => state.catalog.maxPrice);
 	const currentParams = querystring.parse(location.search.slice(1));
 
 	useEffect(() => {
@@ -54,8 +56,11 @@ const FilterBar = () => {
 							checked && arr.push(name);
 							return arr;
 						}, []);
+
 						return obj;
 					}, {});
+					params.minPrice = minPrice;
+					params.maxPrice = maxPrice;
 					const str = querystring.stringify(params, { arrayFormat: 'comma' });
 					history.push({
 						search: `?${str}`,
@@ -64,39 +69,45 @@ const FilterBar = () => {
 			>
 				{({ values, handleSubmit, setFieldValue }) => {
 					return (
-						<form onSubmit={handleSubmit}>
-							<>
-								Categories
-								{Object.entries(values.categories || {}).map(
-									([key, val], index) => {
-										return (
-											<Checkbox
-												id={categories[index]._id}
-												checked={val}
-												name={`categories.${key}`}
-												label={categories[index].name}
-												onChange={() =>
-													setFieldValue(`categories.${key}`, !val)
-												}
-											/>
-										);
-									}
-								)}
-								Colors
-								{Object.entries(values.color || {}).map(([key, val], index) => {
-									return (
-										<Checkbox
-											id={color[index]._id}
-											checked={val}
-											name={`color.${key}`}
-											label={color[index].name}
-											onChange={() => setFieldValue(`color.${key}`, !val)}
-										/>
-									);
-								})}
-							</>
-							<Button type="Submit" text="Show" onClick={() => {}} />
-						</form>
+						<>
+							<br />
+							<PriceRange />
+							<form onSubmit={handleSubmit}>
+								<>
+									Categories
+									{Object.entries(values.categories || {}).map(
+										([key, val], index) => {
+											return (
+												<Checkbox
+													id={categories[index]._id}
+													checked={val}
+													name={`categories.${key}`}
+													label={categories[index].name}
+													onChange={() =>
+														setFieldValue(`categories.${key}`, !val)
+													}
+												/>
+											);
+										}
+									)}
+									Colors
+									{Object.entries(values.color || {}).map(
+										([key, val], index) => {
+											return (
+												<Checkbox
+													id={color[index]._id}
+													checked={val}
+													name={`color.${key}`}
+													label={color[index].name}
+													onChange={() => setFieldValue(`color.${key}`, !val)}
+												/>
+											);
+										}
+									)}
+								</>
+								<Button type="Submit" text="Show" onClick={() => {}} />
+							</form>
+						</>
 					);
 				}}
 			</Formik>
