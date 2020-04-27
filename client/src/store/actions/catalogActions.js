@@ -46,7 +46,10 @@ export const getFilteredProducts = params => dispatch => {
 		.get('/products/filter/', {
 			params,
 		})
-		.then(response => dispatch(getFilteredProductsSuccess(response.data)))
+		.then(response => {
+			// console.log(response.data);
+			dispatch(getFilteredProductsSuccess(response.data));
+		})
 		.catch(err => dispatch(getFilteredProductsError(err)));
 };
 

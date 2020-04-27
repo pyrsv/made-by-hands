@@ -10,6 +10,7 @@ import {
 import { getInitialFields } from '../../../utils/getFilterFields';
 import Button from '../../UI/Button/Button';
 import { FiltersContainer } from './styles';
+import PriceRange from '../PriceRange/PriceRange';
 
 const FilterBar = () => {
 	const dispatch = useDispatch();
@@ -53,8 +54,12 @@ const FilterBar = () => {
 							checked && arr.push(name);
 							return arr;
 						}, []);
+
 						return obj;
 					}, {});
+					params.minPrice = 800;
+					params.maxPrice = 900;
+					// console.log(params)
 					const str = querystring.stringify(params, { arrayFormat: 'comma' });
 					history.push({
 						search: `?${str}`,
@@ -63,35 +68,41 @@ const FilterBar = () => {
 			>
 				{({ values, handleSubmit, setFieldValue }) => {
 					return (
-						<form onSubmit={handleSubmit}>
-							<>
-								Categories
-								{Object.entries(values.categories || {}).map(([key, val]) => {
-									return (
-										<Field
-											component="input"
-											type="checkbox"
-											checked={val}
-											name={`categories.${key}`}
-											onChange={() => setFieldValue(`categories.${key}`, !val)}
-										/>
-									);
-								})}
-								Colors
-								{Object.entries(values.color || {}).map(([key, val]) => {
-									return (
-										<Field
-											component="input"
-											type="checkbox"
-											checked={val}
-											name={`color.${key}`}
-											onChange={() => setFieldValue(`color.${key}`, !val)}
-										/>
-									);
-								})}
-							</>
-							<Button type="Submit" text="Show" onClick={() => {}} />
-						</form>
+						<>
+							<br />
+							<PriceRange />
+							<form onSubmit={handleSubmit}>
+								<>
+									Categories
+									{Object.entries(values.categories || {}).map(([key, val]) => {
+										return (
+											<Field
+												component="input"
+												type="checkbox"
+												checked={val}
+												name={`categories.${key}`}
+												onChange={() =>
+													setFieldValue(`categories.${key}`, !val)
+												}
+											/>
+										);
+									})}
+									Colors
+									{Object.entries(values.color || {}).map(([key, val]) => {
+										return (
+											<Field
+												component="input"
+												type="checkbox"
+												checked={val}
+												name={`color.${key}`}
+												onChange={() => setFieldValue(`color.${key}`, !val)}
+											/>
+										);
+									})}
+								</>
+								<Button type="Submit" text="Show" onClick={() => {}} />
+							</form>
+						</>
 					);
 				}}
 			</Formik>
