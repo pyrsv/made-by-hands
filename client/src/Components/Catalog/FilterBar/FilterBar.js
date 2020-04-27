@@ -10,8 +10,8 @@ import {
 import { getInitialFields } from '../../../utils/getFilterFields';
 import Button from '../../UI/Button/Button';
 import Checkbox from '../../UI/Checkbox/Checkbox';
-import { FiltersContainer } from './styles';
 import PriceRange from '../PriceRange/PriceRange';
+import { FiltersContainer, FilterName, Title, FilterGroup } from './styles';
 
 const FilterBar = () => {
 	const dispatch = useDispatch();
@@ -43,7 +43,8 @@ const FilterBar = () => {
 
 	return (
 		<FiltersContainer>
-			Filters
+			<Title>Filters</Title>
+
 			<Formik
 				enableReinitialize
 				initialValues={{
@@ -70,40 +71,47 @@ const FilterBar = () => {
 				{({ values, handleSubmit, setFieldValue }) => {
 					return (
 						<>
-							<br />
-							<PriceRange />
 							<form onSubmit={handleSubmit}>
 								<>
-									Categories
-									{Object.entries(values.categories || {}).map(
-										([key, val], index) => {
-											return (
-												<Checkbox
-													id={categories[index]._id}
-													checked={val}
-													name={`categories.${key}`}
-													label={categories[index].name}
-													onChange={() =>
-														setFieldValue(`categories.${key}`, !val)
-													}
-												/>
-											);
-										}
-									)}
-									Colors
-									{Object.entries(values.color || {}).map(
-										([key, val], index) => {
-											return (
-												<Checkbox
-													id={color[index]._id}
-													checked={val}
-													name={`color.${key}`}
-													label={color[index].name}
-													onChange={() => setFieldValue(`color.${key}`, !val)}
-												/>
-											);
-										}
-									)}
+									<FilterGroup>
+										<FilterName>Categories</FilterName>
+										{Object.entries(values.categories || {}).map(
+											([key, val], index) => {
+												return (
+													<Checkbox
+														id={categories[index]._id}
+														checked={val}
+														name={`categories.${key}`}
+														label={categories[index].name}
+														onChange={() =>
+															setFieldValue(`categories.${key}`, !val)
+														}
+													/>
+												);
+											}
+										)}
+									</FilterGroup>
+									<FilterGroup>
+										<FilterName>Colors</FilterName>
+
+										{Object.entries(values.color || {}).map(
+											([key, val], index) => {
+												return (
+													<Checkbox
+														id={color[index]._id}
+														checked={val}
+														name={`color.${key}`}
+														label={color[index].name}
+														onChange={() => setFieldValue(`color.${key}`, !val)}
+													/>
+												);
+											}
+										)}
+									</FilterGroup>
+									<FilterGroup>
+										<FilterName>Price</FilterName>
+										<PriceRange />
+									</FilterGroup>
 								</>
 								<Button type="Submit" text="Show" onClick={() => {}} />
 							</form>

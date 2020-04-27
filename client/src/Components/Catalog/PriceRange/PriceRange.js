@@ -6,6 +6,8 @@ import {
 } from '../../../store/actions/catalogActions';
 import InputRange from 'react-input-range';
 import 'react-input-range/lib/css/index.css';
+import './styles.scss';
+import { Wrapper } from './styles';
 
 const PriceRange = () => {
 	const dispatch = useDispatch();
@@ -16,16 +18,16 @@ const PriceRange = () => {
 		dispatch(setMaxPrice(range.value.max));
 	}, [range]);
 	return (
-		<>
-			<span>price</span>
+		<Wrapper>
 			<InputRange
 				formatLabel={value => `${value}₴`}
 				maxValue={2000}
 				minValue={0}
 				value={range.value}
 				onChange={value => setValue({ value })}
+				step={10}
 			/>
-		</>
+		</Wrapper>
 	);
 };
 

@@ -1,0 +1,44 @@
+.input-range {
+	box-sizing: border-box;
+	max-width: 70%;
+	margin: 0 auto;
+	padding-top: 15px;
+	left: -10px;
+
+	&__track {
+		background-color: #16161c;
+		position: static;
+	}
+
+	&__slider {
+		background: #f9ecef;
+		border: 1px solid #16161c;
+	}
+
+	&__label {
+		color: #16161c;
+		font-size: 20px;
+
+		&--min {
+			bottom: -1px;
+			top: 50%;
+			transform: translateY(-50%);
+			left: -10%;
+		}
+
+		&--max {
+			bottom: -1px;
+			top: 50%;
+			transform: translateY(-50%);
+			right: -15%;
+		}
+
+		&--value {
+			top: -36px;
+		}
+	}
+
+
+
+
+}
