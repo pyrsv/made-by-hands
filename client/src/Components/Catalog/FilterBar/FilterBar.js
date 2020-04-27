@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useHistory } from 'react-router-dom';
-import { Formik, Field } from 'formik';
+import { Formik } from 'formik';
 import querystring from 'query-string';
 import {
 	getFilteredProducts,
@@ -9,6 +9,7 @@ import {
 } from '../../../store/actions/catalogActions';
 import { getInitialFields } from '../../../utils/getFilterFields';
 import Button from '../../UI/Button/Button';
+import Checkbox from '../../UI/Checkbox/Checkbox';
 import { FiltersContainer } from './styles';
 
 const FilterBar = () => {
@@ -66,25 +67,29 @@ const FilterBar = () => {
 						<form onSubmit={handleSubmit}>
 							<>
 								Categories
-								{Object.entries(values.categories || {}).map(([key, val]) => {
-									return (
-										<Field
-											component="input"
-											type="checkbox"
-											checked={val}
-											name={`categories.${key}`}
-											onChange={() => setFieldValue(`categories.${key}`, !val)}
-										/>
-									);
-								})}
+								{Object.entries(values.categories || {}).map(
+									([key, val], index) => {
+										return (
+											<Checkbox
+												id={categories[index]._id}
+												checked={val}
+												name={`categories.${key}`}
+												label={categories[index].name}
+												onChange={() =>
+													setFieldValue(`categories.${key}`, !val)
+												}
+											/>
+										);
+									}
+								)}
 								Colors
-								{Object.entries(values.color || {}).map(([key, val]) => {
+								{Object.entries(values.color || {}).map(([key, val], index) => {
 									return (
-										<Field
-											component="input"
-											type="checkbox"
+										<Checkbox
+											id={color[index]._id}
 											checked={val}
 											name={`color.${key}`}
+											label={color[index].name}
 											onChange={() => setFieldValue(`color.${key}`, !val)}
 										/>
 									);
