@@ -79,6 +79,7 @@ const FilterBar = () => {
 											([key, val], index) => {
 												return (
 													<Checkbox
+														key={categories[index]._id}
 														id={categories[index]._id}
 														checked={val}
 														name={`categories.${key}`}
@@ -98,6 +99,7 @@ const FilterBar = () => {
 											([key, val], index) => {
 												return (
 													<Checkbox
+														key={color[index]._id}
 														id={color[index]._id}
 														checked={val}
 														name={`color.${key}`}
