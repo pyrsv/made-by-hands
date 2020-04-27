@@ -70,9 +70,9 @@ const FilterBar = () => {
 					return (
 						<>
 							<br />
-							<PriceRange />
 							<form onSubmit={handleSubmit}>
 								<>
+									<PriceRange />
 									Categories
 									{Object.entries(values.categories || {}).map(([key, val]) => {
 										return (

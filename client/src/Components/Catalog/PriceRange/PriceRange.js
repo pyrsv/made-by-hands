@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import {
 	setMinPrice,
@@ -11,10 +11,12 @@ const PriceRange = () => {
 	const dispatch = useDispatch();
 	const [range, setValue] = useState({ value: { min: 400, max: 1000 } });
 
-	useEffect(() => {
+	function dispatchValues() {
+		// console.log(range.value.min,range.value.max)
 		dispatch(setMinPrice(range.value.min));
 		dispatch(setMaxPrice(range.value.max));
-	}, [range]);
+	}
+
 	return (
 		<>
 			<span>price</span>
@@ -24,6 +26,7 @@ const PriceRange = () => {
 				minValue={0}
 				value={range.value}
 				onChange={value => setValue({ value })}
+				onChangeComplete={() => dispatchValues()}
 			/>
 		</>
 	);
