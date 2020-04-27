@@ -20,7 +20,8 @@ const FilterBar = () => {
 	const [fields, setFields] = useState({});
 	const categories = useSelector(state => state.catalog.categories);
 	const color = useSelector(state => state.catalog.colors);
-
+	const minPrice = useSelector(state => state.catalog.minPrice);
+	const maxPrice = useSelector(state => state.catalog.maxPrice);
 	const currentParams = querystring.parse(location.search.slice(1));
 
 	useEffect(() => {
@@ -57,9 +58,8 @@ const FilterBar = () => {
 
 						return obj;
 					}, {});
-					params.minPrice = 800;
-					params.maxPrice = 900;
-					// console.log(params)
+					params.minPrice = minPrice;
+					params.maxPrice = maxPrice;
 					const str = querystring.stringify(params, { arrayFormat: 'comma' });
 					history.push({
 						search: `?${str}`,
