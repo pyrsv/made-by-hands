@@ -1,90 +1,100 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useLocation } from 'react-router-dom';
-import { Formik } from 'formik';
-import querystring from 'querystring';
-import { FiltersContainer } from './styles';
-import { getCategoriesAction } from '../../../store/actions/catalogActions';
-import { Input } from '../../UI/InputFiels/styles';
+import { useLocation, useHistory } from 'react-router-dom';
+import { Formik, Field } from 'formik';
+import querystring from 'query-string';
+import {
+	getFilteredProducts,
+	getColorsAction,
+} from '../../../store/actions/catalogActions';
+import { getInitialFields } from '../../../utils/getFilterFields';
 import Button from '../../UI/Button/Button';
+import { FiltersContainer } from './styles';
 
 const FilterBar = () => {
 	const dispatch = useDispatch();
 	const location = useLocation();
+	const history = useHistory();
+
+	const [fields, setFields] = useState({});
+	const categories = useSelector(state => state.catalog.categories);
+	const color = useSelector(state => state.catalog.colors);
+
 	const currentParams = querystring.parse(location.search.slice(1));
 
-	const categories = useSelector(state => state.catalog.categories);
-	const colors = useSelector(state => state.catalog.colors);
-
-	const fields = {
-		categories: categories.reduce((obj, cat) => {
-			obj[cat.id] = currentParams.categories === cat.id;
-			return obj
-		}, {})
-	};
-
-	console.log('fields', fields)
+	useEffect(() => {
+		dispatch(getColorsAction());
+	}, []);
 
 	useEffect(() => {
-		dispatch(getCategoriesAction())
+		dispatch(getFilteredProducts(currentParams));
 	}, [location]);
 
-	// const getInitialValues = () => {
-	// 	return {
-	// 		categories: {
-	// 			bags: false,
-	// 			test: true,
-	// 		},
-	// 	};
-	// };
+	useEffect(() => {
+		const initialFields = getInitialFields(currentParams, {
+			categories,
+			color,
+		});
+		setFields(initialFields);
+	}, [categories, color]);
 
 	return (
 		<FiltersContainer>
 			Filters
-			{Object.entries(fields).map(([key, value]) => {
-				console.log('key', key, '\nvalue',  value)
-				return (
-					<Formik
-						enableReinitialize
-						initialValues={{ [key]: value }}
-						onSubmit={values => {
-							console.log(values);
-						}}
-					>
-						{({
-								values,
-								handleChange,
-								handleBlur,
-								handleSubmit,
-							}) => {
-							console.log('values', values);
-							return (
-								<form onSubmit={handleSubmit}>
-									{Object.values(values.categories).map((val, index) => {
-										console.log(val, '<=====val')
-
-										return (
-											<label htmlFor={categories[index].id}>
-												{categories[index].name}
-												<Input
-													type="checkbox"
-													id={categories[index].id}
-													name={categories[index].name}
-													checked={val}
-												/>
-											</label>
-										)
-
-
-									})}
-									<Button type="Submit" text="Show" onClick={() => {}} />
-								</form>
-							);
-						}}
-					</Formik>
-				)
-			})}
-
+			<Formik
+				enableReinitialize
+				initialValues={{
+					...fields,
+				}}
+				onSubmit={values => {
+					const params = Object.entries(values).reduce((obj, [key, value]) => {
+						obj[key] = Object.entries(value).reduce((arr, [name, checked]) => {
+							// eslint-disable-next-line no-unused-expressions
+							checked && arr.push(name);
+							return arr;
+						}, []);
+						return obj;
+					}, {});
+					const str = querystring.stringify(params, { arrayFormat: 'comma' });
+					history.push({
+						search: `?${str}`,
+					});
+				}}
+			>
+				{({ values, handleSubmit, setFieldValue }) => {
+					return (
+						<form onSubmit={handleSubmit}>
+							<>
+								Categories
+								{Object.entries(values.categories || {}).map(([key, val]) => {
+									return (
+										<Field
+											component="input"
+											type="checkbox"
+											checked={val}
+											name={`categories.${key}`}
+											onChange={() => setFieldValue(`categories.${key}`, !val)}
+										/>
+									);
+								})}
+								Colors
+								{Object.entries(values.color || {}).map(([key, val]) => {
+									return (
+										<Field
+											component="input"
+											type="checkbox"
+											checked={val}
+											name={`color.${key}`}
+											onChange={() => setFieldValue(`color.${key}`, !val)}
+										/>
+									);
+								})}
+							</>
+							<Button type="Submit" text="Show" onClick={() => {}} />
+						</form>
+					);
+				}}
+			</Formik>
 		</FiltersContainer>
 	);
 };
