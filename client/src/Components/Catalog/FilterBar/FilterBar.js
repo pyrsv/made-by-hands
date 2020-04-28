@@ -6,6 +6,7 @@ import querystring from 'query-string';
 import {
 	getFilteredProducts,
 	getColorsAction,
+	getBrandsAction,
 } from '../../../store/actions/catalogActions';
 import { getInitialFields } from '../../../utils/getFilterFields';
 import Button from '../../UI/Button/Button';
@@ -19,14 +20,17 @@ const FilterBar = () => {
 	const history = useHistory();
 
 	const [fields, setFields] = useState({});
+	const [priceRange, setPriceRange] = useState({ minPrice: 0, maxPrice: 2000 });
+
 	const categories = useSelector(state => state.catalog.categories);
 	const color = useSelector(state => state.catalog.colors);
-	const minPrice = useSelector(state => state.catalog.minPrice);
-	const maxPrice = useSelector(state => state.catalog.maxPrice);
+	const brand = useSelector(state => state.catalog.brands);
+
 	const currentParams = querystring.parse(location.search.slice(1));
 
 	useEffect(() => {
 		dispatch(getColorsAction());
+		dispatch(getBrandsAction());
 	}, []);
 
 	useEffect(() => {
@@ -37,9 +41,14 @@ const FilterBar = () => {
 		const initialFields = getInitialFields(currentParams, {
 			categories,
 			color,
+			brand,
 		});
 		setFields(initialFields);
-	}, [categories, color]);
+	}, [categories, color, brand]);
+
+	const handleChangePrice = (min, max) => {
+		setPriceRange({ minPrice: min, maxPrice: max });
+	};
 
 	return (
 		<FiltersContainer>
@@ -60,8 +69,8 @@ const FilterBar = () => {
 
 						return obj;
 					}, {});
-					params.minPrice = minPrice;
-					params.maxPrice = maxPrice;
+					params.minPrice = priceRange.minPrice;
+					params.maxPrice = priceRange.maxPrice;
 					const str = querystring.stringify(params, { arrayFormat: 'comma' });
 					history.push({
 						search: `?${str}`,
@@ -93,6 +102,23 @@ const FilterBar = () => {
 										)}
 									</FilterGroup>
 									<FilterGroup>
+										<FilterName>Brands</FilterName>
+										{Object.entries(values.brand || {}).map(
+											([key, val], index) => {
+												return (
+													<Checkbox
+														key={brand[index]._id}
+														id={brand[index]._id}
+														checked={val}
+														name={`brand.${key}`}
+														label={brand[index].name}
+														onChange={() => setFieldValue(`brand.${key}`, !val)}
+													/>
+												);
+											}
+										)}
+									</FilterGroup>
+									<FilterGroup>
 										<FilterName>Colors</FilterName>
 
 										{Object.entries(values.color || {}).map(
@@ -114,7 +140,7 @@ const FilterBar = () => {
 									</FilterGroup>
 									<FilterGroup>
 										<FilterName>Price</FilterName>
-										<PriceRange />
+										<PriceRange changeRange={handleChangePrice} />
 									</FilterGroup>
 								</>
 								<Button type="Submit" text="Show" onClick={() => {}} />
