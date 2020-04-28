@@ -100,6 +100,8 @@ const FilterBar = () => {
 												return (
 													<Checkbox
 														key={color[index]._id}
+														type="color"
+														cssValue={color[index].cssValue}
 														id={color[index]._id}
 														checked={val}
 														name={`color.${key}`}

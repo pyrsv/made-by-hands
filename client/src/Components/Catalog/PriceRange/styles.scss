@@ -1,9 +1,8 @@
 .input-range {
 	box-sizing: border-box;
-	max-width: 70%;
+	width: 90%;
 	margin: 0 auto;
 	padding-top: 15px;
-	left: -10px;
 
 	&__track {
 		background-color: #16161c;
@@ -20,6 +19,7 @@
 		font-size: 20px;
 
 		&--min {
+			display: none;
 			bottom: -1px;
 			top: 50%;
 			transform: translateY(-50%);
@@ -27,6 +27,7 @@
 		}
 
 		&--max {
+			display: none;
 			bottom: -1px;
 			top: 50%;
 			transform: translateY(-50%);

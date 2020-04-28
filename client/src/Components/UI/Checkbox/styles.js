@@ -19,7 +19,7 @@ export const HiddenCheckbox = styled.input.attrs({ type: 'checkbox' })`
 	width: 1px;
 `;
 
-export const StyledCheckbox = styled.div`
+export const DefaultCheckbox = styled.div`
 	display: inline-block;
 	box-sizing: border-box;
 	width: 18px;
@@ -32,6 +32,32 @@ export const StyledCheckbox = styled.div`
 	transition: all 150ms;
 	margin-right: 7px;
 	margin-bottom: 1px;
+`;
+
+export const ColorCheckbox = styled.div`
+	display: inline-block;
+	position: relative;
+	box-sizing: border-box;
+	width: 20px;
+	height: 20px;
+	border-radius: 100%;
+	border: 1px solid ${props => props.theme.mainDark};
+	background-color: ${props => props.cssValue};
+	margin-right: 7px;
+
+	&:before {
+		content: '';
+		position: absolute;
+		display: ${props => (props.checked ? 'block' : 'none')};
+		border-radius: 100%;
+		width: 13px;
+		height: 13px;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		border: 1px solid ${props => props.theme.lightPink};
+		background-color: rgba(0, 0, 0, 0.2);
+	}
 `;
 
 export const Label = styled.label`
