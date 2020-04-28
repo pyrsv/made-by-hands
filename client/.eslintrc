@@ -31,6 +31,8 @@
 		"import/order": "off",
 		"import/prefer-default-export": "off",
 		"react-hooks/exhaustive-deps": "off",
-		"react/no-unsafe": "off"
+		"react/no-unsafe": "off",
+		"no-param-reassign": "off",
+		"no-underscore-dangle": "off"
 	}
 }
