@@ -5,8 +5,6 @@ import {
 	GET_FILTERED_PRODUCTS_INIT,
 	GET_FILTERED_PRODUCTS_ERROR,
 	GET_FILTERED_PRODUCTS_SUCCESS,
-	SET_MIN_PRICE,
-	SET_MAX_PRICE,
 } from '../types/catalogTypes';
 
 const getCategories = categories => ({
@@ -49,7 +47,6 @@ export const getFilteredProducts = params => dispatch => {
 			params,
 		})
 		.then(response => {
-			// console.log(response.data);
 			dispatch(getFilteredProductsSuccess(response.data));
 		})
 		.catch(err => dispatch(getFilteredProductsError(err)));
@@ -58,13 +55,3 @@ export const getFilteredProducts = params => dispatch => {
 export const getColorsAction = () => dispatch => {
 	axios.get('/colors').then(response => dispatch(getColors(response.data)));
 };
-
-export const setMinPrice = data => ({
-	type: SET_MIN_PRICE,
-	payload: data,
-});
-
-export const setMaxPrice = data => ({
-	type: SET_MAX_PRICE,
-	payload: data,
-});

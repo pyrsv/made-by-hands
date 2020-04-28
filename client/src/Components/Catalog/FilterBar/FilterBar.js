@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useHistory } from 'react-router-dom';
-import { Formik, Field } from 'formik';
+import { Formik } from 'formik';
 import querystring from 'query-string';
 import {
 	getFilteredProducts,
@@ -9,8 +9,9 @@ import {
 } from '../../../store/actions/catalogActions';
 import { getInitialFields } from '../../../utils/getFilterFields';
 import Button from '../../UI/Button/Button';
-import { FiltersContainer } from './styles';
+import Checkbox from '../../UI/Checkbox/Checkbox';
 import PriceRange from '../PriceRange/PriceRange';
+import { FiltersContainer, FilterName, Title, FilterGroup } from './styles';
 
 const FilterBar = () => {
 	const dispatch = useDispatch();
@@ -18,11 +19,15 @@ const FilterBar = () => {
 	const history = useHistory();
 
 	const [fields, setFields] = useState({});
+	const [priceRange, setPriceRange] = useState({ minPrice: 0, maxPrice: 2000 });
+
 	const categories = useSelector(state => state.catalog.categories);
 	const color = useSelector(state => state.catalog.colors);
-	const minPrice = useSelector(state => state.catalog.minPrice);
-	const maxPrice = useSelector(state => state.catalog.maxPrice);
 	const currentParams = querystring.parse(location.search.slice(1));
+
+	const changeRange = (min, max) => {
+		setPriceRange({ minPrice: min, maxPrice: max });
+	};
 
 	useEffect(() => {
 		dispatch(getColorsAction());
@@ -42,7 +47,8 @@ const FilterBar = () => {
 
 	return (
 		<FiltersContainer>
-			Filters
+			<Title>Filters</Title>
+
 			<Formik
 				enableReinitialize
 				initialValues={{
@@ -58,8 +64,8 @@ const FilterBar = () => {
 
 						return obj;
 					}, {});
-					params.minPrice = minPrice;
-					params.maxPrice = maxPrice;
+					params.minPrice = priceRange.minPrice;
+					params.maxPrice = priceRange.maxPrice;
 					const str = querystring.stringify(params, { arrayFormat: 'comma' });
 					history.push({
 						search: `?${str}`,
@@ -69,36 +75,51 @@ const FilterBar = () => {
 				{({ values, handleSubmit, setFieldValue }) => {
 					return (
 						<>
-							<br />
 							<form onSubmit={handleSubmit}>
 								<>
-									<PriceRange />
-									Categories
-									{Object.entries(values.categories || {}).map(([key, val]) => {
-										return (
-											<Field
-												component="input"
-												type="checkbox"
-												checked={val}
-												name={`categories.${key}`}
-												onChange={() =>
-													setFieldValue(`categories.${key}`, !val)
-												}
-											/>
-										);
-									})}
-									Colors
-									{Object.entries(values.color || {}).map(([key, val]) => {
-										return (
-											<Field
-												component="input"
-												type="checkbox"
-												checked={val}
-												name={`color.${key}`}
-												onChange={() => setFieldValue(`color.${key}`, !val)}
-											/>
-										);
-									})}
+									<FilterGroup>
+										<FilterName>Categories</FilterName>
+										{Object.entries(values.categories || {}).map(
+											([key, val], index) => {
+												return (
+													<Checkbox
+														key={categories[index]._id}
+														id={categories[index]._id}
+														checked={val}
+														name={`categories.${key}`}
+														label={categories[index].name}
+														onChange={() =>
+															setFieldValue(`categories.${key}`, !val)
+														}
+													/>
+												);
+											}
+										)}
+									</FilterGroup>
+									<FilterGroup>
+										<FilterName>Colors</FilterName>
+
+										{Object.entries(values.color || {}).map(
+											([key, val], index) => {
+												return (
+													<Checkbox
+														key={color[index]._id}
+														type="color"
+														cssValue={color[index].cssValue}
+														id={color[index]._id}
+														checked={val}
+														name={`color.${key}`}
+														label={color[index].name}
+														onChange={() => setFieldValue(`color.${key}`, !val)}
+													/>
+												);
+											}
+										)}
+									</FilterGroup>
+									<FilterGroup>
+										<FilterName>Price</FilterName>
+										<PriceRange changeRange={changeRange} />
+									</FilterGroup>
 								</>
 								<Button type="Submit" text="Show" onClick={() => {}} />
 							</form>
