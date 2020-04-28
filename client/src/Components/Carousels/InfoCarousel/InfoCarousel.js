@@ -1,9 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import LayoutContainer from '../../LayoutContainer/LayoutContainer';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import { Carousel } from 'react-responsive-carousel';
-import { useSelector, useDispatch } from 'react-redux';
-import { getInfoCarouselAction } from '../../../store/actions/getInfoCarouselAction';
+import axios from 'axios';
 import Button from '../../UI/Button/Button';
 import './stylesInfoCarousel.scss';
 import {
@@ -11,12 +10,17 @@ import {
 	CarouselTextContainer,
 	SliderContainer,
 	InfoCarouselContainer,
+	MinHeightContainer,
 } from './styles';
 
 const InfoCarousel = () => {
-	const dispatch = useDispatch();
+	const [items, setItems] = useState([]);
 
-	const items = useSelector(state => state.infoCarousel.items);
+	const takeInfo = () => {
+		axios.get('./slides').then(res => {
+			setItems(res.data);
+		});
+	};
 
 	const settings = {
 		showArrows: false,
@@ -29,8 +33,8 @@ const InfoCarousel = () => {
 	};
 
 	useEffect(() => {
-		dispatch(getInfoCarouselAction());
-	}, [dispatch]);
+		takeInfo();
+	}, [setItems]);
 
 	const changePage = () => {
 		window.location.assign('https://www.google.com/');
@@ -39,23 +43,27 @@ const InfoCarousel = () => {
 	return (
 		<InfoCarouselContainer>
 			<LayoutContainer>
-				<Carousel {...settings}>
-					{items.map(item => {
-						return (
-							<SliderContainer key={item.customId}>
-								<img
-									className="sliderIMG"
-									alt={item.customId}
-									src={item.imageUrl}
-								/>
-								<CarouselTextContainer>
-									<CarouselTitle>{item.title}</CarouselTitle>
-									<Button text="More details" onClick={() => changePage()} />
-								</CarouselTextContainer>
-							</SliderContainer>
-						);
-					})}
-				</Carousel>
+				{items.length === 0 ? (
+					<MinHeightContainer />
+				) : (
+					<Carousel {...settings}>
+						{items.map(item => {
+							return (
+								<SliderContainer key={item.customId}>
+									<img
+										className="sliderIMG"
+										alt={item.customId}
+										src={item.imageUrl}
+									/>
+									<CarouselTextContainer>
+										<CarouselTitle>{item.title}</CarouselTitle>
+										<Button text="More details" onClick={() => changePage()} />
+									</CarouselTextContainer>
+								</SliderContainer>
+							);
+						})}
+					</Carousel>
+				)}
 			</LayoutContainer>
 		</InfoCarouselContainer>
 	);

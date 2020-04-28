@@ -1,5 +1,10 @@
 import styled from 'styled-components';
 
+export const MinHeightContainer = styled.div`
+	min-height: 50vh;
+	width: 100%;
+`;
+
 export const SliderContainer = styled.div`
 	position: relative;
 	width: 100%;
