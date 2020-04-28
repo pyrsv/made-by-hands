@@ -4,6 +4,7 @@ import {
 	GET_FILTERED_PRODUCTS_ERROR,
 	GET_FILTERED_PRODUCTS_INIT,
 	GET_FILTERED_PRODUCTS_SUCCESS,
+	GET_BRANDS,
 } from '../types/catalogTypes';
 
 const initialState = {
@@ -29,6 +30,11 @@ export const catalogReducer = (state = initialState, { type, payload }) => {
 			return {
 				...state,
 				colors: payload,
+			};
+		case GET_BRANDS:
+			return {
+				...state,
+				brands: payload,
 			};
 		case GET_FILTERED_PRODUCTS_INIT:
 			return {

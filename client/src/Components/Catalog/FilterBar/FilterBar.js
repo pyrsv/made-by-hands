@@ -6,6 +6,7 @@ import querystring from 'query-string';
 import {
 	getFilteredProducts,
 	getColorsAction,
+	getBrandsAction,
 } from '../../../store/actions/catalogActions';
 import { getInitialFields } from '../../../utils/getFilterFields';
 import Button from '../../UI/Button/Button';
@@ -23,11 +24,15 @@ const FilterBar = () => {
 
 	const categories = useSelector(state => state.catalog.categories);
 	const color = useSelector(state => state.catalog.colors);
+	const brand = useSelector(state => state.catalog.brands);
 	const currentParams = querystring.parse(location.search.slice(1));
-
 	const changeRange = (min, max) => {
 		setPriceRange({ minPrice: min, maxPrice: max });
 	};
+
+	useEffect(() => {
+		dispatch(getBrandsAction());
+	}, []);
 
 	useEffect(() => {
 		dispatch(getColorsAction());
@@ -41,6 +46,7 @@ const FilterBar = () => {
 		const initialFields = getInitialFields(currentParams, {
 			categories,
 			color,
+			brand,
 		});
 		setFields(initialFields);
 	}, [categories, color]);
@@ -91,6 +97,23 @@ const FilterBar = () => {
 														onChange={() =>
 															setFieldValue(`categories.${key}`, !val)
 														}
+													/>
+												);
+											}
+										)}
+									</FilterGroup>
+									<FilterGroup>
+										<FilterName>Brands</FilterName>
+										{Object.entries(values.brand || {}).map(
+											([key, val], index) => {
+												return (
+													<Checkbox
+														key={brand[index]._id}
+														id={brand[index]._id}
+														checked={val}
+														name={`brand.${key}`}
+														label={brand[index].name}
+														onChange={() => setFieldValue(`brand.${key}`, !val)}
 													/>
 												);
 											}
