@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { NavLink } from 'react-router-dom';
 import HamburgerMenu from 'react-hamburger-menu';
@@ -12,6 +12,7 @@ import UserNavigation from './UserNavigation/UserNavigation';
 import Drawer from '../Drawer/Drawer';
 import HeaderButtons from './HeaderButtons/HeaderButtons';
 import { userLogout } from '../../store/actions/authActions';
+import { getCategoriesAction } from '../../store/actions/catalogActions';
 import {
 	StyledHeader,
 	Container,
@@ -36,12 +37,14 @@ const Header = () => {
 	const [isSearch, setSearch] = useState(false);
 
 	const catalogRoutes = [
-		<NavLink to="/">All Items</NavLink>,
-		<NavLink to="/">Bags</NavLink>,
-		<NavLink to="/">Suitcases</NavLink>,
-		<NavLink to="/">Backbacks</NavLink>,
-		<NavLink to="/">Wallets</NavLink>,
-		<NavLink to="/">Other accessories</NavLink>,
+		<NavLink to="/catalog">All Items</NavLink>,
+		...useSelector(state =>
+			state.catalog.categories.map(category => (
+				<NavLink key={category.id} to={`/catalog?categories=${category.id}`}>
+					{category.name}
+				</NavLink>
+			))
+		),
 	];
 
 	const profileRoutes = [
@@ -71,6 +74,7 @@ const Header = () => {
 
 	useEffect(() => {
 		handleWindowResize();
+		dispatch(getCategoriesAction());
 		window.addEventListener('resize', handleWindowResize);
 		return () => {
 			window.removeEventListener('resize', handleWindowResize);

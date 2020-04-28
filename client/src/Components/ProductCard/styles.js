@@ -21,10 +21,9 @@ export const CardInfo = styled.div`
 `;
 
 export const ProductName = styled.p`
-	font-family: Raleway;
+	text-transform: capitalize;
 	font-weight: 600;
 	font-size: 22px;
-	line-height: 25px;
 	max-width: 85%;
 	min-height: 66px;
 	margin-bottom: 10px;

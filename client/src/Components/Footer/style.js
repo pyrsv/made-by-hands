@@ -9,7 +9,7 @@ export const Foot = styled.div`
 	min-height: ${props => props.height};
 	@media (max-width: 640px) {
 		background: red;
-  }
+	}
 `;
 
 export const FooterContainer = styled.section`
@@ -23,5 +23,5 @@ export const FooterContainer = styled.section`
 export const FootLine = styled.div`
 	width: 100%;
 	border-top: 2px solid #e5e5e5;
-	margin-bottom:20px;
+	margin-bottom: 20px;
 `;
