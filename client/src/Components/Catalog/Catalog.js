@@ -2,6 +2,7 @@ import React from 'react';
 import LayoutContainer from '../LayoutContainer/LayoutContainer';
 import Title from '../UI/Title/title';
 import FilterBar from './FilterBar/FilterBar';
+import ProductsList from '../ProductsList/ProductsList';
 import { CatalogContainer, Content } from './styles';
 
 const Catalog = () => {
@@ -11,6 +12,7 @@ const Catalog = () => {
 				<Title text="catalog" color="dark" />
 				<Content>
 					<FilterBar />
+					<ProductsList />
 				</Content>
 			</LayoutContainer>
 		</CatalogContainer>

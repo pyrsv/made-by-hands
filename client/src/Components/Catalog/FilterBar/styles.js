@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export const FiltersContainer = styled.div`
+	align-self: start;
 	border: 1px solid ${props => props.theme.mainDark};
 	border-radius: 4px;
 	padding: 10px;

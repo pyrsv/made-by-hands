@@ -3,16 +3,23 @@ import PropTypes from 'prop-types';
 import {
 	CheckboxContainer,
 	HiddenCheckbox,
-	StyledCheckbox,
+	DefaultCheckbox,
+	ColorCheckbox,
 	Label,
 } from './styles';
 
-const Checkbox = ({ id, label, onChange, checked }) => {
+const Checkbox = ({ id, label, onChange, checked, type, cssValue }) => {
 	return (
 		<CheckboxContainer>
 			<Label htmlFor={id}>
 				<HiddenCheckbox id={id} checked={checked} onChange={onChange} />
-				<StyledCheckbox checked={checked} />
+
+				{type === 'color' ? (
+					<ColorCheckbox checked={checked} cssValue={cssValue} />
+				) : (
+					<DefaultCheckbox checked={checked} />
+				)}
+
 				{label}
 			</Label>
 		</CheckboxContainer>
@@ -24,6 +31,12 @@ Checkbox.propTypes = {
 	label: PropTypes.string.isRequired,
 	onChange: PropTypes.func.isRequired,
 	checked: PropTypes.bool.isRequired,
+	type: PropTypes.oneOf(['default', 'color']),
+	cssValue: PropTypes.string,
 };
 
+Checkbox.defaultProps = {
+	type: 'default',
+	cssValue: '#000000',
+};
 export default Checkbox;
