@@ -4,8 +4,7 @@ import InputField from '../UI/InputFiels/InputField';
 import Button from '../UI/Button/Button';
 import LayoutContainer from '../LayoutContainer/LayoutContainer';
 
-import { FooterContainer , Foot , FootLine } from './style';
-
+import { FooterContainer, Foot, FootLine } from './style';
 
 import { FooterText } from './FooterText/FooterText';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';

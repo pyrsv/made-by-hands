@@ -11,8 +11,8 @@ export const FooterText = ({ type, text, marginBottom }) => {
 };
 FooterText.propTypes = {
 	type: PropTypes.oneOf(['title', 'link']),
-	text:PropTypes.string.isRequired,
-	marginBottom:PropTypes.string.isRequired,
+	text: PropTypes.string.isRequired,
+	marginBottom: PropTypes.string.isRequired,
 };
 FooterText.defaultProps = {
 	type: 'title',

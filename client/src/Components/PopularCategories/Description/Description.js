@@ -1,9 +1,10 @@
 import React from 'react';
 import {
-	StyledTextRight,
 	StyledDescription,
+	StyledInfoContainer,
+	StyledInfoContainerReverse,
 	StyledImagesContainerRight,
-	StyledImages,
+	Images,
 	StyledTextUl,
 	StyledImagesContainer,
 	StyledName,
@@ -13,125 +14,85 @@ import Button from '../../UI/Button/Button';
 import PropTypes from 'prop-types';
 
 const Description = ({
-	isReverse,
 	imgSrc,
+	imgSrcSecondItem,
 	isRight,
 	isMarker,
-	textRight,
 	name,
+	nameSecondItem,
+	textSecondItem,
 	text,
 	firstLi,
 	secondLi,
 	thirdLi,
 }) => {
-	const imgStyle = {
-		width: '100%',
-		height: '100%',
-	};
 	return (
-		<div>
-			{isReverse ? (
-				<div>
-					<StyledDescription>
-						{isRight ? (
-							<StyledImagesContainerRight>
-								<img
-									className={StyledImages}
-									style={imgStyle}
-									src={imgSrc}
-									alt=""
-								/>
-							</StyledImagesContainerRight>
-						) : (
-							<StyledImagesContainer>
-								<img
-									className={StyledImages}
-									style={imgStyle}
-									src={imgSrc}
-									alt=""
-								/>
-							</StyledImagesContainer>
-						)}
-						{textRight ? (
-							<StyledTextRight>
-								<StyledName>
-									<h2>{name}</h2>
-								</StyledName>
-								<StyledText>
-									<p>{text}</p>
-								</StyledText>
-								<Button text="More" type="button" onClick={() => 'ds'} />
-							</StyledTextRight>
-						) : (
-							<div>
-								<StyledName>
-									<h2>{name}</h2>
-								</StyledName>
-								<StyledText>
-									<p>{text}</p>
-								</StyledText>
-								<Button text="More" type="button" onClick={() => 'ds'} />
-							</div>
-						)}
-					</StyledDescription>
-				</div>
-			) : (
-				<div>
-					<StyledDescription>
-						<div>
-							<StyledName>
-								<h2>{name}</h2>
-							</StyledName>
-							{isMarker ? (
-								<StyledTextUl>
-									<li>{firstLi}</li>
-									<li>{secondLi}</li>
-									<li>{thirdLi}</li>
-								</StyledTextUl>
-							) : (
-								<StyledText>
-									<p>{text}</p>
-								</StyledText>
-							)}
-							<Button text="More" type="button" onClick={() => 'ds'} />
-						</div>
-						{isRight ? (
-							<StyledImagesContainerRight>
-								<img
-									className={StyledImages}
-									style={imgStyle}
-									src={imgSrc}
-									alt=""
-								/>
-							</StyledImagesContainerRight>
-						) : (
-							<StyledImagesContainer>
-								<img
-									className={StyledImages}
-									style={imgStyle}
-									src={imgSrc}
-									alt=""
-								/>
-							</StyledImagesContainer>
-						)}
-					</StyledDescription>
-				</div>
-			)}
-		</div>
+		<>
+			<StyledDescription>
+				<StyledImagesContainer>
+					<Images src={imgSrc} />
+				</StyledImagesContainer>
+				<StyledInfoContainer>
+					<StyledName>{name}</StyledName>
+					<StyledText>{text}</StyledText>
+					<Button text="More" type="button" onClick={() => 'ds'} />
+				</StyledInfoContainer>
+			</StyledDescription>
+
+			<StyledDescription>
+				<StyledInfoContainerReverse>
+					<StyledName>{nameSecondItem}</StyledName>
+					{isMarker ? (
+						<StyledTextUl>
+							<li>{firstLi}</li>
+							<li>{secondLi}</li>
+							<li>{thirdLi}</li>
+						</StyledTextUl>
+					) : (
+						<StyledText>{textSecondItem}</StyledText>
+					)}
+					<Button text="More" type="button" onClick={() => 'ds'} />
+				</StyledInfoContainerReverse>
+				{isRight ? (
+					<StyledImagesContainerRight>
+						<Images src={imgSrcSecondItem} />
+					</StyledImagesContainerRight>
+				) : (
+					<StyledImagesContainer>
+						<Images src={imgSrcSecondItem} />
+					</StyledImagesContainer>
+				)}
+			</StyledDescription>
+		</>
 	);
 };
 
+Description.defaultProps = {
+	isRight: undefined,
+	isMarker: undefined,
+	imgSrc: undefined,
+	imgSrcSecondItem: undefined,
+	name: undefined,
+	nameSecondItem: undefined,
+	text: undefined,
+	textSecondItem: undefined,
+	firstLi: undefined,
+	secondLi: undefined,
+	thirdLi: undefined,
+};
+
 Description.propTypes = {
-	isRight: PropTypes.bool.isRequired,
-	isReverse: PropTypes.bool.isRequired,
-	isMarker: PropTypes.bool.isRequired,
-	textRight: PropTypes.bool.isRequired,
-	imgSrc: PropTypes.string.isRequired,
-	name: PropTypes.string.isRequired,
-	text: PropTypes.string.isRequired,
-	firstLi: PropTypes.string.isRequired,
-	secondLi: PropTypes.string.isRequired,
-	thirdLi: PropTypes.string.isRequired,
+	isRight: PropTypes.bool,
+	isMarker: PropTypes.bool,
+	imgSrc: PropTypes.string,
+	imgSrcSecondItem: PropTypes.string,
+	name: PropTypes.string,
+	nameSecondItem: PropTypes.string,
+	text: PropTypes.string,
+	textSecondItem: PropTypes.string,
+	firstLi: PropTypes.string,
+	secondLi: PropTypes.string,
+	thirdLi: PropTypes.string,
 };
 
 export default Description;
