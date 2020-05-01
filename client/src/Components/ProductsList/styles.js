@@ -19,3 +19,8 @@ export const ProductsContainer = styled.div`
 		padding: 0 15px;
 	}
 `;
+
+export const ProductsPreloader = styled.div`
+	padding: 25px 0;
+	text-align: center;
+`;
