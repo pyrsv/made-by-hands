@@ -54,8 +54,8 @@ const Header = () => {
 		<span
 			role="button"
 			tabIndex="0"
-			onKeyDown={() => dispatch(userLogout)}
-			onClick={() => dispatch(userLogout)}
+			onKeyDown={() => dispatch(userLogout())}
+			onClick={() => dispatch(userLogout())}
 		>
 			Logout
 		</span>,
