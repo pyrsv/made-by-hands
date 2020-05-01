@@ -12,12 +12,20 @@ export const CardImage = styled.img`
 	height: 315px;
 	object-fit: cover;
 	vertical-align: middle;
+
+	@media (max-width: 992px) {
+		height: 285px;
+	}
 `;
 
 export const CardInfo = styled.div`
 	background-color: ${props =>
 		props.type === 'light' ? props.theme.lightPink : props.theme.mainOlive};
 	padding: 16px 12px 19px;
+
+	@media (max-width: 992px) {
+		padding: 12px 8px 13px;
+	}
 `;
 
 export const ProductName = styled.p`
@@ -28,6 +36,13 @@ export const ProductName = styled.p`
 	min-height: 66px;
 	margin-bottom: 10px;
 	line-height: 22px;
+	@media (max-width: 992px) {
+		min-height: 54px;
+		font-size: 18px;
+		line-height: 18px;
+		font-weight: 600;
+		padding-right: 5px;
+	}
 `;
 
 export const PriceContainer = styled.div`
@@ -42,6 +57,9 @@ export const Price = styled.span`
 	color: ${props =>
 		props.discounted ? props.theme.accentRed : props.theme.mainDark};
 	font-size: 24px;
+	/* @media (max-width: 992px) {
+		font-size: 18px;
+	} */
 `;
 
 export const OldPrice = styled.span`
