@@ -14,9 +14,6 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Slider from 'react-slick';
-import axios from 'axios';
-import { setCartAction } from '../../../store/actions/cartActions';
-import { userLoginError } from '../../../store/actions/authActions';
 
 const SampleNextArrow = props => {
 	const { onClick, onKeyUp } = props;
@@ -104,30 +101,6 @@ const ProductCarousel = () => {
 		],
 	};
 
-	const onAddToCart = (id, itemNo) => {
-		axios
-			.put(`/cart/${id}`)
-			.then(result => {
-				dispatch(setCartAction(result.data.products));
-			})
-			.catch(err => {
-				// console.log("catch")
-				if (!localStorage.getItem('cart')) {
-					localStorage.setItem('cart', []);
-				}
-				axios.get(`/products/${itemNo}`).then(result => {
-					const addingItem = result.data;
-					const LSItems = JSON.parse(localStorage.getItem('cart'));
-
-					// console.log(LSItems)
-
-					LSItems.push(addingItem);
-
-					localStorage.setItem('cart', JSON.stringify(LSItems));
-					dispatch(userLoginError(err));
-				});
-			});
-	};
 	// const currentCart = useSelector(state=>state.cartReducer.currentCart)
 	// console.log(currentCart)
 	return (
@@ -142,7 +115,7 @@ const ProductCarousel = () => {
 									<>
 										<ProductCardContainer>
 											<ProductCard
-												onAddToCart={onAddToCart}
+												// onAddToCart={onAddToCart}
 												id={item._id}
 												itemNo={item.itemNo}
 												key={item.itemNo}

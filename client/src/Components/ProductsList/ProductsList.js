@@ -33,6 +33,7 @@ const ProductsList = () => {
 						img={image}
 						price={currentPrice}
 						oldPrice={previousPrice}
+						itemNo={itemNo}
 						type="olive"
 					/>
 				)

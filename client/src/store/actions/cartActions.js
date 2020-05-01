@@ -1,33 +1,36 @@
 import { SET_CART } from '../types/cartTypes';
-// import axios from 'axios';
-// import setAuthToken from '../../utils/setAuthToken';
-// import { handleGetUser } from '../../utils/API';
+import axios from 'axios';
+
 // eslint-disable-next-line import/no-cycle
-// import { userLoginSuccess, userLoginError } from './authActions'
+import { userLoginError } from './authActions';
 
 export const setCartAction = data => ({
 	type: SET_CART,
 	payload: data,
 });
 
-// export const addToCartActionCreator = id => dispatch=> {
-//     const token = localStorage.getItem('token');
-// 	if (token) {
-// 		setAuthToken(token);
-// 		handleGetUser(token)
-//         .then(customer => {
+export const AddToCartActionCreator = (id, itemNo) => dispatch => {
+	axios
+		.put(`/cart/${id}`)
+		.then(result => {
+			// console.log(result.data.products)
+			dispatch(setCartAction(result.data.products));
+		})
+		.catch(err => {
+			// console.log("catch")
+			if (!localStorage.getItem('cart')) {
+				localStorage.setItem('cart', []);
+			}
+			axios.get(`/products/${itemNo}`).then(result => {
+				const addingItem = result.data;
+				const LSItems = JSON.parse(localStorage.getItem('cart'));
 
-//             axios.post(`/cart + ${id}`).then(result => {
-//                 console.log(result.data)
-//             });
-//             dispatch(userLoginSuccess(customer.data));
-//         })
-//         .catch(err => {
-//             if (!localStorage.getItem('cart')) {
-//                 localStorage.setItem('cart', '[]');
-//             }
-//             dispatch(setCartAction(localStorage.getItem('cart')));
-//             dispatch(userLoginError(err));
-//         });
-//     }
-// }
+				// console.log(LSItems)
+
+				LSItems.push(addingItem);
+
+				localStorage.setItem('cart', JSON.stringify(LSItems));
+				dispatch(userLoginError(err));
+			});
+		});
+};
