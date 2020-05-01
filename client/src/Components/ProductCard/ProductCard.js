@@ -14,6 +14,8 @@ import {
 } from './styles';
 
 const ProductCard = ({
+	id,
+	itemNo,
 	name,
 	img,
 	oldPrice,
@@ -37,7 +39,7 @@ const ProductCard = ({
 						type="default"
 						color="dark"
 						text={isInCart ? 'In Cart' : 'Buy'}
-						onClick={onAddToCart}
+						onClick={() => onAddToCart(id, itemNo)}
 						disabled={isInCart}
 					/>
 					<PriceContainer>
@@ -51,6 +53,8 @@ const ProductCard = ({
 };
 
 ProductCard.propTypes = {
+	id: PropTypes.string.isRequired,
+	itemNo: PropTypes.string.isRequired,
 	name: PropTypes.string.isRequired,
 	img: PropTypes.string.isRequired,
 	oldPrice: PropTypes.oneOfType([PropTypes.number, PropTypes.object]),

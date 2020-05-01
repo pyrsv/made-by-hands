@@ -1,6 +1,7 @@
 import axios from 'axios';
 import setAuthToken from '../../utils/setAuthToken';
 import { handleUserLogin, handleGetUser } from '../../utils/API';
+// eslint-disable-next-line import/no-cycle
 import { setCartAction } from './cartActions';
 
 export const USER_LOGIN_INIT = 'USER_LOGIN_INIT';
@@ -12,12 +13,12 @@ const userLoginInit = () => ({
 	type: USER_LOGIN_INIT,
 });
 
-const userLoginSuccess = user => ({
+export const userLoginSuccess = user => ({
 	type: USER_LOGIN_SUCCESS,
 	payload: user,
 });
 
-const userLoginError = error => ({
+export const userLoginError = error => ({
 	type: USER_LOGIN_ERROR,
 	payload: error,
 });
@@ -39,7 +40,7 @@ export const getUser = () => dispatch => {
 		handleGetUser(token)
 			.then(customer => {
 				axios.get('/cart').then(result => {
-					dispatch(setCartAction(result.data));
+					dispatch(setCartAction(result.data.products));
 				});
 				dispatch(userLoginSuccess(customer.data));
 			})
@@ -50,6 +51,11 @@ export const getUser = () => dispatch => {
 				dispatch(setCartAction(localStorage.getItem('cart')));
 				dispatch(userLoginError(err));
 			});
+	} else {
+		if (!localStorage.getItem('cart')) {
+			localStorage.setItem('cart', '[]');
+		}
+		dispatch(setCartAction(localStorage.getItem('cart')));
 	}
 };
 
@@ -62,7 +68,7 @@ export const userLogin = ({ loginOrEmail, password }) => dispatch => {
 			handleGetUser()
 				.then(customer => {
 					axios.get('/cart').then(result => {
-						dispatch(setCartAction(result.data));
+						dispatch(setCartAction(result.data.products));
 					});
 					dispatch(userLoginSuccess(customer.data));
 				})
@@ -93,7 +99,7 @@ export const userRegister = data => async dispatch => {
 				.then(res => {
 					setAuthToken(res.data.token);
 					axios.get('/cart').then(result => {
-						dispatch(setCartAction(result.data));
+						dispatch(setCartAction(result.data.products));
 					});
 					dispatch(userLoginSuccess(customer.data));
 				})
