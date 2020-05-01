@@ -24,6 +24,10 @@ const userLoginError = error => ({
 
 export const userLogout = () => dispatch => {
 	setAuthToken();
+	if (!localStorage.getItem('cart')) {
+		localStorage.setItem('cart', '[]');
+	}
+	dispatch(setCartAction(localStorage.getItem('cart')));
 	dispatch({ type: USER_LOGOUT });
 };
 
@@ -34,9 +38,18 @@ export const getUser = () => dispatch => {
 		setAuthToken(token);
 		handleGetUser(token)
 			.then(customer => {
+				axios.get('/cart').then(result => {
+					dispatch(setCartAction(result.data));
+				});
 				dispatch(userLoginSuccess(customer.data));
 			})
-			.catch(err => dispatch(userLoginError(err)));
+			.catch(err => {
+				if (!localStorage.getItem('cart')) {
+					localStorage.setItem('cart', '[]');
+				}
+				dispatch(setCartAction(localStorage.getItem('cart')));
+				dispatch(userLoginError(err));
+			});
 	}
 };
 
@@ -58,6 +71,10 @@ export const userLogin = ({ loginOrEmail, password }) => dispatch => {
 				});
 		})
 		.catch(err => {
+			if (!localStorage.getItem('cart')) {
+				localStorage.setItem('cart', '[]');
+			}
+			dispatch(setCartAction(localStorage.getItem('cart')));
 			dispatch(userLoginError(err));
 		});
 };
@@ -85,6 +102,10 @@ export const userRegister = data => async dispatch => {
 				});
 		})
 		.catch(err => {
+			if (!localStorage.getItem('cart')) {
+				localStorage.setItem('cart', '[]');
+			}
+			dispatch(setCartAction(localStorage.getItem('cart')));
 			dispatch(userLoginError(err));
 		});
 };
