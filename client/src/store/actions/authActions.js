@@ -1,6 +1,7 @@
 import axios from 'axios';
 import setAuthToken from '../../utils/setAuthToken';
 import { handleUserLogin, handleGetUser } from '../../utils/API';
+import { setCartAction } from './cartActions';
 
 export const USER_LOGIN_INIT = 'USER_LOGIN_INIT';
 export const USER_LOGIN_SUCCESS = 'USER_LOGIN_SUCCESS';
@@ -47,6 +48,9 @@ export const userLogin = ({ loginOrEmail, password }) => dispatch => {
 			setAuthToken(token);
 			handleGetUser()
 				.then(customer => {
+					axios.get('/cart').then(result => {
+						dispatch(setCartAction(result.data));
+					});
 					dispatch(userLoginSuccess(customer.data));
 				})
 				.catch(err => {
@@ -71,6 +75,9 @@ export const userRegister = data => async dispatch => {
 			handleUserLogin(login, password)
 				.then(res => {
 					setAuthToken(res.data.token);
+					axios.get('/cart').then(result => {
+						dispatch(setCartAction(result.data));
+					});
 					dispatch(userLoginSuccess(customer.data));
 				})
 				.catch(err => {
