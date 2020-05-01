@@ -3,7 +3,8 @@ import InfiniteScroll from 'react-infinite-scroller';
 import { useSelector, useDispatch } from 'react-redux';
 import { loadMoreAction } from '../../store/actions/catalogActions';
 import ProductCard from '../ProductCard/ProductCard';
-import { ProductsContainer } from './styles';
+import Preloader from '../UI/Preloader/Preloader';
+import { ProductsContainer, ProductsPreloader } from './styles';
 
 const ProductsList = () => {
 	const dispatch = useDispatch();
@@ -20,11 +21,10 @@ const ProductsList = () => {
 			threshold={100}
 			loadMore={() => dispatch(loadMoreAction(config))}
 			hasMore={products.length < productsQuantity && !isProductsFetching}
-			// hasMore
 			loader={
-				<div className="loader" key={0}>
-					Loading ...
-				</div>
+				<ProductsPreloader>
+					<Preloader size={60} />
+				</ProductsPreloader>
 			}
 		>
 			<ProductsContainer>
