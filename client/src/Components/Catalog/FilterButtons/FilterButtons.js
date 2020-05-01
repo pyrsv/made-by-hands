@@ -1,5 +1,4 @@
 import React from 'react';
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { ButtonsContainer, FilterButton, FilterIcon } from './styles';
 
