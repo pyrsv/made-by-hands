@@ -6,12 +6,12 @@ export const CartContainer = styled.div`
 `;
 
 export const CartItemListContainer = styled.div`
-	border-top: 1px solid ${props => props.theme.mainDark};
 	border-bottom: 1px solid #d8846c;
 	background: ${props => props.theme.lightPink};
 `;
 
 export const CartItemContainer = styled.div`
+	border-top: 1px solid ${props => props.theme.mainDark};
 	display: flex;
 	justify-content: space-between;
 	height: 210px;

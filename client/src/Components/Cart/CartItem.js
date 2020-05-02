@@ -1,4 +1,5 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import {
 	CartItemContainer,
 	CartItemImage,
@@ -11,10 +12,11 @@ import {
 	CartItemOldPrice,
 } from './styles';
 import PropTypes from 'prop-types';
+import { AddToCartActionCreator } from '../../store/actions/cartActions';
 
 export const CartItem = ({
-	// itemNo,
-	// id,
+	itemNo,
+	id,
 	name,
 	img,
 	oldPrice,
@@ -25,7 +27,7 @@ export const CartItem = ({
 	cartQuantity,
 	color,
 }) => {
-	// console.log(itemNo)
+	const dispatch = useDispatch();
 	return (
 		<>
 			<CartItemContainer>
@@ -37,7 +39,11 @@ export const CartItem = ({
 				<QuantityContainer>
 					<DecreaseQuantity>-</DecreaseQuantity>
 					<CartItemQuantity>{cartQuantity}</CartItemQuantity>
-					<IncreaseQuantity>+</IncreaseQuantity>
+					<IncreaseQuantity
+						onClick={() => dispatch(AddToCartActionCreator(id, itemNo))}
+					>
+						+
+					</IncreaseQuantity>
 				</QuantityContainer>
 				<CartItemPrice>
 					{price}₴ <CartItemOldPrice>{oldPrice}</CartItemOldPrice>
@@ -48,8 +54,8 @@ export const CartItem = ({
 };
 
 CartItem.propTypes = {
-	// id: PropTypes.string.isRequired,
-	// itemNo: PropTypes.string.isRequired,
+	id: PropTypes.string.isRequired,
+	itemNo: PropTypes.string.isRequired,
 	name: PropTypes.string.isRequired,
 	img: PropTypes.string.isRequired,
 	oldPrice: PropTypes.oneOfType([PropTypes.number, PropTypes.object]),
