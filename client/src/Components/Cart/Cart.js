@@ -20,31 +20,22 @@ export const Cart = () => {
 	return (
 		<>
 			<CartContainer>
-				{currentCart.map(
-					({
-						name,
-						currentPrice,
-						previousPrice,
-						_id,
-						imageUrls: [image],
-						itemNo,
-					}) => {
-						return (
-							<CartItem
-								key={itemNo}
-								id={_id}
-								name={name}
-								img={image}
-								price={currentPrice}
-								oldPrice={previousPrice}
-								type="olive"
-								itemNo={itemNo}
-							>
-								{name}
-							</CartItem>
-						);
-					}
-				)}
+				{currentCart.map(({ product }) => {
+					return (
+						<CartItem
+							key={product.itemNo}
+							id={product._id}
+							name={product.name}
+							img={product.image}
+							price={product.currentPrice}
+							oldPrice={product.previousPrice}
+							type="olive"
+							itemNo={product.itemNo}
+						>
+							{product.name}
+						</CartItem>
+					);
+				})}
 			</CartContainer>
 			<ProductsCarousel />
 			<div>It is CartPage</div>;

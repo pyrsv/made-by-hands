@@ -64,6 +64,7 @@ export const userLogin = ({ loginOrEmail, password }) => dispatch => {
 			handleGetUser()
 				.then(customer => {
 					axios.get('/cart').then(result => {
+						// console.log(result.data.products)
 						dispatch(setCartAction(result.data.products));
 					});
 					dispatch(userLoginSuccess(customer.data));
