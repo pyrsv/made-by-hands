@@ -46,7 +46,6 @@ export const Cart = () => {
 				</LayoutContainer>
 			</CartContainer>
 			<ProductsCarousel />
-			<div>It is CartPage</div>;
 		</>
 	);
 };

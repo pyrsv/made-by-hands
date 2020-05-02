@@ -12,7 +12,10 @@ import {
 	CartItemOldPrice,
 } from './styles';
 import PropTypes from 'prop-types';
-import { AddToCartActionCreator } from '../../store/actions/cartActions';
+import {
+	AddToCartActionCreator,
+	DeleteFromCartActionCreator,
+} from '../../store/actions/cartActions';
 
 export const CartItem = ({
 	itemNo,
@@ -37,7 +40,11 @@ export const CartItem = ({
 					<span style={{ marginTop: '43px' }}>color: {color}</span>{' '}
 				</CartItemInfo>
 				<QuantityContainer>
-					<DecreaseQuantity>-</DecreaseQuantity>
+					<DecreaseQuantity
+						onClick={() => dispatch(DeleteFromCartActionCreator(id, itemNo))}
+					>
+						-
+					</DecreaseQuantity>
 					<CartItemQuantity>{cartQuantity}</CartItemQuantity>
 					<IncreaseQuantity
 						onClick={() => dispatch(AddToCartActionCreator(id, itemNo))}

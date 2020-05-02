@@ -13,11 +13,9 @@ export const AddToCartActionCreator = (id, itemNo) => dispatch => {
 	axios
 		.put(`/cart/${id}`)
 		.then(result => {
-			// console.log(result.data.products)
 			dispatch(setCartAction(result.data.products));
 		})
 		.catch(err => {
-			// console.log("catch")
 			if (!localStorage.getItem('cart')) {
 				localStorage.setItem('cart', []);
 			}
@@ -44,4 +42,10 @@ export const AddToCartActionCreator = (id, itemNo) => dispatch => {
 				dispatch(userLoginError(err));
 			});
 		});
+};
+
+export const DeleteFromCartActionCreator = id => dispatch => {
+	axios.delete(`/cart/product/${id}`).then(result => {
+		dispatch(setCartAction(result.data.products));
+	});
 };
