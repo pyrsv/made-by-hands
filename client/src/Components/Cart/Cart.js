@@ -11,7 +11,7 @@ export const Cart = () => {
 	const currentCart = useSelector(state => state.cartReducer.currentCart);
 
 	const sumPrice = currentCart.reduce((total, item) => {
-		total += item.product.currentPrice;
+		total += item.product.currentPrice * item.cartQuantity;
 		return total;
 	}, 0);
 
