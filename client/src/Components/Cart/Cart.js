@@ -8,6 +8,15 @@ export const Cart = () => {
 	// const dispatch = useDispatch()
 	const currentCart = useSelector(state => state.cartReducer.currentCart);
 	// console.log(currentCart)
+
+	// const filtered = currentCart.filter(item=>{
+	// 	const equal = currentCart.filter(
+	// 		i=>{return i._id===item._id}
+	// 		)
+
+	// })
+	// console.log(filtered)
+
 	return (
 		<>
 			<CartContainer>
@@ -17,19 +26,19 @@ export const Cart = () => {
 						currentPrice,
 						previousPrice,
 						_id,
-						itemNo,
 						imageUrls: [image],
+						itemNo,
 					}) => {
 						return (
 							<CartItem
-								key={_id}
+								key={itemNo}
 								id={_id}
 								name={name}
 								img={image}
 								price={currentPrice}
 								oldPrice={previousPrice}
-								itemNo={itemNo}
 								type="olive"
+								itemNo={itemNo}
 							>
 								{name}
 							</CartItem>

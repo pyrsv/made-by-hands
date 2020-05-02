@@ -1,7 +1,8 @@
-import React from 'react';
+// import React from 'react';
 
 export const CartItem = () =>
 	// {
+	// itemNo,
 	// id,
 	// name,
 	// img,
@@ -12,5 +13,6 @@ export const CartItem = () =>
 	// isFavorite,
 	// }
 	{
-		return <></>;
+		// console.log(itemNo)
+		// return <>{name}{itemNo}</>;
 	};

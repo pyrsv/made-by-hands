@@ -28,7 +28,7 @@ export const userLogout = () => dispatch => {
 	if (!localStorage.getItem('cart')) {
 		localStorage.setItem('cart', '[]');
 	}
-	dispatch(setCartAction(localStorage.getItem('cart')));
+	dispatch(setCartAction(JSON.parse(localStorage.getItem('cart'))));
 	dispatch({ type: USER_LOGOUT });
 };
 
@@ -45,17 +45,13 @@ export const getUser = () => dispatch => {
 				dispatch(userLoginSuccess(customer.data));
 			})
 			.catch(err => {
-				if (!localStorage.getItem('cart')) {
-					localStorage.setItem('cart', '[]');
-				}
-				dispatch(setCartAction(JSON.parse(localStorage.getItem('cart'))));
 				dispatch(userLoginError(err));
 			});
 	} else {
 		if (!localStorage.getItem('cart')) {
 			localStorage.setItem('cart', '[]');
 		}
-		dispatch(setCartAction(localStorage.getItem('cart')));
+		dispatch(setCartAction(JSON.parse(localStorage.getItem('cart'))));
 	}
 };
 
@@ -80,7 +76,7 @@ export const userLogin = ({ loginOrEmail, password }) => dispatch => {
 			if (!localStorage.getItem('cart')) {
 				localStorage.setItem('cart', '[]');
 			}
-			dispatch(setCartAction(localStorage.getItem('cart')));
+			dispatch(setCartAction(JSON.parse(localStorage.getItem('cart'))));
 			dispatch(userLoginError(err));
 		});
 };
@@ -111,7 +107,7 @@ export const userRegister = data => async dispatch => {
 			if (!localStorage.getItem('cart')) {
 				localStorage.setItem('cart', '[]');
 			}
-			dispatch(setCartAction(localStorage.getItem('cart')));
+			dispatch(setCartAction(JSON.parse(localStorage.getItem('cart'))));
 			dispatch(userLoginError(err));
 		});
 };
