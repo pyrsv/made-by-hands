@@ -29,7 +29,6 @@ export const AddToCartActionCreator = (id, itemNo) => dispatch => {
 				LSItems.map(item => {
 					if (item.product._id === requiredItem._id) {
 						// eslint-disable-next-line no-plusplus
-						// eslint-disable-next-line no-plusplus
 						item.cartQuantity++;
 						inLS = true;
 					}
@@ -38,7 +37,6 @@ export const AddToCartActionCreator = (id, itemNo) => dispatch => {
 					const addingItem = {};
 					addingItem.product = requiredItem;
 					addingItem.cartQuantity = 1;
-					// console.log(LSItems)
 
 					LSItems.push(addingItem);
 				}
