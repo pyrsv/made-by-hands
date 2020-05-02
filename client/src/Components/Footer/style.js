@@ -53,8 +53,11 @@ export const FootLine = styled.div`
 	width: 100vw;
 	border-top: 2px solid #e5e5e5;
 	margin-bottom: 20px;
+<<<<<<< HEAD
 
 	@media (max-width: 900px) {
 		margin-bottom: 10px;
 	}
+=======
+>>>>>>> develop
 `;

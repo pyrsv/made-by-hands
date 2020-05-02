@@ -5,6 +5,7 @@ import CartPage from './Pages/CartPage';
 import CatalogPage from './Pages/CatalogPage';
 import ProfilePage from './Pages/ProfilePage';
 import IndexPage from './Pages/IndexPage';
+import Header from './Components/Header/Header';
 import { getUser } from './store/actions/authActions';
 
 const App = () => {
@@ -14,6 +15,7 @@ const App = () => {
 
 	return (
 		<div>
+			<Header />
 			<Switch>
 				<Route exact path="/">
 					<IndexPage />
@@ -21,7 +23,7 @@ const App = () => {
 				<Route path="/cart">
 					<CartPage />
 				</Route>
-				<Route path="/filter">
+				<Route path="/catalog">
 					<CatalogPage />
 				</Route>
 				<Route path="/profile">
