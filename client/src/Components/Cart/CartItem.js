@@ -1,4 +1,4 @@
-// import React from 'react';
+import React from 'react';
 
 export const CartItem = () =>
 	// {
@@ -14,5 +14,5 @@ export const CartItem = () =>
 	// }
 	{
 		// console.log(itemNo)
-		// return <>{name}{itemNo}</>;
+		return <></>;
 	};
