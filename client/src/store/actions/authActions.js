@@ -48,7 +48,7 @@ export const getUser = () => dispatch => {
 				if (!localStorage.getItem('cart')) {
 					localStorage.setItem('cart', '[]');
 				}
-				dispatch(setCartAction(localStorage.getItem('cart')));
+				dispatch(setCartAction(JSON.parse(localStorage.getItem('cart'))));
 				dispatch(userLoginError(err));
 			});
 	} else {

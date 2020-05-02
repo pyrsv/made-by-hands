@@ -22,7 +22,6 @@ const ProductCard = ({
 	img,
 	oldPrice,
 	price,
-	// onAddToCart,
 	type,
 	isInCart,
 	isFavorite,
