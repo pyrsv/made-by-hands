@@ -22,9 +22,11 @@ export const AddToCartActionCreator = (id, itemNo) => dispatch => {
 				localStorage.setItem('cart', []);
 			}
 			axios.get(`/products/${itemNo}`).then(result => {
-				const addingItem = result.data;
+				const requiredItem = result.data;
 				const LSItems = JSON.parse(localStorage.getItem('cart'));
-
+				const addingItem = {};
+				addingItem.product = requiredItem;
+				addingItem.cartQuantity = 1;
 				// console.log(LSItems)
 
 				LSItems.push(addingItem);
