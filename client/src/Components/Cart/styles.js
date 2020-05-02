@@ -89,3 +89,10 @@ export const CartItemOldPrice = styled.div`
 	text-decoration: line-through;
 	margin-top: 5px;
 `;
+
+export const SumContainer = styled.div`
+	display: flex;
+	flex-direction: row-reverse;
+	font-size: 24px;
+	font-family: Gabriela, sans-serif;
+`;

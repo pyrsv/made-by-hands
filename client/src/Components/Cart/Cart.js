@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import ProductsCarousel from '../Carousels/ProductsCarousel/ProductsCarousel';
-import { CartContainer, CartItemListContainer } from './styles';
+import { CartContainer, CartItemListContainer, SumContainer } from './styles';
 import { CartItem } from './CartItem';
 import LayoutContainer from '../LayoutContainer/LayoutContainer';
 
@@ -9,7 +9,10 @@ export const Cart = () => {
 	// const dispatch = useDispatch()
 	const currentCart = useSelector(state => state.cartReducer.currentCart);
 
-	// console.log(currentCart)
+	const sumPrice = currentCart.reduce((total, item) => {
+		total += item.product.currentPrice;
+		return total;
+	}, 0);
 
 	return (
 		<>
@@ -35,6 +38,7 @@ export const Cart = () => {
 							);
 						})}
 					</CartItemListContainer>
+					<SumContainer>Total: {sumPrice}₴</SumContainer>
 				</LayoutContainer>
 			</CartContainer>
 			<ProductsCarousel />
