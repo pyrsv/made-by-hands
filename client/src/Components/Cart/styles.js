@@ -95,4 +95,5 @@ export const SumContainer = styled.div`
 	flex-direction: row-reverse;
 	font-size: 24px;
 	font-family: Gabriela, sans-serif;
+	margin-top: 10px;
 `;

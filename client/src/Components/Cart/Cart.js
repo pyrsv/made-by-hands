@@ -4,6 +4,7 @@ import ProductsCarousel from '../Carousels/ProductsCarousel/ProductsCarousel';
 import { CartContainer, CartItemListContainer, SumContainer } from './styles';
 import { CartItem } from './CartItem';
 import LayoutContainer from '../LayoutContainer/LayoutContainer';
+import Button from '../UI/Button/Button';
 
 export const Cart = () => {
 	// const dispatch = useDispatch()
@@ -39,6 +40,9 @@ export const Cart = () => {
 						})}
 					</CartItemListContainer>
 					<SumContainer>Total: {sumPrice}₴</SumContainer>
+					<SumContainer>
+						<Button text="Checkout" />
+					</SumContainer>
 				</LayoutContainer>
 			</CartContainer>
 			<ProductsCarousel />
