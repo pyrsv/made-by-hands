@@ -39,6 +39,7 @@ export const AddToCartActionCreator = (id, itemNo) => dispatch => {
 					LSItems.push(addingItem);
 				}
 				localStorage.setItem('cart', JSON.stringify(LSItems));
+				dispatch(setCartAction(LSItems));
 				dispatch(userLoginError(err));
 			});
 		});
@@ -48,4 +49,25 @@ export const DeleteFromCartActionCreator = id => dispatch => {
 	axios.delete(`/cart/product/${id}`).then(result => {
 		dispatch(setCartAction(result.data.products));
 	});
+	// .catch(err=>{
+	// axios.get(`/products/${itemNo}`).then(result => {
+	// const requiredItem = result.data;
+	// let itemsFromLS = JSON.parse(localStorage.getItem('cart'))
+	// // const filtered = itemsFromLS.map(item=>{
+	// // 	if(item.product.id===requiredItem.id){
+	// // 			// eslint-disable-next-line no-plusplus
+	// // 			item.cartQuantity--;
+	// // 			if(!item.cartQuantity){
+	// // 				itemsFromLS = itemsFromLS.filter(i=>{
+	// // 					return i.product.id!==item.product.id
+	// // 				})
+	// // 			}
+	// // 		}
+	// // 	}
+	// // )
+	// localStorage.setItem('cart', JSON.stringify(filtered));
+	// 	dispatch(userLoginError(err));
+
+	// })
+	// })
 };
