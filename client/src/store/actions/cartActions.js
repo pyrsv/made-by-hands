@@ -24,13 +24,24 @@ export const AddToCartActionCreator = (id, itemNo) => dispatch => {
 			axios.get(`/products/${itemNo}`).then(result => {
 				const requiredItem = result.data;
 				const LSItems = JSON.parse(localStorage.getItem('cart'));
-				const addingItem = {};
-				addingItem.product = requiredItem;
-				addingItem.cartQuantity = 1;
-				// console.log(LSItems)
+				let inLS = false;
+				// eslint-disable-next-line array-callback-return
+				LSItems.map(item => {
+					if (item.product._id === requiredItem._id) {
+						// eslint-disable-next-line no-plusplus
+						// eslint-disable-next-line no-plusplus
+						item.cartQuantity++;
+						inLS = true;
+					}
+				});
+				if (!inLS) {
+					const addingItem = {};
+					addingItem.product = requiredItem;
+					addingItem.cartQuantity = 1;
+					// console.log(LSItems)
 
-				LSItems.push(addingItem);
-
+					LSItems.push(addingItem);
+				}
 				localStorage.setItem('cart', JSON.stringify(LSItems));
 				dispatch(userLoginError(err));
 			});

@@ -7,7 +7,6 @@ import { CartItem } from './CartItem';
 export const Cart = () => {
 	// const dispatch = useDispatch()
 	const currentCart = useSelector(state => state.cartReducer.currentCart);
-	// console.log(currentCart)
 
 	// const filtered = currentCart.filter(item=>{
 	// 	const equal = currentCart.filter(
