@@ -45,29 +45,34 @@ export const AddToCartActionCreator = (id, itemNo) => dispatch => {
 		});
 };
 
-export const DeleteFromCartActionCreator = id => dispatch => {
-	axios.delete(`/cart/product/${id}`).then(result => {
-		dispatch(setCartAction(result.data.products));
-	});
-	// .catch(err=>{
-	// axios.get(`/products/${itemNo}`).then(result => {
-	// const requiredItem = result.data;
-	// let itemsFromLS = JSON.parse(localStorage.getItem('cart'))
-	// // const filtered = itemsFromLS.map(item=>{
-	// // 	if(item.product.id===requiredItem.id){
-	// // 			// eslint-disable-next-line no-plusplus
-	// // 			item.cartQuantity--;
-	// // 			if(!item.cartQuantity){
-	// // 				itemsFromLS = itemsFromLS.filter(i=>{
-	// // 					return i.product.id!==item.product.id
-	// // 				})
-	// // 			}
-	// // 		}
-	// // 	}
-	// // )
-	// localStorage.setItem('cart', JSON.stringify(filtered));
-	// 	dispatch(userLoginError(err));
+export const DeleteFromCartActionCreator = (id, itemNo) => dispatch => {
+	axios
+		.delete(`/cart/product/${id}`)
+		.then(result => {
+			dispatch(setCartAction(result.data.products));
+		})
+		.catch(err => {
+			axios.get(`/products/${itemNo}`).then(result => {
+				const requiredItem = result.data;
+				const itemsFromLS = JSON.parse(localStorage.getItem('cart'));
+				// eslint-disable-next-line array-callback-return
+				itemsFromLS.map(item => {
+					if (item.product._id === requiredItem._id) {
+						// eslint-disable-next-line no-plusplus
+						item.cartQuantity--;
+						dispatch(setCartAction(itemsFromLS));
+						localStorage.setItem('cart', JSON.stringify(itemsFromLS));
+						if (!item.cartQuantity) {
+							const filteredItemsFromLS = itemsFromLS.filter(i => {
+								return i.product._id !== item.product._id;
+							});
+							dispatch(setCartAction(filteredItemsFromLS));
+							localStorage.setItem('cart', JSON.stringify(filteredItemsFromLS));
+						}
+					}
+				});
 
-	// })
-	// })
+				dispatch(userLoginError(err));
+			});
+		});
 };
