@@ -30,6 +30,7 @@ export const CartItem = ({
 	cartQuantity,
 	color,
 }) => {
+	name = name[0].toUpperCase() + name.slice(1);
 	const dispatch = useDispatch();
 	return (
 		<>
