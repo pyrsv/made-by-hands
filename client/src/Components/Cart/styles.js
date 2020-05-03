@@ -123,6 +123,8 @@ export const DeleteItemFromCart = styled.button`
 	right: 0;
 	font-weight: bold;
 	background: #fffcfc;
-	/* border:none; */
+	border: none;
 	outline: none;
+	border-radius: 4px;
+	color: ${props => props.theme.mainDark};
 `;
