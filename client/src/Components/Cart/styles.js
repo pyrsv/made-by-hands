@@ -41,6 +41,10 @@ export const CartItemInfo = styled.div`
 	font-weight: 600;
 	font-size: 22px;
 	line-height: 18px;
+	@media (max-width: 576px) {
+		align-items: center;
+		margin-left: 0;
+	}
 `;
 
 export const QuantityContainer = styled.div`
@@ -104,4 +108,9 @@ export const SumContainer = styled.div`
 	font-size: 24px;
 	font-family: Gabriela, sans-serif;
 	margin-top: 10px;
+	@media (max-width: 576px) {
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+	}
 `;
