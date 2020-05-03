@@ -49,6 +49,7 @@ export const CartItem = ({
 				</CartItemInfo>
 				<QuantityContainer>
 					<DecreaseQuantity
+						disabled={cartQuantity === 1}
 						onClick={() => dispatch(deleteFromCart(id, itemNo))}
 					>
 						-

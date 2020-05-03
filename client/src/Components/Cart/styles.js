@@ -134,3 +134,13 @@ export const DeleteItemFromCart = styled.button`
 export const CartItemColor = styled.span`
 	margin-top: 45px;
 `;
+
+export const CartIsEmpty = styled.div`
+	text-align: center;
+	font-family: Gabriela, sans-serif;
+	text-transform: uppercase;
+	font-family: 36px;
+	color: ${props => props.theme.accentRed};
+	font-weight: bold;
+	margin-top: 20px;
+`;

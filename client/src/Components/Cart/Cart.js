@@ -1,6 +1,11 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { CartContainer, CartItemListContainer, SumContainer } from './styles';
+import {
+	CartContainer,
+	CartItemListContainer,
+	SumContainer,
+	CartIsEmpty,
+} from './styles';
 import { CartItem } from './CartItem';
 import LayoutContainer from '../LayoutContainer/LayoutContainer';
 import Button from '../UI/Button/Button';
@@ -8,10 +13,12 @@ import Button from '../UI/Button/Button';
 export const Cart = () => {
 	const currentCart = useSelector(state => state.cartReducer.currentCart);
 
-	const sumPrice = currentCart.reduce((total, item) => {
+	let sumPrice = currentCart.reduce((total, item) => {
 		total += item.product.currentPrice * item.cartQuantity;
 		return total;
 	}, 0);
+
+	sumPrice = sumPrice === 0 ? undefined : sumPrice;
 
 	return (
 		<>
@@ -37,10 +44,13 @@ export const Cart = () => {
 							);
 						})}
 					</CartItemListContainer>
-					<SumContainer>Total: {sumPrice}₴</SumContainer>
-					<SumContainer>
-						<Button text="Checkout" />
-					</SumContainer>
+					{sumPrice && <SumContainer>Total: {sumPrice}₴</SumContainer>}
+					{sumPrice && (
+						<SumContainer>
+							<Button text="Checkout" />
+						</SumContainer>
+					)}
+					{!sumPrice && <CartIsEmpty>Cart is Empty</CartIsEmpty>}
 				</LayoutContainer>
 			</CartContainer>
 		</>
