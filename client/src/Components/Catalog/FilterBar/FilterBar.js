@@ -20,11 +20,12 @@ const FilterBar = () => {
 	const history = useHistory();
 
 	const [fields, setFields] = useState({});
-	const [priceRange, setPriceRange] = useState({ minPrice: 0, maxPrice: 2000 });
 
 	const categories = useSelector(state => state.catalog.categories);
 	const color = useSelector(state => state.catalog.colors);
 	const brand = useSelector(state => state.catalog.brands);
+	const minPrice = useSelector(state => state.catalog.minPrice);
+	const maxPrice = useSelector(state => state.catalog.maxPrice);
 
 	const currentParams = querystring.parse(location.search.slice(1));
 
@@ -46,10 +47,6 @@ const FilterBar = () => {
 		setFields(initialFields);
 	}, [categories, color, brand]);
 
-	const handleChangePrice = (min, max) => {
-		setPriceRange({ minPrice: min, maxPrice: max });
-	};
-
 	return (
 		<FiltersContainer>
 			<Title>Filters</Title>
@@ -69,8 +66,8 @@ const FilterBar = () => {
 
 						return obj;
 					}, {});
-					params.minPrice = priceRange.minPrice;
-					params.maxPrice = priceRange.maxPrice;
+					params.minPrice = minPrice;
+					params.maxPrice = maxPrice;
 					const str = querystring.stringify(params, { arrayFormat: 'comma' });
 					history.push({
 						search: `?${str}`,
@@ -140,7 +137,7 @@ const FilterBar = () => {
 									</FilterGroup>
 									<FilterGroup>
 										<FilterName>Price</FilterName>
-										<PriceRange changeRange={handleChangePrice} />
+										<PriceRange />
 									</FilterGroup>
 								</>
 								<Button type="Submit" text="Show" onClick={() => {}} />

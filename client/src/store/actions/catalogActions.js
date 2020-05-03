@@ -6,6 +6,8 @@ import {
 	GET_FILTERED_PRODUCTS_ERROR,
 	GET_FILTERED_PRODUCTS_SUCCESS,
 	GET_BRANDS,
+	SET_MIN_PRICE,
+	SET_MAX_PRICE,
 } from '../types/catalogTypes';
 
 const getCategories = categories => ({
@@ -67,3 +69,13 @@ export const getBrandsAction = () => dispatch => {
 		.get('/filters/brand')
 		.then(response => dispatch(getBrands(response.data)));
 };
+
+export const setMinPrice = data => ({
+	type: SET_MIN_PRICE,
+	payload: data,
+});
+
+export const setMaxPrice = data => ({
+	type: SET_MAX_PRICE,
+	payload: data,
+});

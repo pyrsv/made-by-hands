@@ -5,6 +5,8 @@ import {
 	GET_FILTERED_PRODUCTS_INIT,
 	GET_FILTERED_PRODUCTS_SUCCESS,
 	GET_BRANDS,
+	SET_MIN_PRICE,
+	SET_MAX_PRICE,
 } from '../types/catalogTypes';
 
 const initialState = {
@@ -54,6 +56,18 @@ export const catalogReducer = (state = initialState, { type, payload }) => {
 				...state,
 				isProductsFetching: false,
 				isProductsError: true,
+			};
+
+		case SET_MIN_PRICE:
+			return {
+				...state,
+				minPrice: payload,
+			};
+
+		case SET_MAX_PRICE:
+			return {
+				...state,
+				maxPrice: payload,
 			};
 		default:
 			return state;
