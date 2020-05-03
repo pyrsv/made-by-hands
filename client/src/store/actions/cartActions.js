@@ -77,8 +77,22 @@ export const deleteFromCartActionCreator = (id, itemNo) => dispatch => {
 		});
 };
 
-export const deleteAllTheSameItemsAction = id => dispatch => {
-	axios.delete(`/cart/${id}`).then(result => {
-		dispatch(setCartAction(result.data.products));
-	});
+export const deleteAllTheSameItemsAction = (id, itemNo) => dispatch => {
+	axios
+		.delete(`/cart/${id}`)
+		.then(result => {
+			dispatch(setCartAction(result.data.products));
+		})
+		.catch(err => {
+			axios.get(`/products/${itemNo}`).then(result => {
+				const requiredItem = result.data;
+				const itemsFromLS = JSON.parse(localStorage.getItem('cart'));
+				const filtered = itemsFromLS.filter(item => {
+					return item.product._id !== requiredItem._id;
+				});
+				localStorage.setItem('cart', JSON.stringify(filtered));
+				dispatch(setCartAction(filtered));
+				dispatch(userLoginError(err));
+			});
+		});
 };

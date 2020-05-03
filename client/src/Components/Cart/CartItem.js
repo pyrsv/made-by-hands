@@ -38,7 +38,7 @@ export const CartItem = ({
 		<>
 			<CartItemContainer>
 				<DeleteItemFromCart
-					onClick={() => dispatch(deleteAllTheSameItemsAction(id))}
+					onClick={() => dispatch(deleteAllTheSameItemsAction(id, itemNo))}
 				>
 					X
 				</DeleteItemFromCart>
