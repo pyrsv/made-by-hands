@@ -68,6 +68,7 @@ export const getFilteredProducts = config => dispatch => {
 			},
 		})
 		.then(response => {
+			// console.log(response.data.products)
 			dispatch(getFilteredProductsSuccess(response.data));
 		})
 		.catch(err => dispatch(getFilteredProductsError(err)));
