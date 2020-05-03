@@ -11,6 +11,7 @@ export const CartItemListContainer = styled.div`
 `;
 
 export const CartItemContainer = styled.div`
+	position: relative;
 	border-top: 1px solid ${props => props.theme.mainDark};
 	display: flex;
 	justify-content: space-between;
@@ -113,4 +114,15 @@ export const SumContainer = styled.div`
 		justify-content: center;
 		align-items: center;
 	}
+`;
+
+export const DeleteItemFromCart = styled.button`
+	display: inline-block;
+	position: absolute;
+	top: 5%;
+	right: 0;
+	font-weight: bold;
+	background: #fffcfc;
+	/* border:none; */
+	outline: none;
 `;

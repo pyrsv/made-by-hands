@@ -10,11 +10,13 @@ import {
 	IncreaseQuantity,
 	QuantityContainer,
 	CartItemOldPrice,
+	DeleteItemFromCart,
 } from './styles';
 import PropTypes from 'prop-types';
 import {
-	AddToCartActionCreator,
-	DeleteFromCartActionCreator,
+	addToCartActionCreator,
+	deleteFromCartActionCreator,
+	deleteAllTheSameItemsAction,
 } from '../../store/actions/cartActions';
 
 export const CartItem = ({
@@ -35,6 +37,11 @@ export const CartItem = ({
 	return (
 		<>
 			<CartItemContainer>
+				<DeleteItemFromCart
+					onClick={() => dispatch(deleteAllTheSameItemsAction(id))}
+				>
+					X
+				</DeleteItemFromCart>
 				<CartItemImage src={img} alt={name} />
 				<CartItemInfo>
 					<span>{name}</span>
@@ -42,13 +49,13 @@ export const CartItem = ({
 				</CartItemInfo>
 				<QuantityContainer>
 					<DecreaseQuantity
-						onClick={() => dispatch(DeleteFromCartActionCreator(id, itemNo))}
+						onClick={() => dispatch(deleteFromCartActionCreator(id, itemNo))}
 					>
 						-
 					</DecreaseQuantity>
 					<CartItemQuantity>{cartQuantity}</CartItemQuantity>
 					<IncreaseQuantity
-						onClick={() => dispatch(AddToCartActionCreator(id, itemNo))}
+						onClick={() => dispatch(addToCartActionCreator(id, itemNo))}
 					>
 						+
 					</IncreaseQuantity>
