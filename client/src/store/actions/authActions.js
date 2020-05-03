@@ -40,7 +40,11 @@ export const getUser = () => dispatch => {
 		handleGetUser(token)
 			.then(customer => {
 				axios.get('/cart').then(result => {
-					dispatch(setCartAction(result.data.products));
+					if (!result.data) {
+						axios.post('/cart');
+					} else {
+						dispatch(setCartAction(result.data.products));
+					}
 				});
 				dispatch(userLoginSuccess(customer.data));
 			})
@@ -68,8 +72,11 @@ export const userLogin = ({ loginOrEmail, password }) => dispatch => {
 			handleGetUser()
 				.then(customer => {
 					axios.get('/cart').then(result => {
-						// console.log(result.data.products)
-						dispatch(setCartAction(result.data.products));
+						if (!result.data) {
+							axios.post('/cart');
+						} else {
+							dispatch(setCartAction(result.data.products));
+						}
 					});
 					dispatch(userLoginSuccess(customer.data));
 				})
@@ -100,7 +107,11 @@ export const userRegister = data => async dispatch => {
 				.then(res => {
 					setAuthToken(res.data.token);
 					axios.get('/cart').then(result => {
-						dispatch(setCartAction(result.data.products));
+						if (!result.data) {
+							axios.post('/cart');
+						} else {
+							dispatch(setCartAction(result.data.products));
+						}
 					});
 					dispatch(userLoginSuccess(customer.data));
 				})
