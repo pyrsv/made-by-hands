@@ -4,103 +4,92 @@ import InputField from '../UI/InputFiels/InputField';
 import Button from '../UI/Button/Button';
 import LayoutContainer from '../LayoutContainer/LayoutContainer';
 
-import { FooterContainer, Step, FootLine, IconSocNet } from './style';
+import {
+	Wrapper,
+	FooterContainer,
+	FooterSection,
+	FootLine,
+	IconSocNet,
+	IconPay,
+} from './style';
 import { FooterText } from './FooterText/FooterText';
 
 const Footer = () => {
 	return (
-		<Step>
+		<Wrapper>
 			<LayoutContainer>
 				<FooterContainer>
-					<Step width="calc(100/3)" minHeight="200px" padding="5%">
+					<FooterSection>
 						<FooterText
 							type="title"
-							marginBottom="35px"
 							text="Subscribe and get first all the best!"
 						/>
 						<InputField placeholder="Enter your email " />
 						<Button text="Send" color="light" icon="envelope" />
-					</Step>
+					</FooterSection>
 
-					<Step minHeight="100%" width="calc(100%/3)" padding="5%">
-						<Step alignItems="baseline" marginBottom="15px">
-							<FooterText type="title" text="Partners" />
-							<FooterText
-								href="/Cooperation"
-								type="link"
-								text="Cooperation with us"
-							/>
-							<FooterText
-								href="/Corporate_orders"
-								type="link"
-								text="Corporate orders"
-							/>
-						</Step>
-						<Step alignItems="baseline">
-							<FooterText type="title" text="Help" />
-							<FooterText
-								href="/Deliver_and_payment"
-								type="link"
-								text="Deliver and payment"
-							/>
-							<FooterText
-								href="/Exchange_or_refund"
-								type="link"
-								text="Exchange or refund"
-							/>
-						</Step>
-					</Step>
-					<Step
-						alignItems="baseline"
-						width="calc(100%/3)"
-						padding="5%"
-						minHeight="200px"
-					>
+					<FooterSection>
+						<FooterText type="title" text="Partners" />
+						<FooterText
+							href="/Cooperation"
+							type="link"
+							text="Cooperation with us"
+						/>
+						<FooterText
+							href="/Corporate_orders"
+							type="link"
+							text="Corporate orders"
+						/>
+
+						<FooterText type="title" text="Help" />
+						<FooterText
+							href="/Deliver_and_payment"
+							type="link"
+							text="Deliver and payment"
+						/>
+						<FooterText
+							href="/Exchange_or_refund"
+							type="link"
+							text="Exchange or refund"
+						/>
+					</FooterSection>
+
+					<FooterSection>
 						<FooterText text="Stay connected" />
 						<FooterContainer>
 							<IconSocNet
 								href="https://www.instagram.com/"
-								backgroundImg="url(https://pngimage.net/wp-content/uploads/2018/06/social-icons-png-vk-4.png)"
-								backgroundPoss="337px 183px;"
+								backgroundPoss="-63px -117px;"
 							/>
 							<IconSocNet
 								href="https://www.facebook.com/"
-								backgroundImg="url(https://pngimage.net/wp-content/uploads/2018/06/social-icons-png-vk-4.png)"
-								backgroundPoss="302px 253px;"
+								backgroundPoss="-98px -47px;"
 							/>
 							<IconSocNet
 								href="https://twitter.com/explore"
-								backgroundImg="url(https://pngimage.net/wp-content/uploads/2018/06/social-icons-png-vk-4.png)"
-								backgroundPoss="232px 253px"
+								backgroundPoss="-168px -47px"
 							/>
 							<IconSocNet
 								href="https://vk.com/"
-								backgroundImg="url(https://pngimage.net/wp-content/uploads/2018/06/social-icons-png-vk-4.png)"
-								backgroundPoss="337px 253px;"
+								backgroundPoss="-63px -47px;"
 							/>
 							<IconSocNet
 								href="https://www.pinterest.com/"
-								backgroundImg="url(https://pngimage.net/wp-content/uploads/2018/06/social-icons-png-vk-4.png)"
-								backgroundPoss="232px 218px"
+								backgroundPoss="-168px -82px"
 							/>
 						</FooterContainer>
 						<FooterText text="Making payments" />
 						<FooterContainer>
-							<IconSocNet
-								width="180px"
-								backgroundImg="url(https://edanadom.sumy.ua/assets/images/online.png)"
-								backgroundSize="cover"
-								backgroundRepeat="no-repeat"
-							/>
+							<IconPay />
 						</FooterContainer>
-					</Step>
+					</FooterSection>
 				</FooterContainer>
 			</LayoutContainer>
 			<LayoutContainer>
 				<FootLine />
 				<FooterText type="copy" text="© 2020 | all rights reserved" />
 			</LayoutContainer>
-		</Step>
+		</Wrapper>
 	);
 };
 
