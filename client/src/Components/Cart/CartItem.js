@@ -11,6 +11,7 @@ import {
 	QuantityContainer,
 	CartItemOldPrice,
 	DeleteItemFromCart,
+	CartItemColor,
 } from './styles';
 import PropTypes from 'prop-types';
 import {
@@ -32,7 +33,6 @@ export const CartItem = ({
 	cartQuantity,
 	color,
 }) => {
-	name = name[0].toUpperCase() + name.slice(1);
 	const dispatch = useDispatch();
 	return (
 		<>
@@ -45,7 +45,7 @@ export const CartItem = ({
 				<CartItemImage src={img} alt={name} />
 				<CartItemInfo>
 					<span>{name}</span>
-					<span style={{ marginTop: '43px' }}>color: {color}</span>{' '}
+					<CartItemColor>color: {color}</CartItemColor>{' '}
 				</CartItemInfo>
 				<QuantityContainer>
 					<DecreaseQuantity

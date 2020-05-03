@@ -1,6 +1,5 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import ProductsCarousel from '../Carousels/ProductsCarousel/ProductsCarousel';
 import { CartContainer, CartItemListContainer, SumContainer } from './styles';
 import { CartItem } from './CartItem';
 import LayoutContainer from '../LayoutContainer/LayoutContainer';
@@ -44,7 +43,6 @@ export const Cart = () => {
 					</SumContainer>
 				</LayoutContainer>
 			</CartContainer>
-			<ProductsCarousel />
 		</>
 	);
 };

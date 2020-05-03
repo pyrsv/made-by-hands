@@ -33,6 +33,7 @@ export const CartItemImage = styled.img`
 `;
 
 export const CartItemInfo = styled.div`
+	text-transform: capitalize;
 	display: flex;
 	flex-direction: column;
 	width: 298px;
@@ -45,6 +46,7 @@ export const CartItemInfo = styled.div`
 	@media (max-width: 576px) {
 		align-items: center;
 		margin-left: 0;
+		text-align: center;
 	}
 `;
 
@@ -127,4 +129,8 @@ export const DeleteItemFromCart = styled.button`
 	outline: none;
 	border-radius: 4px;
 	color: ${props => props.theme.mainDark};
+`;
+
+export const CartItemColor = styled.span`
+	margin-top: 45px;
 `;
