@@ -45,6 +45,10 @@ export const getUser = () => dispatch => {
 				dispatch(userLoginSuccess(customer.data));
 			})
 			.catch(err => {
+				if (!localStorage.getItem('cart')) {
+					localStorage.setItem('cart', '[]');
+				}
+				dispatch(setCartAction(JSON.parse(localStorage.getItem('cart'))));
 				dispatch(userLoginError(err));
 			});
 	} else {
