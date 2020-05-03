@@ -6,6 +6,8 @@ import {
 	GET_FILTERED_PRODUCTS_ERROR,
 	GET_FILTERED_PRODUCTS_SUCCESS,
 	GET_BRANDS,
+	UPDATE_PARAMS,
+	LOAD_MORE_PRODUCTS,
 } from '../types/catalogTypes';
 
 const getCategories = categories => ({
@@ -40,17 +42,30 @@ const getFilteredProductsError = error => ({
 	payload: error,
 });
 
+const updateParams = params => ({
+	type: UPDATE_PARAMS,
+	payload: params,
+});
+
+const loadMoreProducts = products => ({
+	type: LOAD_MORE_PRODUCTS,
+	payload: products,
+});
+
 export const getCategoriesAction = () => dispatch => {
 	axios.get('/catalog').then(response => {
 		dispatch(getCategories(response.data));
 	});
 };
 
-export const getFilteredProducts = params => dispatch => {
+export const getFilteredProducts = config => dispatch => {
 	dispatch(getFilteredProductsInit());
+	dispatch(updateParams(config));
 	axios
 		.get('/products/filter/', {
-			params,
+			params: {
+				...config,
+			},
 		})
 		.then(response => {
 			// console.log(response.data.products)
@@ -67,4 +82,16 @@ export const getBrandsAction = () => dispatch => {
 	axios
 		.get('/filters/brand')
 		.then(response => dispatch(getBrands(response.data)));
+};
+
+export const loadMoreAction = config => dispatch => {
+	axios
+		.get('/products/filter', {
+			params: {
+				...config,
+			},
+		})
+		.then(response => {
+			dispatch(loadMoreProducts(response.data.products));
+		});
 };
