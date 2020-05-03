@@ -101,8 +101,6 @@ const ProductCarousel = () => {
 		],
 	};
 
-	// const currentCart = useSelector(state=>state.cartReducer.currentCart)
-	// console.log(currentCart)
 	return (
 		<div>
 			<NewArrivalsBackground>

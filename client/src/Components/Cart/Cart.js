@@ -7,7 +7,6 @@ import LayoutContainer from '../LayoutContainer/LayoutContainer';
 import Button from '../UI/Button/Button';
 
 export const Cart = () => {
-	// const dispatch = useDispatch()
 	const currentCart = useSelector(state => state.cartReducer.currentCart);
 
 	const sumPrice = currentCart.reduce((total, item) => {
