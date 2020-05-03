@@ -6,13 +6,6 @@ import { ProductsContainer } from './styles';
 
 const ProductsList = () => {
 	const products = useSelector(state => state.catalog.currentProducts);
-	// const dispatch = useDispatch()
-
-	// const onAddToCart = (id)=> {
-	// 	// axios.post(`/cart/${id}`).then(result => {
-	// 	// 	})
-	// 	// dispatch(addToCartActionCreator(id))
-	// }
 
 	return (
 		<ProductsContainer>
