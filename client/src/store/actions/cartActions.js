@@ -9,7 +9,7 @@ export const setCartAction = data => ({
 	payload: data,
 });
 
-export const addToCartActionCreator = (id, itemNo) => dispatch => {
+export const addToCart = (id, itemNo) => dispatch => {
 	axios
 		.put(`/cart/${id}`)
 		.then(result => {
@@ -45,7 +45,7 @@ export const addToCartActionCreator = (id, itemNo) => dispatch => {
 		});
 };
 
-export const deleteFromCartActionCreator = (id, itemNo) => dispatch => {
+export const deleteFromCart = (id, itemNo) => dispatch => {
 	axios
 		.delete(`/cart/product/${id}`)
 		.then(result => {
@@ -77,7 +77,7 @@ export const deleteFromCartActionCreator = (id, itemNo) => dispatch => {
 		});
 };
 
-export const deleteAllTheSameItemsAction = (id, itemNo) => dispatch => {
+export const deleteAllTheSameItems = (id, itemNo) => dispatch => {
 	axios
 		.delete(`/cart/${id}`)
 		.then(result => {

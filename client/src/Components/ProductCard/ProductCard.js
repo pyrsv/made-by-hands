@@ -13,7 +13,7 @@ import {
 	ProductName,
 } from './styles';
 import { useDispatch } from 'react-redux';
-import { addToCartActionCreator } from '../../store/actions/cartActions';
+import { addToCart } from '../../store/actions/cartActions';
 
 const ProductCard = ({
 	id,
@@ -34,17 +34,14 @@ const ProductCard = ({
 			<CardInfo type={type}>
 				<CardInfoRow>
 					<ProductName>{name}</ProductName>
-					<FavoriteHeart
-						// onClick={dispatch(addToCartActionCreator)}
-						isFavorite={isFavorite}
-					/>
+					<FavoriteHeart isFavorite={isFavorite} />
 				</CardInfoRow>
 				<CardInfoRow>
 					<Button
 						type="default"
 						color="dark"
 						text={isInCart ? 'In Cart' : 'Buy'}
-						onClick={() => dispatch(addToCartActionCreator(id, itemNo))}
+						onClick={() => dispatch(addToCart(id, itemNo))}
 						disabled={isInCart}
 					/>
 					<PriceContainer>
