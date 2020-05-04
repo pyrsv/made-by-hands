@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { StyledBackdrop } from './styles';
 
 const Backdrop = ({ onClick }) => {
-	return <StyledBackdrop onCLick={onClick} />;
+	return <StyledBackdrop onClick={onClick} />;
 };
 
 Backdrop.propTypes = {
