@@ -11,7 +11,6 @@ export const DrawerWrapper = styled.div`
 	padding: 30px 20px;
 	transition: left 0.3s ease-in;
 	animation: show_drawer 0.3s ease-in;
-	z-index: 999;
 	@keyframes show_drawer {
 		0% {
 			transform: translateX(-100%);
