@@ -81,7 +81,12 @@ export const deleteAllTheSameItems = (id, itemNo) => dispatch => {
 	axios
 		.delete(`/cart/${id}`)
 		.then(result => {
-			dispatch(setCartAction(result.data.products));
+			let data = result.data.products;
+			if (result.data.products[0].product._id === id) {
+				data = [];
+				axios.delete(`/cart`);
+			}
+			dispatch(setCartAction(data));
 		})
 		.catch(err => {
 			axios.get(`/products/${itemNo}`).then(result => {
