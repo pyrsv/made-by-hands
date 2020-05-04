@@ -114,6 +114,7 @@ const ProductCarousel = () => {
 											<ProductCard
 												key={item.itemNo}
 												name={item.name}
+												itemNo={item.itemNo}
 												img={item.imageUrls[0]}
 												price={item.currentPrice}
 											/>

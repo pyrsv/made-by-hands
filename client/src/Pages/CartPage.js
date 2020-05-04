@@ -1,13 +1,17 @@
 import React from 'react';
-import Header from '../Components/Header/Header';
+import ProductDescription from '../Components/ProductDescription/ProductDescription';
+import PropTypes from 'prop-types';
 
-const CartPage = () => {
+const CartPage = ({ cartNoParam }) => {
 	return (
 		<>
-			<Header />
-			<div>It is CartPage</div>;
+			<ProductDescription cartNoParam={cartNoParam} />
 		</>
 	);
+};
+
+CartPage.propTypes = {
+	cartNoParam: PropTypes.string.isRequired,
 };
 
 export default CartPage;

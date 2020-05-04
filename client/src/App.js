@@ -5,7 +5,7 @@ import CartPage from './Pages/CartPage';
 import CatalogPage from './Pages/CatalogPage';
 import ProfilePage from './Pages/ProfilePage';
 import IndexPage from './Pages/IndexPage';
-import Header from './Components/Header/Header'
+import Header from './Components/Header/Header';
 import { getUser } from './store/actions/authActions';
 
 const App = () => {
@@ -20,9 +20,12 @@ const App = () => {
 				<Route exact path="/">
 					<IndexPage />
 				</Route>
-				<Route path="/cart">
-					<CartPage />
-				</Route>
+				<Route
+					path="/cart/:itemNo"
+					render={({ match }) => {
+						return match && <CartPage cartNoParam={match.params.itemNo} />;
+					}}
+				/>
 				<Route path="/catalog">
 					<CatalogPage />
 				</Route>

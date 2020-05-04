@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Button from '../UI/Button/Button';
 import FavoriteHeart from '../UI/FavoriteHeart/FavoriteHeart';
@@ -23,10 +24,13 @@ const ProductCard = ({
 	isInCart,
 	isFavorite,
 	onAddToFavorites,
+	itemNo,
 }) => {
 	return (
 		<Card>
-			<CardImage src={img} alt={name} />
+			<NavLink to={`/cart/${itemNo}`}>
+				<CardImage src={img} alt={name} />
+			</NavLink>
 			<CardInfo type={type}>
 				<CardInfoRow>
 					<ProductName>{name}</ProductName>
@@ -60,6 +64,7 @@ ProductCard.propTypes = {
 	onAddToCart: PropTypes.func,
 	onAddToFavorites: PropTypes.func,
 	type: PropTypes.oneOf(['light', 'olive']),
+	itemNo: PropTypes.string.isRequired,
 };
 
 ProductCard.defaultProps = {
