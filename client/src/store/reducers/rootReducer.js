@@ -3,12 +3,14 @@ import { itemsReducer } from './itemsReducer';
 import { authReducer } from './authReducer';
 import { catalogReducer } from './catalogReducer';
 import { descriptionCardReducer } from './descriptionCardReducer';
+import { cartReducer } from './cartReducer';
 
 const rootReducer = combineReducers({
 	itemsReducer,
 	auth: authReducer,
 	catalog: catalogReducer,
 	descriptionCard: descriptionCardReducer,
+	cartReducer,
 });
 
 export default rootReducer;

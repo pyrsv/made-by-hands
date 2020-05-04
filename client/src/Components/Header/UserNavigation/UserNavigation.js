@@ -39,7 +39,7 @@ const UserNavigation = ({
 				</NavLink>
 			</UserNavItem>
 			<UserNavItem>
-				<NavLink to="/">
+				<NavLink to="/cart">
 					<UserNavIcon>
 						<FontAwesomeIcon icon={['fas', 'shopping-cart']} />
 					</UserNavIcon>

@@ -34,9 +34,11 @@ const ProductsList = () => {
 						currentPrice,
 						previousPrice,
 						itemNo,
+						_id,
 						imageUrls: [image],
 					}) => (
 						<ProductCard
+							id={_id}
 							key={itemNo}
 							itemNo={itemNo}
 							name={name}
