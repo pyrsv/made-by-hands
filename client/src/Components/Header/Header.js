@@ -163,14 +163,6 @@ const Header = () => {
 						onModalOpen={handleModalToggle}
 					/>
 				</Drawer>
-				// catalogRoutes={catalogRoutes}
-				// profileRoutes={profileRoutes}
-				// isProfileDropdown={dropdown.profile}
-				// isCatalogDropdown={dropdown.catalog}
-				// onCatalogDropdownOpen={() => handleDropdownToggle('catalog')}
-				// onProfileDropdownOpen={() => handleDropdownToggle('profile')}
-				// onModalOpen={handleModalToggle}
-				// />
 			)}
 			{isModal && <AuthModal onToggle={handleModalToggle} />}
 		</StyledHeader>
