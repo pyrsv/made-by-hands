@@ -72,7 +72,7 @@ const ProductCarousel = () => {
 
 	const items = useSelector(state => state.itemsReducer.items);
 	const shuffled = items.sort(() => 0.5 - Math.random());
-	const selected = shuffled.slice(0, 4);
+	const selected = shuffled.slice(0, 8);
 	const settings = {
 		nextArrow: <SampleNextArrow />,
 		prevArrow: <SamplePrevArrow />,
@@ -100,6 +100,7 @@ const ProductCarousel = () => {
 			},
 		],
 	};
+
 	return (
 		<div>
 			<NewArrivalsBackground>
@@ -109,16 +110,18 @@ const ProductCarousel = () => {
 						<Slider {...settings}>
 							{selected.map(item => {
 								return (
-									<>
+									<div key={item._id}>
 										<ProductCardContainer>
 											<ProductCard
-												key={item.itemNo}
+												// onAddToCart={onAddToCart}
+												id={item._id}
+												itemNo={item.itemNo}
 												name={item.name}
 												img={item.imageUrls[0]}
 												price={item.currentPrice}
 											/>
 										</ProductCardContainer>
-									</>
+									</div>
 								);
 							})}
 						</Slider>

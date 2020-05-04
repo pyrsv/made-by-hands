@@ -1,15 +1,8 @@
 import styled from 'styled-components';
 
-export const Foot = styled.div`
-	display: flex;
-	align-items: center;
-	flex-direction: column;
+export const Wrapper = styled.div`
 	background: #f9ecef;
-	justify-content: space-evenly;
-	min-height: ${props => props.height};
-	@media (max-width: 640px) {
-		background: red;
-	}
+	overflow: hidden;
 `;
 
 export const FooterContainer = styled.section`
@@ -17,11 +10,56 @@ export const FooterContainer = styled.section`
 	align-items: center;
 	flex-direction: row;
 	justify-content: space-between;
-	height: ${props => props.height};
+
+	@media (max-width: 992px) {
+		flex-wrap: wrap;
+		justify-content: space-around;
+	}
+`;
+
+export const FooterSection = styled.div`
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 1vh;
+	justify-content: space-evenly;
+	min-height: 30vh;
+
+	@media (max-width: 992px) {
+		min-height: 25vh;
+	}
+	@media (max-width: 576px) {
+		min-height: 20vh;
+	}
+`;
+
+export const IconSocNet = styled.a`
+	height: 30px;
+	width: ${props => (props.width ? props.width : '30px')};
+	margin: 3px;
+	cursor: pointer;
+	background-image: url("./social-icons-png-vk-4.png");
+	background-position: ${props => props.backgroundPoss};
+	background-size: cover
+	background-repeat:no-repeat;
+`;
+
+export const IconPay = styled.a`
+	height: 30px;
+	width: 180px;
+	margin: 3px;
+	cursor: pointer;
+	background-size: cover;
+	background-image: url('https://edanadom.sumy.ua/assets/images/online.png');
+	background-repeat: no-repeat;
 `;
 
 export const FootLine = styled.div`
-	width: 100%;
+	width: 100vw;
 	border-top: 2px solid #e5e5e5;
 	margin-bottom: 20px;
+
+	@media (max-width: 992px) {
+		margin-bottom: 10px;
+	}
 `;
