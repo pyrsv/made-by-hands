@@ -70,7 +70,7 @@ export const PhoneIcon = styled.span`
 export const HamburgerWrapper = styled.div`
 	position: relative;
 	z-index: 50;
-	left: ${props => (props.isOpen ? '230px' : '0')};
+	left: 0;
 	transition: 0.3s ease-in;
 	justify-self: start;
 `;

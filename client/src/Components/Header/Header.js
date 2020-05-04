@@ -9,7 +9,7 @@ import AuthModal from '../AuthModal/AuthModal';
 import Navigation from './Navigation/Navigation';
 import SearchField from './SearchField/SearchField';
 import UserNavigation from './UserNavigation/UserNavigation';
-import Drawer from '../Drawer/Drawer';
+import Drawer from '../UI/Drawer/Drawer';
 import HeaderButtons from './HeaderButtons/HeaderButtons';
 import { userLogout } from '../../store/actions/authActions';
 import { getCategoriesAction } from '../../store/actions/catalogActions';
@@ -150,15 +150,27 @@ const Header = () => {
 				</Container>
 			</LayoutContainer>
 			{isDrawer && isMobile.mobile && (
-				<Drawer
-					catalogRoutes={catalogRoutes}
-					profileRoutes={profileRoutes}
-					isProfileDropdown={dropdown.profile}
-					isCatalogDropdown={dropdown.catalog}
-					onCatalogDropdownOpen={() => handleDropdownToggle('catalog')}
-					onProfileDropdownOpen={() => handleDropdownToggle('profile')}
-					onModalOpen={handleModalToggle}
-				/>
+				<Drawer heading="Menu" onToggle={handleDrawerToggle}>
+					<Navigation
+						isDropdown={dropdown.catalog}
+						routes={catalogRoutes}
+						onDropdownOpen={() => handleDropdownToggle('catalog')}
+					/>
+					<UserNavigation
+						isDropdown={dropdown.profile}
+						routes={profileRoutes}
+						onDropdownOpen={() => handleDropdownToggle('profile')}
+						onModalOpen={handleModalToggle}
+					/>
+				</Drawer>
+				// catalogRoutes={catalogRoutes}
+				// profileRoutes={profileRoutes}
+				// isProfileDropdown={dropdown.profile}
+				// isCatalogDropdown={dropdown.catalog}
+				// onCatalogDropdownOpen={() => handleDropdownToggle('catalog')}
+				// onProfileDropdownOpen={() => handleDropdownToggle('profile')}
+				// onModalOpen={handleModalToggle}
+				// />
 			)}
 			{isModal && <AuthModal onToggle={handleModalToggle} />}
 		</StyledHeader>

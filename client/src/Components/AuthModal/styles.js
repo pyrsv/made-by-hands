@@ -10,7 +10,10 @@ export const ModalWrapper = styled.div`
 	padding: 20px 40px;
 	box-sizing: border-box;
 	border-radius: 4px;
-	z-index: 20;
+	z-index: 999;
+	@media (max-width: 576px) {
+		min-width: 300px;
+	}
 `;
 
 export const Header = styled.div`
