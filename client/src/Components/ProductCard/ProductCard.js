@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import Button from '../UI/Button/Button';
 import FavoriteHeart from '../UI/FavoriteHeart/FavoriteHeart';
+import useCart from '../../hooks/useCart';
+
 import {
 	Card,
 	CardImage,
@@ -23,11 +25,11 @@ const ProductCard = ({
 	oldPrice,
 	price,
 	type,
-	isInCart,
 	isFavorite,
-	// onAddToFavorites,
 }) => {
 	const dispatch = useDispatch();
+	const isInCart = useCart(id);
+
 	return (
 		<Card>
 			<CardImage src={img} alt={name} />
@@ -61,7 +63,7 @@ ProductCard.propTypes = {
 	img: PropTypes.string.isRequired,
 	oldPrice: PropTypes.oneOfType([PropTypes.number, PropTypes.object]),
 	price: PropTypes.number.isRequired,
-	isInCart: PropTypes.bool,
+	// isInCart: PropTypes.bool,
 	isFavorite: PropTypes.bool,
 	// onAddToFavorites: PropTypes.func,
 	type: PropTypes.oneOf(['light', 'olive']),
@@ -70,10 +72,10 @@ ProductCard.propTypes = {
 ProductCard.defaultProps = {
 	type: 'light',
 	oldPrice: null,
-	isInCart: false,
+	// isInCart: false,
 	isFavorite: false,
 	// onAddToCart: () => {},
 	// onAddToFavorites: () => {},
 };
 
-export default ProductCard;
+export default memo(ProductCard);
