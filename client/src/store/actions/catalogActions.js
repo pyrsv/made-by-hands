@@ -6,7 +6,7 @@ import {
 	GET_FILTERED_PRODUCTS_ERROR,
 	GET_FILTERED_PRODUCTS_SUCCESS,
 	GET_BRANDS,
-	UPDATE_PARAMS,
+	UPDATE_CONFIG,
 	LOAD_MORE_PRODUCTS,
 } from '../types/catalogTypes';
 
@@ -42,8 +42,8 @@ const getFilteredProductsError = error => ({
 	payload: error,
 });
 
-const updateParams = params => ({
-	type: UPDATE_PARAMS,
+const updateConfig = params => ({
+	type: UPDATE_CONFIG,
 	payload: params,
 });
 
@@ -60,7 +60,7 @@ export const getCategoriesAction = () => dispatch => {
 
 export const getFilteredProducts = config => dispatch => {
 	dispatch(getFilteredProductsInit());
-	dispatch(updateParams(config));
+	dispatch(updateConfig(config));
 	axios
 		.get('/products/filter/', {
 			params: {

@@ -5,7 +5,7 @@ import {
 	GET_FILTERED_PRODUCTS_INIT,
 	GET_FILTERED_PRODUCTS_SUCCESS,
 	GET_BRANDS,
-	UPDATE_PARAMS,
+	UPDATE_CONFIG,
 	LOAD_MORE_PRODUCTS,
 } from '../types/catalogTypes';
 
@@ -74,7 +74,7 @@ export const catalogReducer = (state = initialState, { type, payload }) => {
 					startPage: state.config.startPage + 1,
 				},
 			};
-		case UPDATE_PARAMS:
+		case UPDATE_CONFIG:
 			return {
 				...state,
 				config: payload,
