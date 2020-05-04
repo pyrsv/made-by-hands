@@ -28,7 +28,7 @@ const ProductCard = ({
 }) => {
 	return (
 		<Card>
-			<NavLink to={`/cart/${itemNo}`}>
+			<NavLink to={`/products/${itemNo}`}>
 				<CardImage src={img} alt={name} />
 			</NavLink>
 			<CardInfo type={type}>
