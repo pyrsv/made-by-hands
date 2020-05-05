@@ -34,17 +34,20 @@ const ProductsList = () => {
 						currentPrice,
 						previousPrice,
 						itemNo,
-            _id,
+						_id,
+						isInCart,
 						imageUrls: [image],
 					}) => (
 						<ProductCard
-						  id={_id}
+							id={_id}
 							key={itemNo}
 							name={name}
 							img={image}
 							price={currentPrice}
 							oldPrice={previousPrice}
 							type="olive"
+							itemNo={itemNo}
+							isInCart={isInCart}
 						/>
 					)
 				)}

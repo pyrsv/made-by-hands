@@ -2,7 +2,6 @@ import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import Button from '../UI/Button/Button';
 import FavoriteHeart from '../UI/FavoriteHeart/FavoriteHeart';
-import useCart from '../../hooks/useCart';
 
 import {
 	Card,
@@ -16,6 +15,7 @@ import {
 } from './styles';
 import { useDispatch } from 'react-redux';
 import { addToCart } from '../../store/actions/cartActions';
+import { setProductToCart } from '../../store/actions/catalogActions';
 
 const ProductCard = ({
 	id,
@@ -26,9 +26,14 @@ const ProductCard = ({
 	price,
 	type,
 	isFavorite,
+	isInCart,
 }) => {
 	const dispatch = useDispatch();
-	const isInCart = useCart(id);
+
+	const handleCartButtonClick = () => {
+		dispatch(addToCart(id, itemNo));
+		dispatch(setProductToCart(id));
+	};
 
 	return (
 		<Card>
@@ -43,7 +48,7 @@ const ProductCard = ({
 						type="default"
 						color="dark"
 						text={isInCart ? 'In Cart' : 'Buy'}
-						onClick={() => dispatch(addToCart(id, itemNo))}
+						onClick={handleCartButtonClick}
 						disabled={isInCart}
 					/>
 					<PriceContainer>
@@ -63,19 +68,16 @@ ProductCard.propTypes = {
 	img: PropTypes.string.isRequired,
 	oldPrice: PropTypes.oneOfType([PropTypes.number, PropTypes.object]),
 	price: PropTypes.number.isRequired,
-	// isInCart: PropTypes.bool,
+	isInCart: PropTypes.bool,
 	isFavorite: PropTypes.bool,
-	// onAddToFavorites: PropTypes.func,
 	type: PropTypes.oneOf(['light', 'olive']),
 };
 
 ProductCard.defaultProps = {
 	type: 'light',
 	oldPrice: null,
-	// isInCart: false,
+	isInCart: false,
 	isFavorite: false,
-	// onAddToCart: () => {},
-	// onAddToFavorites: () => {},
 };
 
 export default memo(ProductCard);
