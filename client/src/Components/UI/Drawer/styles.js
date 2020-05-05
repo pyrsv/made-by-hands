@@ -4,7 +4,7 @@ export const DrawerWrapper = styled.div`
 	position: fixed;
 	box-sizing: border-box;
 	width: 280px;
-	height: 100%;
+	height: 100vh;
 	left: 0;
 	top: 0;
 	background-color: ${props => props.theme.whiteBackground};
@@ -12,6 +12,7 @@ export const DrawerWrapper = styled.div`
 	transition: left 0.3s ease-in;
 	animation: show_drawer 0.3s ease-in;
 	z-index: 99;
+	overflow: auto;
 	@keyframes show_drawer {
 		0% {
 			transform: translateX(-100%);

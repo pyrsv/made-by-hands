@@ -5,7 +5,8 @@ import CartPage from './Pages/CartPage';
 import CatalogPage from './Pages/CatalogPage';
 import ProfilePage from './Pages/ProfilePage';
 import IndexPage from './Pages/IndexPage';
-import Header from './Components/Header/Header'
+import Header from './Components/Header/Header';
+import AppContainer from './Components/AppContainer/AppContainer';
 import { getUser } from './store/actions/authActions';
 
 const App = () => {
@@ -14,7 +15,7 @@ const App = () => {
 	useEffect(() => dispatch(getUser()));
 
 	return (
-		<div>
+		<AppContainer>
 			<Header />
 			<Switch>
 				<Route exact path="/">
@@ -30,7 +31,7 @@ const App = () => {
 					<ProfilePage />
 				</Route>
 			</Switch>
-		</div>
+		</AppContainer>
 	);
 };
 

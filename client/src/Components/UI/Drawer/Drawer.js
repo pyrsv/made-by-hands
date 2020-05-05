@@ -1,4 +1,6 @@
 import React from 'react';
+import { RemoveScroll } from 'react-remove-scroll';
+
 import PropTypes from 'prop-types';
 import Backdrop from '../Backdrop/Backdrop';
 import CloseButton from '../CloseButton/CloseButton';
@@ -11,7 +13,7 @@ import {
 
 const Drawer = ({ heading, children, onToggle }) => {
 	return (
-		<>
+		<RemoveScroll>
 			<DrawerWrapper>
 				<CloseButtonContainer>
 					<CloseButton onClick={onToggle} size={30} />
@@ -20,7 +22,7 @@ const Drawer = ({ heading, children, onToggle }) => {
 				<DrawerContent>{children}</DrawerContent>
 			</DrawerWrapper>
 			<Backdrop onClick={onToggle} />
-		</>
+		</RemoveScroll>
 	);
 };
 
