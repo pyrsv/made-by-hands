@@ -13,6 +13,7 @@ import Drawer from '../UI/Drawer/Drawer';
 import HeaderButtons from './HeaderButtons/HeaderButtons';
 import { userLogout } from '../../store/actions/authActions';
 import { getCategoriesAction } from '../../store/actions/catalogActions';
+import { toggleModal, toggleNav } from '../../store/actions/UIActions';
 import {
 	StyledHeader,
 	Container,
@@ -25,14 +26,13 @@ import {
 
 const Header = () => {
 	const dispatch = useDispatch();
-
+	const isModal = useSelector(state => state.UI.isModal);
+	const isNav = useSelector(state => state.UI.isNav);
 	const [dropdown, setDropdown] = useState({
 		catalog: false,
 		profile: false,
 	});
 
-	const [isModal, setModal] = useState(false);
-	const [isDrawer, setDrawer] = useState(false);
 	const [isMobile, setMobile] = useState({ mobile: false });
 	const [isSearch, setSearch] = useState(false);
 
@@ -62,7 +62,8 @@ const Header = () => {
 	];
 
 	const handleWindowResize = () => {
-		setDrawer(false);
+		// eslint-disable-next-line no-unused-expressions
+		isNav && dispatch(toggleNav());
 		if (!isMobile.mobile && window.innerWidth <= 900) {
 			setMobile(state => ({ ...state, mobile: true }));
 		}
@@ -88,14 +89,6 @@ const Header = () => {
 		});
 	};
 
-	const handleModalToggle = () => {
-		setModal(!isModal);
-	};
-
-	const handleDrawerToggle = () => {
-		setDrawer(!isDrawer);
-	};
-
 	return (
 		<StyledHeader>
 			<LayoutContainer>
@@ -117,7 +110,7 @@ const Header = () => {
 										isDropdown={dropdown.profile}
 										routes={profileRoutes}
 										onDropdownOpen={() => handleDropdownToggle('profile')}
-										onModalOpen={handleModalToggle}
+										onModalOpen={toggleModal}
 									/>
 								</Info>
 								<Navigation
@@ -129,10 +122,10 @@ const Header = () => {
 						</>
 					) : (
 						<>
-							<HamburgerWrapper isOpen={isDrawer}>
+							<HamburgerWrapper isOpen={isNav}>
 								<HamburgerMenu
-									isOpen={isDrawer}
-									menuClicked={handleDrawerToggle}
+									isOpen={isNav}
+									menuClicked={() => dispatch(toggleNav())}
 									width={28}
 									height={20}
 									strokeWidth={2}
@@ -149,8 +142,8 @@ const Header = () => {
 					)}
 				</Container>
 			</LayoutContainer>
-			{isDrawer && isMobile.mobile && (
-				<Drawer heading="Menu" onToggle={handleDrawerToggle}>
+			{isNav && isMobile.mobile && (
+				<Drawer heading="Menu" onToggle={() => dispatch(toggleNav())}>
 					<Navigation
 						isDropdown={dropdown.catalog}
 						routes={catalogRoutes}
@@ -160,11 +153,11 @@ const Header = () => {
 						isDropdown={dropdown.profile}
 						routes={profileRoutes}
 						onDropdownOpen={() => handleDropdownToggle('profile')}
-						onModalOpen={handleModalToggle}
+						onModalOpen={() => dispatch(toggleModal())}
 					/>
 				</Drawer>
 			)}
-			{isModal && <AuthModal onToggle={handleModalToggle} />}
+			{isModal && <AuthModal onToggle={() => dispatch(toggleModal())} />}
 		</StyledHeader>
 	);
 };

@@ -13,7 +13,7 @@ export const UIReducer = (state = initialState, { type }) => {
 		case TOGGLE_MODAL:
 			return { ...state, isModal: !state.isModal, isNav: false };
 		case TOGGLE_NAV:
-			return { ...state, isNav: !state.isModal };
+			return { ...state, isNav: !state.isNav };
 		default:
 			return state;
 	}
