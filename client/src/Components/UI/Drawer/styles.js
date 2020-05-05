@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const DrawerWrapper = styled.div`
 	position: fixed;
 	box-sizing: border-box;
-	width: 300px;
+	width: 280px;
 	height: 100%;
 	left: 0;
 	top: 0;
@@ -11,7 +11,7 @@ export const DrawerWrapper = styled.div`
 	padding: 30px 20px;
 	transition: left 0.3s ease-in;
 	animation: show_drawer 0.3s ease-in;
-	z-index: 999;
+	z-index: 99;
 	@keyframes show_drawer {
 		0% {
 			transform: translateX(-100%);
@@ -29,6 +29,12 @@ export const DrawerContent = styled.div`
 export const DrawerHeading = styled.h3`
 	font-size: 30px;
 	font-weight: 900;
-	margin-bottom: 30px;
 	text-transform: uppercase;
+	margin-bottom: 30px;
+`;
+
+export const CloseButtonContainer = styled.div`
+	position: absolute;
+	top: 28px;
+	right: 20px;
 `;

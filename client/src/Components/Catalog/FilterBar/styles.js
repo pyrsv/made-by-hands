@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export const FilterWrapper = styled.div`
+	margin-right: 15px;
 	@media (max-width: 670px) {
 		display: none;
 		position: fixed;

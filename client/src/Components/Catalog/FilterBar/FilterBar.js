@@ -10,15 +10,9 @@ import {
 } from '../../../store/actions/catalogActions';
 import { getInitialFields } from '../../../utils/getFilterFields';
 import Button from '../../UI/Button/Button';
-import Checkbox from '../../UI/Checkbox/Checkbox';
 import PriceRange from '../PriceRange/PriceRange';
-import {
-	FiltersContainer,
-	FilterName,
-	Title,
-	FilterGroup,
-	FilterWrapper,
-} from './styles';
+import FilterGroup from '../FilterGroup/FilterGroup';
+import { FiltersContainer, Title, FilterWrapper } from './styles';
 
 const FilterBar = () => {
 	const dispatch = useDispatch();
@@ -92,77 +86,37 @@ const FilterBar = () => {
 				>
 					{({ values, handleSubmit, setFieldValue }) => {
 						return (
-							<>
-								<form onSubmit={handleSubmit}>
-									<>
-										<FilterGroup>
-											<FilterName>Categories</FilterName>
-											{Object.entries(values.categories || {}).map(
-												([key, val], index) => {
-													return (
-														<Checkbox
-															key={categories[index]._id}
-															id={categories[index]._id}
-															checked={val}
-															name={`categories.${key}`}
-															label={categories[index].name}
-															onChange={() =>
-																setFieldValue(`categories.${key}`, !val)
-															}
-														/>
-													);
-												}
-											)}
-										</FilterGroup>
-										<FilterGroup>
-											<FilterName>Brands</FilterName>
-											{Object.entries(values.brand || {}).map(
-												([key, val], index) => {
-													return (
-														<Checkbox
-															key={brand[index]._id}
-															id={brand[index]._id}
-															checked={val}
-															name={`brand.${key}`}
-															label={brand[index].name}
-															onChange={() =>
-																setFieldValue(`brand.${key}`, !val)
-															}
-														/>
-													);
-												}
-											)}
-										</FilterGroup>
-										<FilterGroup>
-											<FilterName>Colors</FilterName>
+							<form onSubmit={handleSubmit}>
+								<FilterGroup
+									name="Categories"
+									fields={values.categories}
+									values={categories}
+									fieldsKey="categories"
+									setValue={setFieldValue}
+									checkboxType="default"
+								/>
+								<FilterGroup
+									name="Brands"
+									fields={values.brand}
+									values={brand}
+									fieldsKey="brand"
+									setValue={setFieldValue}
+									checkboxType="default"
+								/>
+								<FilterGroup
+									name="Colors"
+									fields={values.color}
+									values={color}
+									fieldsKey="color"
+									setValue={setFieldValue}
+									checkboxType="color"
+								/>
+								<FilterGroup name="Price">
+									<PriceRange changeRange={handleChangePrice} />
+								</FilterGroup>
 
-											{Object.entries(values.color || {}).map(
-												([key, val], index) => {
-													return (
-														<Checkbox
-															key={color[index]._id}
-															type="color"
-															cssValue={color[index].cssValue}
-															id={color[index]._id}
-															checked={val}
-															name={`color.${key}`}
-															label={color[index].name}
-															onChange={() =>
-																setFieldValue(`color.${key}`, !val)
-															}
-														/>
-													);
-												}
-											)}
-										</FilterGroup>
-										<FilterGroup>
-											<FilterName>Price</FilterName>
-											<PriceRange changeRange={handleChangePrice} />
-										</FilterGroup>
-									</>
-									<Button type="Submit" text="Show" onClick={() => {}} />
-								</form>
-							</>
+								<Button type="Submit" text="Show" onClick={() => {}} />
+							</form>
 						);
 					}}
 				</Formik>

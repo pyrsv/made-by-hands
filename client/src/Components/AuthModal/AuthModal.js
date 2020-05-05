@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import LoginForm from './Forms/LoginForm';
 import RegisterForm from './Forms/RegisterForm';
 import CloseButton from '../UI/CloseButton/CloseButton';
+import Backdrop from '../UI/Backdrop/Backdrop';
 import {
-	Backdrop,
 	Content,
 	Title,
 	ModalWrapper,
