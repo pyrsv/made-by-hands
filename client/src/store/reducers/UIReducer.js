@@ -1,19 +1,20 @@
-import { TOGGLE_DRAWER, TOGGLE_MODAL } from '../types/UITypes';
+import { TOGGLE_FILTERS, TOGGLE_MODAL, TOGGLE_NAV } from '../types/UITypes';
 
 const initialState = {
 	isModal: false,
-	isDrawer: false,
+	isFilters: false,
+	isNav: false,
 };
 
-const UIReducer = (state = initialState, { type }) => {
+export const UIReducer = (state = initialState, { type }) => {
 	switch (type) {
-		case TOGGLE_DRAWER:
+		case TOGGLE_FILTERS:
 			return { ...state, isDrawer: !state.isDrawer };
 		case TOGGLE_MODAL:
-			return { ...state, isModal: !state.isModal };
+			return { ...state, isModal: !state.isModal, isNav: false };
+		case TOGGLE_NAV:
+			return { ...state, isNav: !state.isModal };
 		default:
 			return state;
 	}
 };
-
-export default UIReducer;
