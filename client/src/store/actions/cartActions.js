@@ -1,6 +1,5 @@
 import { SET_CART } from '../types/cartTypes';
 import axios from 'axios';
-
 // eslint-disable-next-line import/no-cycle
 import { userLoginError } from './authActions';
 
@@ -77,7 +76,8 @@ export const deleteFromCart = (id, itemNo) => dispatch => {
 		});
 };
 
-export const deleteAllTheSameItems = (id, itemNo) => dispatch => {
+export const deleteAllTheSameItems = (id, itemNo, btn) => dispatch => {
+	btn.current.setAttribute('disabled', 'disabled');
 	axios
 		.delete(`/cart/${id}`)
 		.then(result => {
