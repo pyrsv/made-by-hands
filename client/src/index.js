@@ -8,7 +8,6 @@ import { faEnvelope, far } from '@fortawesome/free-regular-svg-icons';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import store from './store/configreStore';
 import App from './App';
-import './main.scss';
 
 library.add(faEnvelope, fas, far);
 

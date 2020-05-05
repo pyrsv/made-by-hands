@@ -4,7 +4,7 @@ export const StyledContainer = styled.div`
 	font-family: 'Raleway', sans-serif;
 	color: #16161c;
 
-	> a {
+	& a {
 		color: inherit;
 		text-decoration: none;
 	}
