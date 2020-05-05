@@ -16,3 +16,34 @@ export const handleGetUser = async () => {
 		},
 	});
 };
+
+export const checkProductsForCartAndFavorites = products => {
+	if (!Array.isArray(products)) {
+		products = [products];
+	}
+
+	return axios
+		.get('/cart')
+		.then(res => res.data.products)
+		.catch(() => JSON.parse(localStorage.getItem('cart') || '[]'))
+		.then(cart => {
+			return axios
+				.get('/wishlist')
+				.then(res => res.data.products)
+				.catch(() => JSON.parse(localStorage.getItem('wishlist') || '[]'))
+				.then(wishlist => {
+					const productsWithCartAndFavorites = products.map(prod => {
+						return {
+							...prod,
+							isInCart:
+								cart.some(cartItem => cartItem.product._id === prod._id) ||
+								false,
+							isFavorite:
+								wishlist.some(cartItem => cartItem.product._id === prod._id) ||
+								false,
+						};
+					});
+					return productsWithCartAndFavorites;
+				});
+		});
+};

@@ -7,6 +7,8 @@ import {
 	GET_BRANDS,
 	UPDATE_CONFIG,
 	LOAD_MORE_PRODUCTS,
+	SET_PRODUCT_TO_CART,
+	SET_PRODUCT_TO_WISHLIST,
 } from '../types/catalogTypes';
 
 const initialState = {
@@ -78,6 +80,24 @@ export const catalogReducer = (state = initialState, { type, payload }) => {
 			return {
 				...state,
 				config: payload,
+			};
+		case SET_PRODUCT_TO_CART:
+			return {
+				...state,
+				currentProducts: state.currentProducts.map(prod => {
+					return prod._id === payload
+						? { ...prod, isInCart: !prod.isInCart }
+						: prod;
+				}),
+			};
+		case SET_PRODUCT_TO_WISHLIST:
+			return {
+				...state,
+				currentProducts: state.currentProducts.map(prod => {
+					return prod._id === payload
+						? { ...prod, isFavorite: !prod.isFavorite }
+						: prod;
+				}),
 			};
 		default:
 			return state;

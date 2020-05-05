@@ -8,7 +8,10 @@ import {
 	GET_BRANDS,
 	UPDATE_CONFIG,
 	LOAD_MORE_PRODUCTS,
+	SET_PRODUCT_TO_CART,
+	SET_PRODUCT_TO_WISHLIST,
 } from '../types/catalogTypes';
+import { checkProductsForCartAndFavorites } from '../../utils/API';
 
 const getCategories = categories => ({
 	type: GET_CATEGORIES,
@@ -29,7 +32,7 @@ const getFilteredProductsInit = () => ({
 	type: GET_FILTERED_PRODUCTS_INIT,
 });
 
-const getFilteredProductsSuccess = ({ products, productsQuantity }) => ({
+const getFilteredProductsSuccess = (products, productsQuantity) => ({
 	type: GET_FILTERED_PRODUCTS_SUCCESS,
 	payload: {
 		products,
@@ -52,6 +55,16 @@ const loadMoreProducts = products => ({
 	payload: products,
 });
 
+export const setProductToCart = id => ({
+	type: SET_PRODUCT_TO_CART,
+	payload: id,
+});
+
+export const setProductToWishlist = id => ({
+	type: SET_PRODUCT_TO_WISHLIST,
+	payload: id,
+});
+
 export const getCategoriesAction = () => dispatch => {
 	axios.get('/catalog').then(response => {
 		dispatch(getCategories(response.data));
@@ -68,8 +81,16 @@ export const getFilteredProducts = config => dispatch => {
 			},
 		})
 		.then(response => {
-			// console.log(response.data.products)
-			dispatch(getFilteredProductsSuccess(response.data));
+			checkProductsForCartAndFavorites(response.data.products).then(
+				productsWithCartAndFavorites => {
+					dispatch(
+						getFilteredProductsSuccess(
+							productsWithCartAndFavorites,
+							response.data.productsQuantity
+						)
+					);
+				}
+			);
 		})
 		.catch(err => dispatch(getFilteredProductsError(err)));
 };
