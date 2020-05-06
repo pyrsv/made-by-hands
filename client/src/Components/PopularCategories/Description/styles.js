@@ -1,48 +1,53 @@
 import styled from 'styled-components';
 
-export const StyledDescription = styled.div`
-	justify-items: stretch;
-	display: grid;
-	grid-template-columns: repeat(2, 1fr);
-	font-family: 'Raleway', sans-serif;
-	text-align: justify;
-	line-height: 35px;
-	padding-bottom: 42px;
-	color: ${props => props.theme.mainDark};
+export const Image = styled.img`
+	width: 100%;
+	height: 100%;
+`;
+
+export const StyledTextContainer = styled.div`
+	width: 50%;
 	@media (max-width: 576px) {
-		display: flex;
-		flex-direction: column;
+		width: 80%;
 	}
 `;
 
-export const StyledName = styled.h2`
-	font-size: 20px;
-	margin-bottom: 20px;
+export const Name = styled.p`
+	font-style: normal;
 	font-weight: bold;
+	font-size: 24px;
+	line-height: 35px;
+	margin-bottom: 30px;
 	@media (max-width: 576px) {
-		display: flex;
-		justify-content: center;
+		margin-top: 50px;
+		text-align: center;
 	}
 `;
 
-export const StyledText = styled.p`
-	font-weight: 500;
+export const Text = styled.p`
+	font-style: normal;
+	font-weight: 600;
 	font-size: 16px;
+	line-height: 35px;
 	margin-bottom: 30px;
+	text-align: justify;
 `;
 
-export const StyledTextUl = styled.ul`
-	list-style: disc;
-	font-weight: 500;
-	font-size: 16px;
-	margin-bottom: 30px;
+export const GridContainer = styled.div`
+	display: flex;
+	justify-content: space-between;
+	padding: 65px 0;
+	@media (max-width: 576px) {
+		flex-direction: column;
+		align-items: center;
+	}
 `;
 
-export const StyledImagesContainer = styled.div`
+export const StyledImageContainer = styled.div`
 	width: 400px;
 	height: 300px;
 	@media (max-width: 576px) {
-		margin: 0 auto 30px;
+		order: -1;
 	}
 	@media (max-width: 762px) {
 		width: 300px;
@@ -52,40 +57,4 @@ export const StyledImagesContainer = styled.div`
 		width: 320px;
 		height: 200px;
 	}
-`;
-
-export const StyledImagesContainerRight = styled.div`
-	width: 400px;
-	height: 300px;
-	margin-left: auto;
-	@media (max-width: 576px) {
-		margin: 0 auto 30px;
-	}
-	@media (max-width: 762px) {
-		width: 300px;
-		height: 200px;
-	}
-	@media (max-width: 992px) {
-		width: 320px;
-		height: 200px;
-	}
-`;
-
-export const StyledInfoContainer = styled.div`
-	order: 1;
-	@media (max-width: 576px) {
-		order: 0;
-	}
-`;
-
-export const StyledInfoContainerReverse = styled.div`
-	order: 0;
-	@media (max-width: 576px) {
-		order: 1;
-	}
-`;
-
-export const Images = styled.img`
-	width: 100%;
-	height: 100%;
 `;
