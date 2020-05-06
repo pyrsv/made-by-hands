@@ -68,7 +68,7 @@ export const getCategories = () => dispatch => {
 export const getColors = () => dispatch => {
 	dispatch(getColorsInit());
 	axios
-		.get('/catalog')
+		.get('/colors')
 		.then(response => {
 			dispatch(getColorsSuccess(response.data));
 		})
@@ -80,7 +80,7 @@ export const getColors = () => dispatch => {
 export const getBrands = () => dispatch => {
 	dispatch(getBrandsInit());
 	axios
-		.get('/catalog')
+		.get('/filters/brand')
 		.then(response => {
 			dispatch(getBrandsSuccess(response.data));
 		})
