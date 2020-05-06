@@ -12,7 +12,7 @@ import UserNavigation from './UserNavigation/UserNavigation';
 import Drawer from '../UI/Drawer/Drawer';
 import HeaderButtons from './HeaderButtons/HeaderButtons';
 import { userLogout } from '../../store/actions/authActions';
-import { getCategoriesAction } from '../../store/actions/catalogActions';
+import { getCategories } from '../../store/actions/filtersActions';
 import { toggleModal, toggleNav } from '../../store/actions/UIActions';
 import {
 	StyledHeader,
@@ -39,7 +39,7 @@ const Header = () => {
 	const catalogRoutes = [
 		<NavLink to="/catalog">All Items</NavLink>,
 		...useSelector(state =>
-			state.catalog.categories.map(category => (
+			state.filters.categories.map(category => (
 				<NavLink key={category.id} to={`/catalog?categories=${category.id}`}>
 					{category.name}
 				</NavLink>
@@ -75,7 +75,7 @@ const Header = () => {
 
 	useEffect(() => {
 		handleWindowResize();
-		dispatch(getCategoriesAction());
+		dispatch(getCategories());
 		window.addEventListener('resize', handleWindowResize);
 		return () => {
 			window.removeEventListener('resize', handleWindowResize);
