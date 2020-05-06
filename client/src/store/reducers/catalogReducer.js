@@ -1,10 +1,7 @@
 import {
-	GET_CATEGORIES,
-	GET_COLORS,
 	GET_FILTERED_PRODUCTS_ERROR,
 	GET_FILTERED_PRODUCTS_INIT,
 	GET_FILTERED_PRODUCTS_SUCCESS,
-	GET_BRANDS,
 	UPDATE_CONFIG,
 	LOAD_MORE_PRODUCTS,
 	SET_PRODUCT_TO_CART,
@@ -12,9 +9,6 @@ import {
 } from '../types/catalogTypes';
 
 const initialState = {
-	categories: [],
-	colors: [],
-	brands: [],
 	isProductsFetching: false,
 	isProductsError: false,
 	currentProducts: [],
@@ -29,21 +23,6 @@ const initialState = {
 
 export const catalogReducer = (state = initialState, { type, payload }) => {
 	switch (type) {
-		case GET_CATEGORIES:
-			return {
-				...state,
-				categories: payload,
-			};
-		case GET_COLORS:
-			return {
-				...state,
-				colors: payload,
-			};
-		case GET_BRANDS:
-			return {
-				...state,
-				brands: payload,
-			};
 		case GET_FILTERED_PRODUCTS_INIT:
 			return {
 				...state,
