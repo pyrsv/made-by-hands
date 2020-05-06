@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 
 const Preloader = ({ size }) => {
-	return <Loader type="Grid" color="#000" height={size} width={size} />;
+	return <Loader type="Oval" color="#000" height={size} width={size} />;
 };
 
 Preloader.propTypes = {

@@ -23,6 +23,12 @@ const FilterBar = () => {
 	const color = useSelector(state => state.filters.colors);
 	const brand = useSelector(state => state.filters.brands);
 
+	const isCategoriesLoading = useSelector(
+		state => state.filters.isCategoriesFetching
+	);
+	const isColorsLoading = useSelector(state => state.filters.isColorsFetching);
+	const isBrandsLoading = useSelector(state => state.filters.isBrandsFetching);
+
 	const currentParams = querystring.parse(location.search.slice(1));
 	const { perPage } = useSelector(state => state.catalog.config);
 	useEffect(() => {
@@ -91,6 +97,7 @@ const FilterBar = () => {
 									fieldsKey="categories"
 									setValue={setFieldValue}
 									checkboxType="default"
+									isLoading={isCategoriesLoading}
 								/>
 								<FilterGroup
 									name="Brands"
@@ -99,6 +106,7 @@ const FilterBar = () => {
 									fieldsKey="brand"
 									setValue={setFieldValue}
 									checkboxType="default"
+									isLoading={isBrandsLoading}
 								/>
 								<FilterGroup
 									name="Colors"
@@ -107,6 +115,7 @@ const FilterBar = () => {
 									fieldsKey="color"
 									setValue={setFieldValue}
 									checkboxType="color"
+									isLoading={isColorsLoading}
 								/>
 								<FilterGroup name="Price">
 									<PriceRange changeRange={handleChangePrice} />

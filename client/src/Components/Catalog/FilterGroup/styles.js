@@ -11,3 +11,16 @@ export const FiltersName = styled.h4`
 		font-size: 22px;
 	}
 `;
+
+export const CheckboxesWrapper = styled.div`
+	position: relative;
+	min-height: 80px;
+`;
+
+export const PreloaderContainer = styled.div`
+	position: absolute;
+	padding: 15px 0;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+`;
