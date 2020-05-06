@@ -2,7 +2,7 @@ import React from 'react';
 import ImageGallery from 'react-image-gallery';
 import PropTypes from 'prop-types';
 import './style.scss';
-import 'react-image-gallery/styles/css/image-gallery.css';
+import 'react-image-gallery/styles/scss/image-gallery.scss';
 
 const DescriptionPageCarousel = ({ imageUrls }) => {
 	const images = imageUrls.map(image => {

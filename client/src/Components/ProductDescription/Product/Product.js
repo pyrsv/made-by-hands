@@ -12,9 +12,9 @@ import {
 	NameOfProduct,
 	OldPrice,
 	Price,
-} from './styled';
+} from './styles';
 
-const Cart = ({
+const Product = ({
 	imageUrls,
 	description,
 	name,
@@ -46,6 +46,9 @@ const Cart = ({
 					<Price discounted={previousPrice && true}>{currentPrice}€</Price>
 				</BlockText>
 				<BlockText>
+					{parameters && <Parametrs parameters={parameters} />}
+				</BlockText>
+				<BlockText>
 					<Button
 						type="default"
 						color="dark"
@@ -53,19 +56,16 @@ const Cart = ({
 						onClick={onAddToCart}
 					/>
 				</BlockText>
-				<BlockText>
-					{parameters && <Parametrs parameters={parameters} />}
-				</BlockText>
 			</div>
 		</GridContainer>
 	);
 };
 
-Cart.propTypes = {
+Product.propTypes = {
 	description: PropTypes.string.isRequired,
 	name: PropTypes.string.isRequired,
 	imageUrls: PropTypes.arrayOf(PropTypes.string).isRequired,
-	previousPrice: PropTypes.number.isRequired,
+	previousPrice: PropTypes.number,
 	currentPrice: PropTypes.number.isRequired,
 	parameters: PropTypes.arrayOf(PropTypes.string).isRequired,
 	isInCart: PropTypes.bool,
@@ -74,11 +74,12 @@ Cart.propTypes = {
 	onAddToFavorites: PropTypes.func,
 };
 
-Cart.defaultProps = {
+Product.defaultProps = {
 	isInCart: false,
 	isFavorite: false,
+	previousPrice: null,
 	onAddToCart: () => {},
 	onAddToFavorites: () => {},
 };
 
-export default Cart;
+export default Product;

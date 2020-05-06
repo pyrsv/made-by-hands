@@ -2,7 +2,16 @@ import styled from 'styled-components';
 
 export const ProductDescriptionContainer = styled.div`
 	background-color: #f9ecef;
-	padding: 40px 0;
+	padding: 80px 0;
+	@media screen and (max-width: 992px) {
+		padding: 60px 0;
+	}
+	@media screen and (max-width: 768px) {
+		padding: 40px 0;
+	}
+	@media screen and (max-width: 576px) {
+		padding: 30px 0;
+	}
 `;
 
 export const GridContainer = styled.div`
@@ -21,44 +30,60 @@ export const DescriptionArea = styled.div`
 	@media screen and (max-width: 576px) {
 		margin: 20px 0 0 90px;
 	}
-	text-align: justify;
+	@media screen and (max-width: 480px) {
+		margin: 20px 0 0;
+	}
 `;
 
 export const BlockText = styled.div`
-	margin-bottom: 15px;
+	margin-bottom: 40px;
 	display: ${props => props.flex && 'flex'};
+	@media screen and (max-width: 992px) {
+		margin-bottom: 30px;
+	}
+	@media screen and (max-width: 768px) {
+		margin-bottom: 25px;
+	}
+	@media screen and (max-width: 576px) {
+		margin-bottom: 15px;
+	}
+	@media screen and (max-width: 480px) {
+		margin-bottom: 10px;
+	}
 `;
 
 export const TextDescription = styled.p`
 	font-size: 16px;
 	font-weight: 500;
 	line-height: 20px;
+	font-family: 'Open Sans', sans-serif;
 	@media screen and (max-width: 768px) {
 		font-size: 14px;
 	}
 	@media screen and (max-width: 576px) {
-		font-size: 10px;
-		line-height: 10px;
+		font-size: 11px;
+		line-height: 15px;
 	}
 `;
 
 export const NameOfProduct = styled.p`
 	font-size: 20px;
+	letter-spacing: 0.19em;
 	text-transform: uppercase;
 	font-weight: bold;
 	display: inline-block;
 	align-self: center;
-	padding-right: 20px;
+	padding-right: 25px;
+	font-family: 'Open Sans', sans-serif;
 	@media screen and (max-width: 992px) {
-		font-size: 16px;
+		font-size: 18px;
 	}
 	@media screen and (max-width: 768px) {
-		font-size: 14px;
-		padding-right: 10px;
+		font-size: 16px;
+		padding-right: 15px;
 	}
 	@media screen and (max-width: 576px) {
 		font-size: 12px;
-		padding-right: 7px;
 	}
 `;
 
@@ -68,10 +93,16 @@ export const Price = styled.span`
 	width: 100%;
 	color: ${props =>
 		props.discounted ? props.theme.accentRed : props.theme.mainDark};
-	font-size: 24px;
-	/* @media (max-width: 992px) {
+	font-size: 27px;
+	@media screen and (max-width: 992px) {
+		font-size: 22px;
+	}
+	@media screen and (max-width: 768px) {
 		font-size: 18px;
-	} */
+	}
+	@media screen and (max-width: 480px) {
+		font-size: 16px;
+	}
 `;
 
 export const OldPrice = styled.p`
@@ -79,6 +110,14 @@ export const OldPrice = styled.p`
 	text-decoration-line: line-through;
 	font-family: 'Open Sans', sans-serif;
 	padding-bottom: 7px;
+	font-size: 14px;
+
+	@media screen and (max-width: 768px) {
+		font-size: 12px;
+	}
+	@media screen and (max-width: 480px) {
+		font-size: 10px;
+	}
 `;
 
 export const MinHeight = styled.div`

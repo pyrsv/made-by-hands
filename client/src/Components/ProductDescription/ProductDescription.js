@@ -1,19 +1,22 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import LayoutContainer from '../LayoutContainer/LayoutContainer';
 import PropTypes from 'prop-types';
-import { useSelector, useDispatch } from 'react-redux';
-import { getCart } from '../../store/actions/descriptionCardAction';
-import { ProductDescriptionContainer, MinHeight } from './Cart/styled';
-import Cart from './Cart/Cart';
+import axios from 'axios';
+import { ProductDescriptionContainer, MinHeight } from './Product/styles';
+import Product from './Product/Product';
 
-const ProductDescription = ({ cartNoParam }) => {
-	const dispatch = useDispatch();
+const ProductDescription = ({ productNoParam }) => {
+	const [item, setItem] = useState({});
 
+	const getProduct = param => {
+		axios.get(`/products/${param}`).then(res => {
+			setItem(res.data);
+		});
+	};
 	useEffect(() => {
-		dispatch(getCart(cartNoParam));
-	}, [dispatch]);
+		getProduct(productNoParam);
+	}, [productNoParam]);
 
-	const item = useSelector(state => state.descriptionCard.card);
 	const {
 		imageUrls,
 		description,
@@ -31,7 +34,7 @@ const ProductDescription = ({ cartNoParam }) => {
 				{!item.itemNo ? (
 					<MinHeight />
 				) : (
-					<Cart
+					<Product
 						imageUrls={imageUrls}
 						description={description}
 						name={name}
@@ -48,7 +51,7 @@ const ProductDescription = ({ cartNoParam }) => {
 };
 
 ProductDescription.propTypes = {
-	cartNoParam: PropTypes.string.isRequired,
+	productNoParam: PropTypes.string.isRequired,
 };
 
 export default ProductDescription;

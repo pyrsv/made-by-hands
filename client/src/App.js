@@ -33,7 +33,9 @@ const App = () => {
 				<Route
 					path="/products/:itemNo"
 					render={({ match }) => {
-						return match && <ProductPage cartNoParam={match.params.itemNo} />;
+						return (
+							match && <ProductPage productNoParam={match.params.itemNo} />
+						);
 					}}
 				/>
 			</Switch>
