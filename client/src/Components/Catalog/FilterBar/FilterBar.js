@@ -3,11 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useHistory } from 'react-router-dom';
 import { Formik } from 'formik';
 import querystring from 'query-string';
-import {
-	getFilteredProducts,
-	getColorsAction,
-	getBrandsAction,
-} from '../../../store/actions/catalogActions';
+import { getFilteredProducts } from '../../../store/actions/catalogActions';
+import { getColors, getBrands } from '../../../store/actions/filtersActions';
 import { getInitialFields } from '../../../utils/getFilterFields';
 import Button from '../../UI/Button/Button';
 import PriceRange from '../PriceRange/PriceRange';
@@ -22,15 +19,21 @@ const FilterBar = () => {
 	const [fields, setFields] = useState({});
 	const [priceRange, setPriceRange] = useState({ minPrice: 0, maxPrice: 2000 });
 
-	const categories = useSelector(state => state.catalog.categories);
-	const color = useSelector(state => state.catalog.colors);
-	const brand = useSelector(state => state.catalog.brands);
+	const categories = useSelector(state => state.filters.categories);
+	const color = useSelector(state => state.filters.colors);
+	const brand = useSelector(state => state.filters.brands);
+
+	const isCategoriesLoading = useSelector(
+		state => state.filters.isCategoriesFetching
+	);
+	const isColorsLoading = useSelector(state => state.filters.isColorsFetching);
+	const isBrandsLoading = useSelector(state => state.filters.isBrandsFetching);
 
 	const currentParams = querystring.parse(location.search.slice(1));
 	const { perPage } = useSelector(state => state.catalog.config);
 	useEffect(() => {
-		dispatch(getColorsAction());
-		dispatch(getBrandsAction());
+		dispatch(getColors());
+		dispatch(getBrands());
 	}, []);
 
 	useEffect(() => {
@@ -94,6 +97,7 @@ const FilterBar = () => {
 									fieldsKey="categories"
 									setValue={setFieldValue}
 									checkboxType="default"
+									isLoading={isCategoriesLoading}
 								/>
 								<FilterGroup
 									name="Brands"
@@ -102,6 +106,7 @@ const FilterBar = () => {
 									fieldsKey="brand"
 									setValue={setFieldValue}
 									checkboxType="default"
+									isLoading={isBrandsLoading}
 								/>
 								<FilterGroup
 									name="Colors"
@@ -110,6 +115,7 @@ const FilterBar = () => {
 									fieldsKey="color"
 									setValue={setFieldValue}
 									checkboxType="color"
+									isLoading={isColorsLoading}
 								/>
 								<FilterGroup name="Price">
 									<PriceRange changeRange={handleChangePrice} />

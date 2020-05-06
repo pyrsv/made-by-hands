@@ -1,32 +1,14 @@
 import axios from 'axios';
 import {
-	GET_CATEGORIES,
-	GET_COLORS,
 	GET_FILTERED_PRODUCTS_INIT,
 	GET_FILTERED_PRODUCTS_ERROR,
 	GET_FILTERED_PRODUCTS_SUCCESS,
-	GET_BRANDS,
 	UPDATE_CONFIG,
 	LOAD_MORE_PRODUCTS,
 	SET_PRODUCT_TO_CART,
 	SET_PRODUCT_TO_WISHLIST,
 } from '../types/catalogTypes';
 import { checkProductsForCartAndFavorites } from '../../utils/API';
-
-const getCategories = categories => ({
-	type: GET_CATEGORIES,
-	payload: categories,
-});
-
-const getColors = colors => ({
-	type: GET_COLORS,
-	payload: colors,
-});
-
-const getBrands = brands => ({
-	type: GET_BRANDS,
-	payload: brands,
-});
 
 const getFilteredProductsInit = () => ({
 	type: GET_FILTERED_PRODUCTS_INIT,
@@ -65,12 +47,6 @@ export const setProductToWishlist = id => ({
 	payload: id,
 });
 
-export const getCategoriesAction = () => dispatch => {
-	axios.get('/catalog').then(response => {
-		dispatch(getCategories(response.data));
-	});
-};
-
 export const getFilteredProducts = config => dispatch => {
 	dispatch(getFilteredProductsInit());
 	dispatch(updateConfig(config));
@@ -93,16 +69,6 @@ export const getFilteredProducts = config => dispatch => {
 			);
 		})
 		.catch(err => dispatch(getFilteredProductsError(err)));
-};
-
-export const getColorsAction = () => dispatch => {
-	axios.get('/colors').then(response => dispatch(getColors(response.data)));
-};
-
-export const getBrandsAction = () => dispatch => {
-	axios
-		.get('/filters/brand')
-		.then(response => dispatch(getBrands(response.data)));
 };
 
 export const loadMoreAction = config => dispatch => {
