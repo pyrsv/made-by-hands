@@ -2,7 +2,7 @@ import axios from 'axios';
 import setAuthToken from '../../utils/setAuthToken';
 import { handleUserLogin, handleGetUser } from '../../utils/API';
 // eslint-disable-next-line import/no-cycle
-import { setCartAction } from './cartActions';
+import { setCartAction, updateCart } from './cartActions';
 
 export const USER_LOGIN_INIT = 'USER_LOGIN_INIT';
 export const USER_LOGIN_SUCCESS = 'USER_LOGIN_SUCCESS';
@@ -75,8 +75,11 @@ export const userLogin = ({ loginOrEmail, password }) => dispatch => {
 						if (!result.data) {
 							axios.post('/cart');
 						} else {
-							dispatch(setCartAction(result.data.products));
+							axios.get('/cart').then(ans => {
+								dispatch(setCartAction(ans.data.products));
+							});
 						}
+						dispatch(updateCart);
 					});
 					dispatch(userLoginSuccess(customer.data));
 				})

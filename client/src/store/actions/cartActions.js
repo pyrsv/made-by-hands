@@ -3,6 +3,13 @@ import axios from 'axios';
 // eslint-disable-next-line import/no-cycle
 import { userLoginError } from './authActions';
 
+export const UPDATE_CART_ERROR = 'UPDATE_CART_ERROR';
+
+export const updateCartError = error => ({
+	type: UPDATE_CART_ERROR,
+	payload: error,
+});
+
 export const setCartAction = data => ({
 	type: SET_CART,
 	payload: data,
@@ -99,5 +106,32 @@ export const deleteAllTheSameItems = (id, itemNo, btn) => dispatch => {
 				dispatch(setCartAction(filtered));
 				dispatch(userLoginError(err));
 			});
+		});
+};
+
+export const updateCart = dispatch => {
+	const itemsFromLS = JSON.parse(localStorage.getItem('cart'));
+	const arrayToSend = [];
+	let i = 0;
+	// eslint-disable-next-line no-restricted-syntax
+	for (const item of itemsFromLS) {
+		arrayToSend[i] = (({ cartQuantity }) => ({ cartQuantity }))(item);
+		arrayToSend[i].product = item.product._id;
+		// eslint-disable-next-line no-plusplus
+		i++;
+	}
+	const updatedCart = {
+		products: arrayToSend,
+	};
+	// console.log(updatedCart)
+	axios
+		.put('/cart', updatedCart)
+		.then(result => {
+			//   console.log(result.data.products)
+			dispatch(setCartAction(result.data.products));
+		})
+		.catch(err => {
+			//   console.log(err)
+			dispatch(updateCartError(err));
 		});
 };
