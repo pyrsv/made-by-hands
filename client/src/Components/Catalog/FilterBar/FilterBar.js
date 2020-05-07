@@ -30,14 +30,16 @@ const FilterBar = () => {
 	const isBrandsLoading = useSelector(state => state.filters.isBrandsFetching);
 
 	const currentParams = querystring.parse(location.search.slice(1));
-	const { perPage } = useSelector(state => state.catalog.config);
+	const config = useSelector(state => state.catalog.config);
 	useEffect(() => {
 		dispatch(getColors());
 		dispatch(getBrands());
 	}, []);
 
 	useEffect(() => {
-		dispatch(getFilteredProducts({ ...currentParams, startPage: 1, perPage }));
+		dispatch(
+			getFilteredProducts({ ...currentParams, ...config, startPage: 1 })
+		);
 	}, [location]);
 
 	useEffect(() => {

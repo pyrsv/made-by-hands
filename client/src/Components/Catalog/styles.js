@@ -9,9 +9,8 @@ export const Content = styled.div`
 	grid-template-columns: 240px auto;
 	margin-top: 30px;
 	@media (max-width: 992px) {
-		grid-template-columns: 200px auto;
+		grid-template-columns: auto;
 	}
 	@media (max-width: 670px) {
-		grid-template-columns: auto;
 	}
 `;
