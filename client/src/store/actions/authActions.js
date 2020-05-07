@@ -28,7 +28,8 @@ export const userLogout = () => dispatch => {
 	if (!localStorage.getItem('cart')) {
 		localStorage.setItem('cart', '[]');
 	}
-	dispatch(setCartAction(JSON.parse(localStorage.getItem('cart'))));
+	dispatch(setCartAction([]));
+	localStorage.setItem('cart', '[]');
 	dispatch({ type: USER_LOGOUT });
 };
 
@@ -75,11 +76,9 @@ export const userLogin = ({ loginOrEmail, password }) => dispatch => {
 						if (!result.data) {
 							axios.post('/cart');
 						} else {
-							axios.get('/cart').then(ans => {
-								dispatch(setCartAction(ans.data.products));
-							});
+							dispatch(setCartAction(result.data.products));
 						}
-						dispatch(updateCart);
+						dispatch(updateCart(result.data));
 					});
 					dispatch(userLoginSuccess(customer.data));
 				})

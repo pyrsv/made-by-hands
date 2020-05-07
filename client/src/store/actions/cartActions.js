@@ -109,21 +109,50 @@ export const deleteAllTheSameItems = (id, itemNo, btn) => dispatch => {
 		});
 };
 
-export const updateCart = dispatch => {
-	const itemsFromLS = JSON.parse(localStorage.getItem('cart'));
+export const updateCart = cartFromServer => dispatch => {
+	const itemsFromLocalStorage = JSON.parse(localStorage.getItem('cart'));
 	const arrayToSend = [];
 	let i = 0;
+
 	// eslint-disable-next-line no-restricted-syntax
-	for (const item of itemsFromLS) {
-		arrayToSend[i] = (({ cartQuantity }) => ({ cartQuantity }))(item);
+	for (const item of itemsFromLocalStorage) {
+		arrayToSend[i] = {};
+		arrayToSend[i].cartQuantity = item.cartQuantity;
+		// arrayToSend[i] = (({ cartQuantity }) => ({ cartQuantity }))(item);
 		arrayToSend[i].product = item.product._id;
 		// eslint-disable-next-line no-plusplus
 		i++;
 	}
+
+	if (cartFromServer) {
+		// eslint-disable-next-line no-restricted-syntax
+		for (const item of cartFromServer.products) {
+			// eslint-disable-next-line no-loop-func
+			arrayToSend.map(el => {
+				if (el.product === item.product._id) {
+					// eslint-disable-next-line no-plusplus
+					el.cartQuantity += item.cartQuantity;
+				} else if (
+					arrayToSend.some(elem => {
+						return elem.product === item.product._id;
+					})
+				) {
+					//
+				} else {
+					arrayToSend[i] = {};
+					arrayToSend[i].cartQuantity = item.cartQuantity;
+					arrayToSend[i].product = item.product._id;
+					// eslint-disable-next-line no-plusplus
+					i++;
+				}
+				return undefined;
+			});
+		}
+	}
+
 	const updatedCart = {
 		products: arrayToSend,
 	};
-	// console.log(updatedCart)
 	axios
 		.put('/cart', updatedCart)
 		.then(result => {
