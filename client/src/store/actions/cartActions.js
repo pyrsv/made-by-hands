@@ -133,12 +133,10 @@ export const updateCart = cartFromServer => dispatch => {
 					// eslint-disable-next-line no-plusplus
 					el.cartQuantity += item.cartQuantity;
 				} else if (
-					arrayToSend.some(elem => {
+					!arrayToSend.some(elem => {
 						return elem.product === item.product._id;
 					})
 				) {
-					//
-				} else {
 					arrayToSend[i] = {};
 					arrayToSend[i].cartQuantity = item.cartQuantity;
 					arrayToSend[i].product = item.product._id;
