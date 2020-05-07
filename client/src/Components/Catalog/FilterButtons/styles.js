@@ -3,10 +3,6 @@ import styled from 'styled-components';
 export const ButtonsContainer = styled.div`
 	display: flex;
 	justify-content: flex-end;
-
-	@media (max-width: 670px) {
-		justify-content: flex-start;
-	}
 `;
 
 export const FilterButton = styled.button`
@@ -22,7 +18,7 @@ export const FilterButton = styled.button`
 		display: none;
 		margin-right: 15px;
 
-		@media (max-width: 670px) {
+		@media (max-width: 992px) {
 			display: inline-block;
 		}
 	}

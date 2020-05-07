@@ -1,26 +1,28 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Select from 'react-select';
+import CustomSelect from 'react-select';
 import { customStyles } from './styles';
 
-const CustomSelect = ({
+const Select = ({
 	options,
-	searchable = false,
+	searchable,
 	placeholder,
 	onChange,
+	isMobile = true,
 }) => {
 	return (
-		<Select
+		<CustomSelect
 			placeholder={placeholder}
 			options={options}
 			isSearchable={searchable}
 			styles={customStyles}
 			onChange={onChange}
+			isMobile={isMobile}
 		/>
 	);
 };
 
-CustomSelect.propTypes = {
+Select.propTypes = {
 	options: PropTypes.arrayOf(PropTypes.object).isRequired,
 	searchable: PropTypes.bool.isRequired,
 	placeholder: PropTypes.oneOfType([
@@ -28,6 +30,11 @@ CustomSelect.propTypes = {
 		PropTypes.string.isRequired,
 	]).isRequired,
 	onChange: PropTypes.func.isRequired,
+	isMobile: PropTypes.bool,
 };
 
-export default CustomSelect;
+Select.defaultProps = {
+	isMobile: false,
+};
+
+export default Select;

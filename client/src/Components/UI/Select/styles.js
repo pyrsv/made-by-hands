@@ -4,12 +4,14 @@ export const customStyles = {
 		padding: 10,
 		fontFamily: 'sans-serif',
 	}),
-	control: () => ({
+	control: (provided, state) => ({
+		...provided,
 		display: 'flex',
 		justifyContent: 'space-between',
-		width: 200,
+		width: state.selectProps.isMobile ? 130 : 200,
 		border: '1px solid black',
 		borderRadius: 4,
+		background: 'transparent',
 	}),
 	placeholder: provided => ({
 		...provided,
