@@ -123,8 +123,8 @@ export const updateCart = cartFromServer => dispatch => {
 			(cartFromServer?.products.find(item => item.product._id === id)
 				?.cartQuantity || 0);
 		const product = {
-			id,
-			productQuantity: cartQuantity,
+			product: id,
+			cartQuantity,
 		};
 
 		return product;
@@ -138,59 +138,4 @@ export const updateCart = cartFromServer => dispatch => {
 		.catch(err => {
 			dispatch(updateCartError(err));
 		});
-	// const products = JSON.parse(localStorage.getItem('cart')).map(item => {
-	// 	const localId = item._id;
-	// 	const mapped = {
-	// 		cartQuantity: item.cartQuantity,
-	// 		product: item.product._id,
-	// 	};
-	// 	if (cartFromServer.products.some(product => product._id === localId)) {
-	// 		const idx = cartFromServer.products.findIndex(
-	// 			product => product._id === localId
-	// 		);
-	// 		mapped.cartQuantity += cartFromServer.products[idx].cartQuantity;
-	// 	}
-	// 	return mapped;
-	// });
-
-	// const arrayToSend = [];
-	// let i = 0;
-
-	// // eslint-disable-next-line no-restricted-syntax
-	// for (const item of itemsFromLocalStorage) {
-	// 	arrayToSend[i] = {};
-	// 	arrayToSend[i].cartQuantity = item.cartQuantity;
-	// 	// arrayToSend[i] = (({ cartQuantity }) => ({ cartQuantity }))(item);
-	// 	arrayToSend[i].product = item.product._id;
-	// 	// eslint-disable-next-line no-plusplus
-	// 	i++;
-	// }
-
-	// if (cartFromServer) {
-	// 	// eslint-disable-next-line no-restricted-syntax
-	// 	for (const item of cartFromServer.products) {
-	// 		// eslint-disable-next-line no-loop-func
-	// 		arrayToSend.map(el => {
-	// 			if (el.product === item.product._id) {
-	// 				// eslint-disable-next-line no-plusplus
-	// 				el.cartQuantity += item.cartQuantity;
-	// 			} else if (
-	// 				!arrayToSend.some(elem => {
-	// 					return elem.product === item.product._id;
-	// 				})
-	// 			) {
-	// 				arrayToSend[i] = {};
-	// 				arrayToSend[i].cartQuantity = item.cartQuantity;
-	// 				arrayToSend[i].product = item.product._id;
-	// 				// eslint-disable-next-line no-plusplus
-	// 				i++;
-	// 			}
-	// 			return undefined;
-	// 		});
-	// 	}
-	// }
-
-	// const updatedCart = {
-	// 	products: arrayToSend,
-	// };
 };
