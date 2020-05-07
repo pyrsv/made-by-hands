@@ -154,11 +154,9 @@ export const updateCart = cartFromServer => dispatch => {
 	axios
 		.put('/cart', updatedCart)
 		.then(result => {
-			//   console.log(result.data.products)
 			dispatch(setCartAction(result.data.products));
 		})
 		.catch(err => {
-			//   console.log(err)
 			dispatch(updateCartError(err));
 		});
 };
