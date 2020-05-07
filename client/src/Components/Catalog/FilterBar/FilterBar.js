@@ -3,22 +3,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useHistory } from 'react-router-dom';
 import { Formik } from 'formik';
 import querystring from 'query-string';
-import {
-	getFilteredProducts,
-	getColorsAction,
-	getBrandsAction,
-} from '../../../store/actions/catalogActions';
+import { getFilteredProducts } from '../../../store/actions/catalogActions';
+import { getColors, getBrands } from '../../../store/actions/filtersActions';
 import { getInitialFields } from '../../../utils/getFilterFields';
 import Button from '../../UI/Button/Button';
-import Checkbox from '../../UI/Checkbox/Checkbox';
 import PriceRange from '../PriceRange/PriceRange';
-import {
-	FiltersContainer,
-	FilterName,
-	Title,
-	FilterGroup,
-	FilterWrapper,
-} from './styles';
+import FilterGroup from '../FilterGroup/FilterGroup';
+import { FiltersContainer, Title, FilterWrapper } from './styles';
 
 const FilterBar = () => {
 	const dispatch = useDispatch();
@@ -28,15 +19,21 @@ const FilterBar = () => {
 	const [fields, setFields] = useState({});
 	const [priceRange, setPriceRange] = useState({ minPrice: 0, maxPrice: 2000 });
 
-	const categories = useSelector(state => state.catalog.categories);
-	const color = useSelector(state => state.catalog.colors);
-	const brand = useSelector(state => state.catalog.brands);
+	const categories = useSelector(state => state.filters.categories);
+	const color = useSelector(state => state.filters.colors);
+	const brand = useSelector(state => state.filters.brands);
+
+	const isCategoriesLoading = useSelector(
+		state => state.filters.isCategoriesFetching
+	);
+	const isColorsLoading = useSelector(state => state.filters.isColorsFetching);
+	const isBrandsLoading = useSelector(state => state.filters.isBrandsFetching);
 
 	const currentParams = querystring.parse(location.search.slice(1));
 	const { perPage } = useSelector(state => state.catalog.config);
 	useEffect(() => {
-		dispatch(getColorsAction());
-		dispatch(getBrandsAction());
+		dispatch(getColors());
+		dispatch(getBrands());
 	}, []);
 
 	useEffect(() => {
@@ -92,77 +89,40 @@ const FilterBar = () => {
 				>
 					{({ values, handleSubmit, setFieldValue }) => {
 						return (
-							<>
-								<form onSubmit={handleSubmit}>
-									<>
-										<FilterGroup>
-											<FilterName>Categories</FilterName>
-											{Object.entries(values.categories || {}).map(
-												([key, val], index) => {
-													return (
-														<Checkbox
-															key={categories[index]._id}
-															id={categories[index]._id}
-															checked={val}
-															name={`categories.${key}`}
-															label={categories[index].name}
-															onChange={() =>
-																setFieldValue(`categories.${key}`, !val)
-															}
-														/>
-													);
-												}
-											)}
-										</FilterGroup>
-										<FilterGroup>
-											<FilterName>Brands</FilterName>
-											{Object.entries(values.brand || {}).map(
-												([key, val], index) => {
-													return (
-														<Checkbox
-															key={brand[index]._id}
-															id={brand[index]._id}
-															checked={val}
-															name={`brand.${key}`}
-															label={brand[index].name}
-															onChange={() =>
-																setFieldValue(`brand.${key}`, !val)
-															}
-														/>
-													);
-												}
-											)}
-										</FilterGroup>
-										<FilterGroup>
-											<FilterName>Colors</FilterName>
+							<form onSubmit={handleSubmit}>
+								<FilterGroup
+									name="Categories"
+									fields={values.categories}
+									values={categories}
+									fieldsKey="categories"
+									setValue={setFieldValue}
+									checkboxType="default"
+									isLoading={isCategoriesLoading}
+								/>
+								<FilterGroup
+									name="Brands"
+									fields={values.brand}
+									values={brand}
+									fieldsKey="brand"
+									setValue={setFieldValue}
+									checkboxType="default"
+									isLoading={isBrandsLoading}
+								/>
+								<FilterGroup
+									name="Colors"
+									fields={values.color}
+									values={color}
+									fieldsKey="color"
+									setValue={setFieldValue}
+									checkboxType="color"
+									isLoading={isColorsLoading}
+								/>
+								<FilterGroup name="Price">
+									<PriceRange changeRange={handleChangePrice} />
+								</FilterGroup>
 
-											{Object.entries(values.color || {}).map(
-												([key, val], index) => {
-													return (
-														<Checkbox
-															key={color[index]._id}
-															type="color"
-															cssValue={color[index].cssValue}
-															id={color[index]._id}
-															checked={val}
-															name={`color.${key}`}
-															label={color[index].name}
-															onChange={() =>
-																setFieldValue(`color.${key}`, !val)
-															}
-														/>
-													);
-												}
-											)}
-										</FilterGroup>
-										<FilterGroup>
-											<FilterName>Price</FilterName>
-											<PriceRange changeRange={handleChangePrice} />
-										</FilterGroup>
-									</>
-									<Button type="Submit" text="Show" onClick={() => {}} />
-								</form>
-							</>
+								<Button type="Submit" text="Show" onClick={() => {}} />
+							</form>
 						);
 					}}
 				</Formik>

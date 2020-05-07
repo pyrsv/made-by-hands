@@ -7,6 +7,7 @@ import ProfilePage from './Pages/ProfilePage';
 import IndexPage from './Pages/IndexPage';
 import ProductPage from './Pages/ProductPage';
 import Header from './Components/Header/Header';
+import AppContainer from './Components/AppContainer/AppContainer';
 import { getUser } from './store/actions/authActions';
 
 const App = () => {
@@ -15,7 +16,7 @@ const App = () => {
 	useEffect(() => dispatch(getUser()));
 
 	return (
-		<div>
+		<AppContainer>
 			<Header />
 			<Switch>
 				<Route exact path="/">
@@ -39,7 +40,7 @@ const App = () => {
 					}}
 				/>
 			</Switch>
-		</div>
+		</AppContainer>
 	);
 };
 

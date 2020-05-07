@@ -11,7 +11,7 @@ const HeaderButtons = ({ onSearchClick }) => {
 				<FontAwesomeIcon icon={['fas', 'search']} />
 			</IconLink>
 			<IconLink>
-				<NavLink to="/">
+				<NavLink to="/cart">
 					<FontAwesomeIcon icon={['fas', 'shopping-cart']} />
 				</NavLink>
 			</IconLink>

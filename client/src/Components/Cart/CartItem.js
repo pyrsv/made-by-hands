@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import {
 	CartItemContainer,
@@ -33,12 +33,15 @@ export const CartItem = ({
 	cartQuantity,
 	color,
 }) => {
+	const btn = useRef();
+
 	const dispatch = useDispatch();
 	return (
 		<>
 			<CartItemContainer>
 				<DeleteItemFromCart
-					onClick={() => dispatch(deleteAllTheSameItems(id, itemNo))}
+					ref={btn}
+					onClick={() => dispatch(deleteAllTheSameItems(id, itemNo, btn))}
 				>
 					X
 				</DeleteItemFromCart>

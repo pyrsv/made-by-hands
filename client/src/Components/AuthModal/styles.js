@@ -1,16 +1,5 @@
 import styled from 'styled-components';
 
-export const Backdrop = styled.div`
-	position: fixed;
-	width: 100%;
-	height: 100%;
-	top: 0;
-	left: 0;
-	background-color: rgba(0, 0, 0, 0.4);
-	backdrop-filter: blur(3px);
-	z-index: 10;
-`;
-
 export const ModalWrapper = styled.div`
 	position: fixed;
 	top: 50%;
@@ -21,7 +10,10 @@ export const ModalWrapper = styled.div`
 	padding: 20px 40px;
 	box-sizing: border-box;
 	border-radius: 4px;
-	z-index: 20;
+	z-index: 999;
+	@media (max-width: 576px) {
+		min-width: 300px;
+	}
 `;
 
 export const Header = styled.div`

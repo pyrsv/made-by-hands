@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Wrapper } from './styles';
 
-const CloseButton = ({ onClick }) => {
+const CloseButton = ({ onClick, size }) => {
 	return (
-		<Wrapper>
+		<Wrapper size={size}>
 			<FontAwesomeIcon onClick={onClick} icon={['fas', 'times']} />
 		</Wrapper>
 	);
@@ -13,6 +13,11 @@ const CloseButton = ({ onClick }) => {
 
 CloseButton.propTypes = {
 	onClick: PropTypes.func.isRequired,
+	size: PropTypes.number,
+};
+
+CloseButton.defaultProps = {
+	size: 22,
 };
 
 export default CloseButton;

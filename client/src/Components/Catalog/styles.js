@@ -7,7 +7,7 @@ export const CatalogContainer = styled.div`
 export const Content = styled.div`
 	display: grid;
 	grid-template-columns: 240px auto;
-	padding-top: 40px;
+	margin-top: 30px;
 	@media (max-width: 992px) {
 		grid-template-columns: 200px auto;
 	}
