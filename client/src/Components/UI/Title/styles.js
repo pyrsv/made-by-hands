@@ -14,7 +14,7 @@ export const StyledTitle = styled.span`
 	line-height: 85px;
 	letter-spacing: 0.08em;
 
-	@media (max-width: 576px) {
+	@media (max-width: 768px) {
 		font-size: 48px;
 	}
 `;

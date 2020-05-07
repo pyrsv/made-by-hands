@@ -27,7 +27,7 @@ const getFilteredProductsError = error => ({
 	payload: error,
 });
 
-const updateConfig = params => ({
+export const updateConfig = params => ({
 	type: UPDATE_CONFIG,
 	payload: params,
 });
