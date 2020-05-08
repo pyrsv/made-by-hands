@@ -41,7 +41,7 @@ const Description = ({ name, image, description, isReverse }) => {
 Description.propTypes = {
 	name: PropTypes.string.isRequired,
 	image: PropTypes.string.isRequired,
-	description: PropTypes.number.isRequired,
+	description: PropTypes.string.isRequired,
 	isReverse: PropTypes.bool.isRequired,
 };
 
