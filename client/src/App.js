@@ -8,6 +8,7 @@ import IndexPage from './Pages/IndexPage';
 import Header from './Components/Header/Header';
 import AppContainer from './Components/AppContainer/AppContainer';
 import { getUser } from './store/actions/authActions';
+import Wishlist from './Components/Wishlist/Wishlist';
 
 const App = () => {
 	const dispatch = useDispatch();
@@ -29,6 +30,9 @@ const App = () => {
 				</Route>
 				<Route path="/profile">
 					<ProfilePage />
+				</Route>
+				<Route path="/wishlist">
+					<Wishlist />
 				</Route>
 			</Switch>
 		</AppContainer>

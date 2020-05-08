@@ -15,45 +15,48 @@ const ProductsList = () => {
 	const isProductsFetching = useSelector(
 		state => state.catalog.isProductsFetching
 	);
-
-	return (
-		<InfiniteScroll
-			threshold={100}
-			loadMore={() => dispatch(loadMoreAction(config))}
-			hasMore={products.length < productsQuantity && !isProductsFetching}
-			loader={
-				<ProductsPreloader>
-					<Preloader size={60} />
-				</ProductsPreloader>
-			}
-		>
-			<ProductsContainer>
-				{products.map(
-					({
-						name,
-						currentPrice,
-						previousPrice,
-						itemNo,
-						_id,
-						isInCart,
-						imageUrls: [image],
-					}) => (
-						<ProductCard
-							id={_id}
-							key={itemNo}
-							name={name}
-							img={image}
-							price={currentPrice}
-							oldPrice={previousPrice}
-							type="olive"
-							itemNo={itemNo}
-							isInCart={isInCart}
-						/>
-					)
-				)}
-			</ProductsContainer>
-		</InfiniteScroll>
-	);
+	if (products.length)
+		return (
+			<InfiniteScroll
+				threshold={100}
+				loadMore={() => dispatch(loadMoreAction(config))}
+				hasMore={products.length < productsQuantity && !isProductsFetching}
+				loader={
+					<ProductsPreloader>
+						<Preloader size={60} />
+					</ProductsPreloader>
+				}
+			>
+				<ProductsContainer>
+					{products.map(
+						({
+							name,
+							currentPrice,
+							previousPrice,
+							itemNo,
+							_id,
+							isInCart,
+							imageUrls: [image],
+							isFavorite,
+						}) => (
+							<ProductCard
+								id={_id}
+								key={itemNo}
+								name={name}
+								img={image}
+								price={currentPrice}
+								oldPrice={previousPrice}
+								type="olive"
+								itemNo={itemNo}
+								isInCart={isInCart}
+								isFavorite={isFavorite}
+							/>
+						)
+					)}
+				</ProductsContainer>
+			</InfiniteScroll>
+		);
+	return null;
 };
 
 export default ProductsList;

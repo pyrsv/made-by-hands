@@ -15,7 +15,10 @@ import {
 } from './styles';
 import { useDispatch } from 'react-redux';
 import { addToCart } from '../../store/actions/cartActions';
-import { setProductToCart } from '../../store/actions/catalogActions';
+import {
+	setProductToCart,
+	setProductToWishlist,
+} from '../../store/actions/catalogActions';
 
 const ProductCard = ({
 	id,
@@ -29,10 +32,12 @@ const ProductCard = ({
 	isInCart,
 }) => {
 	const dispatch = useDispatch();
-
 	const handleCartButtonClick = () => {
 		dispatch(addToCart(id, itemNo));
 		dispatch(setProductToCart(id));
+	};
+	const handleHeartButtonClick = () => {
+		dispatch(setProductToWishlist(id));
 	};
 
 	return (
@@ -41,7 +46,10 @@ const ProductCard = ({
 			<CardInfo type={type}>
 				<CardInfoRow>
 					<ProductName>{name}</ProductName>
-					<FavoriteHeart isFavorite={isFavorite} />
+					<FavoriteHeart
+						isFavorite={isFavorite}
+						onClick={handleHeartButtonClick}
+					/>
 				</CardInfoRow>
 				<CardInfoRow>
 					<Button

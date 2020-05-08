@@ -80,6 +80,14 @@ export const userLogin = ({ loginOrEmail, password }) => dispatch => {
 						}
 						dispatch(updateCart(result.data));
 					});
+					axios.get('/wishlist').then(result => {
+						if (!result.data) {
+							axios.post('/wishlist');
+						} else {
+							// put in store
+						}
+					});
+
 					dispatch(userLoginSuccess(customer.data));
 				})
 				.catch(err => {
