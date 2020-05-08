@@ -21,15 +21,15 @@ export const toggleModal = () => ({
 
 export const setMobile = isMobile => ({
 	type: SET_MOBILE,
-	paylaod: isMobile,
+	payload: isMobile,
 });
 
 export const setTablet = isTablet => ({
 	type: SET_TABLET,
-	paylaod: isTablet,
+	payload: isTablet,
 });
 
 export const setHeaderMobile = isHeaderMobile => ({
 	type: SET_HEADER_MOBILE,
-	paylaod: isHeaderMobile,
+	payload: isHeaderMobile,
 });
