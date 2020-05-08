@@ -3,6 +3,7 @@ import styled from 'styled-components';
 export const Image = styled.img`
 	width: 100%;
 	height: 100%;
+	object-fit: cover;
 `;
 
 export const StyledTextContainer = styled.div`
@@ -17,9 +18,11 @@ export const Name = styled.p`
 	font-weight: bold;
 	font-size: 24px;
 	line-height: 35px;
+	text-transform: capitalize;
 	margin-bottom: 30px;
 	@media (max-width: 576px) {
 		margin-top: 50px;
+		font-size: 18px;
 		text-align: center;
 	}
 `;
