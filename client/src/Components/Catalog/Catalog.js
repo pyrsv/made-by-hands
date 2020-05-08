@@ -8,7 +8,7 @@ import ProductsList from '../ProductsList/ProductsList';
 import { CatalogContainer, Content } from './styles';
 import {
 	updateConfig,
-	getFilteredProducts,
+	// getFilteredProducts,
 } from '../../store/actions/catalogActions';
 
 const Catalog = () => {
@@ -16,7 +16,7 @@ const Catalog = () => {
 	const config = useSelector(state => state.catalog.config);
 
 	useEffect(() => {
-		dispatch(getFilteredProducts(config));
+		// dispatch(getFilteredProducts(config));
 		return () =>
 			dispatch(updateConfig({ ...config, perPage: 12, startPage: 1 }));
 	}, []);
