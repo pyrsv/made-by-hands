@@ -6,6 +6,7 @@ import { useLocation } from 'react-router-dom';
 import {
 	loadMoreAction,
 	getFilteredProducts,
+	updateConfig,
 } from '../../store/actions/catalogActions';
 import ProductCard from '../ProductCard/ProductCard';
 import Preloader from '../UI/Preloader/Preloader';
@@ -26,6 +27,8 @@ const ProductsList = () => {
 		dispatch(
 			getFilteredProducts({ ...currentParams, ...config, startPage: 1 })
 		);
+		return () =>
+			dispatch(updateConfig({ ...config, perPage: 12, startPage: 1 }));
 	}, []);
 
 	return (

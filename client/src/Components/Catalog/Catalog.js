@@ -1,25 +1,19 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import LayoutContainer from '../LayoutContainer/LayoutContainer';
 import Title from '../UI/Title/title';
 import FilterButtons from './FilterButtons/FilterButtons';
 import FilterBar from './FilterBar/FilterBar';
+import Drawer from '../UI/Drawer/Drawer';
 import ProductsList from '../ProductsList/ProductsList';
+import { toggleFilters } from '../../store/actions/UIActions';
+
 import { CatalogContainer, Content } from './styles';
-import {
-	updateConfig,
-	// getFilteredProducts,
-} from '../../store/actions/catalogActions';
 
 const Catalog = () => {
 	const dispatch = useDispatch();
-	const config = useSelector(state => state.catalog.config);
-
-	useEffect(() => {
-		// dispatch(getFilteredProducts(config));
-		return () =>
-			dispatch(updateConfig({ ...config, perPage: 12, startPage: 1 }));
-	}, []);
+	const isTablet = useSelector(state => state.UI.isHeaderMobile);
+	const isFilters = useSelector(state => state.UI.isDrawer);
 
 	return (
 		<CatalogContainer>
@@ -27,7 +21,19 @@ const Catalog = () => {
 				<Title text="catalog" color="dark" />
 				<FilterButtons />
 				<Content>
-					<FilterBar />
+					{isTablet ? (
+						isFilters && (
+							<Drawer
+								onToggle={() => dispatch(toggleFilters())}
+								heading="Filters"
+							>
+								<FilterBar />
+							</Drawer>
+						)
+					) : (
+						// <></>
+						<FilterBar />
+					)}
 					<ProductsList />
 				</Content>
 			</LayoutContainer>

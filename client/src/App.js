@@ -18,7 +18,7 @@ const App = () => {
 	const dispatch = useDispatch();
 
 	const handleWindowResize = () => {
-		if (window.innerWidth <= 900) {
+		if (window.innerWidth <= 992) {
 			dispatch(setHeaderMobile(true));
 		} else {
 			dispatch(setHeaderMobile(false));
