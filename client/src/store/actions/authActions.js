@@ -2,7 +2,7 @@ import axios from 'axios';
 import setAuthToken from '../../utils/setAuthToken';
 import { handleUserLogin, handleGetUser } from '../../utils/API';
 // eslint-disable-next-line import/no-cycle
-import { setCartAction } from './cartActions';
+import { setCartAction, updateCart } from './cartActions';
 
 export const USER_LOGIN_INIT = 'USER_LOGIN_INIT';
 export const USER_LOGIN_SUCCESS = 'USER_LOGIN_SUCCESS';
@@ -28,7 +28,8 @@ export const userLogout = () => dispatch => {
 	if (!localStorage.getItem('cart')) {
 		localStorage.setItem('cart', '[]');
 	}
-	dispatch(setCartAction(JSON.parse(localStorage.getItem('cart'))));
+	dispatch(setCartAction([]));
+	localStorage.setItem('cart', '[]');
 	dispatch({ type: USER_LOGOUT });
 };
 
@@ -77,6 +78,7 @@ export const userLogin = ({ loginOrEmail, password }) => dispatch => {
 						} else {
 							dispatch(setCartAction(result.data.products));
 						}
+						dispatch(updateCart(result.data));
 					});
 					dispatch(userLoginSuccess(customer.data));
 				})

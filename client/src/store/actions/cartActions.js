@@ -3,6 +3,13 @@ import axios from 'axios';
 // eslint-disable-next-line import/no-cycle
 import { userLoginError } from './authActions';
 
+export const UPDATE_CART_ERROR = 'UPDATE_CART_ERROR';
+
+export const updateCartError = error => ({
+	type: UPDATE_CART_ERROR,
+	payload: error,
+});
+
 export const setCartAction = data => ({
 	type: SET_CART,
 	payload: data,
@@ -99,5 +106,36 @@ export const deleteAllTheSameItems = (id, itemNo, btn) => dispatch => {
 				dispatch(setCartAction(filtered));
 				dispatch(userLoginError(err));
 			});
+		});
+};
+
+export const updateCart = cartFromServer => dispatch => {
+	const localCart = JSON.parse(localStorage.getItem('cart')) || [];
+
+	const products = [
+		...new Set([
+			...localCart.map(({ product }) => product._id),
+			...cartFromServer?.products.map(({ product }) => product._id || []),
+		]),
+	].map(id => {
+		const cartQuantity =
+			(localCart.find(item => item.product._id === id)?.cartQuantity || 0) +
+			(cartFromServer?.products.find(item => item.product._id === id)
+				?.cartQuantity || 0);
+		const product = {
+			product: id,
+			cartQuantity,
+		};
+
+		return product;
+	});
+
+	axios
+		.put('/cart', { products })
+		.then(result => {
+			dispatch(setCartAction(result.data.products));
+		})
+		.catch(err => {
+			dispatch(updateCartError(err));
 		});
 };
