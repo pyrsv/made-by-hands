@@ -8,7 +8,8 @@ import { ProductsContainer, ProductsPreloader } from './styles';
 
 const ProductsList = () => {
 	const dispatch = useDispatch();
-
+	// const wishlist = useSelector(state=>state.wishlistReducer.wishlist)
+	// console.log("in wishlist", wishlist)
 	const products = useSelector(state => state.catalog.currentProducts);
 	const productsQuantity = useSelector(state => state.catalog.productsQuantity);
 	const config = useSelector(state => state.catalog.config);

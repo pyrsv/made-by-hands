@@ -3,6 +3,7 @@ import setAuthToken from '../../utils/setAuthToken';
 import { handleUserLogin, handleGetUser } from '../../utils/API';
 // eslint-disable-next-line import/no-cycle
 import { setCartAction, updateCart } from './cartActions';
+import { setWishlist } from './wishActions';
 
 export const USER_LOGIN_INIT = 'USER_LOGIN_INIT';
 export const USER_LOGIN_SUCCESS = 'USER_LOGIN_SUCCESS';
@@ -47,6 +48,13 @@ export const getUser = () => dispatch => {
 						dispatch(setCartAction(result.data.products));
 					}
 				});
+				axios.get('/wishlist').then(result => {
+					if (!result.data) {
+						axios.post('/wishlist');
+					} else {
+						dispatch(setWishlist(result.data.products));
+					}
+				});
 				dispatch(userLoginSuccess(customer.data));
 			})
 			.catch(err => {
@@ -84,7 +92,7 @@ export const userLogin = ({ loginOrEmail, password }) => dispatch => {
 						if (!result.data) {
 							axios.post('/wishlist');
 						} else {
-							// put in store
+							dispatch(setWishlist(result.data.products));
 						}
 					});
 

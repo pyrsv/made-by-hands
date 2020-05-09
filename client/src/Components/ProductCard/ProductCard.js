@@ -2,6 +2,10 @@ import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import Button from '../UI/Button/Button';
 import FavoriteHeart from '../UI/FavoriteHeart/FavoriteHeart';
+import {
+	addToWishlist,
+	deleteFromWishlist,
+} from '../../store/actions/wishActions';
 
 import {
 	Card,
@@ -13,7 +17,7 @@ import {
 	PriceContainer,
 	ProductName,
 } from './styles';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addToCart } from '../../store/actions/cartActions';
 import {
 	setProductToCart,
@@ -31,13 +35,21 @@ const ProductCard = ({
 	isFavorite,
 	isInCart,
 }) => {
+	const user = useSelector(state => state.auth.currentUser);
+
 	const dispatch = useDispatch();
 	const handleCartButtonClick = () => {
 		dispatch(addToCart(id, itemNo));
 		dispatch(setProductToCart(id));
 	};
 	const handleHeartButtonClick = () => {
-		dispatch(setProductToWishlist(id));
+		if (user) {
+			dispatch(setProductToWishlist(id));
+			if (!isFavorite) dispatch(addToWishlist(id));
+			else dispatch(deleteFromWishlist(id));
+			// console.log(isFavorite)
+		}
+		// else console.log("zalogin'sya")
 	};
 
 	return (
