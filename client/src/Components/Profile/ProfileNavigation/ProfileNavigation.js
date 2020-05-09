@@ -13,7 +13,7 @@ const ProfileNavigation = () => {
 				<StyledNavLink to={`${url}/adress-book`}>Adress book</StyledNavLink>
 			</NavItem>
 			<NavItem>
-				<StyledNavLink to={`${url}/favorites`}>Favorites</StyledNavLink>
+				<StyledNavLink to={`${url}/wishlist`}>Wishlist</StyledNavLink>
 			</NavItem>
 		</Nav>
 	);

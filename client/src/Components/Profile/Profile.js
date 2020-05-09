@@ -14,7 +14,7 @@ const Profile = () => {
 			<Switch>
 				<Route path={`${path}/contact-info`}>Contact Info</Route>
 				<Route path={`${path}/adress-book`}>Adress book</Route>
-				<Route path={`${path}/favorites`}>Favorites</Route>
+				<Route path={`${path}/wishlist`}>Favorites</Route>
 			</Switch>
 		</LayoutContainer>
 	);

@@ -24,5 +24,5 @@ export const StyledTitle = styled.h2`
 	@media (max-width: 420px) {
 		font-size: 36px;
 		line-height: 40px;
-s	}
+	}
 `;
