@@ -1,15 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroller';
 import { useSelector, useDispatch } from 'react-redux';
 import { loadMoreAction } from '../../store/actions/catalogActions';
 import ProductCard from '../ProductCard/ProductCard';
 import Preloader from '../UI/Preloader/Preloader';
 import { ProductsContainer, ProductsPreloader } from './styles';
+import NotLoggedInModal from '../UI/Modals/NotLoggedInModal';
 
 const ProductsList = () => {
 	const dispatch = useDispatch();
-	// const wishlist = useSelector(state=>state.wishlistReducer.wishlist)
-	// console.log("in wishlist", wishlist)
+	const [isModal, toggleModal] = useState({ open: false });
+
+	const modalToggler = () => {
+		toggleModal(prevState => ({
+			open: !prevState.open,
+		}));
+	};
+
 	const products = useSelector(state => state.catalog.currentProducts);
 	const productsQuantity = useSelector(state => state.catalog.productsQuantity);
 	const config = useSelector(state => state.catalog.config);
@@ -29,6 +36,8 @@ const ProductsList = () => {
 				}
 			>
 				<ProductsContainer>
+					{isModal.open && <NotLoggedInModal toggleModal={modalToggler} />}
+
 					{products.map(
 						({
 							name,
@@ -51,6 +60,7 @@ const ProductsList = () => {
 								itemNo={itemNo}
 								isInCart={isInCart}
 								isFavorite={isFavorite}
+								modalToggler={modalToggler}
 							/>
 						)
 					)}
