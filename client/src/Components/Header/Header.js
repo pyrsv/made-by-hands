@@ -61,18 +61,6 @@ const Header = () => {
 		</span>,
 	];
 
-	// const handleWindowResize = () => {
-	// 	// eslint-disable-next-line no-unused-expressions
-	// 	isNav && dispatch(toggleNav());
-	// 	if (!isMobile.mobile && window.innerWidth <= 900) {
-	// 		setMobile(state => ({ ...state, mobile: true }));
-	// 	}
-
-	// 	if (!isMobile.mobile && window.innerWidth > 900) {
-	// 		setMobile(state => ({ ...state, mobile: false }));
-	// 	}
-	// };
-
 	useEffect(() => {
 		dispatch(getCategories());
 	}, []);
@@ -105,7 +93,7 @@ const Header = () => {
 										isDropdown={dropdown.profile}
 										routes={profileRoutes}
 										onDropdownOpen={() => handleDropdownToggle('profile')}
-										onModalOpen={toggleModal}
+										onModalOpen={() => dispatch(toggleModal())}
 									/>
 								</Info>
 								<Navigation
