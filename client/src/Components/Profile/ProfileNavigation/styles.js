@@ -6,6 +6,7 @@ export const NavigationContainer = styled.div``;
 export const Nav = styled.ul`
 	display: flex;
 	border-bottom: 1px solid ${props => props.theme.mainDark};
+	margin-bottom: 40px;
 `;
 
 export const NavItem = styled.li`
@@ -20,7 +21,7 @@ export const StyledNavLink = styled(NavLink)`
 	padding: 14px 0;
 	font-weight: 700;
 	text-transform: uppercase;
-	font-size: 14px;
+	font-size: 16px;
 
 	&.active {
 		&:after {
