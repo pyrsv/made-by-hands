@@ -53,7 +53,7 @@ const ProductsList = () => {
 				}
 			>
 				<ProductsContainer>
-					{isModal && <NotLoggedInModal />}
+					{isModal.open && <NotLoggedInModal toggleModal={toggleModal} />}
 					{products.map(
 						({
 							name,
@@ -63,6 +63,7 @@ const ProductsList = () => {
 							_id,
 							isInCart,
 							imageUrls: [image],
+							isFavorite,
 						}) => (
 							<ProductCard
 								id={_id}
@@ -75,6 +76,7 @@ const ProductsList = () => {
 								itemNo={itemNo}
 								isInCart={isInCart}
 								modalToggler={modalToggler}
+								isFavorite={isFavorite}
 							/>
 						)
 					)}

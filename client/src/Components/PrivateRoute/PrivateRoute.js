@@ -16,3 +16,5 @@ PrivateRoute.propTypes = {
 		PropTypes.node,
 	]).isRequired,
 };
+
+export default PrivateRoute;

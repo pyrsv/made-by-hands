@@ -6,7 +6,6 @@ import {
 	addToWishlist,
 	deleteFromWishlist,
 } from '../../store/actions/wishActions';
-
 import {
 	Card,
 	CardImage,
