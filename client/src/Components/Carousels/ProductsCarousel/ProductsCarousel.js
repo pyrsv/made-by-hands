@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 import ProductCard from '../../ProductCard/ProductCard';
@@ -15,6 +15,7 @@ import 'slick-carousel/slick/slick-theme.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Slider from 'react-slick';
 import { getFilteredProducts } from '../../../store/actions/catalogActions';
+import NotLoggedInModal from '../../UI/Modals/NotLoggedInModal';
 
 const SampleNextArrow = props => {
 	const { onClick, onKeyUp } = props;
@@ -67,6 +68,14 @@ const SamplePrevArrow = props => {
 const ProductCarousel = () => {
 	const dispatch = useDispatch();
 
+	const [isModal, toggleModal] = useState({ open: false });
+
+	const modalToggler = () => {
+		toggleModal(prevState => ({
+			open: !prevState.open,
+		}));
+	};
+
 	useEffect(() => {
 		dispatch(getItemsAction());
 	}, [dispatch]);
@@ -116,6 +125,8 @@ const ProductCarousel = () => {
 				<LayoutContainer>
 					<Title text="new arrivals" />
 					<ProductCarouselContainer>
+						{isModal.open && <NotLoggedInModal toggleModal={modalToggler} />}
+
 						<Slider {...settings}>
 							{selected.map(item => {
 								return (
@@ -130,6 +141,7 @@ const ProductCarousel = () => {
 												price={item.currentPrice}
 												isFavorite={item.isFavorite}
 												isInCart={item.isInCart}
+												modalToggler={modalToggler}
 											/>
 										</ProductCardContainer>
 									</div>
