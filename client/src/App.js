@@ -7,6 +7,7 @@ import ProfilePage from './Pages/ProfilePage';
 import IndexPage from './Pages/IndexPage';
 import Header from './Components/Header/Header';
 import AppContainer from './Components/AppContainer/AppContainer';
+import ProtectedRoute from './Components/PrivateRoute/PrivateRoute';
 import { getUser } from './store/actions/authActions';
 import {
 	setHeaderMobile,
@@ -61,9 +62,9 @@ const App = () => {
 				<Route path="/catalog">
 					<CatalogPage />
 				</Route>
-				<Route path="/profile">
+				<ProtectedRoute path="/profile">
 					<ProfilePage />
-				</Route>
+				</ProtectedRoute>
 			</Switch>
 		</AppContainer>
 	);
