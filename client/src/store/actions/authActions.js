@@ -131,6 +131,7 @@ export const userRegister = data => async dispatch => {
 							dispatch(setCartAction(result.data.products));
 						}
 					});
+					axios.post('/wishlist');
 					dispatch(userLoginSuccess(customer.data));
 				})
 				.catch(err => {
