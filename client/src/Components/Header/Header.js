@@ -28,12 +28,12 @@ const Header = () => {
 	const dispatch = useDispatch();
 	const isModal = useSelector(state => state.UI.isModal);
 	const isNav = useSelector(state => state.UI.isNav);
+	const isMobile = useSelector(state => state.UI.isHeaderMobile);
 	const [dropdown, setDropdown] = useState({
 		catalog: false,
 		profile: false,
 	});
 
-	const [isMobile, setMobile] = useState({ mobile: false });
 	const [isSearch, setSearch] = useState(false);
 
 	const catalogRoutes = [
@@ -61,25 +61,8 @@ const Header = () => {
 		</span>,
 	];
 
-	const handleWindowResize = () => {
-		// eslint-disable-next-line no-unused-expressions
-		isNav && dispatch(toggleNav());
-		if (!isMobile.mobile && window.innerWidth <= 900) {
-			setMobile(state => ({ ...state, mobile: true }));
-		}
-
-		if (!isMobile.mobile && window.innerWidth > 900) {
-			setMobile(state => ({ ...state, mobile: false }));
-		}
-	};
-
 	useEffect(() => {
-		handleWindowResize();
 		dispatch(getCategories());
-		window.addEventListener('resize', handleWindowResize);
-		return () => {
-			window.removeEventListener('resize', handleWindowResize);
-		};
 	}, []);
 
 	const handleDropdownToggle = key => {
@@ -93,7 +76,7 @@ const Header = () => {
 		<StyledHeader>
 			<LayoutContainer>
 				<Container>
-					{!isMobile.mobile ? (
+					{!isMobile ? (
 						<>
 							<Logo />
 							<Content>
@@ -110,7 +93,7 @@ const Header = () => {
 										isDropdown={dropdown.profile}
 										routes={profileRoutes}
 										onDropdownOpen={() => handleDropdownToggle('profile')}
-										onModalOpen={toggleModal}
+										onModalOpen={() => dispatch(toggleModal())}
 									/>
 								</Info>
 								<Navigation
@@ -142,7 +125,7 @@ const Header = () => {
 					)}
 				</Container>
 			</LayoutContainer>
-			{isNav && isMobile.mobile && (
+			{isNav && isMobile && (
 				<Drawer heading="Menu" onToggle={() => dispatch(toggleNav())}>
 					<Navigation
 						isDropdown={dropdown.catalog}
