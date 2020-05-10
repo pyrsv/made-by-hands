@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, useLocation } from 'react-router-dom';
 import CartPage from './Pages/CartPage';
 import CatalogPage from './Pages/CatalogPage';
 import ProfilePage from './Pages/ProfilePage';
@@ -20,6 +20,8 @@ import {
 
 const App = () => {
 	const dispatch = useDispatch();
+	const location = useLocation();
+	const background = location.state && location.state.background;
 
 	const handleWindowResize = () => {
 		if (window.innerWidth <= 992) {
@@ -55,7 +57,7 @@ const App = () => {
 	return (
 		<AppContainer>
 			<Header />
-			<Switch>
+			<Switch location={background || location}>
 				<Route exact path="/">
 					<IndexPage />
 				</Route>
