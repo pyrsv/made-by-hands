@@ -8,6 +8,7 @@ export const Image = styled.img`
 
 export const StyledTextContainer = styled.div`
 	width: 50%;
+
 	@media (max-width: 576px) {
 		width: 80%;
 	}
@@ -20,9 +21,10 @@ export const Name = styled.p`
 	line-height: 35px;
 	text-transform: capitalize;
 	margin-bottom: 30px;
+
 	@media (max-width: 576px) {
 		margin-top: 50px;
-		font-size: 18px;
+		font-size: 20px;
 		text-align: center;
 	}
 `;
@@ -34,12 +36,17 @@ export const Text = styled.p`
 	line-height: 35px;
 	margin-bottom: 30px;
 	text-align: justify;
+
+	@media (max-width: 762px) {
+		font-size: 14px;
+	}
 `;
 
 export const GridContainer = styled.div`
 	display: flex;
 	justify-content: space-between;
 	padding: 65px 0;
+
 	@media (max-width: 576px) {
 		flex-direction: column;
 		align-items: center;
@@ -49,15 +56,14 @@ export const GridContainer = styled.div`
 export const StyledImageContainer = styled.div`
 	width: 400px;
 	height: 300px;
+
 	@media (max-width: 576px) {
 		order: -1;
+		width: 80%;
 	}
-	@media (max-width: 762px) {
-		width: 300px;
-		height: 180px;
-	}
+
 	@media (max-width: 992px) {
-		width: 320px;
-		height: 200px;
+		width: 40%;
+		height: 80%;
 	}
 `;
