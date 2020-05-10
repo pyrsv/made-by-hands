@@ -33,22 +33,23 @@ const ProductCard = ({
 	type,
 	isFavorite,
 	isInCart,
-	modalToggler,
 }) => {
-	const user = useSelector(state => state.auth.currentUser);
-
 	const dispatch = useDispatch();
+	const user = useSelector(state => state.auth.user);
+
 	const handleCartButtonClick = () => {
 		dispatch(addToCart(id, itemNo));
 		dispatch(setProductToCart(id));
 	};
+
 	const handleHeartButtonClick = () => {
+		dispatch(setProductToWishlist(id));
 		if (user) {
-			dispatch(setProductToWishlist(id));
-			if (!isFavorite) dispatch(addToWishlist(id));
-			else dispatch(deleteFromWishlist(id));
-		} else {
-			modalToggler();
+			if (!isFavorite) {
+				dispatch(addToWishlist(id));
+			} else {
+				dispatch(deleteFromWishlist(id));
+			}
 		}
 	};
 
@@ -82,7 +83,6 @@ const ProductCard = ({
 };
 
 ProductCard.propTypes = {
-	modalToggler: PropTypes.func.isRequired,
 	id: PropTypes.string.isRequired,
 	itemNo: PropTypes.string.isRequired,
 	name: PropTypes.string.isRequired,
