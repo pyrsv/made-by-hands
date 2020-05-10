@@ -6,6 +6,8 @@ import RegisterForm from './Forms/RegisterForm';
 import CloseButton from '../UI/CloseButton/CloseButton';
 import Backdrop from '../UI/Backdrop/Backdrop';
 import { closeNav } from '../../store/actions/UIActions';
+import { setProductToWishlist } from '../../store/actions/catalogActions';
+import { addToWishlist } from '../../store/actions/wishActions';
 import {
 	Content,
 	Title,
@@ -20,6 +22,7 @@ const AuthModal = () => {
 	const location = useLocation();
 	const dispatch = useDispatch();
 	const user = useSelector(state => state.auth.currentUser);
+	const currentProductId = useSelector(state => state.catalog.currentProductId);
 	const isFirstRun = useRef(true);
 	const [form, setForm] = useState({ login: true });
 	const { from } = location.state;
@@ -33,6 +36,11 @@ const AuthModal = () => {
 			isFirstRun.current = false;
 			return;
 		}
+		if (location) {
+			dispatch(setProductToWishlist(currentProductId));
+			dispatch(addToWishlist(currentProductId));
+		}
+
 		if (from) {
 			history.replace(from);
 		} else {

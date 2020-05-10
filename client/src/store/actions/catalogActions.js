@@ -7,6 +7,7 @@ import {
 	LOAD_MORE_PRODUCTS,
 	SET_PRODUCT_TO_CART,
 	SET_PRODUCT_TO_WISHLIST,
+	SET_CURRENT_PRODUCT_ID,
 } from '../types/catalogTypes';
 import { checkProductsForCartAndFavorites } from '../../utils/API';
 
@@ -44,6 +45,11 @@ export const setProductToCart = id => ({
 
 export const setProductToWishlist = id => ({
 	type: SET_PRODUCT_TO_WISHLIST,
+	payload: id,
+});
+
+export const setCurrentProductId = id => ({
+	type: SET_CURRENT_PRODUCT_ID,
 	payload: id,
 });
 

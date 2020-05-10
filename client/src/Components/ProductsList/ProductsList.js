@@ -44,7 +44,6 @@ const ProductsList = () => {
 			}
 		>
 			<ProductsContainer>
-				{/* {isModal.open && <NotLoggedInModal toggleModal={toggleModal} />} */}
 				{products.map(
 					({
 						name,
