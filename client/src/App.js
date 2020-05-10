@@ -6,7 +6,7 @@ import ProfilePage from './Pages/ProfilePage';
 import IndexPage from './Pages/IndexPage';
 import Header from './Components/Header/Header';
 import AppContainer from './Components/AppContainer/AppContainer';
-import ProtectedRoute from './Components/PrivateRoute/PrivateRoute';
+import ProtectedRoute from './HOC/ProtectedRoute/ProtectedRoute';
 import AuthModal from './Components/AuthModal/AuthModal';
 import Wishlist from './Components/Wishlist/Wishlist';
 

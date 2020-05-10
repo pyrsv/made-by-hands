@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import React, { useState, useEffect, useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory, useLocation } from 'react-router-dom';
 import LoginForm from './Forms/LoginForm';
 import RegisterForm from './Forms/RegisterForm';
 import CloseButton from '../UI/CloseButton/CloseButton';
@@ -17,12 +17,28 @@ import {
 
 const AuthModal = () => {
 	const history = useHistory();
+	const location = useLocation();
 	const dispatch = useDispatch();
+	const user = useSelector(state => state.auth.currentUser);
+	const isFirstRun = useRef(true);
 	const [form, setForm] = useState({ login: true });
+	const { from } = location.state;
 
 	useEffect(() => {
 		dispatch(closeNav());
-	});
+	}, []);
+
+	useEffect(() => {
+		if (isFirstRun.current) {
+			isFirstRun.current = false;
+			return;
+		}
+		if (from) {
+			history.replace(from);
+		} else {
+			history.goBack();
+		}
+	}, [user]);
 
 	const handleFormChange = () => {
 		setForm({ ...form, login: !form.login });

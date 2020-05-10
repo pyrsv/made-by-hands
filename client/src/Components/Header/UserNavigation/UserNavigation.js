@@ -36,7 +36,7 @@ const UserNavigation = ({ isDropdown, onDropdownOpen, routes }) => {
 				)}
 			</UserNavItem>
 			<UserNavItem>
-				<NavLink to="/wishlist">
+				<NavLink to="/profile/wishlist">
 					<UserNavIcon accent>
 						<FontAwesomeIcon icon={['fas', 'heart']} />
 					</UserNavIcon>
