@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+import React, { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import LoginForm from './Forms/LoginForm';
 import RegisterForm from './Forms/RegisterForm';
 import CloseButton from '../UI/CloseButton/CloseButton';
 import Backdrop from '../UI/Backdrop/Backdrop';
+import { closeNav } from '../../store/actions/UIActions';
 import {
 	Content,
 	Title,
@@ -13,19 +15,27 @@ import {
 	RegisterLink,
 } from './styles';
 
-const AuthModal = ({ onToggle }) => {
+const AuthModal = () => {
+	const history = useHistory();
+	const dispatch = useDispatch();
 	const [form, setForm] = useState({ login: true });
+
+	useEffect(() => {
+		dispatch(closeNav());
+	});
 
 	const handleFormChange = () => {
 		setForm({ ...form, login: !form.login });
 	};
+
+	const handeleModalClose = () => history.goBack();
 
 	return (
 		<>
 			<ModalWrapper>
 				<Header>
 					<Title>Login</Title>
-					<CloseButton onClick={onToggle} />
+					<CloseButton onClick={handeleModalClose} />
 				</Header>
 				<Content>
 					{form.login ? (
@@ -43,13 +53,9 @@ const AuthModal = ({ onToggle }) => {
 					)}
 				</Content>
 			</ModalWrapper>
-			<Backdrop onClick={onToggle} />
+			<Backdrop onClick={handeleModalClose} />
 		</>
 	);
-};
-
-AuthModal.propTypes = {
-	onToggle: PropTypes.func.isRequired,
 };
 
 export default AuthModal;
