@@ -31,7 +31,7 @@ const UserNavigation = ({
 				)}
 			</UserNavItem>
 			<UserNavItem>
-				<NavLink to="/">
+				<NavLink to="/wishlist">
 					<UserNavIcon accent>
 						<FontAwesomeIcon icon={['fas', 'heart']} />
 					</UserNavIcon>

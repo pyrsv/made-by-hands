@@ -37,9 +37,9 @@ const FilterBar = () => {
 	}, []);
 
 	useEffect(() => {
-		dispatch(
-			getFilteredProducts({ ...currentParams, ...config, startPage: 1 })
-		);
+		// dispatch(
+		// 	getFilteredProducts({ ...currentParams, ...config, startPage: 1 })
+		// );
 	}, [location]);
 
 	useEffect(() => {
@@ -83,10 +83,21 @@ const FilterBar = () => {
 						);
 						params.minPrice = priceRange.minPrice;
 						params.maxPrice = priceRange.maxPrice;
-						const str = querystring.stringify(params, { arrayFormat: 'comma' });
+						const str = querystring.stringify(params, {
+							arrayFormat: 'comma',
+							skipEmptyString: true,
+						});
 						history.push({
 							search: `?${str}`,
 						});
+
+						dispatch(
+							getFilteredProducts({
+								...config,
+								...querystring.parse(str),
+								startPage: 1,
+							})
+						);
 					}}
 				>
 					{({ values, handleSubmit, setFieldValue }) => {

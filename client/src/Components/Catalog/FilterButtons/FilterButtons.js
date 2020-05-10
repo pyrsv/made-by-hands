@@ -1,6 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getFilteredProducts } from '../../../store/actions/catalogActions';
+import { toggleFilters } from '../../../store/actions/UIActions';
 import CustomSelect from '../../UI/Select/Select';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { ButtonsContainer, FilterButton, FilterIcon } from './styles';
@@ -39,7 +40,7 @@ const FilterButtons = () => {
 	return (
 		<>
 			<ButtonsContainer>
-				<FilterButton>
+				<FilterButton onClick={() => dispatch(toggleFilters())}>
 					<FilterIcon>
 						<FontAwesomeIcon icon={['fas', 'filter']} />
 					</FilterIcon>
