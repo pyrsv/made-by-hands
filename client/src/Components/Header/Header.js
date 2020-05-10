@@ -48,9 +48,9 @@ const Header = () => {
 	];
 
 	const profileRoutes = [
-		<NavLink to="/">contact info</NavLink>,
-		<NavLink to="/">adress book</NavLink>,
-		<NavLink to="/">favorites</NavLink>,
+		<NavLink to="/profile/contact-info">contact info</NavLink>,
+		<NavLink to="/profile/adress-book">adress book</NavLink>,
+		<NavLink to="/profile/wishlist">wishlist</NavLink>,
 		<span
 			role="button"
 			tabIndex="0"

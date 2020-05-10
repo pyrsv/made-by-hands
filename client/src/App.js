@@ -9,6 +9,9 @@ import Header from './Components/Header/Header';
 import AppContainer from './Components/AppContainer/AppContainer';
 import ProtectedRoute from './Components/PrivateRoute/PrivateRoute';
 import { getUser } from './store/actions/authActions';
+
+import Wishlist from './Components/Wishlist/Wishlist';
+
 import {
 	setHeaderMobile,
 	setMobile,
@@ -65,6 +68,10 @@ const App = () => {
 				<ProtectedRoute path="/profile">
 					<ProfilePage />
 				</ProtectedRoute>
+
+				<Route path="/wishlist">
+					<Wishlist />
+				</Route>
 			</Switch>
 		</AppContainer>
 	);

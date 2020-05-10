@@ -14,6 +14,7 @@ import { ProductsContainer, ProductsPreloader } from './styles';
 
 const ProductsList = () => {
 	const dispatch = useDispatch();
+
 	const location = useLocation();
 	const currentParams = querystring.parse(location.search.slice(1));
 	const products = useSelector(state => state.catalog.currentProducts);
@@ -43,6 +44,7 @@ const ProductsList = () => {
 			}
 		>
 			<ProductsContainer>
+				{/* {isModal.open && <NotLoggedInModal toggleModal={toggleModal} />} */}
 				{products.map(
 					({
 						name,
@@ -52,6 +54,7 @@ const ProductsList = () => {
 						_id,
 						isInCart,
 						imageUrls: [image],
+						isFavorite,
 					}) => (
 						<ProductCard
 							id={_id}
@@ -63,6 +66,7 @@ const ProductsList = () => {
 							type="olive"
 							itemNo={itemNo}
 							isInCart={isInCart}
+							isFavorite={isFavorite}
 						/>
 					)
 				)}

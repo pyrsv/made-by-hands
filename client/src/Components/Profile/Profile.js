@@ -3,6 +3,7 @@ import { Switch, Route, useRouteMatch } from 'react-router-dom';
 import LayoutContainer from '../LayoutContainer/LayoutContainer';
 import Title from '../UI/Title/title';
 import ProfileNavigation from './ProfileNavigation/ProfileNavigation';
+import Wishlist from '../Wishlist/Wishlist';
 
 const Profile = () => {
 	const { path } = useRouteMatch();
@@ -14,7 +15,9 @@ const Profile = () => {
 			<Switch>
 				<Route path={`${path}/contact-info`}>Contact Info</Route>
 				<Route path={`${path}/adress-book`}>Adress book</Route>
-				<Route path={`${path}/wishlist`}>Favorites</Route>
+				<Route path={`${path}/wishlist`}>
+					<Wishlist />
+				</Route>
 			</Switch>
 		</LayoutContainer>
 	);
