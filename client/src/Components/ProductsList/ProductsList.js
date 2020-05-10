@@ -30,7 +30,7 @@ const ProductsList = () => {
 		);
 		return () =>
 			dispatch(updateConfig({ ...config, perPage: 12, startPage: 1 }));
-	}, []);
+	}, [location]);
 
 	return (
 		<InfiniteScroll
