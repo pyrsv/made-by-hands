@@ -30,7 +30,7 @@ const ProductsList = () => {
 		);
 		return () =>
 			dispatch(updateConfig({ ...config, perPage: 12, startPage: 1 }));
-	}, []);
+	}, [location]);
 
 	return (
 		<InfiniteScroll
@@ -44,7 +44,6 @@ const ProductsList = () => {
 			}
 		>
 			<ProductsContainer>
-				{/* {isModal.open && <NotLoggedInModal toggleModal={toggleModal} />} */}
 				{products.map(
 					({
 						name,

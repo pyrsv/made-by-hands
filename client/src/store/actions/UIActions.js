@@ -1,5 +1,6 @@
 import {
-	TOGGLE_NAV,
+	OPEN_NAV,
+	CLOSE_NAV,
 	TOGGLE_FILTERS,
 	TOGGLE_MODAL,
 	SET_HEADER_MOBILE,
@@ -7,8 +8,11 @@ import {
 	SET_TABLET,
 } from '../types/UITypes';
 
-export const toggleNav = () => ({
-	type: TOGGLE_NAV,
+export const openNav = () => ({
+	type: OPEN_NAV,
+});
+export const closeNav = () => ({
+	type: CLOSE_NAV,
 });
 
 export const toggleFilters = () => ({

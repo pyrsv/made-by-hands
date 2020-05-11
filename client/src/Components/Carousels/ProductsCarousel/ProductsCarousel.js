@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, memo } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 import ProductCard from '../../ProductCard/ProductCard';
@@ -152,4 +152,4 @@ SamplePrevArrow.propTypes = {
 	onKeyUp: PropTypes.func.isRequired,
 };
 
-export default ProductCarousel;
+export default memo(ProductCarousel);

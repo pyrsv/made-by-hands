@@ -1,4 +1,5 @@
 import React, { memo } from 'react';
+import { NavLink, useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Button from '../UI/Button/Button';
 import FavoriteHeart from '../UI/FavoriteHeart/FavoriteHeart';
@@ -21,6 +22,7 @@ import { addToCart } from '../../store/actions/cartActions';
 import {
 	setProductToCart,
 	setProductToWishlist,
+	setCurrentProductId,
 } from '../../store/actions/catalogActions';
 
 const ProductCard = ({
@@ -35,7 +37,8 @@ const ProductCard = ({
 	isInCart,
 }) => {
 	const dispatch = useDispatch();
-	const user = useSelector(state => state.auth.user);
+	const location = useLocation();
+	const user = useSelector(state => state.auth.currentUser);
 
 	const handleCartButtonClick = () => {
 		dispatch(addToCart(id, itemNo));
@@ -44,14 +47,23 @@ const ProductCard = ({
 
 	const handleHeartButtonClick = () => {
 		dispatch(setProductToWishlist(id));
-		if (user) {
-			if (!isFavorite) {
-				dispatch(addToWishlist(id));
-			} else {
-				dispatch(deleteFromWishlist(id));
-			}
+		if (!isFavorite) {
+			dispatch(addToWishlist(id));
+		} else {
+			dispatch(deleteFromWishlist(id));
 		}
 	};
+
+	// useEffect(() => {
+	// 	if (isFirstRun.current) {
+	// 		isFirstRun.current = false;
+	// 		return;
+	// 	}
+	// 	console.log('user in useEffect ProductCard', user);
+	// 	if (user) {
+	// 		handleHeartButtonClick();
+	// 	}
+	// }, [user]);
 
 	return (
 		<Card>
@@ -59,10 +71,26 @@ const ProductCard = ({
 			<CardInfo type={type}>
 				<CardInfoRow>
 					<ProductName>{name}</ProductName>
-					<FavoriteHeart
-						isFavorite={isFavorite}
-						onClick={handleHeartButtonClick}
-					/>
+					{user ? (
+						<FavoriteHeart
+							isFavorite={isFavorite}
+							onClick={handleHeartButtonClick}
+						/>
+					) : (
+						<NavLink
+							to={{
+								pathname: '/login',
+								state: {
+									background: location,
+								},
+							}}
+						>
+							<FavoriteHeart
+								isFavorite={isFavorite}
+								onClick={() => dispatch(setCurrentProductId(id))}
+							/>
+						</NavLink>
+					)}
 				</CardInfoRow>
 				<CardInfoRow>
 					<Button
