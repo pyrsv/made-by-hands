@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import LayoutContainer from '../LayoutContainer/LayoutContainer';
+import LayoutContainer from '../../LayoutContainer/LayoutContainer';
 import WishlistItem from './WishlistItem';
 import { WishlistContainer } from './styles';
 
