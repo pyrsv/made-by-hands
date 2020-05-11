@@ -1,13 +1,14 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Formik } from 'formik';
 import Button from '../../UI/Button/Button';
 import InputField from '../../UI/InputFiels/InputField';
 import { InfoWrapper, Description, Form } from './styles';
+import { updateUser } from '../../../store/actions/authActions';
 
 const ContactInfo = () => {
-	// const dispatch = useDispatch();
-	const { firstName, lastName, email, birthdayDate } = useSelector(
+	const dispatch = useDispatch();
+	const { firstName, lastName, email, birthdate } = useSelector(
 		state => state.auth.currentUser
 	);
 
@@ -20,9 +21,9 @@ const ContactInfo = () => {
 					firstName,
 					lastName,
 					email,
-					birthdayDate: birthdayDate || '',
+					birthdate: birthdate || '',
 				}}
-				onSubmit={values => values}
+				onSubmit={values => dispatch(updateUser(values))}
 			>
 				{({ values, handleChange, handleBlur, handleSubmit }) => (
 					<Form>
@@ -55,13 +56,13 @@ const ContactInfo = () => {
 						/>
 						<InputField
 							type="text"
-							name="birthdayDate"
-							label="Birhday date"
+							name="birthdate"
+							label="Birthdate"
 							target="form"
 							placeholder="YYYY.MM.DD"
 							onChange={handleChange}
 							onBlur={handleBlur}
-							value={values.birthdayDate}
+							value={values.birthdate}
 						/>
 						<Button
 							type="submit"
