@@ -11,9 +11,16 @@ import SearchField from './SearchField/SearchField';
 import UserNavigation from './UserNavigation/UserNavigation';
 import Drawer from '../UI/Drawer/Drawer';
 import HeaderButtons from './HeaderButtons/HeaderButtons';
-import { userLogout } from '../../store/actions/authActions';
+import { userLogout, getUser } from '../../store/actions/authActions';
 import { getCategories } from '../../store/actions/filtersActions';
-import { toggleModal, toggleNav } from '../../store/actions/UIActions';
+import {
+	toggleModal,
+	openNav,
+	closeNav,
+	setHeaderMobile,
+	setMobile,
+	setTablet,
+} from '../../store/actions/UIActions';
 import {
 	StyledHeader,
 	Container,
@@ -33,6 +40,37 @@ const Header = () => {
 		catalog: false,
 		profile: false,
 	});
+
+	const handleWindowResize = () => {
+		dispatch(closeNav());
+		if (window.innerWidth <= 992) {
+			dispatch(setHeaderMobile(true));
+		} else {
+			dispatch(setHeaderMobile(false));
+		}
+
+		if (window.innerWidth <= 768) {
+			dispatch(setTablet(true));
+		} else {
+			dispatch(setTablet(false));
+		}
+
+		if (window.innerWidth <= 576) {
+			dispatch(setMobile(true));
+		} else {
+			dispatch(setMobile(false));
+		}
+	};
+
+	useEffect(() => {
+		handleWindowResize();
+		dispatch(getUser());
+
+		window.addEventListener('resize', handleWindowResize);
+		return () => {
+			window.removeEventListener('resize', handleWindowResize);
+		};
+	}, []);
 
 	const [isSearch, setSearch] = useState(false);
 
@@ -93,7 +131,6 @@ const Header = () => {
 										isDropdown={dropdown.profile}
 										routes={profileRoutes}
 										onDropdownOpen={() => handleDropdownToggle('profile')}
-										onModalOpen={() => dispatch(toggleModal())}
 									/>
 								</Info>
 								<Navigation
@@ -108,7 +145,7 @@ const Header = () => {
 							<HamburgerWrapper isOpen={isNav}>
 								<HamburgerMenu
 									isOpen={isNav}
-									menuClicked={() => dispatch(toggleNav())}
+									menuClicked={() => dispatch(openNav())}
 									width={28}
 									height={20}
 									strokeWidth={2}
@@ -126,7 +163,7 @@ const Header = () => {
 				</Container>
 			</LayoutContainer>
 			{isNav && isMobile && (
-				<Drawer heading="Menu" onToggle={() => dispatch(toggleNav())}>
+				<Drawer heading="Menu" onToggle={() => dispatch(closeNav())}>
 					<Navigation
 						isDropdown={dropdown.catalog}
 						routes={catalogRoutes}
@@ -136,7 +173,6 @@ const Header = () => {
 						isDropdown={dropdown.profile}
 						routes={profileRoutes}
 						onDropdownOpen={() => handleDropdownToggle('profile')}
-						onModalOpen={() => dispatch(toggleModal())}
 					/>
 				</Drawer>
 			)}

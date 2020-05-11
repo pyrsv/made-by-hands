@@ -37,12 +37,6 @@ const FilterBar = () => {
 	}, []);
 
 	useEffect(() => {
-		// dispatch(
-		// 	getFilteredProducts({ ...currentParams, ...config, startPage: 1 })
-		// );
-	}, [location]);
-
-	useEffect(() => {
 		const initialFields = getInitialFields(currentParams, {
 			categories,
 			color,

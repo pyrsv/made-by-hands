@@ -6,6 +6,7 @@ import {
 	LOAD_MORE_PRODUCTS,
 	SET_PRODUCT_TO_CART,
 	SET_PRODUCT_TO_WISHLIST,
+	SET_CURRENT_PRODUCT_ID,
 } from '../types/catalogTypes';
 
 const initialState = {
@@ -19,6 +20,7 @@ const initialState = {
 		perPage: 12,
 		startPage: 1,
 	},
+	currentProductId: null,
 };
 
 export const catalogReducer = (state = initialState, { type, payload }) => {
@@ -77,7 +79,14 @@ export const catalogReducer = (state = initialState, { type, payload }) => {
 						? { ...prod, isFavorite: !prod.isFavorite }
 						: prod;
 				}),
+				currentProductId: null,
 			};
+		case SET_CURRENT_PRODUCT_ID: {
+			return {
+				...state,
+				currentProductId: payload,
+			};
+		}
 		default:
 			return state;
 	}

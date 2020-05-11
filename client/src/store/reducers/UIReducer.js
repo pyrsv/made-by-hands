@@ -1,7 +1,8 @@
 import {
 	TOGGLE_FILTERS,
 	TOGGLE_MODAL,
-	TOGGLE_NAV,
+	CLOSE_NAV,
+	OPEN_NAV,
 	SET_HEADER_MOBILE,
 	SET_MOBILE,
 	SET_TABLET,
@@ -22,8 +23,10 @@ export const UIReducer = (state = initialState, { type, payload }) => {
 			return { ...state, isDrawer: !state.isDrawer };
 		case TOGGLE_MODAL:
 			return { ...state, isModal: !state.isModal, isNav: false };
-		case TOGGLE_NAV:
-			return { ...state, isNav: !state.isNav };
+		case OPEN_NAV:
+			return { ...state, isNav: true };
+		case CLOSE_NAV:
+			return { ...state, isNav: false };
 		case SET_MOBILE:
 			return { ...state, isMobile: payload };
 		case SET_TABLET:
