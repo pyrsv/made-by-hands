@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Field } from 'formik';
 
 export const CartContainer = styled.div`
 	background: ${props => props.theme.lightPink};
@@ -143,4 +144,52 @@ export const CartIsEmpty = styled.div`
 	color: ${props => props.theme.accentRed};
 	font-weight: bold;
 	margin-top: 20px;
+`;
+
+export const StyledFormColumn = styled.div`
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 26px;
+	width: 26%;
+`;
+
+export const DisabledStyledButton = styled.button`
+	display: inline-block;
+	position: relative;
+	box-sizing: border-box;
+	border-radius: 4px;
+	font-size: 16px;
+	min-width: 127px;
+	cursor: pointer;
+	width: ${props => (props.size === 'wide' ? '100%' : 'auto')};
+	padding: 8px 12px;
+	text-transform: ${props =>
+		props.color === 'dark' ? 'uppercase' : 'titlecase'};
+	font-weight: ${props => (props.color === 'dark' ? '600' : '500')};
+	font-family: 'Raleway', sans-serif;
+	background-color: #f0f0f0;
+	color: #6d6d6d;
+	border: 1px solid #6d6d6d;
+	outline: none;
+`;
+
+export const StyledField = styled(Field)`
+	display: inline-block;
+	border: 1px solid #16161c;
+	box-sizing: border-box;
+	border-radius: 4px;
+	padding: 6px 12px;
+	font-family: Raleway;
+	font-size: 16px;
+	outline: none;
+	background-color: transparent;
+	width: 100%;
+	margin-top: 6px;
+`;
+export const StyledLabel = styled.label`
+	margin: 17px 0;
+	font-family: 'Raleway', sans-serif;
+	font-weight: 500;
+	font-size: 14px;
+	line-height: 16px;
 `;
