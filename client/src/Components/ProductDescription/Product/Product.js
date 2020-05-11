@@ -4,6 +4,8 @@ import FavoriteHeart from '../../UI/FavoriteHeart/FavoriteHeart';
 import DescriptionPageCarousel from '../../Carousels/DescriptionPageCarousel/DescriptionPageCarousel';
 import PropTypes from 'prop-types';
 import Parametrs from '../Parametrs/Parametrs';
+import Rating from '../Rating/Rating';
+
 import {
 	GridContainer,
 	DescriptionArea,
@@ -25,6 +27,7 @@ const Product = ({
 	isFavorite,
 	onAddToFavorites,
 	onAddToCart,
+	id,
 }) => {
 	return (
 		<GridContainer>
@@ -40,6 +43,9 @@ const Product = ({
 					<span>
 						<FavoriteHeart isFavorite={isFavorite} onClick={onAddToFavorites} />
 					</span>
+				</BlockText>
+				<BlockText>
+					<Rating id={id} />
 				</BlockText>
 				<BlockText>
 					{previousPrice && <OldPrice>{previousPrice}€</OldPrice>}
@@ -62,6 +68,7 @@ const Product = ({
 };
 
 Product.propTypes = {
+	id: PropTypes.string.isRequired,
 	description: PropTypes.string.isRequired,
 	name: PropTypes.string.isRequired,
 	imageUrls: PropTypes.arrayOf(PropTypes.string).isRequired,

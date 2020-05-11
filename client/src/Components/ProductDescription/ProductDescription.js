@@ -13,6 +13,7 @@ const ProductDescription = ({ productNoParam }) => {
 			setItem(res.data);
 		});
 	};
+
 	useEffect(() => {
 		getProduct(productNoParam);
 	}, [productNoParam]);
@@ -26,6 +27,7 @@ const ProductDescription = ({ productNoParam }) => {
 		isInCart,
 		parameters,
 		isFavorite,
+		_id,
 	} = item;
 
 	return (
@@ -43,6 +45,7 @@ const ProductDescription = ({ productNoParam }) => {
 						isInCart={isInCart}
 						parameters={parameters}
 						isFavorite={isFavorite}
+						id={_id}
 					/>
 				)}
 			</LayoutContainer>
