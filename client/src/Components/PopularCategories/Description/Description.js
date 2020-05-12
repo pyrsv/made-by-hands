@@ -11,12 +11,16 @@ import Button from '../../UI/Button/Button';
 import PropTypes from 'prop-types';
 
 const Description = ({ name, image, description, isReverse }) => {
+	const changePage = () => {
+		window.location.assign('https://www.google.com/');
+	};
+
 	return isReverse ? (
 		<GridContainer>
 			<StyledTextContainer>
 				<Name>{name}</Name>
 				<Text>{description}</Text>
-				<Button text="More" onClick="go" />
+				<Button text="More" onClick={() => changePage()} />
 			</StyledTextContainer>
 
 			<StyledImageContainer>
@@ -32,7 +36,7 @@ const Description = ({ name, image, description, isReverse }) => {
 			<StyledTextContainer>
 				<Name>{name}</Name>
 				<Text>{description}</Text>
-				<Button text="More" onClick="go" />
+				<Button text="More" onClick={() => changePage()} />
 			</StyledTextContainer>
 		</GridContainer>
 	);
