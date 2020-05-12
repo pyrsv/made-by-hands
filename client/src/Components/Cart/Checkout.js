@@ -15,7 +15,7 @@ import {
 	StyledRadio,
 	FillTheFields,
 } from './styles';
-import PropTypes from 'prop-types';
+import PropTypes, { object } from 'prop-types';
 
 const valid = {
 	name: string().required(),
@@ -23,7 +23,15 @@ const valid = {
 	phone: number().required().positive().integer(),
 };
 
-function FormData({ errors, touched, isValid, submitForm }) {
+function FormData({
+	errors,
+	touched,
+	isValid,
+	submitForm,
+	values,
+	handleBlur,
+	handleChange,
+}) {
 	const [isPostalPoints, togglePP] = useState({ showed: true });
 	const [isAddress, toggleAddress] = useState({ showed: false });
 
@@ -42,6 +50,7 @@ function FormData({ errors, touched, isValid, submitForm }) {
 		toggleAddress({ showed: true });
 		valid.city = string().required();
 		valid.street = string().required();
+		values.delivery = '';
 	};
 
 	return (
@@ -92,7 +101,13 @@ function FormData({ errors, touched, isValid, submitForm }) {
 					{isPostalPoints.showed && (
 						<StyledLabel>
 							Choose postal delivery point
-							<StyledField as="select" name="delivery">
+							<StyledField
+								as="select"
+								name="delivery"
+								value={values.delivery}
+								onChange={handleChange}
+								onBlur={handleBlur}
+							>
 								<option value="point1"> point 1</option>
 								<option value="point2"> point 2</option>
 							</StyledField>
@@ -152,6 +167,7 @@ const Checkout = withFormik({
 			name: '',
 			surname: '',
 			phone: '',
+			delivery: 'point1',
 		};
 	},
 	isInitialValid: false,
@@ -173,7 +189,8 @@ const Checkout = withFormik({
 	},
 	validationSchema: yup.object().shape(valid),
 	// eslint-disable-next-line no-unused-vars
-	handleSubmit(values) {
+	handleSubmit(values, { setSubmitting }) {
+		setSubmitting(false);
 		// console.log('submited data ', values);
 	},
 })(FormData);
@@ -190,6 +207,10 @@ FormData.propTypes = {
 	errors: PropTypes.object.isRequired,
 	isValid: PropTypes.bool.isRequired,
 	submitForm: PropTypes.func.isRequired,
+	handleChange: PropTypes.func.isRequired,
+	handleBlur: PropTypes.func.isRequired,
+	delivery: PropTypes.string.isRequired,
+	values: PropTypes.arrayOf(object).isRequired,
 };
 
 export default Checkout;
