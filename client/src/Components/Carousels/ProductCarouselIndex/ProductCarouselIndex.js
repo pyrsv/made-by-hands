@@ -19,9 +19,9 @@ const ProductCarouselIndex = () => {
 
 	const products = useSelector(state => state.catalog.currentProducts);
 
-	// const shuffled = products.sort(() => 0.5 - Math.random());
-	// const selected = shuffled.slice(0, 8);
+	products.sort((a, b) => Date.parse(a.date) - Date.parse(b.date)).reverse();
 	const selected = products.slice(0, 6);
+
 	return <ProductsCarousel selected={selected} />;
 };
 
