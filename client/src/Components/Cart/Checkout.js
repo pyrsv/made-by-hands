@@ -137,6 +137,21 @@ const Checkout = withFormik({
 		};
 	},
 	isInitialValid: false,
+	validate: values => {
+		const errors = {};
+
+		if (!values.city) {
+			errors.city = 'Required';
+		}
+		if (!values.street) {
+			errors.street = 'Required';
+		}
+		if (!values.house) {
+			errors.street = 'Required';
+		}
+
+		return errors;
+	},
 	validationSchema: yup.object().shape({
 		name: string().required(),
 		surname: string().required(),
