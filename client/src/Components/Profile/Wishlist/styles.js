@@ -13,12 +13,13 @@ export const WishlistItemImage = styled.img`
 export const WishlistItemContainer = styled.div`
 	position: relative;
 	display: flex;
-	padding: 24px 0;
+	padding: 24px 0 24px 0;
 	border-bottom: 1px solid ${props => props.theme.mainDark};
 	@media (max-width: 576px) {
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
+		padding: 24px 0 10px 0;
 	}
 `;
 export const WishlistItemInfo = styled.div`
