@@ -157,6 +157,7 @@ export const FlexContainer = styled.div`
 	margin-bottom: 10px;
 	border-radius: 4px;
 	position: relative;
+	background: ${props => props.theme.whiteBackground};
 `;
 
 export const StyledFormColumn = styled.div`
@@ -204,6 +205,7 @@ export const StyledLabel = styled.label`
 	font-weight: 500;
 	font-size: 14px;
 	line-height: 16px;
+	text-align: center;
 `;
 export const StyledRadio = styled.label`
 	margin-bottom: 17px;
@@ -211,6 +213,7 @@ export const StyledRadio = styled.label`
 	font-weight: 500;
 	font-size: 14px;
 	line-height: 16px;
+	text-align: center;
 `;
 
 export const ButtonWrapper = styled.div`
