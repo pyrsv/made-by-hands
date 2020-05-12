@@ -98,7 +98,7 @@ function FormData({
 								showPostalPoints();
 							}}
 						/>
-						Delivery to postal point
+						Delivery to the post
 					</StyledRadio>
 
 					{isPostalPoints.showed && (
@@ -122,11 +122,11 @@ function FormData({
 						<input
 							value="address"
 							type="radio"
-							text="Delivery to address"
+							text="Delivery to your address"
 							name="delivery"
 							onClick={() => showAddress()}
 						/>
-						Delivery to address
+						Delivery to your address
 					</StyledRadio>
 					{isAddress.showed && (
 						<ColumnOfInputs>

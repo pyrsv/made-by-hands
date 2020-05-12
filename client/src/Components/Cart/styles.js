@@ -204,14 +204,13 @@ export const StyledLabel = styled.label`
 	font-family: 'Raleway', sans-serif;
 	font-weight: 500;
 	font-size: 14px;
-	line-height: 16px;
 	text-align: center;
 `;
 export const StyledRadio = styled.label`
 	margin-bottom: 17px;
 	font-family: 'Raleway', sans-serif;
 	font-weight: 500;
-	font-size: 14px;
+	font-size: 22px;
 	line-height: 16px;
 	text-align: center;
 `;
@@ -226,15 +225,17 @@ export const ColumnOfInputs = styled.div`
 	flex-direction: column;
 `;
 export const FirstColumn = styled.div`
-	margin-top: 35px;
+	margin-top: 32px;
 `;
 
 export const FillTheFields = styled.div`
 	font-family: 'Raleway', sans-serif;
-	font-weight: 500;
-	font-size: 22px;
+	font-weight: 700;
+	font-size: 28px;
 	display: inline-block;
 	position: absolute;
 	top: 7%;
 	left: 2%;
+	text-transform: capitalize;
+	color: ${props => props.theme.mainDark};
 `;
