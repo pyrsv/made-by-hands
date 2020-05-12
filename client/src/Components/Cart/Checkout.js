@@ -53,6 +53,7 @@ function FormData({
 		toggleAddress({ showed: true });
 		valid.city = string().required();
 		valid.street = string().required();
+		valid.house = number().required();
 		values.delivery = '';
 	};
 
@@ -176,7 +177,6 @@ const Checkout = withFormik({
 	isInitialValid: false,
 	validate: values => {
 		const errors = {};
-
 		if (valid.city) {
 			if (!values.city) {
 				errors.city = 'city is required';
@@ -184,8 +184,9 @@ const Checkout = withFormik({
 			if (!values.street) {
 				errors.street = 'Street is required';
 			}
-			if (!values.house) {
-				errors.house = 'house is required';
+			// eslint-disable-next-line no-restricted-globals
+			if (!values.house || isNaN(+values.house)) {
+				errors.house = 'house is required as number';
 			}
 		}
 		return errors;
