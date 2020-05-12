@@ -1,5 +1,6 @@
+/* eslint-disable react/require-default-props */
 import React, { memo } from 'react';
-import PropTypes from 'prop-types';
+import PropTypes, { object } from 'prop-types';
 import ProductCard from '../../ProductCard/ProductCard';
 import {
 	ProductCardContainer,
@@ -124,16 +125,16 @@ const ProductCarousel = ({ selected }) => {
 };
 
 SampleNextArrow.propTypes = {
-	onClick: PropTypes.func.isRequired,
-	onKeyUp: PropTypes.func.isRequired,
+	onClick: PropTypes.func,
+	onKeyUp: PropTypes.func,
 };
 SamplePrevArrow.propTypes = {
-	onClick: PropTypes.func.isRequired,
-	onKeyUp: PropTypes.func.isRequired,
+	onClick: PropTypes.func,
+	onKeyUp: PropTypes.func,
 };
 
 ProductCarousel.propTypes = {
-	selected: PropTypes.arrayOf.isRequired,
+	selected: PropTypes.arrayOf(object),
 };
 
 export default memo(ProductCarousel);
