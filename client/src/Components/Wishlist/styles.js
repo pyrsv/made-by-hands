@@ -30,7 +30,6 @@ export const WishlistItemInfo = styled.div`
 	font-style: normal;
 	font-weight: 500;
 	font-size: 14px;
-
 	line-height: 18px;
 	color: ${props => props.theme.mainDark};
 	text-transform: capitalize;
@@ -38,7 +37,8 @@ export const WishlistItemInfo = styled.div`
 		justify-content: center;
 		align-items: center;
 		width: 100%;
-		margin: 30px 0;
+		margin: 30px 0 10px 0;
+		text-align: center;
 	}
 `;
 export const WishlistItemName = styled.span`
@@ -46,6 +46,7 @@ export const WishlistItemName = styled.span`
 	font-style: normal;
 	font-weight: bold;
 	font-size: 22px;
+	text-align: center;
 `;
 
 export const WishlistItemPrice = styled.div`
@@ -59,6 +60,10 @@ export const WishlistItemPrice = styled.div`
 	font-weight: normal;
 	font-size: 24px;
 	line-height: 15px;
+	@media (max-width: 576px) {
+		margin-top: 10px;
+		height: 35px;
+	}
 `;
 
 export const ButtonInWishlist = styled.div`
@@ -84,7 +89,8 @@ export const DeleteItemFromWishlist = styled.button`
 `;
 
 export const WishlistItemImageContainer = styled.div`
-	display: inline-block;
+	display: flex;
+	justify-content: center;
 	width: 181px;
 	height: 145px;
 	border-radius: 4px;
