@@ -5,6 +5,7 @@ import DescriptionPageCarousel from '../../Carousels/DescriptionPageCarousel/Des
 import PropTypes from 'prop-types';
 import Parametrs from '../Parametrs/Parametrs';
 import Rating from '../Rating/Rating';
+import Comments from '../Comments/Comments';
 
 import {
 	GridContainer,
@@ -61,6 +62,9 @@ const Product = ({
 						text={isInCart ? 'In Cart' : 'Buy'}
 						onClick={onAddToCart}
 					/>
+				</BlockText>
+				<BlockText>
+					<Comments id={id} />
 				</BlockText>
 			</div>
 		</GridContainer>

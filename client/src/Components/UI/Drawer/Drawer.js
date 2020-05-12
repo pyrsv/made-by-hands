@@ -1,6 +1,5 @@
 import React from 'react';
 import { RemoveScroll } from 'react-remove-scroll';
-
 import PropTypes from 'prop-types';
 import Backdrop from '../Backdrop/Backdrop';
 import CloseButton from '../CloseButton/CloseButton';

@@ -1,5 +1,4 @@
-import React from 'react';
-
+import React, { useState } from 'react';
 import {
 	ModalWrapper,
 	Header,
@@ -8,12 +7,18 @@ import {
 } from '../../../AuthModal/styles';
 import { RatingContainer } from './styles';
 import Backdrop from '../../../UI/Backdrop/Backdrop';
-import Rater from 'react-rater';
 import FormToAddComment from './FormRating/FormToAddComment';
 import CloseButtom from '../../../UI/CloseButton/CloseButton';
 import PropTypes from 'prop-types';
+import RatingStars from '../../../UI/RatingStars/RatingStars';
 
 const ModalRating = ({ toggleModal, id }) => {
+	const [ratingStar, setRating] = useState(null);
+
+	const setRatingStar = rating => {
+		setRating(rating);
+	};
+
 	return (
 		<>
 			<ModalWrapper>
@@ -23,9 +28,13 @@ const ModalRating = ({ toggleModal, id }) => {
 				</Header>
 				<Content>
 					<RatingContainer>
-						<Rater total={5} />
+						<RatingStars rating={ratingStar} onStarClick={setRatingStar} edit />
 					</RatingContainer>
-					<FormToAddComment id={id} />
+					<FormToAddComment
+						toggleModal={toggleModal}
+						rating={ratingStar}
+						id={id}
+					/>
 				</Content>
 			</ModalWrapper>
 			<Backdrop onClick={toggleModal} />

@@ -85,6 +85,9 @@ export const NameOfProduct = styled.p`
 	@media screen and (max-width: 576px) {
 		font-size: 12px;
 	}
+	@media screen and (max-width: 320px) {
+		font-size: 11px;
+	}
 `;
 
 export const Price = styled.span`

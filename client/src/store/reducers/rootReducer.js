@@ -6,6 +6,7 @@ import { cartReducer } from './cartReducer';
 import { UIReducer } from './UIReducer';
 import { filtersReducer } from './filtersReducer';
 import { wishlistReducer } from './wishlistReducer';
+import { commentsReducer } from './commentsReducer';
 
 const rootReducer = combineReducers({
 	itemsReducer,
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
 	UI: UIReducer,
 	filters: filtersReducer,
 	wishlistReducer,
+	comments: commentsReducer,
 });
 
 export default rootReducer;
