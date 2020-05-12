@@ -5,64 +5,61 @@ import * as yup from 'yup';
 import { string, number } from 'yup';
 import Button from '../UI/Button/Button';
 import {
+	FlexContainer,
 	StyledFormColumn,
 	DisabledStyledButton,
 	StyledLabel,
 	StyledField,
+	ButtonWrapper,
 } from './styles';
 import PropTypes from 'prop-types';
 
 function FormData({ errors, touched, isValid, submitForm }) {
 	return (
 		<Form>
-			<StyledFormColumn>
-				<StyledLabel>
-					{' '}
-					Enter your name
-					<StyledField className="field" name="name" />
-				</StyledLabel>
-				{errors.name && touched.name ? <div>{errors.name}</div> : null}
-				<StyledLabel>
-					{' '}
-					Enter your surname
-					<StyledField className="field" name="surname" />
-				</StyledLabel>
-				{errors.surname && touched.surname ? <div>{errors.surname}</div> : null}
-				{/* {/* <Field className="field" name="age" placeholder="enter age"></Field>
-      {errors.age && touched.age ? <div>{errors.age}</div> : null} */}
-				{/* <Field
-        className="field"
-        name="address"
-        placeholder="enter address"
-      ></Field> */}
-				{/* {errors.address && touched.address ? <div>{errors.address}</div> : null} */}
-				<StyledLabel>
-					{' '}
-					Enter your phone number
-					<StyledField className="field" name="phone" />
-				</StyledLabel>
-				{errors.phone && touched.phone ? <div>{errors.phone}</div> : null}
-			</StyledFormColumn>
-			{isValid ? (
-				<Button onClick={submitForm} text="checkout" />
-			) : (
-				<DisabledStyledButton
-					type="submit"
-					disabled
-					// onClick={() =>
-					//   validateForm().then(resolve => {
-					//     if (
-					//       Object.keys(resolve).length &&
-					//       resolve.constructor === Object
-					//     ) {
-					//       console.log("fill the fields")
-					//     }
-					//   })
-					// }
-				>
-					Checkout
-				</DisabledStyledButton>
-			)}
+			<FlexContainer>
+				<StyledFormColumn>
+					<StyledLabel>
+						{' '}
+						Enter your name
+						<StyledField className="field" name="name" />
+					</StyledLabel>
+					{errors.name && touched.name ? <div>{errors.name}</div> : null}
+					<StyledLabel>
+						{' '}
+						Enter your surname
+						<StyledField className="field" name="surname" />
+					</StyledLabel>
+					{errors.surname && touched.surname ? (
+						<div>{errors.surname}</div>
+					) : null}
+
+					<StyledLabel>
+						{' '}
+						Enter your phone number
+						<StyledField className="field" name="phone" />
+					</StyledLabel>
+					{errors.phone && touched.phone ? <div>{errors.phone}</div> : null}
+				</StyledFormColumn>
+				<StyledFormColumn>
+					<StyledLabel>
+						Choose postal delivery point
+						<StyledField as="select" name="delivery">
+							<option value="point1"> point 1</option>
+							<option value="point2"> point 2</option>
+						</StyledField>
+					</StyledLabel>
+				</StyledFormColumn>
+			</FlexContainer>
+			<ButtonWrapper>
+				{isValid ? (
+					<Button onClick={submitForm} text="checkout" />
+				) : (
+					<DisabledStyledButton type="submit" disabled>
+						Checkout
+					</DisabledStyledButton>
+				)}
+			</ButtonWrapper>
 		</Form>
 	);
 }
@@ -71,9 +68,8 @@ const Checkout = withFormik({
 		return {
 			name: '',
 			surname: '',
-			// age: '',
-			// address: '',
 			phone: '',
+			delivery: 'point1',
 		};
 	},
 	isInitialValid: false,

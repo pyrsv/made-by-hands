@@ -149,6 +149,11 @@ export const CartIsEmpty = styled.div`
 	margin-top: 20px;
 `;
 
+export const FlexContainer = styled.div`
+	display: flex;
+	justify-content: space-evenly;
+`;
+
 export const StyledFormColumn = styled.div`
 	display: flex;
 	flex-direction: column;
@@ -195,4 +200,9 @@ export const StyledLabel = styled.label`
 	font-weight: 500;
 	font-size: 14px;
 	line-height: 16px;
+`;
+
+export const ButtonWrapper = styled.div`
+	display: flex;
+	justify-content: center;
 `;
