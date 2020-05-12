@@ -41,9 +41,12 @@ function FormData({
 		errors.city = '';
 		errors.street = '';
 		errors.house = '';
-
+		values.city = '';
+		values.house = '';
+		values.street = '';
 		delete valid.city;
 		delete valid.street;
+		delete valid.house;
 	};
 	const showAddress = () => {
 		togglePP({ showed: false });
