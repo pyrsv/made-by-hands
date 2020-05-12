@@ -50,6 +50,7 @@ export const GridContainer = styled.div`
 	@media (max-width: 576px) {
 		flex-direction: column;
 		align-items: center;
+		padding: 30px 0;
 	}
 `;
 
@@ -57,13 +58,13 @@ export const StyledImageContainer = styled.div`
 	width: 400px;
 	height: 300px;
 
-	@media (max-width: 576px) {
-		order: -1;
-		width: 80%;
-	}
-
 	@media (max-width: 992px) {
 		width: 40%;
 		height: 80%;
+	}
+
+	@media (max-width: 576px) {
+		order: -1;
+		width: 80%;
 	}
 `;
