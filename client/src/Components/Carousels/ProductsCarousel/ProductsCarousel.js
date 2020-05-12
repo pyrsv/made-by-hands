@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, memo } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 import ProductCard from '../../ProductCard/ProductCard';
@@ -14,6 +14,7 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Slider from 'react-slick';
+import { getFilteredProducts } from '../../../store/actions/catalogActions';
 
 const SampleNextArrow = props => {
 	const { onClick, onKeyUp } = props;
@@ -70,9 +71,17 @@ const ProductCarousel = () => {
 		dispatch(getItemsAction());
 	}, [dispatch]);
 
-	const items = useSelector(state => state.itemsReducer.items);
-	const shuffled = items.sort(() => 0.5 - Math.random());
+	const config = useSelector(state => state.catalog.config);
+
+	useEffect(() => {
+		dispatch(getFilteredProducts(config));
+	}, []);
+
+	const products = useSelector(state => state.catalog.currentProducts);
+
+	const shuffled = products.sort(() => 0.5 - Math.random());
 	const selected = shuffled.slice(0, 8);
+
 	const settings = {
 		nextArrow: <SampleNextArrow />,
 		prevArrow: <SamplePrevArrow />,
@@ -119,6 +128,8 @@ const ProductCarousel = () => {
 												name={item.name}
 												img={item.imageUrls[0]}
 												price={item.currentPrice}
+												isFavorite={item.isFavorite}
+												isInCart={item.isInCart}
 											/>
 										</ProductCardContainer>
 									</div>
@@ -141,4 +152,4 @@ SamplePrevArrow.propTypes = {
 	onKeyUp: PropTypes.func.isRequired,
 };
 
-export default ProductCarousel;
+export default memo(ProductCarousel);

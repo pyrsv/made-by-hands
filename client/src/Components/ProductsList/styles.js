@@ -6,8 +6,12 @@ export const ProductsContainer = styled.div`
 	grid-gap: 20px;
 
 	@media (max-width: 992px) {
-		grid-template-columns: repeat(2, 1fr);
 		grid-gap: 15px;
+	}
+
+	@media (max-width: 768px) {
+		grid-template-columns: repeat(2, 1fr);
+		grid-gap: 10px;
 	}
 
 	@media (max-width: 576px) {
