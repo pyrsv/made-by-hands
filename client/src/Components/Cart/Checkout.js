@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-globals */
 import React, { useState } from 'react';
 import { withFormik, Form } from 'formik';
 import * as yup from 'yup';
@@ -166,27 +167,27 @@ function FormData({
 	);
 }
 const Checkout = withFormik({
-	mapPropsToValues() {
+	mapPropsToValues(sumPrice) {
 		return {
 			name: '',
 			surname: '',
 			phone: '',
 			delivery: 'point1',
+			amountOfPayment: { sumPrice },
 		};
 	},
 	isInitialValid: false,
 	validate: values => {
 		const errors = {};
 		if (valid.city) {
-			if (!values.city) {
-				errors.city = 'city is required';
+			if (!values.city || !isNaN(+values.street)) {
+				errors.city = 'city is required as a string';
 			}
-			if (!values.street) {
-				errors.street = 'Street is required';
+			if (!values.street || !isNaN(+values.street)) {
+				errors.street = 'Street is required as a string';
 			}
-			// eslint-disable-next-line no-restricted-globals
 			if (!values.house || isNaN(+values.house)) {
-				errors.house = 'house is required as number';
+				errors.house = 'house is required as a number';
 			}
 		}
 		return errors;

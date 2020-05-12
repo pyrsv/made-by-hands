@@ -69,7 +69,7 @@ export const Cart = () => {
 					)}
 					{!sumPrice && <CartIsEmpty>Cart is Empty</CartIsEmpty>}
 
-					{isCheckout.showed && <Checkout />}
+					{isCheckout.showed && <Checkout sumPrice={sumPrice} />}
 				</LayoutContainer>
 			</CartContainer>
 		</>
