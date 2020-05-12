@@ -8,7 +8,6 @@ import Header from './Components/Header/Header';
 import AppContainer from './Components/AppContainer/AppContainer';
 import ProtectedRoute from './HOC/ProtectedRoute/ProtectedRoute';
 import AuthModal from './Components/AuthModal/AuthModal';
-import Wishlist from './Components/Wishlist/Wishlist';
 
 const App = () => {
 	const location = useLocation();
@@ -30,10 +29,6 @@ const App = () => {
 				<ProtectedRoute path="/profile">
 					<ProfilePage />
 				</ProtectedRoute>
-
-				<Route path="/wishlist">
-					<Wishlist />
-				</Route>
 			</Switch>
 
 			{background && (

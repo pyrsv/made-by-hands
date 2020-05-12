@@ -4,11 +4,29 @@ import { handleUserLogin, handleGetUser } from '../../utils/API';
 // eslint-disable-next-line import/no-cycle
 import { setCartAction, updateCart } from './cartActions';
 import { setWishlist } from './wishActions';
+import {
+	USER_LOGIN_ERROR,
+	USER_LOGIN_INIT,
+	USER_LOGIN_SUCCESS,
+	USER_LOGOUT,
+	USER_UPDATE_INIT,
+	USER_UPDATE_ERROR,
+	USER_UPDATE_SUCCESS,
+} from '../types/authTypes';
 
-export const USER_LOGIN_INIT = 'USER_LOGIN_INIT';
-export const USER_LOGIN_SUCCESS = 'USER_LOGIN_SUCCESS';
-export const USER_LOGOUT = 'USER_LOGOUT';
-export const USER_LOGIN_ERROR = 'USER_LOGIN_ERROR';
+const userUpdateInit = () => ({
+	type: USER_UPDATE_INIT,
+});
+
+const userUpdateSuccess = user => ({
+	type: USER_UPDATE_SUCCESS,
+	payload: user,
+});
+
+const userUpdateError = err => ({
+	type: USER_UPDATE_ERROR,
+	payload: err,
+});
 
 const userLoginInit = () => ({
 	type: USER_LOGIN_INIT,
@@ -145,4 +163,16 @@ export const userRegister = data => async dispatch => {
 			dispatch(setCartAction(JSON.parse(localStorage.getItem('cart'))));
 			dispatch(userLoginError(err));
 		});
+};
+
+export const updateUser = data => dispatch => {
+	dispatch(userUpdateInit());
+	axios
+		.put('/customers', JSON.stringify(data), {
+			headers: {
+				'Content-Type': 'application/json',
+			},
+		})
+		.then(customer => dispatch(userUpdateSuccess(customer.data)))
+		.catch(err => dispatch(userUpdateError(err)));
 };
