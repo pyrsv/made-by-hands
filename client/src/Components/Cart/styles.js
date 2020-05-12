@@ -17,6 +17,7 @@ export const CartItemContainer = styled.div`
 	justify-content: space-between;
 	height: 210px;
 	align-items: center;
+
 	@media (max-width: 576px) {
 		flex-direction: column;
 		height: 340px;
@@ -54,6 +55,9 @@ export const QuantityContainer = styled.div`
 	display: flex;
 	align-items: center;
 	margin-left: 100px;
+	@media (max-width: 600px) {
+		margin-left: 60px;
+	}
 	@media (max-width: 576px) {
 		margin-left: 0;
 	}
