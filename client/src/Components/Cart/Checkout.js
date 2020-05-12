@@ -13,6 +13,7 @@ import {
 	ColumnOfInputs,
 	FirstColumn,
 	StyledRadio,
+	FillTheFields,
 } from './styles';
 import PropTypes from 'prop-types';
 
@@ -46,6 +47,7 @@ function FormData({ errors, touched, isValid, submitForm }) {
 	return (
 		<Form>
 			<FlexContainer>
+				<FillTheFields>Fill the fields</FillTheFields>
 				<StyledFormColumn>
 					<FirstColumn>
 						<StyledLabel>

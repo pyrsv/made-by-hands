@@ -152,6 +152,11 @@ export const CartIsEmpty = styled.div`
 export const FlexContainer = styled.div`
 	display: flex;
 	justify-content: space-between;
+	border: 1px solid ${props => props.theme.mainDark};
+	padding: 2% 2% 0 2%;
+	margin-bottom: 10px;
+	border-radius: 4px;
+	position: relative;
 `;
 
 export const StyledFormColumn = styled.div`
@@ -219,4 +224,14 @@ export const ColumnOfInputs = styled.div`
 `;
 export const FirstColumn = styled.div`
 	margin-top: 35px;
+`;
+
+export const FillTheFields = styled.div`
+	font-family: 'Raleway', sans-serif;
+	font-weight: 500;
+	font-size: 22px;
+	display: inline-block;
+	position: absolute;
+	top: 7%;
+	left: 2%;
 `;
