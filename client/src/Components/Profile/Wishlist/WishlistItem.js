@@ -8,11 +8,11 @@ import {
 	WishlistItemName,
 	DeleteItemFromWishlist,
 } from './styles';
-import Button from '../UI/Button/Button';
+import Button from '../../UI/Button/Button';
 import { useDispatch } from 'react-redux';
-import { setProductToCart } from '../../store/actions/catalogActions';
-import { addToCart } from '../../store/actions/cartActions';
-import { deleteFromWishlist } from '../../store/actions/wishActions';
+import { setProductToCart } from '../../../store/actions/catalogActions';
+import { addToCart } from '../../../store/actions/cartActions';
+import { deleteFromWishlist } from '../../../store/actions/wishActions';
 import PropTypes from 'prop-types';
 
 const WishlistItem = ({ name, currentPrice, image, isInCart, id, itemNo }) => {
