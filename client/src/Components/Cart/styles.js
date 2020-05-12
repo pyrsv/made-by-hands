@@ -151,7 +151,7 @@ export const CartIsEmpty = styled.div`
 
 export const FlexContainer = styled.div`
 	display: flex;
-	justify-content: space-evenly;
+	justify-content: space-between;
 `;
 
 export const StyledFormColumn = styled.div`
@@ -195,7 +195,13 @@ export const StyledField = styled(Field)`
 	margin-top: 6px;
 `;
 export const StyledLabel = styled.label`
-	margin: 17px 0;
+	font-family: 'Raleway', sans-serif;
+	font-weight: 500;
+	font-size: 14px;
+	line-height: 16px;
+`;
+export const StyledRadio = styled.label`
+	margin-bottom: 17px;
 	font-family: 'Raleway', sans-serif;
 	font-weight: 500;
 	font-size: 14px;
@@ -205,4 +211,12 @@ export const StyledLabel = styled.label`
 export const ButtonWrapper = styled.div`
 	display: flex;
 	justify-content: center;
+`;
+
+export const ColumnOfInputs = styled.div`
+	display: flex;
+	flex-direction: column;
+`;
+export const FirstColumn = styled.div`
+	margin-top: 35px;
 `;

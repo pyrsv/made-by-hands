@@ -10,6 +10,9 @@ import {
 	StyledLabel,
 	StyledField,
 	ButtonWrapper,
+	ColumnOfInputs,
+	FirstColumn,
+	StyledRadio,
 } from './styles';
 import PropTypes from 'prop-types';
 
@@ -30,30 +33,33 @@ function FormData({ errors, touched, isValid, submitForm }) {
 		<Form>
 			<FlexContainer>
 				<StyledFormColumn>
-					<StyledLabel>
-						{' '}
-						Enter your name
-						<StyledField className="field" name="name" />
-					</StyledLabel>
-					{errors.name && touched.name ? <div>{errors.name}</div> : null}
-					<StyledLabel>
-						{' '}
-						Enter your surname
-						<StyledField className="field" name="surname" />
-					</StyledLabel>
-					{errors.surname && touched.surname ? (
-						<div>{errors.surname}</div>
-					) : null}
+					<FirstColumn>
+						<StyledLabel>
+							{' '}
+							Enter your name
+							<StyledField className="field" name="name" />
+						</StyledLabel>
+						{errors.name && touched.name ? <div>{errors.name}</div> : null}
+						<StyledLabel>
+							{' '}
+							Enter your surname
+							<StyledField className="field" name="surname" />
+						</StyledLabel>
+						{errors.surname && touched.surname ? (
+							<div>{errors.surname}</div>
+						) : null}
 
-					<StyledLabel>
-						{' '}
-						Enter your phone number
-						<StyledField className="field" name="phone" />
-					</StyledLabel>
-					{errors.phone && touched.phone ? <div>{errors.phone}</div> : null}
+						<StyledLabel>
+							{' '}
+							Enter your phone number
+							<StyledField className="field" name="phone" />
+						</StyledLabel>
+						{errors.phone && touched.phone ? <div>{errors.phone}</div> : null}
+					</FirstColumn>
 				</StyledFormColumn>
+
 				<StyledFormColumn>
-					<StyledLabel>
+					<StyledRadio>
 						<input
 							type="radio"
 							text="Delivery to postal point"
@@ -63,16 +69,7 @@ function FormData({ errors, touched, isValid, submitForm }) {
 							}}
 						/>
 						Delivery to postal point
-					</StyledLabel>
-					<StyledLabel>
-						<input
-							type="radio"
-							text="Delivery to address"
-							name="delivery"
-							onClick={() => showAddress()}
-						/>
-						Delivery to address
-					</StyledLabel>
+					</StyledRadio>
 					{isPostalPoints.showed && (
 						<StyledLabel>
 							Choose postal delivery point
@@ -82,8 +79,20 @@ function FormData({ errors, touched, isValid, submitForm }) {
 							</StyledField>
 						</StyledLabel>
 					)}
+				</StyledFormColumn>
+				<StyledFormColumn>
+					<StyledRadio>
+						<input
+							type="radio"
+							text="Delivery to address"
+							name="delivery"
+							onClick={() => showAddress()}
+						/>
+						Delivery to address
+					</StyledRadio>
+
 					{isAddress.showed && (
-						<>
+						<ColumnOfInputs>
 							<StyledLabel>
 								{' '}
 								Enter your city
@@ -99,7 +108,7 @@ function FormData({ errors, touched, isValid, submitForm }) {
 								Enter your house
 								<StyledField className="field" name="house" />
 							</StyledLabel>
-						</>
+						</ColumnOfInputs>
 					)}
 					{errors.city && touched.city ? <div>{errors.city}</div> : null}
 					{errors.street && touched.street ? <div>{errors.street}</div> : null}
