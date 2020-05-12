@@ -16,17 +16,31 @@ import {
 } from './styles';
 import PropTypes from 'prop-types';
 
+const valid = {
+	name: string().required(),
+	surname: string().required(),
+	phone: number().required().positive().integer(),
+};
+
 function FormData({ errors, touched, isValid, submitForm }) {
-	const [isPostalPoints, togglePP] = useState({ showed: false });
+	const [isPostalPoints, togglePP] = useState({ showed: true });
 	const [isAddress, toggleAddress] = useState({ showed: false });
 
 	const showPostalPoints = () => {
 		togglePP({ showed: true });
 		toggleAddress({ showed: false });
+		errors.city = '';
+		errors.street = '';
+		errors.house = '';
+
+		delete valid.city;
+		delete valid.street;
 	};
 	const showAddress = () => {
 		togglePP({ showed: false });
 		toggleAddress({ showed: true });
+		valid.city = string().required();
+		valid.street = string().required();
 	};
 
 	return (
@@ -37,13 +51,13 @@ function FormData({ errors, touched, isValid, submitForm }) {
 						<StyledLabel>
 							{' '}
 							Enter your name
-							<StyledField className="field" name="name" />
+							<StyledField name="name" />
 						</StyledLabel>
 						{errors.name && touched.name ? <div>{errors.name}</div> : null}
 						<StyledLabel>
 							{' '}
 							Enter your surname
-							<StyledField className="field" name="surname" />
+							<StyledField name="surname" />
 						</StyledLabel>
 						{errors.surname && touched.surname ? (
 							<div>{errors.surname}</div>
@@ -52,7 +66,7 @@ function FormData({ errors, touched, isValid, submitForm }) {
 						<StyledLabel>
 							{' '}
 							Enter your phone number
-							<StyledField className="field" name="phone" />
+							<StyledField name="phone" />
 						</StyledLabel>
 						{errors.phone && touched.phone ? <div>{errors.phone}</div> : null}
 					</FirstColumn>
@@ -61,6 +75,8 @@ function FormData({ errors, touched, isValid, submitForm }) {
 				<StyledFormColumn>
 					<StyledRadio>
 						<input
+							checked={!isAddress.showed}
+							value="postal"
 							type="radio"
 							text="Delivery to postal point"
 							name="delivery"
@@ -70,6 +86,7 @@ function FormData({ errors, touched, isValid, submitForm }) {
 						/>
 						Delivery to postal point
 					</StyledRadio>
+
 					{isPostalPoints.showed && (
 						<StyledLabel>
 							Choose postal delivery point
@@ -83,6 +100,7 @@ function FormData({ errors, touched, isValid, submitForm }) {
 				<StyledFormColumn>
 					<StyledRadio>
 						<input
+							value="address"
 							type="radio"
 							text="Delivery to address"
 							name="delivery"
@@ -90,23 +108,22 @@ function FormData({ errors, touched, isValid, submitForm }) {
 						/>
 						Delivery to address
 					</StyledRadio>
-
 					{isAddress.showed && (
 						<ColumnOfInputs>
 							<StyledLabel>
 								{' '}
 								Enter your city
-								<StyledField className="field" name="city" />
+								<StyledField name="city" />
 							</StyledLabel>
 							<StyledLabel>
 								{' '}
 								Enter your street
-								<StyledField className="field" name="street" />
+								<StyledField name="street" />
 							</StyledLabel>
 							<StyledLabel>
 								{' '}
 								Enter your house
-								<StyledField className="field" name="house" />
+								<StyledField name="house" />
 							</StyledLabel>
 						</ColumnOfInputs>
 					)}
@@ -133,36 +150,26 @@ const Checkout = withFormik({
 			name: '',
 			surname: '',
 			phone: '',
-			delivery: 'point1',
 		};
 	},
 	isInitialValid: false,
 	validate: values => {
 		const errors = {};
 
-		if (!values.city) {
-			errors.city = 'Required';
+		if (valid.city) {
+			if (!values.city) {
+				errors.city = 'city is required';
+			}
+			if (!values.street) {
+				errors.street = 'Street is required';
+			}
+			if (!values.house) {
+				errors.house = 'house is required';
+			}
 		}
-		if (!values.street) {
-			errors.street = 'Required';
-		}
-		if (!values.house) {
-			errors.street = 'Required';
-		}
-
 		return errors;
 	},
-	validationSchema: yup.object().shape({
-		name: string().required(),
-		surname: string().required(),
-		// age: number().required().positive().integer(),
-		// address: string().required(),
-		// phone: string().matches(/^[0-9]\d{9}$/, {
-		//   message: 'Please enter valid number.',
-		//   excludeEmptyString: false,
-		// }),
-		phone: number().required().positive().integer(),
-	}),
+	validationSchema: yup.object().shape(valid),
 	// eslint-disable-next-line no-unused-vars
 	handleSubmit(values) {
 		// console.log('submited data ', values);
