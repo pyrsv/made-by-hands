@@ -6,9 +6,8 @@ export const WishlistContainer = styled.div`
 `;
 
 export const WishlistItemImage = styled.img`
-	width: 181px;
-	height: 145px;
-	border-radius: 4px;
+	height: 100%;
+	width: auto;
 `;
 
 export const WishlistItemContainer = styled.div`
@@ -82,4 +81,11 @@ export const DeleteItemFromWishlist = styled.button`
 	outline: none;
 	border-radius: 4px;
 	color: ${props => props.theme.mainDark};
+`;
+
+export const WishlistItemImageContainer = styled.div`
+	display: inline-block;
+	width: 181px;
+	height: 145px;
+	border-radius: 4px;
 `;
