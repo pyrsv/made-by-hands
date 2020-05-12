@@ -31,7 +31,6 @@ const Catalog = () => {
 							</Drawer>
 						)
 					) : (
-						// <></>
 						<FilterBar />
 					)}
 					<ProductsList />

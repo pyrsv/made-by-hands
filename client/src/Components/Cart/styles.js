@@ -134,6 +134,9 @@ export const DeleteItemFromCart = styled.button`
 
 export const CartItemColor = styled.span`
 	margin-top: 45px;
+	@media (max-width: 576px) {
+		margin-top: 15px;
+	}
 `;
 
 export const CartIsEmpty = styled.div`
