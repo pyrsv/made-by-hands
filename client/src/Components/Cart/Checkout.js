@@ -17,6 +17,7 @@ import {
 	FillTheFields,
 } from './styles';
 import PropTypes, { object } from 'prop-types';
+// import InputField from '../UI/InputFiels/InputField'
 
 const valid = {
 	name: string().required(),
@@ -167,13 +168,14 @@ function FormData({
 	);
 }
 const Checkout = withFormik({
-	mapPropsToValues(sumPrice) {
+	mapPropsToValues({ sumPrice, goods }) {
 		return {
 			name: '',
 			surname: '',
 			phone: '',
 			delivery: 'point1',
-			amountOfPayment: { sumPrice },
+			amountOfPayment: sumPrice,
+			items: goods,
 		};
 	},
 	isInitialValid: false,
