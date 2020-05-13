@@ -5,6 +5,7 @@ import LoginForm from './Forms/LoginForm';
 import RegisterForm from './Forms/RegisterForm';
 import CloseButton from '../UI/CloseButton/CloseButton';
 import Backdrop from '../UI/Backdrop/Backdrop';
+import querystring from 'query-string';
 import { closeNav } from '../../store/actions/UIActions';
 import { setProductToWishlist } from '../../store/actions/catalogActions';
 import { addToWishlist } from '../../store/actions/wishActions';
@@ -22,7 +23,7 @@ const AuthModal = () => {
 	const location = useLocation();
 	const dispatch = useDispatch();
 	const user = useSelector(state => state.auth.currentUser);
-	const currentProductId = useSelector(state => state.catalog.currentProductId);
+	const { addtowishlist: wishlistId } = querystring.parse(location.search);
 	const isFirstRun = useRef(true);
 	const [form, setForm] = useState({ login: true });
 	const { from } = location.state;
@@ -37,8 +38,8 @@ const AuthModal = () => {
 			return;
 		}
 		if (location) {
-			dispatch(setProductToWishlist(currentProductId));
-			dispatch(addToWishlist(currentProductId));
+			dispatch(setProductToWishlist(wishlistId));
+			dispatch(addToWishlist(wishlistId));
 		}
 
 		if (from) {

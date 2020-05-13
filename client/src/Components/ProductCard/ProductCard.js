@@ -79,7 +79,7 @@ const ProductCard = ({
 						<NavLink
 							to={{
 								pathname: `/login`,
-								search: `addtowishlist${id}`,
+								search: `addtowishlist=${id}`,
 								state: {
 									background: location,
 								},
