@@ -225,17 +225,17 @@ export const ColumnOfInputs = styled.div`
 	flex-direction: column;
 `;
 export const FirstColumn = styled.div`
-	margin-top: 32px;
+	margin-top: 38px;
+	text-align: center;
 `;
 
 export const FillTheFields = styled.div`
 	font-family: 'Raleway', sans-serif;
 	font-weight: 700;
-	font-size: 28px;
-	display: inline-block;
-	position: absolute;
-	top: 7%;
-	left: 2%;
+	font-size: 36px;
+	display: block;
+	text-align: left;
+	margin: 20px 0;
 	text-transform: capitalize;
 	color: ${props => props.theme.mainDark};
 `;

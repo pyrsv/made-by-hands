@@ -17,7 +17,7 @@ import {
 	FillTheFields,
 } from './styles';
 import PropTypes, { object } from 'prop-types';
-// import InputField from '../UI/InputFiels/InputField'
+import InputField from '../UI/InputFiels/InputField';
 
 const valid = {
 	name: string().required(),
@@ -61,20 +61,28 @@ function FormData({
 
 	return (
 		<Form>
+			<FillTheFields>Fill the fields</FillTheFields>
 			<FlexContainer>
-				<FillTheFields>Fill the fields</FillTheFields>
 				<StyledFormColumn>
 					<FirstColumn>
 						<StyledLabel>
 							{' '}
 							Enter your name
-							<StyledField name="name" />
+							<InputField
+								name="name"
+								onChange={handleChange}
+								onBlur={handleBlur}
+							/>
 						</StyledLabel>
 						{errors.name && touched.name ? <div>{errors.name}</div> : null}
 						<StyledLabel>
 							{' '}
 							Enter your surname
-							<StyledField name="surname" />
+							<InputField
+								name="surname"
+								onChange={handleChange}
+								onBlur={handleBlur}
+							/>
 						</StyledLabel>
 						{errors.surname && touched.surname ? (
 							<div>{errors.surname}</div>
@@ -83,7 +91,11 @@ function FormData({
 						<StyledLabel>
 							{' '}
 							Enter your phone number
-							<StyledField name="phone" />
+							<InputField
+								name="phone"
+								onChange={handleChange}
+								onBlur={handleBlur}
+							/>
 						</StyledLabel>
 						{errors.phone && touched.phone ? <div>{errors.phone}</div> : null}
 					</FirstColumn>
@@ -97,6 +109,7 @@ function FormData({
 							type="radio"
 							text="Delivery to postal point"
 							name="delivery"
+							onChange={handleChange}
 							onClick={() => {
 								showPostalPoints();
 							}}
@@ -136,17 +149,29 @@ function FormData({
 							<StyledLabel>
 								{' '}
 								Enter your city
-								<StyledField name="city" />
+								<InputField
+									name="city"
+									onChange={handleChange}
+									onBlur={handleBlur}
+								/>
 							</StyledLabel>
 							<StyledLabel>
 								{' '}
 								Enter your street
-								<StyledField name="street" />
+								<InputField
+									name="street"
+									onChange={handleChange}
+									onBlur={handleBlur}
+								/>
 							</StyledLabel>
 							<StyledLabel>
 								{' '}
 								Enter your house
-								<StyledField name="house" />
+								<InputField
+									name="house"
+									onChange={handleChange}
+									onBlur={handleBlur}
+								/>
 							</StyledLabel>
 						</ColumnOfInputs>
 					)}
@@ -203,21 +228,27 @@ const Checkout = withFormik({
 })(FormData);
 
 FormData.propTypes = {
-	// eslint-disable-next-line react/require-default-props
 	name: PropTypes.string,
-	// eslint-disable-next-line react/require-default-props
 	surname: PropTypes.string,
-	phone: PropTypes.number.isRequired,
-	// eslint-disable-next-line react/forbid-prop-types
-	touched: PropTypes.object.isRequired,
-	// eslint-disable-next-line react/forbid-prop-types
-	errors: PropTypes.object.isRequired,
+	phone: PropTypes.number,
+	touched: PropTypes.objectOf(string),
+	errors: PropTypes.objectOf(object),
 	isValid: PropTypes.bool.isRequired,
 	submitForm: PropTypes.func.isRequired,
 	handleChange: PropTypes.func.isRequired,
 	handleBlur: PropTypes.func.isRequired,
-	delivery: PropTypes.string.isRequired,
-	values: PropTypes.arrayOf(object).isRequired,
+	delivery: PropTypes.string,
+	values: PropTypes.objectOf(string),
+};
+
+FormData.defaultProps = {
+	delivery: undefined,
+	phone: undefined,
+	errors: undefined,
+	values: undefined,
+	name: undefined,
+	surname: undefined,
+	touched: undefined,
 };
 
 export default Checkout;
