@@ -225,7 +225,7 @@ export const ColumnOfInputs = styled.div`
 	flex-direction: column;
 `;
 export const FirstColumn = styled.div`
-	margin-top: 38px;
+	margin-top: 27px;
 	text-align: center;
 `;
 
