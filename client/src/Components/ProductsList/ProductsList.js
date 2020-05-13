@@ -39,7 +39,7 @@ const ProductsList = () => {
 			hasMore={products.length < productsQuantity && !isProductsFetching}
 			loader={
 				<ProductsPreloader>
-					<Preloader size={60} />
+					<Preloader key="1" size={60} />
 				</ProductsPreloader>
 			}
 		>

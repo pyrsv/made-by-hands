@@ -7,12 +7,13 @@ import {
 	WishlistItemPrice,
 	WishlistItemName,
 	DeleteItemFromWishlist,
+	WishlistItemImageContainer,
 } from './styles';
-import Button from '../UI/Button/Button';
+import Button from '../../UI/Button/Button';
 import { useDispatch } from 'react-redux';
-import { setProductToCart } from '../../store/actions/catalogActions';
-import { addToCart } from '../../store/actions/cartActions';
-import { deleteFromWishlist } from '../../store/actions/wishActions';
+import { setProductToCart } from '../../../store/actions/catalogActions';
+import { addToCart } from '../../../store/actions/cartActions';
+import { deleteFromWishlist } from '../../../store/actions/wishActions';
 import PropTypes from 'prop-types';
 
 const WishlistItem = ({ name, currentPrice, image, isInCart, id, itemNo }) => {
@@ -25,7 +26,9 @@ const WishlistItem = ({ name, currentPrice, image, isInCart, id, itemNo }) => {
 	return (
 		<>
 			<WishlistItemContainer>
-				<WishlistItemImage src={image} alt={name} />
+				<WishlistItemImageContainer>
+					<WishlistItemImage src={image} alt={name} />
+				</WishlistItemImageContainer>
 				<WishlistItemInfo>
 					<div>
 						<WishlistItemName>{name}</WishlistItemName>

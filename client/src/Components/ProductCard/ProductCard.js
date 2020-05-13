@@ -92,6 +92,18 @@ const ProductCard = ({
 								onClick={() => dispatch(setCurrentProductId(id))}
 							/>
 						</NavLink>
+						// <NavLink
+						// to={{
+						// 	pathname: `/login${id}`,
+						// 	state: {
+						// 		background: location,
+						// 	},
+						// }}
+						// >
+						// 	<FavoriteHeart
+						// 		isFavorite={isFavorite}
+						// 	/>
+						// </NavLink>
 					)}
 				</CardInfoRow>
 				<CardInfoRow>

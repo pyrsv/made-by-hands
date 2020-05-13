@@ -1,8 +1,7 @@
-import React, { useEffect, memo } from 'react';
-import PropTypes from 'prop-types';
-import { useSelector, useDispatch } from 'react-redux';
+/* eslint-disable react/require-default-props */
+import React, { memo } from 'react';
+import PropTypes, { object } from 'prop-types';
 import ProductCard from '../../ProductCard/ProductCard';
-import { getItemsAction } from '../../../store/actions/getItemsAction';
 import {
 	ProductCardContainer,
 	ProductCarouselContainer,
@@ -14,7 +13,6 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Slider from 'react-slick';
-import { getFilteredProducts } from '../../../store/actions/catalogActions';
 
 const SampleNextArrow = props => {
 	const { onClick, onKeyUp } = props;
@@ -64,24 +62,7 @@ const SamplePrevArrow = props => {
 	);
 };
 
-const ProductCarousel = () => {
-	const dispatch = useDispatch();
-
-	useEffect(() => {
-		dispatch(getItemsAction());
-	}, [dispatch]);
-
-	const config = useSelector(state => state.catalog.config);
-
-	useEffect(() => {
-		dispatch(getFilteredProducts(config));
-	}, []);
-
-	const products = useSelector(state => state.catalog.currentProducts);
-
-	const shuffled = products.sort(() => 0.5 - Math.random());
-	const selected = shuffled.slice(0, 8);
-
+const ProductCarousel = ({ selected }) => {
 	const settings = {
 		nextArrow: <SampleNextArrow />,
 		prevArrow: <SamplePrevArrow />,
@@ -144,12 +125,16 @@ const ProductCarousel = () => {
 };
 
 SampleNextArrow.propTypes = {
-	onClick: PropTypes.func.isRequired,
-	onKeyUp: PropTypes.func.isRequired,
+	onClick: PropTypes.func,
+	onKeyUp: PropTypes.func,
 };
 SamplePrevArrow.propTypes = {
-	onClick: PropTypes.func.isRequired,
-	onKeyUp: PropTypes.func.isRequired,
+	onClick: PropTypes.func,
+	onKeyUp: PropTypes.func,
+};
+
+ProductCarousel.propTypes = {
+	selected: PropTypes.arrayOf(object),
 };
 
 export default memo(ProductCarousel);
