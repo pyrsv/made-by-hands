@@ -213,7 +213,7 @@ const Checkout = withFormik({
 			if (!values.street || !isNaN(+values.street)) {
 				errors.street = 'Street is required as a string';
 			}
-			if (!values.house || isNaN(+values.house)) {
+			if (!values.house) {
 				errors.house = 'house is required as a number';
 			}
 		}
