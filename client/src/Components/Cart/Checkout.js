@@ -25,7 +25,7 @@ const valid = {
 	phone: number().required().positive().integer(),
 };
 
-function FormData({
+const FormData = ({
 	errors,
 	touched,
 	isValid,
@@ -33,7 +33,7 @@ function FormData({
 	values,
 	handleBlur,
 	handleChange,
-}) {
+}) => {
 	const [isPostalPoints, togglePP] = useState({ showed: true });
 	const [isAddress, toggleAddress] = useState({ showed: false });
 
@@ -191,7 +191,7 @@ function FormData({
 			</ButtonWrapper>
 		</Form>
 	);
-}
+};
 const Checkout = withFormik({
 	mapPropsToValues({ sumPrice, goods }) {
 		return {
