@@ -223,9 +223,11 @@ export const ButtonWrapper = styled.div`
 export const ColumnOfInputs = styled.div`
 	display: flex;
 	flex-direction: column;
+	position: relative;
+	top: 5%;
 `;
 export const FirstColumn = styled.div`
-	margin-top: 27px;
+	margin-top: 38px;
 	text-align: center;
 `;
 
