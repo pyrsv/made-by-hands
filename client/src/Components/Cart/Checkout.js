@@ -220,7 +220,7 @@ const Checkout = withFormik({
 		return errors;
 	},
 	validationSchema: yup.object().shape(valid),
-	// eslint-disable-next-line no-unused-vars
+
 	handleSubmit(values, { setSubmitting }) {
 		setSubmitting(false);
 		// console.log('submited data ', values);
