@@ -12,6 +12,10 @@ const Rating = ({ id }) => {
 	const dispatch = useDispatch();
 	const arrayOfComments = useSelector(state => state.comments.comments);
 
+	const toggleModal = () => {
+		setToggleModal(prevState => !prevState);
+	};
+
 	useEffect(() => {
 		dispatch(getRatingAndCommentsInfo(id));
 	}, [id, dispatch]);
@@ -22,19 +26,15 @@ const Rating = ({ id }) => {
 			return prevValue + currentItem.rating;
 		}, 0) / arrayOfComments.length;
 
-	const toggleModal = () => {
-		setToggleModal(prevState => !prevState);
-	};
-
 	return (
 		<>
 			<RatingDiv>
 				<div>
 					<RatingStars rating={rating} />
 				</div>
-				{arrayOfComments && (
-					<Comments>Comments ( {arrayOfComments.length} )</Comments>
-				)}
+				<Comments>
+					Comments ( {arrayOfComments && arrayOfComments.length} )
+				</Comments>
 			</RatingDiv>
 			<Button onClick={toggleModal} text="write feedback" />
 			{isModalOpen && <SetModalRating id={id} toggleModal={toggleModal} />}

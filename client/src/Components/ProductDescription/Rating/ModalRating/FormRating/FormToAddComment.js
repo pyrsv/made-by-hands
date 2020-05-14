@@ -1,13 +1,18 @@
 import React from 'react';
 import Button from '../../../../UI/Button/Button';
-import InputField from '../../../../UI/InputFiels/InputField';
+import TextareaField from '../../../../UI/TextareaFiels/TextareaFiels';
 import { Formik } from 'formik';
 import PropTypes from 'prop-types';
 import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { getRatingAndCommentsInfo } from '../../../../../store/actions/commentAction';
 
 const FormToAddComment = ({ rating, id, toggleModal }) => {
+	const dispatch = useDispatch();
 	const postCommentAndRate = content => {
-		axios.post('/comments', { product: id, content, rating }).then(toggleModal);
+		axios
+			.post('/comments', { product: id, content, rating })
+			.then(() => dispatch(getRatingAndCommentsInfo(id)), toggleModal());
 	};
 
 	return (
@@ -20,7 +25,7 @@ const FormToAddComment = ({ rating, id, toggleModal }) => {
 			>
 				{({ values, handleChange, handleBlur, handleSubmit }) => (
 					<form onSubmit={handleSubmit}>
-						<InputField
+						<TextareaField
 							type="text"
 							name="content"
 							onChange={handleChange}

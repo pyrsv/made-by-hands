@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import Button from '../../UI/Button/Button';
 import FavoriteHeart from '../../UI/FavoriteHeart/FavoriteHeart';
 import DescriptionPageCarousel from '../../Carousels/DescriptionPageCarousel/DescriptionPageCarousel';
@@ -6,6 +6,18 @@ import PropTypes from 'prop-types';
 import Parametrs from '../Parametrs/Parametrs';
 import Rating from '../Rating/Rating';
 import Comments from '../Comments/Comments';
+import { useDispatch, useSelector } from 'react-redux';
+import { NavLink, useLocation } from 'react-router-dom';
+import { addToCart } from '../../../store/actions/cartActions';
+import {
+	setProductToCart,
+	setProductToWishlist,
+	setCurrentProductId,
+} from '../../../store/actions/catalogActions';
+import {
+	addToWishlist,
+	deleteFromWishlist,
+} from '../../../store/actions/wishActions';
 
 import {
 	GridContainer,
@@ -23,17 +35,39 @@ const Product = ({
 	name,
 	previousPrice,
 	currentPrice,
-	isInCart,
 	parameters,
-	isFavorite,
-	onAddToFavorites,
-	onAddToCart,
 	id,
+	itemNo,
+	isFavorite,
+	isInCart,
+	onAddCart,
+	onAddFavor,
 }) => {
+	const dispatch = useDispatch();
+	const location = useLocation();
+	const user = useSelector(state => state.auth.currentUser);
+
+	const handleCartButtonClick = () => {
+		dispatch(addToCart(id, itemNo));
+		dispatch(setProductToCart(id));
+		onAddCart(id, itemNo);
+	};
+
+	const handleHeartButtonClick = () => {
+		dispatch(setProductToWishlist(id));
+		if (!isFavorite) {
+			dispatch(addToWishlist(id));
+			onAddFavor(id, isFavorite);
+		} else {
+			dispatch(deleteFromWishlist(id));
+			onAddFavor(id, isFavorite);
+		}
+	};
+
 	return (
 		<GridContainer>
 			<div>
-				{imageUrls && <DescriptionPageCarousel imageUrls={imageUrls} />}
+				<DescriptionPageCarousel imageUrls={imageUrls} />
 				<DescriptionArea>
 					<TextDescription>{description}</TextDescription>
 				</DescriptionArea>
@@ -41,9 +75,30 @@ const Product = ({
 			<div>
 				<BlockText flex>
 					<NameOfProduct>{name}</NameOfProduct>
-					<span>
-						<FavoriteHeart isFavorite={isFavorite} onClick={onAddToFavorites} />
-					</span>
+					{user ? (
+						<span>
+							<FavoriteHeart
+								isFavorite={isFavorite}
+								onClick={() => handleHeartButtonClick(id)}
+							/>
+						</span>
+					) : (
+						<NavLink
+							to={{
+								pathname: '/login',
+								state: {
+									background: location,
+								},
+							}}
+						>
+							<FavoriteHeart
+								isFavorite={isFavorite}
+								onClick={() => {
+									dispatch(setCurrentProductId(id));
+								}}
+							/>
+						</NavLink>
+					)}
 				</BlockText>
 				<BlockText>
 					<Rating id={id} />
@@ -53,14 +108,15 @@ const Product = ({
 					<Price discounted={previousPrice && true}>{currentPrice}€</Price>
 				</BlockText>
 				<BlockText>
-					{parameters && <Parametrs parameters={parameters} />}
+					<Parametrs parameters={parameters} />
 				</BlockText>
 				<BlockText>
 					<Button
 						type="default"
 						color="dark"
 						text={isInCart ? 'In Cart' : 'Buy'}
-						onClick={onAddToCart}
+						onClick={() => handleCartButtonClick(id)}
+						disabled={isInCart}
 					/>
 				</BlockText>
 				<BlockText>
@@ -81,16 +137,15 @@ Product.propTypes = {
 	parameters: PropTypes.arrayOf(PropTypes.string).isRequired,
 	isInCart: PropTypes.bool,
 	isFavorite: PropTypes.bool,
-	onAddToCart: PropTypes.func,
-	onAddToFavorites: PropTypes.func,
+	itemNo: PropTypes.number.isRequired,
+	onAddCart: PropTypes.func.isRequired,
+	onAddFavor: PropTypes.func.isRequired,
 };
 
 Product.defaultProps = {
 	isInCart: false,
 	isFavorite: false,
 	previousPrice: null,
-	onAddToCart: () => {},
-	onAddToFavorites: () => {},
 };
 
-export default Product;
+export default memo(Product);

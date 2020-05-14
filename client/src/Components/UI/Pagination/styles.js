@@ -29,7 +29,14 @@ export const Button = styled.button`
 
 export const Link = styled.a`
 	cursor: pointer;
+	@media screen and (max-width: 480px) {
+		font-size: 14px;
+	}
+`;
 
+export const Current = styled.a`
+	cursor: pointer;
+	font-weight: bold;
 	@media screen and (max-width: 480px) {
 		font-size: 14px;
 	}

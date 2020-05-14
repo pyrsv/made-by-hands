@@ -5,11 +5,13 @@ import './styles.scss';
 
 const RatingStars = ({ rating, edit = false, onStarClick }) => {
 	return (
-		<StarRatingComponent
-			value={rating}
-			editing={edit}
-			onStarClick={onStarClick}
-		/>
+		<>
+			<StarRatingComponent
+				value={rating}
+				editing={edit}
+				onStarClick={onStarClick}
+			/>
+		</>
 	);
 };
 

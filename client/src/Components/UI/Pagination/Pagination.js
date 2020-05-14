@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Ul, Li, Nav, Button, Link } from './styles';
+import { Ul, Li, Nav, Button, Link, Current } from './styles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import PropTypes from 'prop-types';
 
@@ -8,6 +8,7 @@ const Pagination = ({
 	totalItemsCount,
 	paginate,
 	portionSize = 3,
+	currentPage,
 }) => {
 	const pagesCount = Math.ceil(totalItemsCount / itemsPerPage);
 	const pages = [];
@@ -37,7 +38,11 @@ const Pagination = ({
 					.filter(p => p >= leftNumberOfPortion && p <= rightNumberOfPortion)
 					.map(page => (
 						<Li key={page}>
-							<Link onClick={() => paginate(page)}>{page}</Link>
+							{currentPage === page ? (
+								<Current onClick={() => paginate(page)}>{page}</Current>
+							) : (
+								<Link onClick={() => paginate(page)}>{page}</Link>
+							)}
 						</Li>
 					))}
 			</Ul>
@@ -55,6 +60,7 @@ const Pagination = ({
 };
 
 Pagination.propTypes = {
+	currentPage: PropTypes.number.isRequired,
 	itemsPerPage: PropTypes.number.isRequired,
 	totalItemsCount: PropTypes.number.isRequired,
 	paginate: PropTypes.func.isRequired,

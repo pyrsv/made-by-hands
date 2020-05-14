@@ -13,7 +13,7 @@ const Comments = ({ id }) => {
 
 	useEffect(() => {
 		dispatch(getRatingAndCommentsInfo(id));
-	}, [id, dispatch]);
+	}, [id]);
 	let arrayOfComments = useSelector(state => state.comments.comments);
 	arrayOfComments = arrayOfComments && arrayOfComments.reverse();
 
@@ -27,21 +27,27 @@ const Comments = ({ id }) => {
 
 	return (
 		<div>
-			{arrayOfComments && <CommentTitle>Comments: </CommentTitle>}
-			{currentComments &&
-				currentComments.map(comment => (
-					<Comment
-						key={comment._id}
-						content={comment.content}
-						rating={comment.rating}
-						firstName={comment.customer.firstName}
+			{!currentComments ? (
+				<div />
+			) : (
+				<>
+					<CommentTitle>Comments: </CommentTitle>
+					{currentComments.map(comment => (
+						<Comment
+							key={comment._id}
+							content={comment.content}
+							rating={comment.rating}
+							firstName={comment.customer.firstName}
+						/>
+					))}
+					<Pagination
+						currentPage={currentPage}
+						itemsPerPage={commentsPerPage}
+						totalItemsCount={arrayOfComments && arrayOfComments.length}
+						paginate={paginate}
 					/>
-				))}
-			<Pagination
-				itemsPerPage={commentsPerPage}
-				totalItemsCount={arrayOfComments && arrayOfComments.length}
-				paginate={paginate}
-			/>
+				</>
+			)}
 		</div>
 	);
 };

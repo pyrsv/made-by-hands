@@ -1,13 +1,13 @@
 import React from 'react';
 import ProductDescription from '../Components/ProductDescription/ProductDescription';
 import PropTypes from 'prop-types';
-import ProductsCarousel from '../Components/Carousels/ProductsCarousel/ProductsCarousel';
+import ProductsCarouselIndex from '../Components/Carousels/ProductCarouselIndex/ProductCarouselIndex';
 
 const ProductPage = ({ productNoParam }) => {
 	return (
 		<>
 			<ProductDescription productNoParam={productNoParam} />
-			<ProductsCarousel />
+			<ProductsCarouselIndex />
 		</>
 	);
 };
