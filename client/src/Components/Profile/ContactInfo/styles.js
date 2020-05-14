@@ -6,8 +6,32 @@ export const Description = styled.p`
 	margin-bottom: 30px;
 `;
 
-export const InfoWrapper = styled.div``;
+export const InfoWrapper = styled.div`
+	margin-bottom: 30px;
+`;
+
+export const FieldsWrapper = styled.div`
+	display: flex;
+`;
 
 export const Form = styled.form`
-	max-width: 280px;
+	max-width: 768px;
+	display: inline-flex;
+	justify-content: center;
+	flex-direction: column;
+
+	@media (max-width: 768px) {
+	}
+`;
+
+export const FormColumn = styled.div`
+	width: 280px;
+
+	&:last-child {
+		margin-left: 30px;
+
+		@media (max-width: 768px) {
+			margin: 0;
+		}
+	}
 `;
