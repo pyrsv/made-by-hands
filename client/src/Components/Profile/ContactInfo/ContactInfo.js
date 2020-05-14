@@ -18,7 +18,7 @@ const ContactInfo = () => {
 		state => state.auth.currentUser
 	);
 
-	const { city, street, houseNumber } = address;
+	const { city, street, houseNumber, flat } = address;
 
 	return (
 		<InfoWrapper>
@@ -34,6 +34,7 @@ const ContactInfo = () => {
 						city: city || '',
 						street: street || '',
 						houseNumber: houseNumber || '',
+						flat: flat || '',
 					},
 				}}
 				onSubmit={values => dispatch(updateUser(values))}
@@ -79,12 +80,6 @@ const ContactInfo = () => {
 									onBlur={handleBlur}
 									value={values.birthdate}
 								/>
-								<Button
-									type="submit"
-									onClick={handleSubmit}
-									size="wide"
-									text="Submit changes "
-								/>
 							</FormColumn>
 							<FormColumn>
 								<InputField
@@ -112,10 +107,26 @@ const ContactInfo = () => {
 									name="address.houseNumber"
 									label="House number"
 									target="form"
-									placeholder="28a"
+									placeholder="69"
 									onChange={handleChange}
 									onBlur={handleBlur}
 									value={values.address.houseNumber}
+								/>
+								<InputField
+									type="text"
+									name="address.flat"
+									label="Flat"
+									target="form"
+									placeholder="420"
+									onChange={handleChange}
+									onBlur={handleBlur}
+									value={values.address.flat}
+								/>
+								<Button
+									type="submit"
+									onClick={handleSubmit}
+									size="wide"
+									text="Submit changes "
 								/>
 							</FormColumn>
 						</FieldsWrapper>
