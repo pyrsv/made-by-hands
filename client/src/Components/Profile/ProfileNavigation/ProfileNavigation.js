@@ -10,10 +10,10 @@ const ProfileNavigation = () => {
 				<StyledNavLink to={`${url}/contact-info`}>Contact Info</StyledNavLink>
 			</NavItem>
 			<NavItem>
-				<StyledNavLink to={`${url}/adress-book`}>Adress book</StyledNavLink>
+				<StyledNavLink to={`${url}/wishlist`}>Wishlist</StyledNavLink>
 			</NavItem>
 			<NavItem>
-				<StyledNavLink to={`${url}/wishlist`}>Wishlist</StyledNavLink>
+				<StyledNavLink to={`${url}/orders`}>Orders</StyledNavLink>
 			</NavItem>
 		</Nav>
 	);
