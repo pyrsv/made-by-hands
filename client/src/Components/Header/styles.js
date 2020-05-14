@@ -16,7 +16,7 @@ export const Container = styled.div`
 	align-items: center;
 	justify-content: space-between;
 
-	@media (max-width: 900px) {
+	@media (max-width: 992px) {
 		display: grid;
 		grid-template-columns: 80px 1fr 80px;
 		align-items: center;

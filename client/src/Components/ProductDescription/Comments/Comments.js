@@ -31,7 +31,9 @@ const Comments = ({ id }) => {
 				<div />
 			) : (
 				<>
-					<CommentTitle>Comments: </CommentTitle>
+					{currentComments.length > 0 && (
+						<CommentTitle>Comments: </CommentTitle>
+					)}
 					{currentComments.map(comment => (
 						<Comment
 							key={comment._id}

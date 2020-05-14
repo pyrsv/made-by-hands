@@ -12,7 +12,6 @@ import { addToCart } from '../../../store/actions/cartActions';
 import {
 	setProductToCart,
 	setProductToWishlist,
-	setCurrentProductId,
 } from '../../../store/actions/catalogActions';
 import {
 	addToWishlist,
@@ -91,12 +90,7 @@ const Product = ({
 								},
 							}}
 						>
-							<FavoriteHeart
-								isFavorite={isFavorite}
-								onClick={() => {
-									dispatch(setCurrentProductId(id));
-								}}
-							/>
+							<FavoriteHeart isFavorite={isFavorite} />
 						</NavLink>
 					)}
 				</BlockText>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import {
 	CartContainer,
@@ -9,6 +9,8 @@ import {
 import { CartItem } from './CartItem';
 import LayoutContainer from '../LayoutContainer/LayoutContainer';
 import Button from '../UI/Button/Button';
+import Checkout from './Checkout';
+import Title from '../UI/Title/title';
 
 export const Cart = () => {
 	const currentCart = useSelector(state => state.cartReducer.currentCart);
@@ -20,10 +22,29 @@ export const Cart = () => {
 
 	sumPrice = sumPrice === 0 ? undefined : sumPrice;
 
+	const [isCheckout, toggleCheckout] = useState({ showed: false });
+
+	const checkoutToggler = () => {
+		toggleCheckout(prevState => ({
+			showed: !prevState.showed,
+		}));
+	};
+	const goods = currentCart.map(item => {
+		return {
+			id: item.product._id,
+			cartQuantity: item.cartQuantity,
+		};
+	});
+
 	return (
 		<>
 			<CartContainer>
 				<LayoutContainer>
+					{isCheckout.showed ? (
+						<Title text="Checkout" color="dark" />
+					) : (
+						<Title text="Cart" color="dark" />
+					)}
 					<CartItemListContainer>
 						{currentCart.map(({ cartQuantity, product }) => {
 							return (
@@ -47,10 +68,14 @@ export const Cart = () => {
 					{sumPrice && <SumContainer>Total: {sumPrice}₴</SumContainer>}
 					{sumPrice && (
 						<SumContainer>
-							<Button text="Checkout" />
+							{!isCheckout.showed && (
+								<Button text="Proceed to checkout" onClick={checkoutToggler} />
+							)}
 						</SumContainer>
 					)}
 					{!sumPrice && <CartIsEmpty>Cart is Empty</CartIsEmpty>}
+
+					{isCheckout.showed && <Checkout sumPrice={sumPrice} goods={goods} />}
 				</LayoutContainer>
 			</CartContainer>
 		</>

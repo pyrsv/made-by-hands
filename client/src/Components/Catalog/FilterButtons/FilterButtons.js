@@ -31,10 +31,10 @@ const options = [
 
 const FilterButtons = () => {
 	const dispatch = useDispatch();
-	const config = useSelector(state => state.catalog.congig);
+	const config = useSelector(state => state.catalog.config);
 
 	const handleChange = e => {
-		dispatch(getFilteredProducts({ ...config, sort: e.value }));
+		dispatch(getFilteredProducts({ ...config, sort: e.value, startPage: 1 }));
 	};
 
 	return (

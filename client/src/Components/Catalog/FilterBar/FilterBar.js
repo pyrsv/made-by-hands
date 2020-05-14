@@ -32,8 +32,10 @@ const FilterBar = () => {
 	const currentParams = querystring.parse(location.search.slice(1));
 	const config = useSelector(state => state.catalog.config);
 	useEffect(() => {
-		dispatch(getColors());
-		dispatch(getBrands());
+		if (!color.length || !brand.length) {
+			dispatch(getColors());
+			dispatch(getBrands());
+		}
 	}, []);
 
 	useEffect(() => {
@@ -49,6 +51,35 @@ const FilterBar = () => {
 		setPriceRange({ minPrice: min, maxPrice: max });
 	};
 
+	const handleFilterSubmit = values => {
+		const params = Object.entries(values).reduce((obj, [key, value]) => {
+			obj[key] = Object.entries(value).reduce((arr, [name, checked]) => {
+				// eslint-disable-next-line no-unused-expressions
+				checked && arr.push(name);
+				return arr;
+			}, []);
+
+			return obj;
+		}, {});
+		params.minPrice = priceRange.minPrice;
+		params.maxPrice = priceRange.maxPrice;
+		const str = querystring.stringify(params, {
+			arrayFormat: 'comma',
+			skipEmptyString: true,
+		});
+		history.push({
+			search: `?${str}`,
+		});
+
+		dispatch(
+			getFilteredProducts({
+				...config,
+				...querystring.parse(str),
+				startPage: 1,
+			})
+		);
+	};
+
 	return (
 		<FilterWrapper>
 			<FiltersContainer>
@@ -59,40 +90,7 @@ const FilterBar = () => {
 					initialValues={{
 						...fields,
 					}}
-					onSubmit={values => {
-						const params = Object.entries(values).reduce(
-							(obj, [key, value]) => {
-								obj[key] = Object.entries(value).reduce(
-									(arr, [name, checked]) => {
-										// eslint-disable-next-line no-unused-expressions
-										checked && arr.push(name);
-										return arr;
-									},
-									[]
-								);
-
-								return obj;
-							},
-							{}
-						);
-						params.minPrice = priceRange.minPrice;
-						params.maxPrice = priceRange.maxPrice;
-						const str = querystring.stringify(params, {
-							arrayFormat: 'comma',
-							skipEmptyString: true,
-						});
-						history.push({
-							search: `?${str}`,
-						});
-
-						dispatch(
-							getFilteredProducts({
-								...config,
-								...querystring.parse(str),
-								startPage: 1,
-							})
-						);
-					}}
+					onSubmit={values => handleFilterSubmit(values)}
 				>
 					{({ values, handleSubmit, setFieldValue }) => {
 						return (
