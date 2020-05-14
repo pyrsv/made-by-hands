@@ -91,7 +91,7 @@ const Checkout = ({ sumPrice, goods }) => {
 			validationSchema={yup.object().shape(valid)}
 
 			// onSubmit = {(values ) => {
-			// 	// console.log('submited data ', values);
+			// 	console.log('submited data ', values);
 			// }}
 		>
 			{({
@@ -168,7 +168,18 @@ const Checkout = ({ sumPrice, goods }) => {
 								/>
 								Delivery to the post
 							</StyledRadio>
-
+							<StyledRadio>
+								<input
+									value="address"
+									type="radio"
+									text="Delivery to your address"
+									name="delivery"
+									onClick={() => showAddress(errors, values)}
+								/>
+								Delivery to your address
+							</StyledRadio>
+						</StyledFormColumn>
+						<StyledFormColumn>
 							{isPostalPoints.showed && (
 								<StyledLabel>
 									Choose postal delivery point
@@ -183,21 +194,10 @@ const Checkout = ({ sumPrice, goods }) => {
 									>
 										<option value="point1"> point 1</option>
 										<option value="point2"> point 2</option>
+										<option value="point3"> point 3</option>
 									</StyledField>
 								</StyledLabel>
 							)}
-						</StyledFormColumn>
-						<StyledFormColumn>
-							<StyledRadio>
-								<input
-									value="address"
-									type="radio"
-									text="Delivery to your address"
-									name="delivery"
-									onClick={() => showAddress(errors, values)}
-								/>
-								Delivery to your address
-							</StyledRadio>
 							{isAddress.showed && (
 								<ColumnOfInputs>
 									<StyledLabel>

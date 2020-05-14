@@ -158,13 +158,14 @@ export const FlexContainer = styled.div`
 	border-radius: 4px;
 	position: relative;
 	background: ${props => props.theme.whiteBackground};
+	height: 287px;
 `;
 
 export const StyledFormColumn = styled.div`
 	display: flex;
 	flex-direction: column;
 	margin-bottom: 26px;
-	width: 26%;
+	width: 28%;
 `;
 
 export const DisabledStyledButton = styled.button`
@@ -199,6 +200,7 @@ export const StyledField = styled(Field)`
 	background-color: transparent;
 	width: 100%;
 	margin-bottom: 6px;
+	margin-top: 6px;
 `;
 export const StyledLabel = styled.label`
 	font-family: 'Raleway', sans-serif;
@@ -209,11 +211,12 @@ export const StyledLabel = styled.label`
 `;
 export const StyledRadio = styled.label`
 	margin-bottom: 10px;
+	margin-top: 35px;
 	font-family: 'Raleway', sans-serif;
 	font-weight: 500;
 	font-size: 22px;
 	line-height: 16px;
-	text-align: center;
+	text-align: left;
 `;
 
 export const ButtonWrapper = styled.div`
