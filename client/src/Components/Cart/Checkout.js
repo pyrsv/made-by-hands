@@ -98,10 +98,10 @@ const Checkout = ({ sumPrice, goods }) => {
 				return errors;
 			}}
 			validationSchema={yup.object().shape(valid)}
-
-			// onSubmit = {(values ) => {
-			// 	console.log('submited data ', values);
-			// }}
+			onSubmit={values => {
+				// eslint-disable-next-line no-console
+				console.log('submited data ', values);
+			}}
 		>
 			{({
 				field,
