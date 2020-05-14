@@ -17,10 +17,10 @@ const Profile = () => {
 				<Route path={`${path}/contact-info`}>
 					<ContactInfo />
 				</Route>
-				<Route path={`${path}/adress-book`}>Adress book</Route>
 				<Route path={`${path}/wishlist`}>
 					<Wishlist />
 				</Route>
+				<Route path={`${path}/orders`}>Orders</Route>
 			</Switch>
 		</LayoutContainer>
 	);

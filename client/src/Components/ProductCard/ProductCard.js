@@ -22,7 +22,6 @@ import { addToCart } from '../../store/actions/cartActions';
 import {
 	setProductToCart,
 	setProductToWishlist,
-	setCurrentProductId,
 } from '../../store/actions/catalogActions';
 
 const ProductCard = ({
@@ -54,17 +53,6 @@ const ProductCard = ({
 		}
 	};
 
-	// useEffect(() => {
-	// 	if (isFirstRun.current) {
-	// 		isFirstRun.current = false;
-	// 		return;
-	// 	}
-	// 	console.log('user in useEffect ProductCard', user);
-	// 	if (user) {
-	// 		handleHeartButtonClick();
-	// 	}
-	// }, [user]);
-
 	return (
 		<Card>
 			<CardImage src={img} alt={name} />
@@ -79,29 +67,15 @@ const ProductCard = ({
 					) : (
 						<NavLink
 							to={{
-								pathname: '/login',
+								pathname: `/login`,
+								search: `addtowishlist=${id}`,
 								state: {
 									background: location,
 								},
 							}}
 						>
-							<FavoriteHeart
-								isFavorite={isFavorite}
-								onClick={() => dispatch(setCurrentProductId(id))}
-							/>
+							<FavoriteHeart isFavorite={isFavorite} />
 						</NavLink>
-						// <NavLink
-						// to={{
-						// 	pathname: `/login${id}`,
-						// 	state: {
-						// 		background: location,
-						// 	},
-						// }}
-						// >
-						// 	<FavoriteHeart
-						// 		isFavorite={isFavorite}
-						// 	/>
-						// </NavLink>
 					)}
 				</CardInfoRow>
 				<CardInfoRow>

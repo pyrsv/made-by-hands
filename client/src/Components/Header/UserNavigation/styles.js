@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const Container = styled.ul`
 	display: flex;
 	justify-content: space-between;
-	@media (max-width: 900px) {
+	@media (max-width: 992px) {
 		flex-direction: column;
 	}
 `;
@@ -23,7 +23,7 @@ export const UserNavItem = styled.li`
 			margin-right: 15px;
 		}
 	}
-	@media (max-width: 900px) {
+	@media (max-width: 992px) {
 		margin-bottom: 20px;
 		align-items: flex-start;
 	}

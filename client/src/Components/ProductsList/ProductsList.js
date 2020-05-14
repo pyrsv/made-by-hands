@@ -34,7 +34,7 @@ const ProductsList = () => {
 
 	return (
 		<InfiniteScroll
-			threshold={100}
+			threshold={150}
 			loadMore={() => dispatch(loadMoreAction(config))}
 			hasMore={products.length < productsQuantity && !isProductsFetching}
 			loader={
