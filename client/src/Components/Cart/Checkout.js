@@ -12,12 +12,12 @@ import {
 	StyledField,
 	ButtonWrapper,
 	ColumnOfInputs,
-	FirstColumn,
+	// FirstColumn,
 	StyledRadio,
 	FillTheFields,
 } from './styles';
 import PropTypes, { object } from 'prop-types';
-import InputField from '../UI/InputFiels/InputField';
+// import InputField from '../UI/InputFiels/InputField';
 
 const valid = {
 	name: string().required(),
@@ -35,9 +35,11 @@ const Checkout = ({ sumPrice, goods }) => {
 		errors.city = '';
 		errors.street = '';
 		errors.house = '';
+		errors.app = '';
 		values.city = '';
 		values.house = '';
 		values.street = '';
+		values.app = '';
 		delete valid.city;
 		delete valid.street;
 		delete valid.house;
@@ -47,7 +49,8 @@ const Checkout = ({ sumPrice, goods }) => {
 		toggleAddress({ showed: true });
 		valid.city = string().required();
 		valid.street = string().required();
-		valid.house = number().required();
+		valid.house = string().required();
+		valid.app = number().required();
 		values.delivery = '';
 	};
 	return (
@@ -77,7 +80,10 @@ const Checkout = ({ sumPrice, goods }) => {
 						errors.street = 'Street is required as a string';
 					}
 					if (!values.house) {
-						errors.house = 'house is required as a number';
+						errors.house = 'house is required as a string';
+					}
+					if (!values.app || isNaN(+values.app)) {
+						errors.app = 'app is required as a number';
 					}
 				}
 				return errors;
@@ -89,6 +95,7 @@ const Checkout = ({ sumPrice, goods }) => {
 			// }}
 		>
 			{({
+				field,
 				errors,
 				touched,
 				isValid,
@@ -101,49 +108,54 @@ const Checkout = ({ sumPrice, goods }) => {
 					<FillTheFields>Fill the fields</FillTheFields>
 					<FlexContainer>
 						<StyledFormColumn>
-							<FirstColumn>
-								<StyledLabel>
-									{' '}
-									Enter your name
-									<InputField
-										name="name"
-										onChange={handleChange}
-										onBlur={handleBlur}
-									/>
-								</StyledLabel>
+							{/* <FirstColumn> */}
+							<StyledLabel>
+								{' '}
+								Enter your name
+								<StyledField
+									name="name"
+									onChange={handleChange}
+									onBlur={handleBlur}
+									target="form"
+									type="text"
+								/>
+							</StyledLabel>
 
-								{errors.name && touched.name ? <div>{errors.name}</div> : null}
-								<StyledLabel>
-									{' '}
-									Enter your surname
-									<InputField
-										name="surname"
-										onChange={handleChange}
-										onBlur={handleBlur}
-									/>
-								</StyledLabel>
-								{errors.surname && touched.surname ? (
-									<div>{errors.surname}</div>
-								) : null}
+							{errors.name && touched.name ? <div>{errors.name}</div> : null}
+							<StyledLabel>
+								{' '}
+								Enter your surname
+								<StyledField
+									name="surname"
+									onChange={handleChange}
+									onBlur={handleBlur}
+									target="form"
+									type="text"
+								/>
+							</StyledLabel>
+							{errors.surname && touched.surname ? (
+								<div>{errors.surname}</div>
+							) : null}
 
-								<StyledLabel>
-									{' '}
-									Enter your phone number
-									<InputField
-										name="phone"
-										onChange={handleChange}
-										onBlur={handleBlur}
-									/>
-								</StyledLabel>
-								{errors.phone && touched.phone ? (
-									<div>{errors.phone}</div>
-								) : null}
-							</FirstColumn>
+							<StyledLabel>
+								{' '}
+								Enter your phone number
+								<StyledField
+									name="phone"
+									onChange={handleChange}
+									onBlur={handleBlur}
+									target="form"
+									type="text"
+								/>
+							</StyledLabel>
+							{errors.phone && touched.phone ? <div>{errors.phone}</div> : null}
+							{/* </FirstColumn> */}
 						</StyledFormColumn>
 
 						<StyledFormColumn>
 							<StyledRadio>
 								<input
+									target="form"
 									checked={!isAddress.showed}
 									value="postal"
 									type="radio"
@@ -166,6 +178,8 @@ const Checkout = ({ sumPrice, goods }) => {
 										value={values.delivery}
 										onChange={handleChange}
 										onBlur={handleBlur}
+										target="form"
+										type="select"
 									>
 										<option value="point1"> point 1</option>
 										<option value="point2"> point 2</option>
@@ -189,10 +203,12 @@ const Checkout = ({ sumPrice, goods }) => {
 									<StyledLabel>
 										{' '}
 										Enter your city
-										<InputField
+										<StyledField
 											name="city"
 											onChange={handleChange}
 											onBlur={handleBlur}
+											target="form"
+											type="text"
 										/>
 									</StyledLabel>
 									{errors.city && touched.city ? (
@@ -201,10 +217,12 @@ const Checkout = ({ sumPrice, goods }) => {
 									<StyledLabel>
 										{' '}
 										Enter your street
-										<InputField
+										<StyledField
 											name="street"
 											onChange={handleChange}
 											onBlur={handleBlur}
+											target="form"
+											type="text"
 										/>
 									</StyledLabel>
 									{errors.street && touched.street ? (
@@ -213,15 +231,30 @@ const Checkout = ({ sumPrice, goods }) => {
 									<StyledLabel>
 										{' '}
 										Enter your house
-										<InputField
+										<StyledField
 											name="house"
 											onChange={handleChange}
 											onBlur={handleBlur}
+											target="form"
+											type="text"
+											{...field}
 										/>
 									</StyledLabel>
 									{errors.house && touched.house ? (
 										<div>{errors.house}</div>
 									) : null}
+									<StyledLabel>
+										{' '}
+										Enter your appartment number
+										<StyledField
+											name="app"
+											onChange={handleChange}
+											onBlur={handleBlur}
+											target="form"
+											type="text"
+										/>
+										{errors.app && touched.app ? <div>{errors.app}</div> : null}
+									</StyledLabel>
 								</ColumnOfInputs>
 							)}
 						</StyledFormColumn>

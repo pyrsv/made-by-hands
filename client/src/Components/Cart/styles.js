@@ -198,16 +198,17 @@ export const StyledField = styled(Field)`
 	outline: none;
 	background-color: transparent;
 	width: 100%;
-	margin-top: 6px;
+	margin-bottom: 6px;
 `;
 export const StyledLabel = styled.label`
 	font-family: 'Raleway', sans-serif;
 	font-weight: 500;
 	font-size: 14px;
 	text-align: center;
+	margin-top: 6px;
 `;
 export const StyledRadio = styled.label`
-	margin-bottom: 17px;
+	margin-bottom: 10px;
 	font-family: 'Raleway', sans-serif;
 	font-weight: 500;
 	font-size: 22px;
@@ -224,10 +225,10 @@ export const ColumnOfInputs = styled.div`
 	display: flex;
 	flex-direction: column;
 	position: relative;
-	top: 5%;
+	/* top: 5%; */
 `;
 export const FirstColumn = styled.div`
-	margin-top: 38px;
+	margin-top: 34px;
 	text-align: center;
 `;
 
