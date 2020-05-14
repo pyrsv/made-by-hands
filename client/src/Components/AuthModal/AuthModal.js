@@ -37,7 +37,7 @@ const AuthModal = () => {
 			isFirstRun.current = false;
 			return;
 		}
-		if (location) {
+		if (wishlistId) {
 			dispatch(setProductToWishlist(wishlistId));
 			dispatch(addToWishlist(wishlistId));
 		}

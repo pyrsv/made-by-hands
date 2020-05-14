@@ -53,17 +53,6 @@ const ProductCard = ({
 		}
 	};
 
-	// useEffect(() => {
-	// 	if (isFirstRun.current) {
-	// 		isFirstRun.current = false;
-	// 		return;
-	// 	}
-	// 	console.log('user in useEffect ProductCard', user);
-	// 	if (user) {
-	// 		handleHeartButtonClick();
-	// 	}
-	// }, [user]);
-
 	return (
 		<Card>
 			<CardImage src={img} alt={name} />
