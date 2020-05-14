@@ -4,6 +4,7 @@ import { Form, Formik } from 'formik';
 import * as yup from 'yup';
 import { string, number } from 'yup';
 import Button from '../UI/Button/Button';
+import { useSelector } from 'react-redux';
 import {
 	FlexContainer,
 	StyledFormColumn,
@@ -28,6 +29,8 @@ const valid = {
 const Checkout = ({ sumPrice, goods }) => {
 	const [isPostalPoints, togglePP] = useState({ showed: true });
 	const [isAddress, toggleAddress] = useState({ showed: false });
+
+	const user = useSelector(state => state.auth.currentUser);
 
 	const showPostalPoints = (errors, values) => {
 		togglePP({ showed: true });
@@ -55,6 +58,7 @@ const Checkout = ({ sumPrice, goods }) => {
 	};
 	return (
 		<Formik
+			user
 			showAddress
 			showPostalPoints
 			isPostalPoints
@@ -62,10 +66,15 @@ const Checkout = ({ sumPrice, goods }) => {
 			sumPrice
 			goods
 			initialValues={{
-				name: '',
-				surname: '',
+				name: user.firstName || '',
+				surname: user.lastName || '',
 				phone: '',
 				delivery: 'point1',
+				city: user.address.city || '',
+				house: user.address.houseNumber || '',
+				app: user.address.flat || '',
+				street: user.address.street || '',
+
 				amountOfPayment: sumPrice,
 				items: goods,
 			}}
