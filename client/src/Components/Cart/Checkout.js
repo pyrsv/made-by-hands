@@ -32,17 +32,17 @@ const Checkout = ({ sumPrice, goods }) => {
 
 	const user = useSelector(state => state.auth.currentUser);
 
-	const showPostalPoints = (errors, values) => {
+	const showPostalPoints = errors => {
 		togglePP({ showed: true });
 		toggleAddress({ showed: false });
 		errors.city = '';
 		errors.street = '';
 		errors.house = '';
 		errors.app = '';
-		values.city = '';
-		values.house = '';
-		values.street = '';
-		values.app = '';
+		// values.city = '';
+		// values.house = '';
+		// values.street = '';
+		// values.app = '';
 		delete valid.city;
 		delete valid.street;
 		delete valid.house;
