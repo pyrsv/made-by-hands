@@ -32,8 +32,10 @@ const FilterBar = () => {
 	const currentParams = querystring.parse(location.search.slice(1));
 	const config = useSelector(state => state.catalog.config);
 	useEffect(() => {
-		dispatch(getColors());
-		dispatch(getBrands());
+		if (!color.length || !brand.length) {
+			dispatch(getColors());
+			dispatch(getBrands());
+		}
 	}, []);
 
 	useEffect(() => {
