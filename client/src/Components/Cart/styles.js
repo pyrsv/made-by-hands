@@ -157,7 +157,7 @@ export const FlexContainer = styled.div`
 	margin-bottom: 10px;
 	border-radius: 4px;
 	position: relative;
-	background: ${props => props.theme.whiteBackground};
+	/* background: ${props => props.theme.whiteBackground}; */
 	height: 287px;
 `;
 
