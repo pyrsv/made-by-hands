@@ -5,6 +5,7 @@ import Title from '../UI/Title/title';
 import ProfileNavigation from './ProfileNavigation/ProfileNavigation';
 import Wishlist from './Wishlist/Wishlist';
 import ContactInfo from './ContactInfo/ContactInfo';
+import AdressBook from './AdressBook/AddressBook';
 
 const Profile = () => {
 	const { path } = useRouteMatch();
@@ -17,7 +18,9 @@ const Profile = () => {
 				<Route path={`${path}/contact-info`}>
 					<ContactInfo />
 				</Route>
-				<Route path={`${path}/adress-book`}>Adress book</Route>
+				<Route path={`${path}/adress-book`}>
+					<AdressBook />
+				</Route>
 				<Route path={`${path}/wishlist`}>
 					<Wishlist />
 				</Route>
