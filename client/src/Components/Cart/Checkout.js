@@ -30,7 +30,11 @@ const Checkout = ({ sumPrice, goods }) => {
 	const [isPostalPoints, togglePP] = useState({ showed: true });
 	const [isAddress, toggleAddress] = useState({ showed: false });
 
-	const user = useSelector(state => state.auth.currentUser);
+	let user = useSelector(state => state.auth.currentUser);
+
+	if (!user) {
+		user = { address: '' };
+	}
 
 	const showPostalPoints = errors => {
 		togglePP({ showed: true });
@@ -89,7 +93,7 @@ const Checkout = ({ sumPrice, goods }) => {
 						errors.street = 'Street is required as a string';
 					}
 					if (!values.house) {
-						errors.house = 'house is required as a string';
+						errors.house = 'house is required';
 					}
 					if (!values.app || isNaN(+values.app)) {
 						errors.app = 'app is required as a number';
