@@ -28,14 +28,13 @@ const ProductsList = () => {
 		dispatch(
 			getFilteredProducts({ ...currentParams, ...config, startPage: 1 })
 		);
-		return () =>
-			dispatch(updateConfig({ ...config, perPage: 12, startPage: 1 }));
-	}, [location]);
+		return () => dispatch(updateConfig({ perPage: 12, startPage: 1 }));
+	}, []);
 
 	return (
 		<InfiniteScroll
 			threshold={150}
-			loadMore={() => dispatch(loadMoreAction(config))}
+			loadMore={() => dispatch(loadMoreAction({ ...currentParams, ...config }))}
 			hasMore={products.length < productsQuantity && !isProductsFetching}
 			loader={
 				<ProductsPreloader>
