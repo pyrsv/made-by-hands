@@ -1,7 +1,4 @@
 import React from 'react';
-
-import InputField from '../UI/InputFiels/InputField';
-import Button from '../UI/Button/Button';
 import LayoutContainer from '../LayoutContainer/LayoutContainer';
 
 import {
@@ -13,6 +10,7 @@ import {
 	IconPay,
 } from './style';
 import { FooterText } from './FooterText/FooterText';
+import FooterForm from './FooterForm';
 
 const Footer = () => {
 	return (
@@ -20,12 +18,7 @@ const Footer = () => {
 			<LayoutContainer>
 				<FooterContainer>
 					<FooterSection>
-						<FooterText
-							type="title"
-							text="Subscribe and get first all the best!"
-						/>
-						<InputField placeholder="Enter your email " />
-						<Button text="Send" color="light" icon="envelope" />
+						<FooterForm />
 					</FooterSection>
 
 					<FooterSection>
@@ -87,7 +80,7 @@ const Footer = () => {
 			</LayoutContainer>
 			<LayoutContainer>
 				<FootLine />
-				<FooterText type="copy" text="© 2020 | all rights reserved" />
+				<FooterText type="link" text="© 2020 | all rights reserved" />
 			</LayoutContainer>
 		</Wrapper>
 	);

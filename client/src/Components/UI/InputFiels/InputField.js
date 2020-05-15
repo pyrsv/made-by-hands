@@ -23,7 +23,7 @@ const InputField = ({
 				id={name}
 				type={type}
 				placeholder={placeholder}
-				onChange={onChange}
+				onChange={e => onChange(e)}
 				value={value}
 			/>
 		</InputContainer>
