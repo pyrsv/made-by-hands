@@ -110,6 +110,11 @@ const Header = () => {
 		});
 	};
 
+	const handleDropdownLinkClick = target => {
+		dispatch(closeNav());
+		handleDropdownToggle(target);
+	};
+
 	return (
 		<StyledHeader>
 			<LayoutContainer>
@@ -130,13 +135,17 @@ const Header = () => {
 									<UserNavigation
 										isDropdown={dropdown.profile}
 										routes={profileRoutes}
+										onDropdownLinkClick={() => handleDropdownToggle('profile')}
 										onDropdownOpen={() => handleDropdownToggle('profile')}
+										onLinkClick={() => {}}
 									/>
 								</Info>
 								<Navigation
 									isDropdown={dropdown.catalog}
 									routes={catalogRoutes}
 									onDropdownOpen={() => handleDropdownToggle('catalog')}
+									onDropdownLinkClick={() => handleDropdownToggle('catalog')}
+									onLinkClick={() => {}}
 								/>
 							</Content>
 						</>
@@ -168,11 +177,15 @@ const Header = () => {
 						isDropdown={dropdown.catalog}
 						routes={catalogRoutes}
 						onDropdownOpen={() => handleDropdownToggle('catalog')}
+						onDropdownLinkClick={() => handleDropdownLinkClick('catalog')}
+						onLinkClick={() => dispatch(closeNav())}
 					/>
 					<UserNavigation
 						isDropdown={dropdown.profile}
 						routes={profileRoutes}
 						onDropdownOpen={() => handleDropdownToggle('profile')}
+						onDropdownLinkClick={() => handleDropdownLinkClick('profile')}
+						onLinkClick={() => dispatch(closeNav())}
 					/>
 				</Drawer>
 			)}

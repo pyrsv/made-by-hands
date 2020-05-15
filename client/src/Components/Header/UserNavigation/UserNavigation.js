@@ -6,9 +6,16 @@ import Dropdown from '../Dropdown/Dropdown';
 import { Container, UserNavItem, UserNavIcon } from './styles';
 import { useSelector } from 'react-redux';
 
-const UserNavigation = ({ isDropdown, onDropdownOpen, routes }) => {
+const UserNavigation = ({
+	isDropdown,
+	onDropdownOpen,
+	routes,
+	onDropdownLinkClick,
+	onLinkClick,
+}) => {
 	const user = useSelector(state => state.auth.currentUser);
 	const location = useLocation();
+
 	return (
 		<Container>
 			<UserNavItem>
@@ -21,6 +28,7 @@ const UserNavigation = ({ isDropdown, onDropdownOpen, routes }) => {
 						heading="Profile"
 						onOpen={onDropdownOpen}
 						routes={routes}
+						onLinkClick={onDropdownLinkClick}
 					/>
 				) : (
 					<NavLink
@@ -35,7 +43,7 @@ const UserNavigation = ({ isDropdown, onDropdownOpen, routes }) => {
 					</NavLink>
 				)}
 			</UserNavItem>
-			<UserNavItem>
+			<UserNavItem onClick={onLinkClick}>
 				<NavLink to="/profile/wishlist">
 					<UserNavIcon accent>
 						<FontAwesomeIcon icon={['fas', 'heart']} />
@@ -43,7 +51,7 @@ const UserNavigation = ({ isDropdown, onDropdownOpen, routes }) => {
 					Wishlist
 				</NavLink>
 			</UserNavItem>
-			<UserNavItem>
+			<UserNavItem onClick={onLinkClick}>
 				<NavLink to="/cart">
 					<UserNavIcon>
 						<FontAwesomeIcon icon={['fas', 'shopping-cart']} />
@@ -59,6 +67,8 @@ UserNavigation.propTypes = {
 	isDropdown: PropTypes.bool.isRequired,
 	onDropdownOpen: PropTypes.func.isRequired,
 	routes: PropTypes.arrayOf(PropTypes.object).isRequired,
+	onDropdownLinkClick: PropTypes.func.isRequired,
+	onLinkClick: PropTypes.func.isRequired,
 };
 
 export default UserNavigation;

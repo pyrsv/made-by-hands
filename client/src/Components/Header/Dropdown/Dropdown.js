@@ -8,7 +8,7 @@ import {
 } from './styles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-const Dropdown = ({ isOpen, heading, onOpen, routes }) => {
+const Dropdown = ({ isOpen, heading, onOpen, routes, onLinkClick }) => {
 	const node = useRef();
 	const opener = useRef();
 
@@ -44,6 +44,7 @@ const Dropdown = ({ isOpen, heading, onOpen, routes }) => {
 						<DropdownItem
 							accent={routes.length === 4 && key === 3}
 							key={item.props.children}
+							onClick={onLinkClick}
 						>
 							{item}
 						</DropdownItem>
@@ -59,6 +60,11 @@ Dropdown.propTypes = {
 	heading: PropTypes.string.isRequired,
 	onOpen: PropTypes.func.isRequired,
 	routes: PropTypes.arrayOf(PropTypes.object).isRequired,
+	onLinkClick: PropTypes.func,
+};
+
+Dropdown.defaultProps = {
+	onLinkClick: () => {},
 };
 
 export default Dropdown;
