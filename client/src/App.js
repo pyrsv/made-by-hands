@@ -1,23 +1,22 @@
-import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { Route, Switch } from 'react-router-dom';
+import React from 'react';
+import { Route, Switch, useLocation } from 'react-router-dom';
 import CartPage from './Pages/CartPage';
 import CatalogPage from './Pages/CatalogPage';
 import ProfilePage from './Pages/ProfilePage';
 import IndexPage from './Pages/IndexPage';
 import Header from './Components/Header/Header';
 import AppContainer from './Components/AppContainer/AppContainer';
-import { getUser } from './store/actions/authActions';
+import ProtectedRoute from './HOC/ProtectedRoute/ProtectedRoute';
+import AuthModal from './Components/AuthModal/AuthModal';
 
 const App = () => {
-	const dispatch = useDispatch();
-
-	useEffect(() => dispatch(getUser()));
+	const location = useLocation();
+	const background = location.state && location.state.background;
 
 	return (
 		<AppContainer>
 			<Header />
-			<Switch>
+			<Switch location={background || location}>
 				<Route exact path="/">
 					<IndexPage />
 				</Route>
@@ -27,10 +26,16 @@ const App = () => {
 				<Route path="/catalog">
 					<CatalogPage />
 				</Route>
-				<Route path="/profile">
+				<ProtectedRoute path="/profile">
 					<ProfilePage />
-				</Route>
+				</ProtectedRoute>
 			</Switch>
+
+			{background && (
+				<Route path="/login">
+					<AuthModal />
+				</Route>
+			)}
 		</AppContainer>
 	);
 };

@@ -1,8 +1,7 @@
-import React, { useEffect } from 'react';
-import PropTypes from 'prop-types';
-import { useSelector, useDispatch } from 'react-redux';
+/* eslint-disable react/require-default-props */
+import React, { memo } from 'react';
+import PropTypes, { object } from 'prop-types';
 import ProductCard from '../../ProductCard/ProductCard';
-import { getItemsAction } from '../../../store/actions/getItemsAction';
 import {
 	ProductCardContainer,
 	ProductCarouselContainer,
@@ -63,16 +62,7 @@ const SamplePrevArrow = props => {
 	);
 };
 
-const ProductCarousel = () => {
-	const dispatch = useDispatch();
-
-	useEffect(() => {
-		dispatch(getItemsAction());
-	}, [dispatch]);
-
-	const items = useSelector(state => state.itemsReducer.items);
-	const shuffled = items.sort(() => 0.5 - Math.random());
-	const selected = shuffled.slice(0, 8);
+const ProductCarousel = ({ selected }) => {
 	const settings = {
 		nextArrow: <SampleNextArrow />,
 		prevArrow: <SamplePrevArrow />,
@@ -119,6 +109,8 @@ const ProductCarousel = () => {
 												name={item.name}
 												img={item.imageUrls[0]}
 												price={item.currentPrice}
+												isFavorite={item.isFavorite}
+												isInCart={item.isInCart}
 											/>
 										</ProductCardContainer>
 									</div>
@@ -133,12 +125,16 @@ const ProductCarousel = () => {
 };
 
 SampleNextArrow.propTypes = {
-	onClick: PropTypes.func.isRequired,
-	onKeyUp: PropTypes.func.isRequired,
+	onClick: PropTypes.func,
+	onKeyUp: PropTypes.func,
 };
 SamplePrevArrow.propTypes = {
-	onClick: PropTypes.func.isRequired,
-	onKeyUp: PropTypes.func.isRequired,
+	onClick: PropTypes.func,
+	onKeyUp: PropTypes.func,
 };
 
-export default ProductCarousel;
+ProductCarousel.propTypes = {
+	selected: PropTypes.arrayOf(object),
+};
+
+export default memo(ProductCarousel);

@@ -38,9 +38,7 @@ export const checkProductsForCartAndFavorites = products => {
 							isInCart:
 								cart.some(cartItem => cartItem.product._id === prod._id) ||
 								false,
-							isFavorite:
-								wishlist.some(cartItem => cartItem.product._id === prod._id) ||
-								false,
+							isFavorite: wishlist.some(Item => Item._id === prod._id) || false,
 						};
 					});
 					return productsWithCartAndFavorites;
