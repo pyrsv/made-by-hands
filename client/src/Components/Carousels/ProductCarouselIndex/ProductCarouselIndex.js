@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getItemsForCarousel } from '../../../store/actions/getItemsAction';
+import { getItemsForCarousel } from '../../../store/actions/getArrivalsAction';
 import ProductsCarousel from '../ProductsCarousel/ProductsCarousel';
 
 const ProductCarouselIndex = () => {
