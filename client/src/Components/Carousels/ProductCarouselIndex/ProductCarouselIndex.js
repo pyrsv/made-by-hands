@@ -9,7 +9,6 @@ const ProductCarouselIndex = () => {
 	useEffect(() => {
 		dispatch(getItemsForCarousel());
 	}, [dispatch]);
-
 	const selected = useSelector(
 		state => state.carouselArrivals.carouselArrivals
 	);
