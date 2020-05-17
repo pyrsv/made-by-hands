@@ -8,7 +8,7 @@ import { filtersReducer } from './filtersReducer';
 import { wishlistReducer } from './wishlistReducer';
 
 const rootReducer = combineReducers({
-	itemsReducer,
+	allItems: itemsReducer,
 	auth: authReducer,
 	catalog: catalogReducer,
 	cartReducer,
