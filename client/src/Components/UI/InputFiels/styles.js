@@ -9,7 +9,7 @@ export const InputContainer = styled.div`
 export const Input = styled.input`
 	display: inline-block;
 	border: 1px solid
-		${props => (props.error ? props.theme.accentRed : props.theme.mainDark)};
+		${props => (props.isInvalid ? props.theme.accentRed : props.theme.mainDark)};
 	box-sizing: border-box;
 	border-radius: 4px;
 	padding: 6px 12px;

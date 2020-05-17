@@ -27,7 +27,7 @@ const InputField = ({
 				placeholder={placeholder}
 				onChange={onChange}
 				value={value}
-				error={error}
+				isInvalid={error && touched}
 			/>
 			{touched && error && <ErrorMessage>{error}</ErrorMessage>}
 		</InputContainer>
