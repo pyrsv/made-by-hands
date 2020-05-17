@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { InputContainer, Input, Label } from './styles';
+import { InputContainer, Input, Label, ErrorMessage } from './styles';
 
 const InputField = ({
 	label,
@@ -11,6 +11,9 @@ const InputField = ({
 	type,
 	value,
 	target,
+	touched,
+	helperText,
+	error,
 }) => {
 	return (
 		<InputContainer target={target}>
@@ -26,6 +29,7 @@ const InputField = ({
 				onChange={onChange}
 				value={value}
 			/>
+			{touched && error && <ErrorMessage>{helperText}</ErrorMessage>}
 		</InputContainer>
 	);
 };
@@ -39,12 +43,18 @@ InputField.propTypes = {
 	type: PropTypes.string.isRequired,
 	value: PropTypes.string.isRequired,
 	target: PropTypes.oneOf(['form', 'search']).isRequired,
+	touched: PropTypes.bool,
+	error: PropTypes.bool,
+	helperText: PropTypes.string,
 };
 
 InputField.defaultProps = {
 	label: '',
 	placeholder: '',
 	required: false,
+	touched: false,
+	error: false,
+	helperText: '',
 };
 
 export default InputField;
