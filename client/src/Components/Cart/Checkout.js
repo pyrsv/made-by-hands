@@ -32,12 +32,8 @@ const Checkout = ({ sumPrice, goods }) => {
 
 	let user = useSelector(state => state.auth.currentUser);
 
-	if (!user) {
+	if (!user || !user.address) {
 		user = { address: '' };
-	}
-
-	if (!user.address) {
-		user.address = '';
 	}
 
 	const showPostalPoints = errors => {
