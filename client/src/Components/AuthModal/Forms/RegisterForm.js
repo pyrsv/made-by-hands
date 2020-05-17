@@ -17,14 +17,14 @@ const RegisterSchema = Yup.object().shape({
 	firstName: Yup.string()
 		.required('First name is required')
 		.matches(/^[a-zA-Zа-яА-Я]+$/, {
-			message: 'Allowed characters for First Name is a-z, A-Z, а-я, А-Я.',
+			message: 'Allowed characters for is a-z, A-Z, а-я, А-Я.',
 		})
 		.min(2, 'Last Name must be between 2 and 25 characters')
 		.max(25, 'Last Name must be between 2 and 25 characters'),
 	lastName: Yup.string()
 		.required('First name is required')
 		.matches(/^[a-zA-Zа-яА-Я]+$/, {
-			message: 'Allowed characters for First Name is a-z, A-Z, а-я, А-Я.',
+			message: 'Allowed characters for is a-z, A-Z, а-я, А-Я.',
 		})
 		.min(2, 'Last Name must be between 2 and 25 characters')
 		.max(25, 'Last Name must be between 2 and 25 characters'),
