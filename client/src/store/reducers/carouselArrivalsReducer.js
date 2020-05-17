@@ -6,17 +6,14 @@ import {
 	GET_CAROUSEL_ARRIVALS_INIT,
 } from '../types/carouselArrivalsTypes';
 
-const initialCarouselArrivals = {
+const initialState = {
 	carouselArrivals: [],
 	getcarouselArrivalsError: null,
 	isProductsFetching: false,
 	isProductsError: false,
 };
 
-export const carouselArrivalsReducer = (
-	state = initialCarouselArrivals,
-	action
-) => {
+export const carouselArrivalsReducer = (state = initialState, action) => {
 	switch (action.type) {
 		case GET_CAROUSEL_ARRIVALS_INIT:
 			return {
