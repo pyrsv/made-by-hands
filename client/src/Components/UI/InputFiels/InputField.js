@@ -28,6 +28,7 @@ const InputField = ({
 				placeholder={placeholder}
 				onChange={onChange}
 				value={value}
+				error={error}
 			/>
 			{touched && error && <ErrorMessage>{helperText}</ErrorMessage>}
 		</InputContainer>

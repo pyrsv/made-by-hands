@@ -8,7 +8,8 @@ export const InputContainer = styled.div`
 
 export const Input = styled.input`
 	display: inline-block;
-	border: 1px solid #16161c;
+	border: 1px solid
+		${props => (props.error ? props.theme.accentRed : props.theme.mainDark)};
 	box-sizing: border-box;
 	border-radius: 4px;
 	padding: 6px 12px;
@@ -17,6 +18,9 @@ export const Input = styled.input`
 	outline: none;
 	background-color: transparent;
 	width: 100%;
+	box-shadow: inset 0 0 0 50px #fff;
+	-webkit-text-fill-color: #000;
+	transition: border-color 0.2s ease-in;
 `;
 
 export const Label = styled.label`
@@ -27,7 +31,17 @@ export const Label = styled.label`
 export const ErrorMessage = styled.span`
 	position: absolute;
 	left: 0;
-	bottom: -15px;
+	bottom: -17px;
 	font-size: 14px;
 	color: ${props => props.theme.accentRed};
+	animation: show 0.2s ease-in;
+
+	@keyframes show {
+		0% {
+			opacity: 0;
+		}
+		100% {
+			opacity: 1;
+		}
+	}
 `;
