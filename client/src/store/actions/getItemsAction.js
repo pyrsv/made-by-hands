@@ -24,12 +24,9 @@ const itemsError = error => ({
 // };
 
 export const getItemsForCarousel = () => dispatch => {
-	axios.get('/products').then(allProducts => {
-		checkProductsForCartAndFavorites(allProducts.data)
+	axios.get('products/filter?perPage=10&sort=-date').then(allProducts => {
+		checkProductsForCartAndFavorites(allProducts.data.products)
 			.then(products => {
-				products
-					.sort((a, b) => Date.parse(a.date) - Date.parse(b.date))
-					.reverse();
 				const selected = products.slice(0, 6);
 				dispatch(itemsSuccess(selected));
 			})

@@ -13,6 +13,16 @@ export const itemsReducer = (state = initialItems, action) => {
 				...state,
 				items: action.payload,
 			};
+
+		case 'SET_PRODUCT_TO_CART':
+			return {
+				...state,
+				items: state.items.map(prod => {
+					return prod._id === action.payload
+						? { ...prod, isInCart: !prod.isInCart }
+						: prod;
+				}),
+			};
 		default: {
 			return {
 				...state,
