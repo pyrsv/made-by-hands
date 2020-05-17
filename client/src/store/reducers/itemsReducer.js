@@ -1,20 +1,26 @@
+import { GET_ITEMS_ERROR, GET_ITEMS_SUCCESS } from '../types/itemsTypes';
+import {
+	SET_PRODUCT_TO_WISHLIST,
+	SET_PRODUCT_TO_CART,
+} from '../types/catalogTypes';
+
 const initialItems = { items: [], getItemsError: null };
 
 export const itemsReducer = (state = initialItems, action) => {
 	switch (action.type) {
-		case 'GET_ITEMS_ERROR':
+		case GET_ITEMS_ERROR:
 			return {
 				...state,
 				getItemsError: action.payload,
 			};
 
-		case 'GET_ITEMS_SUCCESS':
+		case GET_ITEMS_SUCCESS:
 			return {
 				...state,
 				items: action.payload,
 			};
 
-		case 'SET_PRODUCT_TO_CART':
+		case SET_PRODUCT_TO_CART:
 			return {
 				...state,
 				items: state.items.map(prod => {
@@ -24,7 +30,7 @@ export const itemsReducer = (state = initialItems, action) => {
 				}),
 			};
 
-		case 'SET_PRODUCT_TO_WISHLIST':
+		case SET_PRODUCT_TO_WISHLIST:
 			return {
 				...state,
 				items: state.items.map(prod => {
