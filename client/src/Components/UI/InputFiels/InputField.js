@@ -12,7 +12,6 @@ const InputField = ({
 	value,
 	target,
 	touched,
-	helperText,
 	error,
 }) => {
 	return (
@@ -30,7 +29,7 @@ const InputField = ({
 				value={value}
 				error={error}
 			/>
-			{touched && error && <ErrorMessage>{helperText}</ErrorMessage>}
+			{touched && error && <ErrorMessage>{error}</ErrorMessage>}
 		</InputContainer>
 	);
 };
@@ -46,7 +45,6 @@ InputField.propTypes = {
 	target: PropTypes.oneOf(['form', 'search']).isRequired,
 	touched: PropTypes.bool,
 	error: PropTypes.bool,
-	helperText: PropTypes.string,
 };
 
 InputField.defaultProps = {
@@ -55,7 +53,6 @@ InputField.defaultProps = {
 	required: false,
 	touched: false,
 	error: false,
-	helperText: '',
 };
 
 export default InputField;
