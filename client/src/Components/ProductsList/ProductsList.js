@@ -57,12 +57,12 @@ const ProductsList = () => {
 						<ProductCard
 							id={_id}
 							key={itemNo}
+							itemNo={itemNo}
 							name={name}
 							img={image}
 							price={currentPrice}
 							oldPrice={previousPrice}
 							type="olive"
-							itemNo={itemNo}
 							isInCart={isInCart}
 							isFavorite={isFavorite}
 						/>
