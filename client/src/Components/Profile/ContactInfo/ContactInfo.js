@@ -187,13 +187,13 @@ const ContactInfo = () => {
 									error={errors.address?.flat}
 									touched={touched.address?.flat}
 								/>
-								<Button
-									type="submit"
-									onClick={handleSubmit}
-									size="wide"
-									text="Submit changes "
-								/>
 							</FormColumn>
+							<Button
+								type="submit"
+								onClick={handleSubmit}
+								size="wide"
+								text="Submit changes "
+							/>
 						</FieldsWrapper>
 					</Form>
 				)}
