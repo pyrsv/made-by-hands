@@ -36,6 +36,10 @@ const Checkout = ({ sumPrice, goods }) => {
 		user = { address: '' };
 	}
 
+	if (!user.address) {
+		user.address = '';
+	}
+
 	const showPostalPoints = errors => {
 		togglePP({ showed: true });
 		toggleAddress({ showed: false });
