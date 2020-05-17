@@ -12,16 +12,17 @@ export const InfoWrapper = styled.div`
 
 export const FieldsWrapper = styled.div`
 	display: flex;
+
+	@media (max-width: 768px) {
+		flex-direction: column;
+	}
 `;
 
 export const Form = styled.form`
 	max-width: 768px;
-	display: inline-flex;
+	/* display: inline-flex;
 	justify-content: center;
-	flex-direction: column;
-
-	@media (max-width: 768px) {
-	}
+	flex-direction: column; */
 `;
 
 export const FormColumn = styled.div`
