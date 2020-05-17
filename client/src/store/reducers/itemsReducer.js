@@ -23,6 +23,17 @@ export const itemsReducer = (state = initialItems, action) => {
 						: prod;
 				}),
 			};
+
+		case 'SET_PRODUCT_TO_WISHLIST':
+			return {
+				...state,
+				items: state.items.map(prod => {
+					return prod._id === action.payload
+						? { ...prod, isFavorite: !prod.isFavorite }
+						: prod;
+				}),
+				currentProductId: null,
+			};
 		default: {
 			return {
 				...state,
