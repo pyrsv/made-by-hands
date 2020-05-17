@@ -1,36 +1,34 @@
 import axios from 'axios';
 import { checkProductsForCartAndFavorites } from '../../utils/API';
+import {
+	GET_CAROUSEL_ARRIVALS_SUCCESS,
+	GET_CAROUSEL_ARRIVALS_ERROR,
+	GET_CAROUSEL_ARRIVALS_INIT,
+} from '../types/carouselArrivalsTypes';
 
-const GET_ITEMS_SUCCESS = 'GET_ITEMS_SUCCESS';
-const GET_ITEMS_ERROR = 'GET_ITEMS_ERROR';
-
-const itemsSuccess = data => ({
-	type: GET_ITEMS_SUCCESS,
+const arrivalsSuccess = data => ({
+	type: GET_CAROUSEL_ARRIVALS_SUCCESS,
 	payload: data,
 });
 
-const itemsError = error => ({
-	type: GET_ITEMS_ERROR,
+const arrivalsError = error => ({
+	type: GET_CAROUSEL_ARRIVALS_ERROR,
 	payload: error,
 });
 
-// export const getItemsAction = () => dispatch => {
-// 	axios
-// 		.get('/products')
-// 		.then(res => {
-// 			dispatch(itemsSuccess(res.data));
-// 		})
-// 		.catch(err => dispatch(itemsError(err)));
-// };
+const getArrivalsInit = () => ({
+	type: GET_CAROUSEL_ARRIVALS_INIT,
+});
 
 export const getItemsForCarousel = () => dispatch => {
+	dispatch(getArrivalsInit);
 	axios.get('products/filter?perPage=10&sort=-date').then(allProducts => {
 		checkProductsForCartAndFavorites(allProducts.data.products)
 			.then(products => {
 				const selected = products.slice(0, 6);
-				dispatch(itemsSuccess(selected));
+				dispatch(arrivalsSuccess(selected));
 			})
 
-			.catch(err => dispatch(itemsError(err)));
+			.catch(err => dispatch(arrivalsError(err)));
 	});
 };

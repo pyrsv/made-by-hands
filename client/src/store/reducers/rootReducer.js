@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { itemsReducer } from './itemsReducer';
+import { carouselArrivalsReducer } from './carouselArrivalsReducer';
 import { authReducer } from './authReducer';
 import { catalogReducer } from './catalogReducer';
 import { cartReducer } from './cartReducer';
@@ -8,7 +8,7 @@ import { filtersReducer } from './filtersReducer';
 import { wishlistReducer } from './wishlistReducer';
 
 const rootReducer = combineReducers({
-	allItems: itemsReducer,
+	carouselArrivals: carouselArrivalsReducer,
 	auth: authReducer,
 	catalog: catalogReducer,
 	cartReducer,

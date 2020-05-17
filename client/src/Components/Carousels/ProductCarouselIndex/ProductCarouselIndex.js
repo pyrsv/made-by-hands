@@ -10,7 +10,9 @@ const ProductCarouselIndex = () => {
 		dispatch(getItemsForCarousel());
 	}, [dispatch]);
 
-	const selected = useSelector(state => state.allItems.items);
+	const selected = useSelector(
+		state => state.carouselArrivals.carouselArrivals
+	);
 
 	return <ProductsCarousel selected={selected} />;
 };
