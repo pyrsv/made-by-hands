@@ -87,7 +87,6 @@ const Header = () => {
 
 	const profileRoutes = [
 		<NavLink to="/profile/contact-info">contact info</NavLink>,
-		<NavLink to="/profile/adress-book">adress book</NavLink>,
 		<NavLink to="/profile/wishlist">wishlist</NavLink>,
 		<span
 			role="button"
