@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "server": "nodemon server.js",
     "client": "cd client && yarn start",
-    "dev": "concurrently \"npm run client\" \"nodemon server.js\""
+    "dev": "concurrently \"yarn client\" \"nodemon server.js\""
   },
   "repository": {
     "type": "git",
@@ -32,9 +32,6 @@
     "nodemailer": "^6.3.0",
     "passport": "^0.4.0",
     "passport-jwt": "^4.0.0",
-    "react-debounce-input": "^3.2.2",
-    "react-hamburger-menu": "^1.2.1",
-    "reselect": "^4.0.0",
     "unique-random": "^2.1.0",
     "validator": "^11.1.0",
     "yup": "^0.28.5"

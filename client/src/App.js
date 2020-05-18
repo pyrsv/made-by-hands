@@ -4,6 +4,7 @@ import CartPage from './Pages/CartPage';
 import CatalogPage from './Pages/CatalogPage';
 import ProfilePage from './Pages/ProfilePage';
 import IndexPage from './Pages/IndexPage';
+import ProductPage from './Pages/ProductPage';
 import Header from './Components/Header/Header';
 import AppContainer from './Components/AppContainer/AppContainer';
 import ProtectedRoute from './HOC/ProtectedRoute/ProtectedRoute';
@@ -29,6 +30,14 @@ const App = () => {
 				<ProtectedRoute path="/profile">
 					<ProfilePage />
 				</ProtectedRoute>
+				<Route
+					path="/products/:itemNo"
+					render={({ match }) => {
+						return (
+							match && <ProductPage productNoParam={match.params.itemNo} />
+						);
+					}}
+				/>
 			</Switch>
 
 			{background && (

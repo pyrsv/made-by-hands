@@ -55,7 +55,9 @@ const ProductCard = ({
 
 	return (
 		<Card>
-			<CardImage src={img} alt={name} />
+			<NavLink to={`/products/${itemNo}`}>
+				<CardImage src={img} alt={name} />
+			</NavLink>
 			<CardInfo type={type}>
 				<CardInfoRow>
 					<ProductName>{name}</ProductName>

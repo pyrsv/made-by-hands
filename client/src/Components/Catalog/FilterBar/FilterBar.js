@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useHistory } from 'react-router-dom';
 import { Formik } from 'formik';
 import querystring from 'query-string';
-import { getFilteredProducts } from '../../../store/actions/catalogActions';
 import { getColors, getBrands } from '../../../store/actions/filtersActions';
 import { getInitialFields } from '../../../utils/getFilterFields';
 import Button from '../../UI/Button/Button';
@@ -30,7 +29,6 @@ const FilterBar = () => {
 	const isBrandsLoading = useSelector(state => state.filters.isBrandsFetching);
 
 	const currentParams = querystring.parse(location.search.slice(1));
-	const config = useSelector(state => state.catalog.config);
 	useEffect(() => {
 		if (!color.length || !brand.length) {
 			dispatch(getColors());
@@ -70,14 +68,6 @@ const FilterBar = () => {
 		history.push({
 			search: `?${str}`,
 		});
-
-		dispatch(
-			getFilteredProducts({
-				...config,
-				...querystring.parse(str),
-				startPage: 1,
-			})
-		);
 	};
 
 	return (

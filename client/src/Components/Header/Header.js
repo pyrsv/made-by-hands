@@ -87,7 +87,6 @@ const Header = () => {
 
 	const profileRoutes = [
 		<NavLink to="/profile/contact-info">contact info</NavLink>,
-		<NavLink to="/profile/adress-book">adress book</NavLink>,
 		<NavLink to="/profile/wishlist">wishlist</NavLink>,
 		<span
 			role="button"
@@ -110,13 +109,20 @@ const Header = () => {
 		});
 	};
 
+	const handleDropdownLinkClick = target => {
+		dispatch(closeNav());
+		handleDropdownToggle(target);
+	};
+
 	return (
 		<StyledHeader>
 			<LayoutContainer>
 				<Container>
 					{!isMobile ? (
 						<>
-							<Logo />
+							<NavLink to="/">
+								<Logo />
+							</NavLink>
 							<Content>
 								<Info>
 									<Phone href="tel:+62896706255135">
@@ -130,13 +136,17 @@ const Header = () => {
 									<UserNavigation
 										isDropdown={dropdown.profile}
 										routes={profileRoutes}
+										onDropdownLinkClick={() => handleDropdownToggle('profile')}
 										onDropdownOpen={() => handleDropdownToggle('profile')}
+										onLinkClick={() => {}}
 									/>
 								</Info>
 								<Navigation
 									isDropdown={dropdown.catalog}
 									routes={catalogRoutes}
 									onDropdownOpen={() => handleDropdownToggle('catalog')}
+									onDropdownLinkClick={() => handleDropdownToggle('catalog')}
+									onLinkClick={() => {}}
 								/>
 							</Content>
 						</>
@@ -168,11 +178,15 @@ const Header = () => {
 						isDropdown={dropdown.catalog}
 						routes={catalogRoutes}
 						onDropdownOpen={() => handleDropdownToggle('catalog')}
+						onDropdownLinkClick={() => handleDropdownLinkClick('catalog')}
+						onLinkClick={() => dispatch(closeNav())}
 					/>
 					<UserNavigation
 						isDropdown={dropdown.profile}
 						routes={profileRoutes}
 						onDropdownOpen={() => handleDropdownToggle('profile')}
+						onDropdownLinkClick={() => handleDropdownLinkClick('profile')}
+						onLinkClick={() => dispatch(closeNav())}
 					/>
 				</Drawer>
 			)}

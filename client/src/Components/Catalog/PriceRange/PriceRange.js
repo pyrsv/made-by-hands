@@ -6,7 +6,7 @@ import './styles.scss';
 import { Wrapper } from './styles';
 
 const PriceRange = ({ changeRange }) => {
-	const [range, setValue] = useState({ value: { min: 400, max: 1000 } });
+	const [range, setValue] = useState({ value: { min: 0, max: 2000 } });
 
 	return (
 		<Wrapper>
