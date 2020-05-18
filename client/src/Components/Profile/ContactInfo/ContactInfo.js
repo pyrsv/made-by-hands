@@ -188,13 +188,14 @@ const ContactInfo = () => {
 									touched={touched.address?.flat}
 								/>
 							</FormColumn>
-							<Button
-								type="submit"
-								onClick={handleSubmit}
-								size="wide"
-								text="Submit changes "
-							/>
 						</FieldsWrapper>
+
+						<Button
+							type="submit"
+							onClick={handleSubmit}
+							size="wide"
+							text="Submit changes "
+						/>
 					</Form>
 				)}
 			</Formik>
