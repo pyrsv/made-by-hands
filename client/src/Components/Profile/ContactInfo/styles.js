@@ -19,10 +19,11 @@ export const FieldsWrapper = styled.div`
 `;
 
 export const Form = styled.form`
+	display: inline-block;
 	max-width: 768px;
-	/* display: inline-flex;
-	justify-content: center;
-	flex-direction: column; */
+	@media (max-width: 768px) {
+		max-width: initial;
+	}
 `;
 
 export const FormColumn = styled.div`
