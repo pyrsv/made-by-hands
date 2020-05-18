@@ -30,10 +30,10 @@ const Checkout = ({ sumPrice, goods }) => {
 	const [isPostalPoints, togglePP] = useState({ showed: true });
 	const [isAddress, toggleAddress] = useState({ showed: false });
 
-	let user = useSelector(state => state.auth.currentUser);
+	const user = useSelector(state => state.auth.currentUser);
 
-	if (!user || !user.address) {
-		user = { address: '' };
+	if (!user.address) {
+		user.address = {};
 	}
 
 	const showPostalPoints = errors => {
@@ -43,10 +43,6 @@ const Checkout = ({ sumPrice, goods }) => {
 		errors.street = '';
 		errors.house = '';
 		errors.app = '';
-		// values.city = '';
-		// values.house = '';
-		// values.street = '';
-		// values.app = '';
 		delete valid.city;
 		delete valid.street;
 		delete valid.house;
