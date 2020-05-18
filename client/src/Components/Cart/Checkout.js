@@ -30,9 +30,9 @@ const Checkout = ({ sumPrice, goods }) => {
 	const [isPostalPoints, togglePP] = useState({ showed: true });
 	const [isAddress, toggleAddress] = useState({ showed: false });
 
-	const user = useSelector(state => state.auth.currentUser);
+	const user = useSelector(state => state.auth.currentUser) || {};
 
-	if (!user.address) {
+	if (user && !user.address) {
 		user.address = {};
 	}
 
@@ -70,10 +70,10 @@ const Checkout = ({ sumPrice, goods }) => {
 				surname: user.lastName || '',
 				phone: '',
 				delivery: 'point1',
-				city: user.address.city || '',
-				house: user.address.houseNumber || '',
-				app: user.address.flat || '',
-				street: user.address.street || '',
+				city: user?.address.city || '',
+				house: user?.address.houseNumber || '',
+				app: user?.address.flat || '',
+				street: user?.address.street || '',
 
 				amountOfPayment: sumPrice,
 				items: goods,
