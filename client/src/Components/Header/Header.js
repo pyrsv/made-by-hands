@@ -120,7 +120,9 @@ const Header = () => {
 				<Container>
 					{!isMobile ? (
 						<>
-							<Logo />
+							<NavLink to="/">
+								<Logo />
+							</NavLink>
 							<Content>
 								<Info>
 									<Phone href="tel:+62896706255135">
