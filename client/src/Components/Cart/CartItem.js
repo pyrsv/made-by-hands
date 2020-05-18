@@ -63,7 +63,10 @@ export const CartItem = ({
 					</IncreaseQuantity>
 				</QuantityContainer>
 				<CartItemPrice>
-					{price}₴ <CartItemOldPrice>{oldPrice}</CartItemOldPrice>
+					{price * cartQuantity}₴{' '}
+					{oldPrice && (
+						<CartItemOldPrice>{oldPrice * cartQuantity}</CartItemOldPrice>
+					)}
 				</CartItemPrice>
 			</CartItemContainer>
 		</>

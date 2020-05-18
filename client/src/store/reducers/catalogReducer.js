@@ -77,6 +77,7 @@ export const catalogReducer = (state = initialState, { type, payload }) => {
 						? { ...prod, isFavorite: !prod.isFavorite }
 						: prod;
 				}),
+				currentProductId: null,
 			};
 		default:
 			return state;

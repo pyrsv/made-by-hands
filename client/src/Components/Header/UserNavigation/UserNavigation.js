@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Dropdown from '../Dropdown/Dropdown';
 import { Container, UserNavItem, UserNavIcon } from './styles';
@@ -9,13 +9,16 @@ import { useSelector } from 'react-redux';
 const UserNavigation = ({
 	isDropdown,
 	onDropdownOpen,
-	onModalOpen,
 	routes,
+	onDropdownLinkClick,
+	onLinkClick,
 }) => {
 	const user = useSelector(state => state.auth.currentUser);
+	const location = useLocation();
+
 	return (
 		<Container>
-			<UserNavItem onClick={!user ? onModalOpen : null}>
+			<UserNavItem>
 				<UserNavIcon>
 					<FontAwesomeIcon icon={['far', 'user']} />
 				</UserNavIcon>
@@ -25,20 +28,30 @@ const UserNavigation = ({
 						heading="Profile"
 						onOpen={onDropdownOpen}
 						routes={routes}
+						onLinkClick={onDropdownLinkClick}
 					/>
 				) : (
-					'Login'
+					<NavLink
+						to={{
+							pathname: '/login',
+							state: {
+								background: location,
+							},
+						}}
+					>
+						Login
+					</NavLink>
 				)}
 			</UserNavItem>
-			<UserNavItem>
-				<NavLink to="/">
+			<UserNavItem onClick={onLinkClick}>
+				<NavLink to="/profile/wishlist">
 					<UserNavIcon accent>
 						<FontAwesomeIcon icon={['fas', 'heart']} />
 					</UserNavIcon>
 					Wishlist
 				</NavLink>
 			</UserNavItem>
-			<UserNavItem>
+			<UserNavItem onClick={onLinkClick}>
 				<NavLink to="/cart">
 					<UserNavIcon>
 						<FontAwesomeIcon icon={['fas', 'shopping-cart']} />
@@ -53,8 +66,9 @@ const UserNavigation = ({
 UserNavigation.propTypes = {
 	isDropdown: PropTypes.bool.isRequired,
 	onDropdownOpen: PropTypes.func.isRequired,
-	onModalOpen: PropTypes.func.isRequired,
 	routes: PropTypes.arrayOf(PropTypes.object).isRequired,
+	onDropdownLinkClick: PropTypes.func.isRequired,
+	onLinkClick: PropTypes.func.isRequired,
 };
 
 export default UserNavigation;

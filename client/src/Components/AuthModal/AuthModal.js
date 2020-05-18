@@ -1,9 +1,14 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+import React, { useState, useEffect, useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory, useLocation } from 'react-router-dom';
 import LoginForm from './Forms/LoginForm';
 import RegisterForm from './Forms/RegisterForm';
 import CloseButton from '../UI/CloseButton/CloseButton';
 import Backdrop from '../UI/Backdrop/Backdrop';
+import querystring from 'query-string';
+import { closeNav } from '../../store/actions/UIActions';
+import { setProductToWishlist } from '../../store/actions/catalogActions';
+import { addToWishlist } from '../../store/actions/wishActions';
 import {
 	Content,
 	Title,
@@ -13,19 +18,49 @@ import {
 	RegisterLink,
 } from './styles';
 
-const AuthModal = ({ onToggle }) => {
+const AuthModal = () => {
+	const history = useHistory();
+	const location = useLocation();
+	const dispatch = useDispatch();
+	const user = useSelector(state => state.auth.currentUser);
+	const { addtowishlist: wishlistId } = querystring.parse(location.search);
+	const isFirstRun = useRef(true);
 	const [form, setForm] = useState({ login: true });
+	const { from } = location.state;
+
+	useEffect(() => {
+		dispatch(closeNav());
+	}, []);
+
+	useEffect(() => {
+		if (isFirstRun.current) {
+			isFirstRun.current = false;
+			return;
+		}
+		if (wishlistId) {
+			dispatch(setProductToWishlist(wishlistId));
+			dispatch(addToWishlist(wishlistId));
+		}
+
+		if (from) {
+			history.replace(from);
+		} else {
+			history.goBack();
+		}
+	}, [user]);
 
 	const handleFormChange = () => {
 		setForm({ ...form, login: !form.login });
 	};
+
+	const handeleModalClose = () => history.goBack();
 
 	return (
 		<>
 			<ModalWrapper>
 				<Header>
 					<Title>Login</Title>
-					<CloseButton onClick={onToggle} />
+					<CloseButton onClick={handeleModalClose} />
 				</Header>
 				<Content>
 					{form.login ? (
@@ -43,13 +78,9 @@ const AuthModal = ({ onToggle }) => {
 					)}
 				</Content>
 			</ModalWrapper>
-			<Backdrop onClick={onToggle} />
+			<Backdrop onClick={handeleModalClose} />
 		</>
 	);
-};
-
-AuthModal.propTypes = {
-	onToggle: PropTypes.func.isRequired,
 };
 
 export default AuthModal;

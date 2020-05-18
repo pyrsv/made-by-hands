@@ -7,7 +7,7 @@ export const Menu = styled.ul`
 	align-items: center;
 	padding: 15px 0 10px 0;
 
-	@media (max-width: 900px) {
+	@media (max-width: 992px) {
 		flex-direction: column;
 		align-items: flex-start;
 		margin-bottom: 30px;
@@ -22,7 +22,7 @@ export const MenuItem = styled.li`
 	cursor: pointer;
 
 	&:not(:last-child) {
-		@media (max-width: 900px) {
+		@media (max-width: 992px) {
 			margin-bottom: 15px;
 		}
 	}

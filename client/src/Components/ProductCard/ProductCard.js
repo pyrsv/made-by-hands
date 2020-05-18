@@ -1,8 +1,12 @@
 import React, { memo } from 'react';
+import { NavLink, useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Button from '../UI/Button/Button';
 import FavoriteHeart from '../UI/FavoriteHeart/FavoriteHeart';
-
+import {
+	addToWishlist,
+	deleteFromWishlist,
+} from '../../store/actions/wishActions';
 import {
 	Card,
 	CardImage,
@@ -13,9 +17,12 @@ import {
 	PriceContainer,
 	ProductName,
 } from './styles';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addToCart } from '../../store/actions/cartActions';
-import { setProductToCart } from '../../store/actions/catalogActions';
+import {
+	setProductToCart,
+	setProductToWishlist,
+} from '../../store/actions/catalogActions';
 
 const ProductCard = ({
 	id,
@@ -29,19 +36,49 @@ const ProductCard = ({
 	isInCart,
 }) => {
 	const dispatch = useDispatch();
+	const location = useLocation();
+	const user = useSelector(state => state.auth.currentUser);
 
 	const handleCartButtonClick = () => {
 		dispatch(addToCart(id, itemNo));
 		dispatch(setProductToCart(id));
 	};
 
+	const handleHeartButtonClick = () => {
+		dispatch(setProductToWishlist(id));
+		if (!isFavorite) {
+			dispatch(addToWishlist(id));
+		} else {
+			dispatch(deleteFromWishlist(id));
+		}
+	};
+
 	return (
 		<Card>
-			<CardImage src={img} alt={name} />
+			<NavLink to={`/products/${itemNo}`}>
+				<CardImage src={img} alt={name} />
+			</NavLink>
 			<CardInfo type={type}>
 				<CardInfoRow>
 					<ProductName>{name}</ProductName>
-					<FavoriteHeart isFavorite={isFavorite} />
+					{user ? (
+						<FavoriteHeart
+							isFavorite={isFavorite}
+							onClick={handleHeartButtonClick}
+						/>
+					) : (
+						<NavLink
+							to={{
+								pathname: `/login`,
+								search: `addtowishlist=${id}`,
+								state: {
+									background: location,
+								},
+							}}
+						>
+							<FavoriteHeart isFavorite={isFavorite} />
+						</NavLink>
+					)}
 				</CardInfoRow>
 				<CardInfoRow>
 					<Button
