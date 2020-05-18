@@ -14,7 +14,6 @@ import { ProductsContainer, ProductsPreloader } from './styles';
 
 const ProductsList = () => {
 	const dispatch = useDispatch();
-
 	const location = useLocation();
 	const currentParams = querystring.parse(location.search.slice(1));
 	const products = useSelector(state => state.catalog.currentProducts);
@@ -26,15 +25,15 @@ const ProductsList = () => {
 
 	useEffect(() => {
 		dispatch(
-			getFilteredProducts({ ...currentParams, ...config, startPage: 1 })
+			getFilteredProducts({ ...config, ...currentParams, startPage: 1 })
 		);
 		return () => dispatch(updateConfig({ perPage: 12, startPage: 1 }));
-	}, []);
+	}, [location]);
 
 	return (
 		<InfiniteScroll
 			threshold={150}
-			loadMore={() => dispatch(loadMoreAction({ ...currentParams, ...config }))}
+			loadMore={() => dispatch(loadMoreAction({ ...config, ...currentParams }))}
 			hasMore={products.length < productsQuantity && !isProductsFetching}
 			loader={
 				<ProductsPreloader>
