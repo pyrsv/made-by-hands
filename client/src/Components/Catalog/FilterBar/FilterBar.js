@@ -43,7 +43,7 @@ const FilterBar = () => {
 			brand,
 		});
 		setFields(initialFields);
-	}, [categories, color, brand]);
+	}, [categories, color, brand, location]);
 
 	const handleChangePrice = (min, max) => {
 		setPriceRange({ minPrice: min, maxPrice: max });
