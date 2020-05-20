@@ -40,8 +40,8 @@ const ProductsList = () => {
 			loadMore={() => dispatch(loadMoreAction({ ...config, ...currentParams }))}
 			hasMore={products.length < productsQuantity && !isProductsFetching}
 			loader={
-				<ProductsPreloader>
-					<Preloader key="1" size={60} />
+				<ProductsPreloader key="1">
+					<Preloader size={60} />
 				</ProductsPreloader>
 			}
 		>
@@ -59,7 +59,7 @@ const ProductsList = () => {
 					}) => (
 						<ProductCard
 							id={_id}
-							key={itemNo}
+							key={_id}
 							itemNo={itemNo}
 							name={name}
 							img={image}

@@ -60,7 +60,7 @@ const Header = () => {
 		} else {
 			dispatch(setMobile(false));
 		}
-	}, []);
+	}, [dispatch]);
 
 	useEffect(() => {
 		handleWindowResize();
@@ -100,7 +100,7 @@ const Header = () => {
 
 	useEffect(() => {
 		dispatch(getCategories());
-	}, []);
+	}, [dispatch]);
 
 	const handleDropdownToggle = key => {
 		setDropdown({
