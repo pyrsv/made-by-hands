@@ -32,7 +32,7 @@ const ProductsList = () => {
 			getFilteredProducts({ ...config, ...currentParams, startPage: 1 })
 		);
 		return () => dispatch(updateConfig({ perPage: 12, startPage: 1 }));
-	}, [location, dispatch, currentParams]);
+	}, [location, dispatch]);
 
 	return (
 		<InfiniteScroll
