@@ -30,7 +30,7 @@ const AuthModal = () => {
 
 	useEffect(() => {
 		dispatch(closeNav());
-	}, []);
+	}, [dispatch]);
 
 	useEffect(() => {
 		if (isFirstRun.current) {
@@ -47,7 +47,7 @@ const AuthModal = () => {
 		} else {
 			history.goBack();
 		}
-	}, [user]);
+	}, [user, dispatch, from, history, wishlistId]);
 
 	const handleFormChange = () => {
 		setForm({ ...form, login: !form.login });
