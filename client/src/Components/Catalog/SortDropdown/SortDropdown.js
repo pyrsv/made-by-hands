@@ -1,5 +1,5 @@
 import React from 'react';
-// import { useHistory, useLocation } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getFilteredProducts } from '../../../store/actions/catalogActions';
 import CustomSelect from '../../UI/Select/Select';
@@ -31,11 +31,14 @@ const options = [
 
 const SortDropdown = () => {
 	const dispatch = useDispatch();
-	// const history = useHistory();
-	// const location = useLocation();
+	const history = useHistory();
+	const location = useLocation();
 	const config = useSelector(state => state.catalog.config);
 
 	const handleChange = e => {
+		history.push({
+			search: `${location.search}&sort=${e.value}`,
+		});
 		dispatch(getFilteredProducts({ ...config, sort: e.value, startPage: 1 }));
 	};
 	return (
