@@ -28,7 +28,7 @@ const options = [
 	},
 ];
 
-const SortDropdown = () => {
+const SortSelect = () => {
 	const history = useHistory();
 	const location = useLocation();
 	const currentParams = querystring.parse(location.search.slice(1));
@@ -101,4 +101,4 @@ const SortDropdown = () => {
 	);
 };
 
-export default SortDropdown;
+export default SortSelect;

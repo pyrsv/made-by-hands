@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { toggleFilters } from '../../../store/actions/UIActions';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import SortDropdown from '../SortDropdown/SortDropdown';
+import SortSelect from '../SortSelect/SortSelect';
 import { ButtonsContainer, FilterButton, FilterIcon } from './styles';
 
 const FilterButtons = () => {
@@ -16,7 +16,7 @@ const FilterButtons = () => {
 				</FilterIcon>
 				Filters
 			</FilterButton>
-			<SortDropdown />
+			<SortSelect />
 		</ButtonsContainer>
 	);
 };
