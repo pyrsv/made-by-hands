@@ -103,8 +103,20 @@ exports.placeOrder = async (req, res, next) => {
             letterHtml,
             res
           );
-
+          // 1. берем список продуктов из ордера 
+          // 2. по каждому продукту обращаемся в базу и уменьшаем кол-во на то что в ордере у текщего товара
+          // Product.findOneAndUpdate(
+          //   { _id: req.params.id }, // сюда айди (параметр поиска)
+          //   { $set: updatedProduct }, // cюда один параметр можно
+          //   { new: true }
+          // )
+          //   .catch(err =>
+          //     res.status(400).json({
+          //       message: `Error happened on server: "${err}" `
+          //     })
+          //   );
           res.json({ order, mailResult });
+
         })
         .catch(err =>
           res.status(400).json({

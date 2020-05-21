@@ -28,22 +28,23 @@ const FilterBar = () => {
 	const isColorsLoading = useSelector(state => state.filters.isColorsFetching);
 	const isBrandsLoading = useSelector(state => state.filters.isBrandsFetching);
 
-	const currentParams = querystring.parse(location.search.slice(1));
 	useEffect(() => {
 		if (!color.length || !brand.length) {
 			dispatch(getColors());
 			dispatch(getBrands());
 		}
-	}, []);
+	}, [dispatch, brand.length, color.length]);
 
 	useEffect(() => {
+		const currentParams = querystring.parse(location.search.slice(1));
+
 		const initialFields = getInitialFields(currentParams, {
 			categories,
 			color,
 			brand,
 		});
 		setFields(initialFields);
-	}, [categories, color, brand, location]);
+	}, [categories, color, brand, location.search]);
 
 	const handleChangePrice = (min, max) => {
 		setPriceRange({ minPrice: min, maxPrice: max });

@@ -22,13 +22,19 @@ const getArrivalsInit = () => ({
 
 export const getItemsForCarousel = () => dispatch => {
 	dispatch(getArrivalsInit);
-	axios.get('products/filter?perPage=10&sort=-date').then(allProducts => {
-		checkProductsForCartAndFavorites(allProducts.data.products)
-			.then(products => {
-				const selected = products.slice(0, 6);
-				dispatch(arrivalsSuccess(selected));
-			})
+	axios
+		.get('/products/filter', {
+			params: {
+				perPage: '6',
+				sort: '-date',
+			},
+		})
+		.then(allProducts => {
+			checkProductsForCartAndFavorites(allProducts.data.products)
+				.then(products => {
+					dispatch(arrivalsSuccess(products));
+				})
 
-			.catch(err => dispatch(arrivalsError(err)));
-	});
+				.catch(err => dispatch(arrivalsError(err)));
+		});
 };

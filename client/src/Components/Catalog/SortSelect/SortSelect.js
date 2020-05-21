@@ -41,10 +41,9 @@ const SortSelect = () => {
 		history.push({
 			search: querystring.stringify({ ...currentParams, sort: e.value }),
 		});
-		// dispatch(getFilteredProducts({ ...config, sort: e.value, startPage: 1 }));
 	};
 
-	const getInitialSortValue = () => {
+	useEffect(() => {
 		const currentSortParam = currentParams.sort;
 		if (
 			currentSortParam &&
@@ -54,11 +53,7 @@ const SortSelect = () => {
 		} else {
 			setValue(null);
 		}
-	};
-
-	useEffect(() => {
-		getInitialSortValue();
-	}, [location]);
+	}, [currentParams.sort]);
 
 	return (
 		<CustomSelect

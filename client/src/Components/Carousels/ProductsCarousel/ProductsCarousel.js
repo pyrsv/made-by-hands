@@ -90,7 +90,6 @@ const ProductCarousel = ({ selected }) => {
 			},
 		],
 	};
-
 	return (
 		<div>
 			<NewArrivalsBackground>
@@ -98,24 +97,25 @@ const ProductCarousel = ({ selected }) => {
 					<Title text="new arrivals" />
 					<ProductCarouselContainer>
 						<Slider {...settings}>
-							{selected.map(item => {
-								return (
-									<div key={item._id}>
-										<ProductCardContainer>
-											<ProductCard
-												// onAddToCart={onAddToCart}
-												id={item._id}
-												itemNo={item.itemNo}
-												name={item.name}
-												img={item.imageUrls[0]}
-												price={item.currentPrice}
-												isFavorite={item.isFavorite}
-												isInCart={item.isInCart}
-											/>
-										</ProductCardContainer>
-									</div>
-								);
-							})}
+							{selected.length &&
+								selected.map(item => {
+									return (
+										<div key={item._id}>
+											<ProductCardContainer>
+												<ProductCard
+													// onAddToCart={onAddToCart}
+													id={item._id}
+													itemNo={item.itemNo}
+													name={item.name}
+													img={item.imageUrls[0]}
+													price={item.currentPrice}
+													isFavorite={item.isFavorite}
+													isInCart={item.isInCart}
+												/>
+											</ProductCardContainer>
+										</div>
+									);
+								})}
 						</Slider>
 					</ProductCarouselContainer>
 				</LayoutContainer>

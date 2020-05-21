@@ -117,7 +117,7 @@ export const userLogin = ({ loginOrEmail, password }) => dispatch => {
 					dispatch(userLoginSuccess(customer.data));
 				})
 				.catch(err => {
-					dispatch(userLoginError(err));
+					dispatch(userLoginError(err.response.data));
 				});
 		})
 		.catch(err => {
@@ -125,7 +125,7 @@ export const userLogin = ({ loginOrEmail, password }) => dispatch => {
 				localStorage.setItem('cart', '[]');
 			}
 			dispatch(setCartAction(JSON.parse(localStorage.getItem('cart'))));
-			dispatch(userLoginError(err));
+			dispatch(userLoginError(err.response.data));
 		});
 };
 
