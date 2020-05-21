@@ -5,6 +5,7 @@ import CatalogPage from './Pages/CatalogPage';
 import ProfilePage from './Pages/ProfilePage';
 import IndexPage from './Pages/IndexPage';
 import ProductPage from './Pages/ProductPage';
+import NoMatchPage from './Pages/NoMatchPage';
 import Header from './Components/Header/Header';
 import AppContainer from './Components/AppContainer/AppContainer';
 import ProtectedRoute from './HOC/ProtectedRoute/ProtectedRoute';
@@ -38,6 +39,9 @@ const App = () => {
 						);
 					}}
 				/>
+				<Route path="*">
+					<NoMatchPage />
+				</Route>
 			</Switch>
 
 			{background && (
