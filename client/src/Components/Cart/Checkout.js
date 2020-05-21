@@ -8,7 +8,6 @@ import { useSelector } from 'react-redux';
 import {
 	FlexContainer,
 	StyledFormColumn,
-	DisabledStyledButton,
 	StyledLabel,
 	StyledField,
 	ButtonWrapper,
@@ -270,11 +269,18 @@ const Checkout = ({ sumPrice, goods }) => {
 					</FlexContainer>
 					<ButtonWrapper>
 						{isValid ? (
-							<Button onClick={submitForm} text="checkout" />
+							<Button
+								onClick={submitForm}
+								text="checkout"
+								disabled={!isValid}
+							/>
 						) : (
-							<DisabledStyledButton type="submit" disabled>
-								Checkout
-							</DisabledStyledButton>
+							<Button
+								onClick={submitForm}
+								text="checkout"
+								disabled={!isValid}
+								color="#f0f0f0"
+							/>
 						)}
 					</ButtonWrapper>
 				</Form>
