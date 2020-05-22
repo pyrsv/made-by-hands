@@ -1,17 +1,4 @@
 {
-  "folders": [
-    {
-      "path": "."
-    }
-  ],
-  "settings": {
-    "eslint.workingDirectories": [
-      {
-        "directory": "client",
-        "changeProcessCWD": true
-      }
-    ]
-  },
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true, // форматирование по нажатию на ctrl + s
   "[javascript]": {
