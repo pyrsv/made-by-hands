@@ -102,4 +102,6 @@ fabric.properties
 .history/
 *.log
 
-.vscode
+
+
+**/.vscode/
