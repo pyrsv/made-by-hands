@@ -24,8 +24,20 @@ const Footer = () => {
 							type="title"
 							text="Subscribe and get first all the best!"
 						/>
-						<InputField placeholder="Enter your email " />
-						<Button text="Send" color="light" icon="envelope" />
+						<InputField
+							placeholder="Enter your email "
+							name="subscription"
+							onChange={() => {}}
+							type="text"
+							target="form"
+							value=""
+						/>
+						<Button
+							text="Send"
+							color="light"
+							icon="envelope"
+							onClick={() => {}}
+						/>
 					</FooterSection>
 
 					<FooterSection>

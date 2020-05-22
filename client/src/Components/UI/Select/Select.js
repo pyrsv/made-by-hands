@@ -8,10 +8,12 @@ const Select = ({
 	searchable,
 	placeholder,
 	onChange,
-	isMobile = true,
+	isMobile,
+	value,
 }) => {
 	return (
 		<CustomSelect
+			value={value}
 			placeholder={placeholder}
 			options={options}
 			isSearchable={searchable}
@@ -24,17 +26,27 @@ const Select = ({
 
 Select.propTypes = {
 	options: PropTypes.arrayOf(PropTypes.object).isRequired,
-	searchable: PropTypes.bool.isRequired,
+	searchable: PropTypes.bool,
 	placeholder: PropTypes.oneOfType([
 		PropTypes.node,
 		PropTypes.string.isRequired,
 	]).isRequired,
 	onChange: PropTypes.func.isRequired,
 	isMobile: PropTypes.bool,
+	value: PropTypes.oneOfType([
+		PropTypes.shape({
+			value: PropTypes.string,
+			icon: PropTypes.string,
+			label: PropTypes.oneOfType([PropTypes.node, PropTypes.string.isRequired]),
+		}),
+		PropTypes.oneOf([null]),
+	]),
 };
 
 Select.defaultProps = {
 	isMobile: false,
+	searchable: false,
+	value: null,
 };
 
 export default Select;

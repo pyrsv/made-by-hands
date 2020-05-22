@@ -58,7 +58,10 @@ export const catalogReducer = (state = initialState, { type, payload }) => {
 		case UPDATE_CONFIG:
 			return {
 				...state,
-				config: payload,
+				config: {
+					startPage: payload.startPage,
+					perPage: payload.perPage,
+				},
 			};
 		case SET_PRODUCT_TO_CART:
 			return {

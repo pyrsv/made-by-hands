@@ -10,10 +10,11 @@ export const FooterText = ({ type, text, href }) => {
 	);
 };
 FooterText.propTypes = {
-	type: PropTypes.oneOf(['title', 'link']),
+	type: PropTypes.oneOf(['title', 'link', 'copy']),
 	text: PropTypes.string.isRequired,
-	href: PropTypes.string.isRequired,
+	href: PropTypes.string,
 };
 FooterText.defaultProps = {
 	type: 'title',
+	href: '',
 };
