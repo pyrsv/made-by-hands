@@ -4,7 +4,7 @@ import { Form, Formik } from 'formik';
 import * as yup from 'yup';
 import { string, number } from 'yup';
 import Button from '../UI/Button/Button';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import {
 	FlexContainer,
 	StyledFormColumn,
@@ -18,6 +18,7 @@ import {
 } from './styles';
 import PropTypes, { object } from 'prop-types';
 // import InputField from '../UI/InputFiels/InputField';
+import { placeOrder } from '../../store/actions/orderActions';
 
 const valid = {
 	name: string().required(),
@@ -29,7 +30,7 @@ const valid = {
 const Checkout = ({ sumPrice, goods }) => {
 	const [isPostalPoints, togglePP] = useState({ showed: true });
 	const [isAddress, toggleAddress] = useState({ showed: false });
-
+	const dispatch = useDispatch();
 	const user = useSelector(state => state.auth.currentUser) || {};
 
 	if (user && !user.address) {
@@ -102,9 +103,25 @@ const Checkout = ({ sumPrice, goods }) => {
 			onSubmit={values => {
 				// eslint-disable-next-line no-console
 				console.log('submited data ', values);
+
+				const shippingInfo = {
+					city: `${values.city}`,
+					price: '50UAH',
+				};
+				const delivery = {
+					country: 'Ukraine',
+					city: `${values.city}`,
+					address: `${values.street} ${values.house}  ${values.app}`,
+				};
+				const payment = {
+					type: 'credit card',
+					issuer: 'MasterCard',
+				};
 				if (Object.keys(user).length > 1 && user.constructor === Object) {
 					values.items = null;
 				}
+
+				dispatch(placeOrder(values, shippingInfo, delivery, payment));
 			}}
 		>
 			{({
