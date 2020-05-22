@@ -102,6 +102,9 @@ const Checkout = ({ sumPrice, goods }) => {
 			onSubmit={values => {
 				// eslint-disable-next-line no-console
 				console.log('submited data ', values);
+				if (Object.keys(user).length > 1 && user.constructor === Object) {
+					values.items = null;
+				}
 			}}
 		>
 			{({

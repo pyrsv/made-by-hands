@@ -29,12 +29,6 @@ export const Cart = () => {
 			showed: !prevState.showed,
 		}));
 	};
-	const goods = currentCart.map(item => {
-		return {
-			id: item.product._id,
-			cartQuantity: item.cartQuantity,
-		};
-	});
 
 	return (
 		<>
@@ -75,7 +69,9 @@ export const Cart = () => {
 					)}
 					{!sumPrice && <CartIsEmpty>Cart is Empty</CartIsEmpty>}
 
-					{isCheckout.showed && <Checkout sumPrice={sumPrice} goods={goods} />}
+					{isCheckout.showed && (
+						<Checkout sumPrice={sumPrice} goods={currentCart} />
+					)}
 				</LayoutContainer>
 			</CartContainer>
 		</>
