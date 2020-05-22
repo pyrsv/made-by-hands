@@ -23,6 +23,7 @@ const valid = {
 	name: string().required(),
 	surname: string().required(),
 	phone: number().required().positive().integer(),
+	email: string().email(),
 };
 
 const Checkout = ({ sumPrice, goods }) => {
@@ -55,6 +56,7 @@ const Checkout = ({ sumPrice, goods }) => {
 		valid.app = number().required();
 		values.delivery = '';
 	};
+
 	return (
 		<Formik
 			user
@@ -67,13 +69,13 @@ const Checkout = ({ sumPrice, goods }) => {
 			initialValues={{
 				name: user.firstName || '',
 				surname: user.lastName || '',
-				phone: '',
+				email: user.email || '',
+				phone: user.phone || '',
 				delivery: 'point1',
 				city: user?.address.city || '',
 				house: user?.address.houseNumber || '',
 				app: user?.address.flat || '',
 				street: user?.address.street || '',
-
 				amountOfPayment: sumPrice,
 				items: goods,
 			}}
@@ -144,7 +146,18 @@ const Checkout = ({ sumPrice, goods }) => {
 							{errors.surname && touched.surname ? (
 								<div>{errors.surname}</div>
 							) : null}
-
+							<StyledLabel>
+								{' '}
+								Enter your email
+								<StyledField
+									name="email"
+									onChange={handleChange}
+									onBlur={handleBlur}
+									target="form"
+									type="email"
+								/>
+							</StyledLabel>
+							{errors.email && touched.email ? <div>{errors.email}</div> : null}
 							<StyledLabel>
 								{' '}
 								Enter your phone number
