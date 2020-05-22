@@ -11,8 +11,11 @@ const FormToAddComment = ({ rating, id, toggleModal }) => {
 	const dispatch = useDispatch();
 	const postCommentAndRate = content => {
 		axios
-			.post('/comments', { product: id, content, rating })
-			.then(() => dispatch(getRatingAndCommentsInfo(id)), toggleModal());
+			.post('/comments', { product: id, content, rating: rating || 5 })
+			.then(() => {
+				dispatch(getRatingAndCommentsInfo(id));
+				toggleModal();
+			});
 	};
 
 	return (
