@@ -6,8 +6,8 @@ import {
 
 const initialState = {
 	error: null,
-	isProductsFetching: false,
-	isProductsError: false,
+	isOrdersFetching: false,
+	isOrdersError: false,
 	orders: [],
 };
 
@@ -16,8 +16,8 @@ export const ordersReducer = (state = initialState, { type, payload }) => {
 		case PLACE_ORDER_INIT:
 			return {
 				...state,
-				isProductsFetching: true,
-				isProductsError: false,
+				isOrdersFetching: true,
+				isOrdersError: false,
 			};
 		case PLACE_ORDER_FAIL:
 			return {

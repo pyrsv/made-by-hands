@@ -32,6 +32,7 @@ const Checkout = ({ sumPrice, goods }) => {
 	const [isAddress, toggleAddress] = useState({ showed: false });
 	const dispatch = useDispatch();
 	const user = useSelector(state => state.auth.currentUser) || {};
+	const isFetching = useSelector(state => state.orders.isOrdersFetching);
 
 	if (user && !user.address) {
 		user.address = {};
@@ -301,7 +302,7 @@ const Checkout = ({ sumPrice, goods }) => {
 						</StyledFormColumn>
 					</FlexContainer>
 					<ButtonWrapper>
-						{isValid ? (
+						{isValid && !isFetching ? (
 							<Button
 								onClick={submitForm}
 								text="checkout"
