@@ -11,7 +11,6 @@ import {
 import ProductCard from '../ProductCard/ProductCard';
 import Preloader from '../UI/Preloader/Preloader';
 import { ProductsContainer, ProductsPreloader } from './styles';
-import { isEqual } from 'lodash';
 
 const ProductsList = () => {
 	const dispatch = useDispatch();
@@ -20,24 +19,26 @@ const ProductsList = () => {
 		() => querystring.parse(location.search.slice(1)),
 		[location.search]
 	);
+
 	const products = useSelector(state => state.catalog.currentProducts);
 	const productsQuantity = useSelector(state => state.catalog.productsQuantity);
-	const config = useSelector(state => state.catalog.config, isEqual);
+	const perPage = useSelector(state => state.catalog.perPage);
+	const startPage = useSelector(state => state.catalog.startPage);
 	const isProductsFetching = useSelector(
 		state => state.catalog.isProductsFetching
 	);
 
 	useEffect(() => {
-		dispatch(
-			getFilteredProducts({ ...config, ...currentParams, startPage: 1 })
-		);
+		dispatch(getFilteredProducts({ perPage, ...currentParams, startPage: 1 }));
 		return () => dispatch(updateConfig({ perPage: 12, startPage: 1 }));
-	}, [location, dispatch]);
+	}, [location, dispatch, perPage, currentParams]);
 
 	return (
 		<InfiniteScroll
 			threshold={150}
-			loadMore={() => dispatch(loadMoreAction({ ...config, ...currentParams }))}
+			loadMore={() =>
+				dispatch(loadMoreAction({ perPage, startPage, ...currentParams }))
+			}
 			hasMore={products.length < productsQuantity && !isProductsFetching}
 			loader={
 				<ProductsPreloader key="1">
