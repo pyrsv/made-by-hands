@@ -14,8 +14,7 @@ const Comments = ({ id }) => {
 	useEffect(() => {
 		dispatch(getRatingAndCommentsInfo(id));
 	}, [id, dispatch]);
-	let arrayOfComments = useSelector(state => state.comments.comments);
-	arrayOfComments = arrayOfComments && arrayOfComments.reverse();
+	const arrayOfComments = useSelector(state => state.comments.comments);
 
 	const indexOfLastComment = currentPage * commentsPerPage;
 	const indexOfFirstComment = indexOfLastComment - commentsPerPage;
@@ -55,7 +54,7 @@ const Comments = ({ id }) => {
 };
 
 Comments.propTypes = {
-	id: PropTypes.number.isRequired,
+	id: PropTypes.string.isRequired,
 };
 
 export default Comments;

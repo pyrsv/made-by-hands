@@ -123,7 +123,7 @@ const Product = ({
 
 Product.propTypes = {
 	id: PropTypes.string.isRequired,
-	description: PropTypes.string.isRequired,
+	description: PropTypes.arrayOf(PropTypes.string).isRequired,
 	name: PropTypes.string.isRequired,
 	imageUrls: PropTypes.arrayOf(PropTypes.string).isRequired,
 	previousPrice: PropTypes.number,
@@ -131,7 +131,7 @@ Product.propTypes = {
 	parameters: PropTypes.arrayOf(PropTypes.string).isRequired,
 	isInCart: PropTypes.bool,
 	isFavorite: PropTypes.bool,
-	itemNo: PropTypes.number.isRequired,
+	itemNo: PropTypes.string.isRequired,
 	onAddCart: PropTypes.func.isRequired,
 	onAddFavor: PropTypes.func.isRequired,
 };

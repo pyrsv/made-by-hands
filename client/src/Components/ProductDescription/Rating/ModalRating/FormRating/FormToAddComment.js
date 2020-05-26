@@ -21,7 +21,7 @@ const FormToAddComment = ({ rating, id, toggleModal }) => {
 	return (
 		<div>
 			<Formik
-				initialValues={{ content: '' }}
+				initialValues={{ content: undefined }}
 				onSubmit={values => {
 					postCommentAndRate(values.content);
 				}}
@@ -39,7 +39,7 @@ const FormToAddComment = ({ rating, id, toggleModal }) => {
 							required
 						/>
 
-						<Button text="send" type="submit" size="wide" />
+						<Button text="send" onClick={() => {}} type="submit" size="wide" />
 					</form>
 				)}
 			</Formik>

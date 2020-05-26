@@ -8,6 +8,6 @@ const setRatingAndCommentsInfo = data => ({
 
 export const getRatingAndCommentsInfo = id => dispatch => {
 	axios.get(`/comments/product/${id}`).then(res => {
-		dispatch(setRatingAndCommentsInfo(res.data));
+		dispatch(setRatingAndCommentsInfo(res.data.reverse()));
 	});
 };
