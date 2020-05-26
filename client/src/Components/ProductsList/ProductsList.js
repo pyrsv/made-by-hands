@@ -31,7 +31,7 @@ const ProductsList = () => {
 	useEffect(() => {
 		dispatch(getFilteredProducts({ perPage, ...currentParams, startPage: 1 }));
 		return () => dispatch(updateConfig({ perPage: 12, startPage: 1 }));
-	}, [location, dispatch, perPage]);
+	}, [location, dispatch, perPage, currentParams]);
 
 	return (
 		<InfiniteScroll
