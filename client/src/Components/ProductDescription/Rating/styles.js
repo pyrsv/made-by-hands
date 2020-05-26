@@ -13,11 +13,7 @@ export const Comments = styled.span`
 		padding-left: 10px;
 	}
 	@media screen and (max-width: 576px) {
-		font-size: 14px;
-	}
-	@media screen and (max-width: 480px) {
-		font-size: 10px;
-		padding-left: 5px;
+		padding-left: 0px;
 	}
 `;
 
@@ -26,5 +22,6 @@ export const RatingDiv = styled.div`
 	padding-bottom: 15px;
 	@media screen and (max-width: 576px) {
 		padding-bottom: 10px;
+		display: block;
 	}
 `;

@@ -61,7 +61,6 @@ export const TextDescription = styled.p`
 		font-size: 14px;
 	}
 	@media screen and (max-width: 576px) {
-		font-size: 11px;
 		line-height: 15px;
 	}
 `;
@@ -85,9 +84,6 @@ export const NameOfProduct = styled.p`
 	@media screen and (max-width: 576px) {
 		font-size: 12px;
 	}
-	@media screen and (max-width: 320px) {
-		font-size: 11px;
-	}
 `;
 
 export const Price = styled.span`
@@ -103,9 +99,6 @@ export const Price = styled.span`
 	@media screen and (max-width: 768px) {
 		font-size: 18px;
 	}
-	@media screen and (max-width: 480px) {
-		font-size: 16px;
-	}
 `;
 
 export const OldPrice = styled.p`
@@ -117,9 +110,6 @@ export const OldPrice = styled.p`
 
 	@media screen and (max-width: 768px) {
 		font-size: 12px;
-	}
-	@media screen and (max-width: 480px) {
-		font-size: 10px;
 	}
 `;
 

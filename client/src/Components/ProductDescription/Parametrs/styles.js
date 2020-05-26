@@ -7,9 +7,6 @@ export const ParamText = styled.p`
 	@media screen and (max-width: 768px) {
 		font-size: 14px;
 	}
-	@media screen and (max-width: 480px) {
-		font-size: 12px;
-	}
 `;
 
 export const Li = styled.li`
@@ -21,11 +18,7 @@ export const Li = styled.li`
 	@media screen and (max-width: 768px) {
 		font-size: 14px;
 	}
-	@media screen and (max-width: 576px) {
-		font-size: 12px;
-	}
 	@media screen and (max-width: 480px) {
-		font-size: 11px;
 		line-height: 15px;
 	}
 `;
