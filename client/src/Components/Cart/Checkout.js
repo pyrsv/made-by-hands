@@ -4,11 +4,10 @@ import { Form, Formik } from 'formik';
 import * as yup from 'yup';
 import { string, number } from 'yup';
 import Button from '../UI/Button/Button';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import {
 	FlexContainer,
 	StyledFormColumn,
-	DisabledStyledButton,
 	StyledLabel,
 	StyledField,
 	ButtonWrapper,
@@ -19,18 +18,21 @@ import {
 } from './styles';
 import PropTypes, { object } from 'prop-types';
 // import InputField from '../UI/InputFiels/InputField';
+import { placeOrder } from '../../store/actions/orderActions';
 
 const valid = {
 	name: string().required(),
 	surname: string().required(),
 	phone: number().required().positive().integer(),
+	email: string().email(),
 };
 
 const Checkout = ({ sumPrice, goods }) => {
 	const [isPostalPoints, togglePP] = useState({ showed: true });
 	const [isAddress, toggleAddress] = useState({ showed: false });
-
+	const dispatch = useDispatch();
 	const user = useSelector(state => state.auth.currentUser) || {};
+	const isFetching = useSelector(state => state.orders.isOrdersFetching);
 
 	if (user && !user.address) {
 		user.address = {};
@@ -56,6 +58,7 @@ const Checkout = ({ sumPrice, goods }) => {
 		valid.app = number().required();
 		values.delivery = '';
 	};
+
 	return (
 		<Formik
 			user
@@ -68,13 +71,13 @@ const Checkout = ({ sumPrice, goods }) => {
 			initialValues={{
 				name: user.firstName || '',
 				surname: user.lastName || '',
-				phone: '',
+				email: user.email || '',
+				phone: user.phone || '',
 				delivery: 'point1',
 				city: user?.address.city || '',
 				house: user?.address.houseNumber || '',
 				app: user?.address.flat || '',
 				street: user?.address.street || '',
-
 				amountOfPayment: sumPrice,
 				items: goods,
 			}}
@@ -101,6 +104,25 @@ const Checkout = ({ sumPrice, goods }) => {
 			onSubmit={values => {
 				// eslint-disable-next-line no-console
 				console.log('submited data ', values);
+
+				const shippingInfo = {
+					city: `${values.city}`,
+					price: '50UAH',
+				};
+				const delivery = {
+					country: 'Ukraine',
+					city: `${values.city}`,
+					address: `${values.street} ${values.house}  ${values.app}`,
+				};
+				const payment = {
+					type: 'credit card',
+					issuer: 'MasterCard',
+				};
+				if (Object.keys(user).length > 1 && user.constructor === Object) {
+					values.items = null;
+				}
+
+				dispatch(placeOrder(values, shippingInfo, delivery, payment));
 			}}
 		>
 			{({
@@ -145,7 +167,18 @@ const Checkout = ({ sumPrice, goods }) => {
 							{errors.surname && touched.surname ? (
 								<div>{errors.surname}</div>
 							) : null}
-
+							<StyledLabel>
+								{' '}
+								Enter your email
+								<StyledField
+									name="email"
+									onChange={handleChange}
+									onBlur={handleBlur}
+									target="form"
+									type="email"
+								/>
+							</StyledLabel>
+							{errors.email && touched.email ? <div>{errors.email}</div> : null}
 							<StyledLabel>
 								{' '}
 								Enter your phone number
@@ -269,12 +302,19 @@ const Checkout = ({ sumPrice, goods }) => {
 						</StyledFormColumn>
 					</FlexContainer>
 					<ButtonWrapper>
-						{isValid ? (
-							<Button onClick={submitForm} text="checkout" />
+						{isValid && !isFetching ? (
+							<Button
+								onClick={submitForm}
+								text="checkout"
+								disabled={!isValid}
+							/>
 						) : (
-							<DisabledStyledButton type="submit" disabled>
-								Checkout
-							</DisabledStyledButton>
+							<Button
+								onClick={submitForm}
+								text="checkout"
+								disabled={!isValid}
+								color="#f0f0f0"
+							/>
 						)}
 					</ButtonWrapper>
 				</Form>
