@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { NavLink } from 'react-router-dom';
@@ -41,7 +41,7 @@ const Header = () => {
 		profile: false,
 	});
 
-	const handleWindowResize = () => {
+	const handleWindowResize = useCallback(() => {
 		dispatch(closeNav());
 		if (window.innerWidth <= 992) {
 			dispatch(setHeaderMobile(true));
@@ -60,7 +60,7 @@ const Header = () => {
 		} else {
 			dispatch(setMobile(false));
 		}
-	};
+	}, [dispatch]);
 
 	useEffect(() => {
 		handleWindowResize();
@@ -70,7 +70,7 @@ const Header = () => {
 		return () => {
 			window.removeEventListener('resize', handleWindowResize);
 		};
-	}, []);
+	}, [dispatch, handleWindowResize]);
 
 	const [isSearch, setSearch] = useState(false);
 
@@ -100,7 +100,7 @@ const Header = () => {
 
 	useEffect(() => {
 		dispatch(getCategories());
-	}, []);
+	}, [dispatch]);
 
 	const handleDropdownToggle = key => {
 		setDropdown({

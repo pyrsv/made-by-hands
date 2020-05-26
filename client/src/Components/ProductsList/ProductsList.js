@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import InfiniteScroll from 'react-infinite-scroller';
 import querystring from 'query-string';
 import { useSelector, useDispatch } from 'react-redux';
@@ -15,29 +15,34 @@ import { ProductsContainer, ProductsPreloader } from './styles';
 const ProductsList = () => {
 	const dispatch = useDispatch();
 	const location = useLocation();
-	const currentParams = querystring.parse(location.search.slice(1));
+	const currentParams = useMemo(
+		() => querystring.parse(location.search.slice(1)),
+		[location.search]
+	);
+
 	const products = useSelector(state => state.catalog.currentProducts);
 	const productsQuantity = useSelector(state => state.catalog.productsQuantity);
-	const config = useSelector(state => state.catalog.config);
+	const perPage = useSelector(state => state.catalog.perPage);
+	const startPage = useSelector(state => state.catalog.startPage);
 	const isProductsFetching = useSelector(
 		state => state.catalog.isProductsFetching
 	);
 
 	useEffect(() => {
-		dispatch(
-			getFilteredProducts({ ...config, ...currentParams, startPage: 1 })
-		);
+		dispatch(getFilteredProducts({ perPage, ...currentParams, startPage: 1 }));
 		return () => dispatch(updateConfig({ perPage: 12, startPage: 1 }));
-	}, [location]);
+	}, [location, dispatch, perPage, currentParams]);
 
 	return (
 		<InfiniteScroll
 			threshold={150}
-			loadMore={() => dispatch(loadMoreAction({ ...config, ...currentParams }))}
+			loadMore={() =>
+				dispatch(loadMoreAction({ perPage, startPage, ...currentParams }))
+			}
 			hasMore={products.length < productsQuantity && !isProductsFetching}
 			loader={
-				<ProductsPreloader>
-					<Preloader key="1" size={60} />
+				<ProductsPreloader key="1">
+					<Preloader size={60} />
 				</ProductsPreloader>
 			}
 		>
@@ -55,7 +60,7 @@ const ProductsList = () => {
 					}) => (
 						<ProductCard
 							id={_id}
-							key={itemNo}
+							key={_id}
 							itemNo={itemNo}
 							name={name}
 							img={image}
