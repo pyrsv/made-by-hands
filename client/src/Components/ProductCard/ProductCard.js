@@ -38,7 +38,6 @@ const ProductCard = ({
 	const dispatch = useDispatch();
 	const location = useLocation();
 	const user = useSelector(state => state.auth.currentUser);
-
 	const handleCartButtonClick = () => {
 		dispatch(addToCart(id, itemNo));
 		dispatch(setProductToCart(id));
@@ -76,7 +75,7 @@ const ProductCard = ({
 								},
 							}}
 						>
-							<FavoriteHeart isFavorite={isFavorite} />
+							<FavoriteHeart disabled />
 						</NavLink>
 					)}
 				</CardInfoRow>
