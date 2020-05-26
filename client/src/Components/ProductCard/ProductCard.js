@@ -75,7 +75,7 @@ const ProductCard = ({
 								},
 							}}
 						>
-							<FavoriteHeart disabled />
+							<FavoriteHeart />
 						</NavLink>
 					)}
 				</CardInfoRow>

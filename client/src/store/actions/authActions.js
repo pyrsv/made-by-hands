@@ -13,7 +13,6 @@ import {
 	USER_UPDATE_ERROR,
 	USER_UPDATE_SUCCESS,
 } from '../types/authTypes';
-import { setProductToWishlist } from './catalogActions';
 
 const userUpdateInit = () => ({
 	type: USER_UPDATE_INIT,
@@ -48,7 +47,6 @@ export const userLogout = () => dispatch => {
 	if (!localStorage.getItem('cart')) {
 		localStorage.setItem('cart', '[]');
 	}
-	dispatch(setProductToWishlist());
 	dispatch(setCartAction([]));
 	localStorage.setItem('cart', '[]');
 	dispatch({ type: USER_LOGOUT });
