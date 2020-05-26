@@ -5,7 +5,6 @@ import { SearchButton, SearchForm } from './styles';
 import { Formik } from 'formik';
 // import { DebounceInput } from 'react-debounce-input';
 import { getSearchProduct } from './getSearchProduct';
-// import { NavLink } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
 // const SearchField = () => {
@@ -56,11 +55,11 @@ const SearchField = () => {
 							/> */}
 						</InputField>
 
+						{/* <NavLink to=""> */}
 						<SearchButton>
-							{/* <NavLink to="/catalog"> */}
 							<FontAwesomeIcon icon={['fas', 'search']} />
-							{/* </NavLink> */}
 						</SearchButton>
+						{/* </NavLink> */}
 					</SearchForm>
 				)}
 			</Formik>

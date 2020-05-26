@@ -6,7 +6,6 @@ import { FooterSection } from './style';
 import { FooterText } from './FooterText/FooterText';
 import { SetSubscriberEmail } from '../../utils/setSubscriberEmail';
 
-
 const FooterForm = () => (
 	<div>
 		<Formik
@@ -23,10 +22,8 @@ const FooterForm = () => (
 				return errors;
 			}}
 			onSubmit={values => {
-				console.log(SetSubscriberEmail(values.email))
-				console.log(JSON.stringify(values, null, 2));
+				SetSubscriberEmail(values.email);
 			}}
-
 		>
 			{({
 				values,
@@ -36,7 +33,6 @@ const FooterForm = () => (
 				handleBlur,
 				handleSubmit,
 				// isSubmitting,
-				/* and other goodies */
 			}) => (
 				<form onSubmit={handleSubmit}>
 					<FooterSection>

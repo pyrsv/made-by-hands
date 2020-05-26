@@ -13,6 +13,7 @@ export const getSearchProduct = value => dispatch => {
 		.then(res => {
 			const clients = [];
 			// console.log(res.data);
+
 			const result = res.data;
 			result.map(el => {
 				if (el.name.includes(value)) {
