@@ -21,7 +21,7 @@ export const addToCart = (id, itemNo) => dispatch => {
 		.then(result => {
 			dispatch(setCartAction(result.data.products));
 		})
-		.catch(err => {
+		.catch(() => {
 			if (!localStorage.getItem('cart')) {
 				localStorage.setItem('cart', []);
 			}
@@ -46,7 +46,6 @@ export const addToCart = (id, itemNo) => dispatch => {
 				}
 				localStorage.setItem('cart', JSON.stringify(LSItems));
 				dispatch(setCartAction(LSItems));
-				dispatch(userLoginError(err));
 			});
 		});
 };
@@ -57,7 +56,7 @@ export const deleteFromCart = (id, itemNo) => dispatch => {
 		.then(result => {
 			dispatch(setCartAction(result.data.products));
 		})
-		.catch(err => {
+		.catch(() => {
 			axios.get(`/products/${itemNo}`).then(result => {
 				const requiredItem = result.data;
 				const itemsFromLS = JSON.parse(localStorage.getItem('cart'));
@@ -77,8 +76,6 @@ export const deleteFromCart = (id, itemNo) => dispatch => {
 						}
 					}
 				});
-
-				dispatch(userLoginError(err));
 			});
 		});
 };

@@ -29,7 +29,7 @@ const InputField = ({
 				value={value}
 				isInvalid={error && touched}
 			/>
-			{touched && error && <ErrorMessage>{error}</ErrorMessage>}
+			{touched && error && <ErrorMessage message={error}>{error}</ErrorMessage>}
 		</InputContainer>
 	);
 };

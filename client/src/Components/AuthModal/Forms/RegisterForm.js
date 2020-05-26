@@ -4,7 +4,8 @@ import { Formik } from 'formik';
 import * as Yup from 'yup';
 import Button from '../../UI/Button/Button';
 import InputField from '../../UI/InputFiels/InputField';
-import { FormFields } from './styles';
+import FormErrorMessage from '../../UI/FormErrorMessage/FormErrorMessage';
+import { FormFields, StyledForm } from './styles';
 import { userRegister } from '../../../store/actions/authActions';
 
 const RegisterSchema = Yup.object().shape({
@@ -13,7 +14,7 @@ const RegisterSchema = Yup.object().shape({
 		.required('Login is required')
 		.min(3, 'Login must be between 3 and 10 characters')
 		.max(10, 'Login must be between 3 and 10 characters'),
-	password: Yup.string(),
+	password: Yup.string().required('Password is required'),
 	firstName: Yup.string()
 		.required('First name is required')
 		.matches(/^[a-zA-Zа-яА-Я]+$/, {
@@ -38,6 +39,7 @@ const RegisterSchema = Yup.object().shape({
 const RegisterForm = () => {
 	const dispatch = useDispatch();
 	const isLoading = useSelector(state => state.auth.isLoading);
+	const registerError = useSelector(state => state.auth.error);
 
 	return (
 		<div>
@@ -63,7 +65,7 @@ const RegisterForm = () => {
 					errors,
 					touched,
 				}) => (
-					<form onSubmit={handleSubmit}>
+					<StyledForm type="register" onSubmit={handleSubmit}>
 						<FormFields>
 							<InputField
 								type="text"
@@ -145,7 +147,11 @@ const RegisterForm = () => {
 							type="submit"
 							size="wide"
 						/>
-					</form>
+						{registerError &&
+							Object.values(registerError).map(message => (
+								<FormErrorMessage key={message} text={message} />
+							))}
+					</StyledForm>
 				)}
 			</Formik>
 		</div>

@@ -12,7 +12,12 @@ import {
 	USER_UPDATE_INIT,
 	USER_UPDATE_ERROR,
 	USER_UPDATE_SUCCESS,
+	RESET_USER_AUTH_ERROR,
 } from '../types/authTypes';
+
+export const resetUserAuthError = () => ({
+	type: RESET_USER_AUTH_ERROR,
+});
 
 const userUpdateInit = () => ({
 	type: USER_UPDATE_INIT,
@@ -75,12 +80,11 @@ export const getUser = () => dispatch => {
 				});
 				dispatch(userLoginSuccess(customer.data));
 			})
-			.catch(err => {
+			.catch(() => {
 				if (!localStorage.getItem('cart')) {
 					localStorage.setItem('cart', '[]');
 				}
 				dispatch(setCartAction(JSON.parse(localStorage.getItem('cart'))));
-				dispatch(userLoginError(err));
 			});
 	} else {
 		if (!localStorage.getItem('cart')) {
@@ -153,7 +157,7 @@ export const userRegister = data => async dispatch => {
 					dispatch(userLoginSuccess(customer.data));
 				})
 				.catch(err => {
-					dispatch(userLoginError(err));
+					dispatch(userLoginError(err.response.data));
 				});
 		})
 		.catch(err => {
@@ -161,7 +165,7 @@ export const userRegister = data => async dispatch => {
 				localStorage.setItem('cart', '[]');
 			}
 			dispatch(setCartAction(JSON.parse(localStorage.getItem('cart'))));
-			dispatch(userLoginError(err));
+			dispatch(userLoginError(err.response.data));
 		});
 };
 
@@ -174,5 +178,5 @@ export const updateUser = data => dispatch => {
 			},
 		})
 		.then(customer => dispatch(userUpdateSuccess(customer.data)))
-		.catch(err => dispatch(userUpdateError(err)));
+		.catch(err => dispatch(userUpdateError(err.response.data)));
 };
