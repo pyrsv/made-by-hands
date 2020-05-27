@@ -37,6 +37,7 @@ const CatalogList = () => {
 			startPage={startPage}
 			perPage={perPage}
 			isProductsFetching={isProductsFetching}
+			scrollable
 		/>
 	);
 };

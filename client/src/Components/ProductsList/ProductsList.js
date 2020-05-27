@@ -14,10 +14,11 @@ const ProductsList = ({
 	startPage,
 	perPage,
 	isProductsFetching,
+	scrollable,
 }) => {
 	const dispatch = useDispatch();
 
-	return (
+	return scrollable ? (
 		<InfiniteScroll
 			threshold={150}
 			loadMore={() =>
@@ -58,16 +59,52 @@ const ProductsList = ({
 				)}
 			</ProductsContainer>
 		</InfiniteScroll>
+	) : (
+		<ProductsContainer>
+			{products.map(
+				({
+					name,
+					currentPrice,
+					previousPrice,
+					itemNo,
+					_id,
+					isInCart,
+					imageUrls: [image],
+					isFavorite,
+				}) => (
+					<ProductCard
+						id={_id}
+						key={_id}
+						itemNo={itemNo}
+						name={name}
+						img={image}
+						price={currentPrice}
+						oldPrice={previousPrice}
+						type="olive"
+						isInCart={isInCart}
+						isFavorite={isFavorite}
+					/>
+				)
+			)}
+		</ProductsContainer>
 	);
 };
 
 ProductsList.propTypes = {
 	products: PropTypes.arrayOf(PropTypes.object).isRequired,
-	productsQuantity: PropTypes.number.isRequired,
-	queryParams: PropTypes.objectOf(PropTypes.string).isRequired,
-	startPage: PropTypes.number.isRequired,
-	perPage: PropTypes.number.isRequired,
 	isProductsFetching: PropTypes.bool.isRequired,
+	scrollable: PropTypes.bool.isRequired,
+	productsQuantity: PropTypes.number,
+	queryParams: PropTypes.objectOf(PropTypes.string),
+	startPage: PropTypes.number,
+	perPage: PropTypes.number,
+};
+
+ProductsList.defaultProps = {
+	productsQuantity: 0,
+	queryParams: {},
+	startPage: 1,
+	perPage: 12,
 };
 
 export default ProductsList;
