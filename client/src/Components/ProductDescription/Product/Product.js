@@ -26,6 +26,8 @@ import {
 	NameOfProduct,
 	OldPrice,
 	Price,
+	TitleContainer,
+	AllInfo,
 } from './styles';
 
 const Product = ({
@@ -65,13 +67,8 @@ const Product = ({
 
 	return (
 		<GridContainer>
-			<div>
-				<DescriptionPageCarousel imageUrls={imageUrls} />
-				<DescriptionArea>
-					<TextDescription>{description}</TextDescription>
-				</DescriptionArea>
-			</div>
-			<div>
+			<DescriptionPageCarousel imageUrls={imageUrls} />
+			<TitleContainer>
 				<BlockText flex>
 					<NameOfProduct>{name}</NameOfProduct>
 					{user ? (
@@ -94,6 +91,11 @@ const Product = ({
 						</NavLink>
 					)}
 				</BlockText>
+			</TitleContainer>
+			<DescriptionArea>
+				<TextDescription>{description}</TextDescription>
+			</DescriptionArea>
+			<AllInfo>
 				<BlockText>
 					<Rating id={id} />
 				</BlockText>
@@ -116,7 +118,7 @@ const Product = ({
 				<BlockText>
 					<Comments id={id} />
 				</BlockText>
-			</div>
+			</AllInfo>
 		</GridContainer>
 	);
 };

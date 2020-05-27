@@ -16,22 +16,46 @@ export const ProductDescriptionContainer = styled.div`
 
 export const GridContainer = styled.div`
 	display: grid;
+	align-items:
 	grid-template-columns: repeat(2, 1fr);
+	grid-template-areas: "photo title" "text title" ". title";
+	@media screen and (max-width: 576px) {
+		grid-template-columns: 1fr;
+		grid-template-areas: "title" "photo" "textDescription" "allInfo";
+	}
 	grid-column-gap: 20px;
+`;
+
+export const TitleContainer = styled.div`
+	grid-area: title;
+	@media screen and (max-width: 576px) {
+		justify-self: center;
+	}
+`;
+export const AllInfo = styled.div`
+	grid-area: title;
+	margin-top: 55px;
+	@media screen and (max-width: 992px) {
+		margin-top: 65px;
+	}
+	@media screen and (max-width: 576px) {
+		grid-area: allInfo;
+		margin-top: 10px;
+	}
 `;
 
 export const DescriptionArea = styled.div`
 	dispaly: inline-block;
 	max-width: 390px;
 	margin: 30px 0 0 110px;
+	grid-area: text;
 	@media screen and (max-width: 768px) {
 		margin: 20px 0 0 90px;
 	}
 	@media screen and (max-width: 576px) {
-		margin: 20px 0 0 90px;
-	}
-	@media screen and (max-width: 480px) {
-		margin: 20px 0 0;
+		margin: 20px 0 0 0;
+		grid-area: textDescription;
+		max-width: 100%;
 	}
 `;
 
@@ -58,10 +82,11 @@ export const TextDescription = styled.p`
 	line-height: 20px;
 	font-family: 'Open Sans', sans-serif;
 	@media screen and (max-width: 768px) {
-		font-size: 14px;
+		font-size: 16px;
 	}
-	@media screen and (max-width: 576px) {
-		line-height: 15px;
+	@media screen and (max-width: 480px) {
+		font-size: 14px;
+		line-height: 18px;
 	}
 `;
 
@@ -78,11 +103,11 @@ export const NameOfProduct = styled.p`
 		font-size: 18px;
 	}
 	@media screen and (max-width: 768px) {
-		font-size: 16px;
 		padding-right: 15px;
+		font-size: 16px;
 	}
 	@media screen and (max-width: 576px) {
-		font-size: 12px;
+		font-size: 18px;
 	}
 `;
 
@@ -97,7 +122,7 @@ export const Price = styled.span`
 		font-size: 22px;
 	}
 	@media screen and (max-width: 768px) {
-		font-size: 18px;
+		font-size: 20px;
 	}
 `;
 
@@ -109,7 +134,7 @@ export const OldPrice = styled.p`
 	font-size: 14px;
 
 	@media screen and (max-width: 768px) {
-		font-size: 12px;
+		font-size: 14px;
 	}
 `;
 

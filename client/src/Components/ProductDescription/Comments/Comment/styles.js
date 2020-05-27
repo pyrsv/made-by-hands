@@ -34,6 +34,6 @@ export const UserName = styled.p`
 
 export const CommentContent = styled.p`
 	@media screen and (max-width: 480px) {
-		font-size: 14px;
+		font-size: 16px;
 	}
 `;

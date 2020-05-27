@@ -4,13 +4,13 @@ import SetModalRating from './SetModalRating';
 import Button from '../../UI/Button/Button';
 import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
-import { getRatingAndCommentsInfo } from '../../../store/actions/commentAction';
+import { getRatingAndCommentsInfo } from '../../../store/actions/ratingAction';
 import { Comments, RatingDiv } from './styles';
 
 const Rating = ({ id }) => {
 	const [isModalOpen, setToggleModal] = useState(false);
 	const dispatch = useDispatch();
-	const arrayOfComments = useSelector(state => state.comments.comments);
+	const arrayOfComments = useSelector(state => state.rating.comments);
 
 	const toggleModal = () => {
 		setToggleModal(prevState => !prevState);

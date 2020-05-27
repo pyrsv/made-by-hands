@@ -28,7 +28,11 @@ const ModalRating = ({ toggleModal, id }) => {
 				</Header>
 				<Content>
 					<RatingContainer>
-						<RatingStars rating={ratingStar} onStarClick={setRatingStar} edit />
+						<RatingStars
+							rating={ratingStar || 5}
+							onStarClick={setRatingStar}
+							edit
+						/>
 					</RatingContainer>
 					<FormToAddComment
 						toggleModal={toggleModal}
