@@ -1,43 +1,27 @@
-import React, { useEffect, useMemo } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import InfiniteScroll from 'react-infinite-scroller';
-import querystring from 'query-string';
-import { useSelector, useDispatch } from 'react-redux';
-import { useLocation } from 'react-router-dom';
-import {
-	loadMoreAction,
-	getFilteredProducts,
-	updateConfig,
-} from '../../store/actions/catalogActions';
+import { useDispatch } from 'react-redux';
+import { loadMoreAction } from '../../store/actions/catalogActions';
 import ProductCard from '../ProductCard/ProductCard';
 import Preloader from '../UI/Preloader/Preloader';
 import { ProductsContainer, ProductsPreloader } from './styles';
 
-const ProductsList = () => {
+const ProductsList = ({
+	products,
+	productsQuantity,
+	queryParams,
+	startPage,
+	perPage,
+	isProductsFetching,
+}) => {
 	const dispatch = useDispatch();
-	const location = useLocation();
-	const currentParams = useMemo(
-		() => querystring.parse(location.search.slice(1)),
-		[location.search]
-	);
-
-	const products = useSelector(state => state.catalog.currentProducts);
-	const productsQuantity = useSelector(state => state.catalog.productsQuantity);
-	const perPage = useSelector(state => state.catalog.perPage);
-	const startPage = useSelector(state => state.catalog.startPage);
-	const isProductsFetching = useSelector(
-		state => state.catalog.isProductsFetching
-	);
-
-	useEffect(() => {
-		dispatch(getFilteredProducts({ perPage, ...currentParams, startPage: 1 }));
-		return () => dispatch(updateConfig({ perPage: 12, startPage: 1 }));
-	}, [location, dispatch, perPage, currentParams]);
 
 	return (
 		<InfiniteScroll
 			threshold={150}
 			loadMore={() =>
-				dispatch(loadMoreAction({ perPage, startPage, ...currentParams }))
+				dispatch(loadMoreAction({ perPage, startPage, ...queryParams }))
 			}
 			hasMore={products.length < productsQuantity && !isProductsFetching}
 			loader={
@@ -75,6 +59,15 @@ const ProductsList = () => {
 			</ProductsContainer>
 		</InfiniteScroll>
 	);
+};
+
+ProductsList.propTypes = {
+	products: PropTypes.arrayOf(PropTypes.object).isRequired,
+	productsQuantity: PropTypes.number.isRequired,
+	queryParams: PropTypes.objectOf(PropTypes.string).isRequired,
+	startPage: PropTypes.number.isRequired,
+	perPage: PropTypes.number.isRequired,
+	isProductsFetching: PropTypes.bool.isRequired,
 };
 
 export default ProductsList;
