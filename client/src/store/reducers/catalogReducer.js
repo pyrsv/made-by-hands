@@ -2,7 +2,6 @@ import {
 	GET_FILTERED_PRODUCTS_ERROR,
 	GET_FILTERED_PRODUCTS_INIT,
 	GET_FILTERED_PRODUCTS_SUCCESS,
-	UPDATE_CONFIG,
 	LOAD_MORE_PRODUCTS,
 	SET_PRODUCT_TO_CART,
 	SET_PRODUCT_TO_WISHLIST,
@@ -15,10 +14,8 @@ const initialState = {
 	productsQuantity: 0,
 	minPrice: 0,
 	maxPrice: 2000,
-	config: {
-		perPage: 12,
-		startPage: 1,
-	},
+	perPage: 12,
+	startPage: 1,
 };
 
 export const catalogReducer = (state = initialState, { type, payload }) => {
@@ -35,10 +32,7 @@ export const catalogReducer = (state = initialState, { type, payload }) => {
 				isProductsFetching: false,
 				currentProducts: payload.products,
 				productsQuantity: payload.productsQuantity,
-				config: {
-					...state.config,
-					startPage: state.config.startPage + 1,
-				},
+				startPage: state.startPage + 1,
 			};
 		case GET_FILTERED_PRODUCTS_ERROR:
 			return {
@@ -50,19 +44,16 @@ export const catalogReducer = (state = initialState, { type, payload }) => {
 			return {
 				...state,
 				currentProducts: [...state.currentProducts, ...payload],
-				config: {
-					...state.config,
-					startPage: state.config.startPage + 1,
-				},
+				startPage: state.startPage + 1,
 			};
-		case UPDATE_CONFIG:
-			return {
-				...state,
-				config: {
-					startPage: payload.startPage,
-					perPage: payload.perPage,
-				},
-			};
+		// case UPDATE_CONFIG:
+		// 	return {
+		// 		...state,
+		// 		config: {
+		// 			startPage: payload.startPage,
+		// 			perPage: payload.perPage,
+		// 		},
+		// 	};
 		case SET_PRODUCT_TO_CART:
 			return {
 				...state,
