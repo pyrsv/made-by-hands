@@ -38,7 +38,6 @@ const ProductCard = ({
 	const dispatch = useDispatch();
 	const location = useLocation();
 	const user = useSelector(state => state.auth.currentUser);
-
 	const handleCartButtonClick = () => {
 		dispatch(addToCart(id, itemNo));
 		dispatch(setProductToCart(id));
@@ -70,13 +69,13 @@ const ProductCard = ({
 						<NavLink
 							to={{
 								pathname: `/login`,
-								search: `addtowishlist=${id}`,
+								// search: `addtowishlist=${id}`,
 								state: {
 									background: location,
 								},
 							}}
 						>
-							<FavoriteHeart isFavorite={isFavorite} />
+							<FavoriteHeart />
 						</NavLink>
 					)}
 				</CardInfoRow>
