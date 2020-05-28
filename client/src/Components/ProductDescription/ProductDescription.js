@@ -47,7 +47,7 @@ const ProductDescription = ({ productNoParam }) => {
 
 	useEffect(() => {
 		getProduct(productNoParam);
-	}, [productNoParam, item.isInCart, item.isFavorite]);
+	}, [productNoParam]);
 
 	return (
 		<ProductDescriptionContainer>
@@ -66,7 +66,6 @@ const ProductDescription = ({ productNoParam }) => {
 						isInCart={item.isInCart}
 						parameters={item.parameters}
 						isFavorite={item.isFavorite}
-						itemNo={item.itemNo}
 						id={item._id}
 					/>
 				)}

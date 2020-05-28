@@ -6,18 +6,8 @@ import PropTypes from 'prop-types';
 import Parametrs from '../Parametrs/Parametrs';
 import Rating from '../Rating/Rating';
 import Comments from '../Comments/Comments';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { NavLink, useLocation } from 'react-router-dom';
-import { addToCart } from '../../../store/actions/cartActions';
-import {
-	setProductToCart,
-	setProductToWishlist,
-} from '../../../store/actions/catalogActions';
-import {
-	addToWishlist,
-	deleteFromWishlist,
-} from '../../../store/actions/wishActions';
-
 import {
 	GridContainer,
 	DescriptionArea,
@@ -38,32 +28,13 @@ const Product = ({
 	currentPrice,
 	parameters,
 	id,
-	itemNo,
 	isFavorite,
 	isInCart,
 	onAddCart,
 	onAddFavor,
 }) => {
-	const dispatch = useDispatch();
 	const location = useLocation();
 	const user = useSelector(state => state.auth.currentUser);
-
-	const handleCartButtonClick = () => {
-		dispatch(addToCart(id, itemNo));
-		dispatch(setProductToCart(id));
-		onAddCart(id, itemNo);
-	};
-
-	const handleHeartButtonClick = () => {
-		dispatch(setProductToWishlist(id));
-		if (!isFavorite) {
-			dispatch(addToWishlist(id));
-			onAddFavor(id, isFavorite);
-		} else {
-			dispatch(deleteFromWishlist(id));
-			onAddFavor(id, isFavorite);
-		}
-	};
 
 	return (
 		<GridContainer>
@@ -73,10 +44,7 @@ const Product = ({
 					<NameOfProduct>{name}</NameOfProduct>
 					{user ? (
 						<span>
-							<FavoriteHeart
-								isFavorite={isFavorite}
-								onClick={() => handleHeartButtonClick(id)}
-							/>
+							<FavoriteHeart isFavorite={isFavorite} onClick={onAddFavor} />
 						</span>
 					) : (
 						<NavLink
@@ -111,7 +79,7 @@ const Product = ({
 						type="default"
 						color="dark"
 						text={isInCart ? 'In Cart' : 'Buy'}
-						onClick={() => handleCartButtonClick(id)}
+						onClick={onAddCart}
 						disabled={isInCart}
 					/>
 				</BlockText>
@@ -133,7 +101,6 @@ Product.propTypes = {
 	parameters: PropTypes.arrayOf(PropTypes.string).isRequired,
 	isInCart: PropTypes.bool,
 	isFavorite: PropTypes.bool,
-	itemNo: PropTypes.string.isRequired,
 	onAddCart: PropTypes.func.isRequired,
 	onAddFavor: PropTypes.func.isRequired,
 };
