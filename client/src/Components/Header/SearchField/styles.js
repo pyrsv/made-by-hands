@@ -12,7 +12,7 @@ export const SearchForm = styled.form`
 	}
 `;
 
-export const SearchButton = styled.button`
+export const SearchButton = styled.button.attrs(() => ({ type: 'submit' }))`
 	position: absolute;
 	box-sizing: border-box;
 	height: 100%;
