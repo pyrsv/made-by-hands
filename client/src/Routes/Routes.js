@@ -17,39 +17,42 @@ const Routes = () => {
 	const background = location.state && location.state.background;
 	return (
 		<>
-			<TransitionGroup>
-				<CSSTransition key={location.key} classNames="page" timeout={400}>
-					<Switch location={background || location}>
-						<Route exact path="/">
-							<IndexPage />
-						</Route>
-						<Route path="/cart">
-							<CartPage />
-						</Route>
-						<Route path="/catalog">
-							<CatalogPage />
-						</Route>
-						<Route path="/search">
-							<SearchPage />
-						</Route>
-						<Route
-							path="/products/:itemNo"
-							render={({ match }) => {
-								return (
-									match && <ProductPage productNoParam={match.params.itemNo} />
-								);
-							}}
-						/>
-						<Route path="*">
-							<NoMatchPage />
-						</Route>
-					</Switch>
-				</CSSTransition>
-			</TransitionGroup>
 			<Switch location={background || location}>
 				<ProtectedRoute path="/profile">
 					<ProfilePage />
 				</ProtectedRoute>
+				<TransitionGroup>
+					<CSSTransition key={location.key} classNames="page" timeout={400}>
+						<Switch location={background || location}>
+							<Route exact path="/">
+								<IndexPage />
+							</Route>
+							<Route path="/cart">
+								<CartPage />
+							</Route>
+							<Route path="/catalog">
+								<CatalogPage />
+							</Route>
+							<Route path="/search">
+								<SearchPage />
+							</Route>
+
+							<Route
+								path="/products/:itemNo"
+								render={({ match }) => {
+									return (
+										match && (
+											<ProductPage productNoParam={match.params.itemNo} />
+										)
+									);
+								}}
+							/>
+							<Route path="*">
+								<NoMatchPage />
+							</Route>
+						</Switch>
+					</CSSTransition>
+				</TransitionGroup>
 			</Switch>
 			{background && (
 				<Route path="/login">
