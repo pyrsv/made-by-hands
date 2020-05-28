@@ -5,6 +5,7 @@ import {
 	LOAD_MORE_PRODUCTS,
 	SET_PRODUCT_TO_CART,
 	SET_PRODUCT_TO_WISHLIST,
+	UPDATE_CONFIG,
 } from '../types/catalogTypes';
 
 const initialState = {
@@ -46,14 +47,12 @@ export const catalogReducer = (state = initialState, { type, payload }) => {
 				currentProducts: [...state.currentProducts, ...payload],
 				startPage: state.startPage + 1,
 			};
-		// case UPDATE_CONFIG:
-		// 	return {
-		// 		...state,
-		// 		config: {
-		// 			startPage: payload.startPage,
-		// 			perPage: payload.perPage,
-		// 		},
-		// 	};
+		case UPDATE_CONFIG:
+			return {
+				...state,
+				startPage: payload.startPage,
+				perPage: payload.perPage,
+			};
 		case SET_PRODUCT_TO_CART:
 			return {
 				...state,

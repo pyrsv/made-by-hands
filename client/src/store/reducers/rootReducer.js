@@ -8,6 +8,7 @@ import { filtersReducer } from './filtersReducer';
 import { wishlistReducer } from './wishlistReducer';
 import { commentsReducer } from './commentsReducer';
 import { ordersReducer } from './ordersReducer';
+import { searchReducer } from './searchReducer';
 
 const rootReducer = combineReducers({
 	carouselArrivals: carouselArrivalsReducer,
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
 	wishlistReducer,
 	comments: commentsReducer,
 	orders: ordersReducer,
+	search: searchReducer,
 });
 
 export default rootReducer;
