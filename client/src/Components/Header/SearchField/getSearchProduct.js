@@ -4,6 +4,7 @@ import { getFilteredProductsSuccess } from '../../../store/actions/catalogAction
 // import { useDispatch } from 'react-redux';
 
 export const getSearchProduct = value => dispatch => {
+	// console.log(value)
 	const searchPhrases = {
 		query: value,
 	};

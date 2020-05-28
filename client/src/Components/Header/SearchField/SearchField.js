@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import InputField from '../../UI/InputFiels/InputField';
 import { SearchButton, SearchForm } from './styles';
 import { Formik } from 'formik';
-// import { DebounceInput } from 'react-debounce-input';
+import { NavLink } from 'react-router-dom';
 import { getSearchProduct } from './getSearchProduct';
 import { useDispatch } from 'react-redux';
 
@@ -36,7 +36,7 @@ const SearchField = () => {
 				initialValues={{ headerSearch: '' }}
 				onSubmit={values => {
 					dispatch(getSearchProduct(values.headerSearch));
-					// console.log(values.headerSearch);
+					getSearchProduct(values.headerSearch);
 				}}
 			>
 				{({ handleSubmit, handleChange }) => (
@@ -55,11 +55,16 @@ const SearchField = () => {
 							/> */}
 						</InputField>
 
-						{/* <NavLink to=""> */}
-						<SearchButton>
-							<FontAwesomeIcon icon={['fas', 'search']} />
-						</SearchButton>
-						{/* </NavLink> */}
+						<NavLink
+							to={`/catalog?brand=${setTimeout(
+								getSearchProduct(handleSubmit),
+								2000
+							)}`}
+						>
+							<SearchButton>
+								<FontAwesomeIcon icon={['fas', 'search']} />
+							</SearchButton>
+						</NavLink>
 					</SearchForm>
 				)}
 			</Formik>
