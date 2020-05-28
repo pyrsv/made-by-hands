@@ -32,9 +32,6 @@ const Routes = () => {
 						<Route path="/search">
 							<SearchPage />
 						</Route>
-						<ProtectedRoute path="/profile">
-							<ProfilePage />
-						</ProtectedRoute>
 						<Route
 							path="/products/:itemNo"
 							render={({ match }) => {
@@ -49,7 +46,11 @@ const Routes = () => {
 					</Switch>
 				</CSSTransition>
 			</TransitionGroup>
-
+			<Switch location={background || location}>
+				<ProtectedRoute path="/profile">
+					<ProfilePage />
+				</ProtectedRoute>
+			</Switch>
 			{background && (
 				<Route path="/login">
 					<AuthModal />
