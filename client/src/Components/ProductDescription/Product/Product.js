@@ -35,7 +35,6 @@ const Product = ({
 }) => {
 	const location = useLocation();
 	const user = useSelector(state => state.auth.currentUser);
-
 	return (
 		<GridContainer>
 			<DescriptionPageCarousel imageUrls={imageUrls} />
