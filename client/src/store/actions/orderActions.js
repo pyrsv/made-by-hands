@@ -21,29 +21,66 @@ export const placeOrder = (
 	values,
 	shippingInfo,
 	delivery,
-	payment
+	user
 ) => dispatch => {
 	dispatch(placeOrderInit);
-	axios
-		.post('/orders', {
-			products: `${values.items}`,
-			shipping: JSON.stringify(shippingInfo),
-			deliveryAddress: JSON.stringify(delivery),
-			paymentInfo: JSON.stringify(payment),
-			customerId: '5eabe5c2e00ab113f0cb0f1e',
-			status: 'not shipped',
-			email: `${values.email}`,
-			mobile: `${values.phone}`,
-			letterSubject: 'Thank you for order! You are welcome!',
-			letterHtml:
-				'<h1>Your order is placed. OrderNo is 023689452.</h1><p>{Other details about order in your HTML}</p>',
-		})
-		.then(res => {
-			// eslint-disable-next-line no-console
-			console.log(res.data);
-			placeOrderSuccess(res.data.order.orderNo);
-		})
-		.catch(err => {
-			placeOrderFail(err.response.data);
-		});
+
+	if (!user._id) {
+		axios
+			.post('/orders', {
+				email: `${values.email}`,
+				mobile: `${values.phone}`,
+				deliveryAddress: JSON.stringify(delivery),
+				shipping: JSON.stringify(shippingInfo),
+				status: 'pending',
+				letterSubject: 'Thank you for order! You are welcome!',
+				letterHtml:
+					'<h1>Your order is placed. OrderNo is 023689452.</h1><p>{Other details about order in your HTML}</p>',
+				firstName: `${values.firstName}`,
+				lastName: `${values.lastName}`,
+				products: JSON.stringify(values.items),
+			})
+			.then(res => {
+				// eslint-disable-next-line no-console
+				console.log(res.data);
+				if (res.data.order) {
+					placeOrderSuccess(res.data.order.orderNo);
+				} else {
+					// eslint-disable-next-line no-alert
+					alert(res.data.message);
+				}
+			})
+			.catch(err => {
+				placeOrderFail(err.message);
+			});
+	} else {
+		axios
+			.post('/orders', {
+				customerId: `${user._id}`,
+				email: `${values.email}`,
+				mobile: `${values.phone}`,
+				deliveryAddress: JSON.stringify(delivery),
+				shipping: JSON.stringify(shippingInfo),
+				status: 'pending',
+				letterSubject: 'Thank you for order! You are welcome!',
+				letterHtml:
+					'<h1>Your order is placed. OrderNo is 023689452.</h1><p>{Other details about order in your HTML}</p>',
+				firstName: `${values.firstName}`,
+				lastName: `${values.lastName}`,
+				products: JSON.stringify(values.items),
+			})
+			.then(res => {
+				// eslint-disable-next-line no-console
+				console.log(res.data);
+				if (res.data.order) {
+					placeOrderSuccess(res.data.order.orderNo);
+				} else {
+					// eslint-disable-next-line no-alert
+					alert(res.data.message);
+				}
+			})
+			.catch(err => {
+				placeOrderFail(err.message);
+			});
+	}
 };
