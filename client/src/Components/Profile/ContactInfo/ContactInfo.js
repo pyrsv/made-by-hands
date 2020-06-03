@@ -43,9 +43,14 @@ const ContactInfoSchema = Yup.object().shape({
 
 const ContactInfo = () => {
 	const dispatch = useDispatch();
-	const { firstName, lastName, email, birthdate, address = {} } = useSelector(
-		state => state.auth.currentUser
-	);
+	const {
+		firstName,
+		lastName,
+		email,
+		birthdate,
+		telephone,
+		address = {},
+	} = useSelector(state => state.auth.currentUser);
 
 	const { city, street, houseNumber, flat } = address;
 
@@ -59,6 +64,7 @@ const ContactInfo = () => {
 					firstName,
 					lastName,
 					email,
+					telephone,
 					birthdate: birthdate || '',
 					address: {
 						city: city || '',
