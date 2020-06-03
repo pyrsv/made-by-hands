@@ -12,7 +12,6 @@ import {
 	StyledField,
 	ButtonWrapper,
 	ColumnOfInputs,
-	// FirstColumn,
 	StyledRadio,
 	FillTheFields,
 } from './styles';
@@ -24,6 +23,7 @@ const valid = {
 	name: string().required(),
 	surname: string().required(),
 	telephone: number().required().positive().integer(),
+	phone: number().required().positive().integer(),
 	email: string().email(),
 };
 
@@ -69,8 +69,8 @@ const Checkout = ({ sumPrice, goods }) => {
 			sumPrice
 			goods
 			initialValues={{
-				name: user.firstName || '',
-				surname: user.lastName || '',
+				firstName: user.firstName || '',
+				lastName: user.lastName || '',
 				email: user.email || '',
 				telephone: user.telephone || '',
 				delivery: 'point1',
@@ -104,25 +104,19 @@ const Checkout = ({ sumPrice, goods }) => {
 			onSubmit={values => {
 				// eslint-disable-next-line no-console
 				console.log('submited data ', values);
-
-				const shippingInfo = {
+				const postalDelivery = {
 					city: `${values.city}`,
-					price: '50UAH',
+					postalOffice: '',
 				};
 				const delivery = {
 					country: 'Ukraine',
 					city: `${values.city}`,
 					address: `${values.street} ${values.house}  ${values.app}`,
 				};
-				const payment = {
-					type: 'credit card',
-					issuer: 'MasterCard',
-				};
 				if (Object.keys(user).length > 1 && user.constructor === Object) {
 					values.items = null;
 				}
-
-				dispatch(placeOrder(values, shippingInfo, delivery, payment));
+				dispatch(placeOrder(values, postalDelivery, delivery, user));
 			}}
 		>
 			{({
@@ -139,12 +133,11 @@ const Checkout = ({ sumPrice, goods }) => {
 					<FillTheFields>Fill the fields</FillTheFields>
 					<FlexContainer>
 						<StyledFormColumn>
-							{/* <FirstColumn> */}
 							<StyledLabel>
 								{' '}
-								Enter your name
+								Enter your first name
 								<StyledField
-									name="name"
+									name="firstName"
 									onChange={handleChange}
 									onBlur={handleBlur}
 									target="form"
@@ -152,20 +145,22 @@ const Checkout = ({ sumPrice, goods }) => {
 								/>
 							</StyledLabel>
 
-							{errors.name && touched.name ? <div>{errors.name}</div> : null}
+							{errors.firstName && touched.firstName ? (
+								<div>{errors.firstName}</div>
+							) : null}
 							<StyledLabel>
 								{' '}
-								Enter your surname
+								Enter your last name
 								<StyledField
-									name="surname"
+									name="lastName"
 									onChange={handleChange}
 									onBlur={handleBlur}
 									target="form"
 									type="text"
 								/>
 							</StyledLabel>
-							{errors.surname && touched.surname ? (
-								<div>{errors.surname}</div>
+							{errors.lastName && touched.lastName ? (
+								<div>{errors.lastName}</div>
 							) : null}
 							<StyledLabel>
 								{' '}
