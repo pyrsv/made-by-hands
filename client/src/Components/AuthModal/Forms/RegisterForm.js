@@ -73,6 +73,7 @@ const RegisterForm = () => {
 								value={values.email}
 								error={errors.email}
 								touched={touched.email}
+								placeholder="example@mail.com"
 								target="form"
 								label="Email"
 								required
@@ -133,6 +134,7 @@ const RegisterForm = () => {
 								value={values.telephone}
 								error={errors.telephone}
 								touched={touched.telephone}
+								placeholder="+380XXXXXXXXXXX"
 								target="form"
 								label="Phone number"
 								required

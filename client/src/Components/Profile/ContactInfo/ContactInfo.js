@@ -91,6 +91,7 @@ const ContactInfo = () => {
 									name="email"
 									label="Email"
 									target="form"
+									placeholder="example@mail.com"
 									onChange={handleChange}
 									onBlur={handleBlur}
 									value={values.email}

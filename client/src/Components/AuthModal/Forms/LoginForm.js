@@ -46,6 +46,7 @@ const AuthForm = () => {
 								touched={touched.loginOrEmail}
 								error={errors.loginOrEmail}
 								helperText={errors.loginOrEmail}
+								placeholder="example@mail.com"
 								required
 							/>
 							<InputField
