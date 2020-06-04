@@ -24,7 +24,7 @@ const SearchList = () => {
 	return (
 		<LayoutContainer>
 			<ProductsList
-				isProductsFething={isFetching}
+				isProductsFetching={isFetching}
 				products={products}
 				scrollable={false}
 			/>
