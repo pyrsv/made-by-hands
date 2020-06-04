@@ -19,7 +19,7 @@ export const StyledButton = styled.button.attrs(props => ({
 	font-weight: ${props => (props.color === 'dark' ? '600' : '500')};
 	font-family: 'Raleway', sans-serif;
 	background-color: ${props => {
-		if (props.disabled) {
+		if (props.styledDisabled) {
 			return '#16161c61';
 		}
 		return props.color === 'dark' ? props.theme.mainDark : 'transparent';
