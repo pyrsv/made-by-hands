@@ -18,6 +18,11 @@ export const Grid = styled.div`
 	}
 `;
 
+export const Image = styled.div`
+	width: 50px;
+	height: 50px;
+`;
+
 export const Column = styled.div`
 	display: flex;
 	flex-direction: column;
@@ -31,7 +36,7 @@ export const Column = styled.div`
 
 export const Title = styled.p`
 	font-size: 24px;
-	font-weight: bold;
+	font-weight: 600;
 	text-transform: uppercase;
 	padding: 16px 0;
 `;
@@ -39,4 +44,5 @@ export const Text = styled.p`
 	font-size: 16px;
 	padding-bottom: 42px;
 	line-height: 35px;
+	font-weight: 600;
 `;
