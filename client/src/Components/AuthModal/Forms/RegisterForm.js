@@ -143,6 +143,7 @@ const RegisterForm = () => {
 
 						<Button
 							disabled={isLoading}
+							isLoading={isLoading}
 							text="Register"
 							type="submit"
 							size="wide"

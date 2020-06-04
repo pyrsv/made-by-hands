@@ -51,6 +51,7 @@ const ContactInfo = () => {
 		telephone,
 		address = {},
 	} = useSelector(state => state.auth.currentUser);
+	const isLoading = useSelector(state => state.auth.isLoading);
 
 	const { city, street, houseNumber, flat } = address;
 
@@ -198,8 +199,10 @@ const ContactInfo = () => {
 						</FieldsWrapper>
 
 						<Button
-							type="submit"
 							onClick={handleSubmit}
+							isLoading={isLoading}
+							disabled={isLoading}
+							type="submit"
 							size="wide"
 							text="Submit changes "
 						/>

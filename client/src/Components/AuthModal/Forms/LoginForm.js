@@ -70,6 +70,7 @@ const AuthForm = () => {
 							type="submit"
 							size="wide"
 							onClick={() => {}}
+							isLoading={isLoading}
 						/>
 					</form>
 				)}
