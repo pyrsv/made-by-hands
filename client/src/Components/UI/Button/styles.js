@@ -1,21 +1,29 @@
 import styled from 'styled-components';
 
-export const StyledButton = styled.button`
+export const StyledButton = styled.button.attrs(props => ({
+	disabled: props.disabled || props.styledDisabled,
+}))`
 	display: inline-block;
 	position: relative;
 	box-sizing: border-box;
 	border-radius: 4px;
 	font-size: 16px;
 	min-width: 127px;
-	cursor: pointer;
+	min-height: 35px;
+	cursor: ${({ disabled, styledDisabled }) =>
+		styledDisabled || disabled ? 'not-allowed' : 'pointer'};
 	width: ${props => (props.size === 'wide' ? '100%' : 'auto')};
 	padding: 8px 12px;
 	text-transform: ${props =>
 		props.color === 'dark' ? 'uppercase' : 'titlecase'};
 	font-weight: ${props => (props.color === 'dark' ? '600' : '500')};
 	font-family: 'Raleway', sans-serif;
-	background-color: ${props =>
-		props.color === 'dark' ? props.theme.mainDark : 'transparent'};
+	background-color: ${props => {
+		if (props.disabled) {
+			return '#16161c61';
+		}
+		return props.color === 'dark' ? props.theme.mainDark : 'transparent';
+	}};
 	color: ${props =>
 		props.color === 'dark'
 			? props.theme.darkButtonColor
@@ -33,4 +41,11 @@ export const Icon = styled.i`
 	color: inherit;
 	margin-left: 5px;
 	bottom: -1px;
+`;
+
+export const PreloaderContainer = styled.div`
+	position: absolute;
+	top: 53%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 `;

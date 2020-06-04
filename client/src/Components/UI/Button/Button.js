@@ -1,9 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { StyledButton, Icon } from './styles';
+import { StyledButton, Icon, PreloaderContainer } from './styles';
+import Preloader from '../Preloader/Preloader';
 
-const Button = ({ text, onClick, color, size, type, icon, disabled }) => {
+const Button = ({
+	text,
+	onClick,
+	color,
+	size,
+	type,
+	icon,
+	disabled,
+	isLoading,
+	styledDisabled,
+}) => {
 	return (
 		<StyledButton
 			disabled={disabled}
@@ -11,12 +22,21 @@ const Button = ({ text, onClick, color, size, type, icon, disabled }) => {
 			size={size}
 			color={color}
 			onClick={onClick}
+			styledDisabled={styledDisabled}
 		>
-			<span>{text}</span>
-			{icon && (
-				<Icon>
-					<FontAwesomeIcon icon={['far', icon]} />
-				</Icon>
+			{isLoading ? (
+				<PreloaderContainer>
+					<Preloader size={24} color="#fff" />
+				</PreloaderContainer>
+			) : (
+				<>
+					<span>{text}</span>
+					{icon && (
+						<Icon>
+							<FontAwesomeIcon icon={['far', icon]} />
+						</Icon>
+					)}
+				</>
 			)}
 		</StyledButton>
 	);
@@ -30,6 +50,8 @@ Button.propTypes = {
 	type: PropTypes.string,
 	icon: PropTypes.string,
 	disabled: PropTypes.bool,
+	isLoading: PropTypes.bool,
+	styledDisabled: PropTypes.bool,
 };
 
 Button.defaultProps = {
@@ -38,6 +60,8 @@ Button.defaultProps = {
 	size: 'default',
 	icon: null,
 	disabled: false,
+	isLoading: false,
+	styledDisabled: false,
 };
 
 export default Button;
