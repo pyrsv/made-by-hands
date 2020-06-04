@@ -6,6 +6,9 @@ import {
 	SET_PRODUCT_TO_CART,
 	SET_PRODUCT_TO_WISHLIST,
 	UPDATE_CONFIG,
+	SEARCH_PRODUCTS_INIT,
+	SEARCH_PRODUCTS_ERROR,
+	SEARCH_PRODUCTS_SUCCESS,
 } from '../types/catalogTypes';
 
 const initialState = {
@@ -71,6 +74,24 @@ export const catalogReducer = (state = initialState, { type, payload }) => {
 						: prod;
 				}),
 				currentProductId: null,
+			};
+		case SEARCH_PRODUCTS_INIT:
+			return {
+				...state,
+				isProductsFetching: true,
+				isProductsError: false,
+			};
+		case SEARCH_PRODUCTS_ERROR:
+			return {
+				...state,
+				isProductsFetching: false,
+				isProductsError: true,
+			};
+		case SEARCH_PRODUCTS_SUCCESS:
+			return {
+				...state,
+				isProductsFetching: false,
+				currentProducts: payload,
 			};
 		default:
 			return state;
