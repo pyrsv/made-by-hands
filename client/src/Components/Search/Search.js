@@ -28,7 +28,9 @@ const Search = () => {
 		<SearchSection>
 			<LayoutContainer>
 				<Title text="Search" color="dark" />
-				<SearchInfo quantity={products.length} query={searchQuery} />
+				{!isFetching && (
+					<SearchInfo quantity={products.length} query={searchQuery} />
+				)}
 				<SearchList products={products} isFetching={isFetching} />
 			</LayoutContainer>
 		</SearchSection>
