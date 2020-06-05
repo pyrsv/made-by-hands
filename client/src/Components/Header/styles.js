@@ -63,7 +63,8 @@ export const Phone = styled.a`
 	font-weight: 400;
 	font-family: 'Open Sans', sans-serif;
 	@media (max-width: 992px) {
-		font-size: 16px;
+		margin-top: 40px;
+		font-size: 18px;
 	}
 `;
 
