@@ -6,7 +6,7 @@ import { cartReducer } from './cartReducer';
 import { UIReducer } from './UIReducer';
 import { filtersReducer } from './filtersReducer';
 import { wishlistReducer } from './wishlistReducer';
-import { commentsReducer } from './commentsReducer';
+import { ratingReducer } from './ratingReducer';
 import { ordersReducer } from './ordersReducer';
 import { searchReducer } from './searchReducer';
 
@@ -18,7 +18,7 @@ const rootReducer = combineReducers({
 	UI: UIReducer,
 	filters: filtersReducer,
 	wishlistReducer,
-	comments: commentsReducer,
+	rating: ratingReducer,
 	orders: ordersReducer,
 	search: searchReducer,
 });

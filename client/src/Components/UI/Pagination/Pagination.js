@@ -22,6 +22,10 @@ const Pagination = ({
 	const leftNumberOfPortion = (numberOfPortion - 1) * itemsPerPage + 1;
 	const rightNumberOfPortion = numberOfPortion * itemsPerPage;
 
+	if (pagesCount <= 1) {
+		return <div />;
+	}
+
 	return (
 		<Nav>
 			{numberOfPortion > 1 && (

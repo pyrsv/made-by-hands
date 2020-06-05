@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Comment from './Comment/Comment';
 import { useSelector, useDispatch } from 'react-redux';
-import { getRatingAndCommentsInfo } from '../../../store/actions/commentAction';
+import { getRatingAndCommentsInfo } from '../../../store/actions/ratingAction';
 import PropTypes from 'prop-types';
 import { CommentTitle } from './styles';
 import Pagination from '../../UI/Pagination/Pagination';
@@ -14,8 +14,7 @@ const Comments = ({ id }) => {
 	useEffect(() => {
 		dispatch(getRatingAndCommentsInfo(id));
 	}, [id, dispatch]);
-	let arrayOfComments = useSelector(state => state.comments.comments);
-	arrayOfComments = arrayOfComments && arrayOfComments.reverse();
+	const arrayOfComments = useSelector(state => state.rating.comments);
 
 	const indexOfLastComment = currentPage * commentsPerPage;
 	const indexOfFirstComment = indexOfLastComment - commentsPerPage;
@@ -55,7 +54,7 @@ const Comments = ({ id }) => {
 };
 
 Comments.propTypes = {
-	id: PropTypes.number.isRequired,
+	id: PropTypes.string.isRequired,
 };
 
 export default Comments;
