@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import StarRatingComponent from 'react-star-rating-component';
 import PropTypes from 'prop-types';
 import './styles.scss';
@@ -27,4 +27,4 @@ RatingStars.defaultProps = {
 	onStarClick: () => {},
 };
 
-export default RatingStars;
+export default memo(RatingStars);

@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 
 export const CatalogContainer = styled.div`
-	background-color: ${props => props.theme.lightPink};
+	background-color: #ffffff;
+	/* background-color: ${props => props.theme.lightPink}; */
 `;
 
 export const Content = styled.div`

@@ -19,7 +19,10 @@ export const Input = styled.input`
 	background-color: transparent;
 	width: 100%;
 	box-shadow: inset 0 0 0 50px #fff;
-	-webkit-text-fill-color: #000;
+	/* -webkit-text-fill-color: #000; */
+	::placeholder {
+		color: #c4c4c4;
+	}
 	transition: border-color 0.2s ease-in;
 `;
 

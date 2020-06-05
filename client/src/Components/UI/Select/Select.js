@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import CustomSelect from 'react-select';
 import { customStyles } from './styles';
@@ -49,4 +49,4 @@ Select.defaultProps = {
 	value: null,
 };
 
-export default Select;
+export default memo(Select);

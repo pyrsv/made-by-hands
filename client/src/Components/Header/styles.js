@@ -7,7 +7,10 @@ export const StyledHeader = styled.header`
 	padding: 30px 0;
 
 	@media (max-width: 992px) {
-		padding: 25px 0;
+		padding: 17px 0;
+	}
+	@media (max-width: 576px) {
+		padding: 12px 0;
 	}
 `;
 
@@ -28,7 +31,9 @@ export const Content = styled.div`
 	width: 80%;
 	font-size: 16px;
 
-	@media (max-width: 1030px) {
+	@media (max-width: 1085px) {
+		padding-left: 30px;
+
 		width: 85%;
 	}
 
@@ -58,7 +63,8 @@ export const Phone = styled.a`
 	font-weight: 400;
 	font-family: 'Open Sans', sans-serif;
 	@media (max-width: 992px) {
-		font-size: 16px;
+		margin-top: 40px;
+		font-size: 18px;
 	}
 `;
 

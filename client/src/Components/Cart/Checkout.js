@@ -20,8 +20,9 @@ import PropTypes, { object } from 'prop-types';
 import { placeOrder } from '../../store/actions/orderActions';
 
 const valid = {
-	firstName: string().required(),
-	lastName: string().required(),
+	name: string().required(),
+	surname: string().required(),
+	telephone: number().required().positive().integer(),
 	phone: number().required().positive().integer(),
 	email: string().email(),
 };
@@ -71,7 +72,7 @@ const Checkout = ({ sumPrice, goods }) => {
 				firstName: user.firstName || '',
 				lastName: user.lastName || '',
 				email: user.email || '',
-				phone: user.phone || '',
+				telephone: user.telephone || '',
 				delivery: 'point1',
 				city: user?.address.city || '',
 				house: user?.address.houseNumber || '',
@@ -177,14 +178,17 @@ const Checkout = ({ sumPrice, goods }) => {
 								{' '}
 								Enter your phone number
 								<StyledField
-									name="phone"
+									name="telephone"
 									onChange={handleChange}
 									onBlur={handleBlur}
 									target="form"
 									type="text"
 								/>
 							</StyledLabel>
-							{errors.phone && touched.phone ? <div>{errors.phone}</div> : null}
+							{errors.telephone && touched.telephone ? (
+								<div>{errors.telephone}</div>
+							) : null}
+							{/* </FirstColumn> */}
 						</StyledFormColumn>
 
 						<StyledFormColumn>
