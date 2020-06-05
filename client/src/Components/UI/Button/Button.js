@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { StyledButton, Icon, PreloaderContainer } from './styles';
@@ -64,4 +64,4 @@ Button.defaultProps = {
 	styledDisabled: false,
 };
 
-export default Button;
+export default memo(Button);
