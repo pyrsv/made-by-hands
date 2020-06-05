@@ -167,7 +167,9 @@ const Header = () => {
 							</HamburgerWrapper>
 							<Logo />
 							<HeaderButtons onSearchClick={() => setSearch(!isSearch)} />
-							{isSearch && <SearchField />}
+							{isSearch && (
+								<SearchField onToggle={() => setSearch(!isSearch)} />
+							)}
 						</>
 					)}
 				</Container>
