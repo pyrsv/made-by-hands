@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const SearchForm = styled.form`
 	position: relative;
 
-	@media (max-width: 900px) {
+	@media (max-width: 992px) {
 		position: absolute;
 		top: 90px;
 		right: 15px;

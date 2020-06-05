@@ -28,7 +28,9 @@ export const Content = styled.div`
 	width: 80%;
 	font-size: 16px;
 
-	@media (max-width: 1030px) {
+	@media (max-width: 1085px) {
+		padding-left: 30px;
+
 		width: 85%;
 	}
 
