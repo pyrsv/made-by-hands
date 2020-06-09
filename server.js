@@ -24,12 +24,13 @@ const shippingMethods = require("./routes/shippingMethods");
 const paymentMethods = require("./routes/paymentMethods");
 const partners = require("./routes/partners");
 const mainRoute = require("./routes/index");
-
+const routes = require('./routes')
 const app = express();
 
 // Body parser middleware
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use('/', routes)
 
 // DB Config
 const db = require("./config/keys").mongoURI;
