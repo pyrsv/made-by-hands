@@ -51,8 +51,8 @@ const FilterGroup = ({
 
 FilterGroup.propTypes = {
 	name: PropTypes.string.isRequired,
-	fields: PropTypes.arrayOf(PropTypes.object),
-	values: PropTypes.objectOf(PropTypes.bool),
+	fields: PropTypes.objectOf(PropTypes.bool),
+	values: PropTypes.arrayOf(PropTypes.object),
 	fieldsKey: PropTypes.string,
 	setValue: PropTypes.func,
 	checkboxType: PropTypes.string,
@@ -60,7 +60,7 @@ FilterGroup.propTypes = {
 		PropTypes.arrayOf(PropTypes.node),
 		PropTypes.node,
 	]),
-	isLoading: PropTypes.bool.isRequired,
+	isLoading: PropTypes.bool,
 };
 
 FilterGroup.defaultProps = {
@@ -70,6 +70,7 @@ FilterGroup.defaultProps = {
 	setValue: () => {},
 	checkboxType: '',
 	children: <></>,
+	isLoading: false,
 };
 
 export default FilterGroup;

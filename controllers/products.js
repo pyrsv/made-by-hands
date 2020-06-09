@@ -1,4 +1,4 @@
-const Product = require("../models/Product");
+const Product = require("../models/Product"); 
 
 const uniqueRandom = require("unique-random");
 const rand = uniqueRandom(0, 999999);
@@ -80,8 +80,8 @@ exports.updateProduct = (req, res, next) => {
         const updatedProduct = queryCreator(productFields);
 
         Product.findOneAndUpdate(
-          { _id: req.params.id },
-          { $set: updatedProduct },
+          { _id: req.params.id }, // сюда айди (параметр поиска)
+          { $set: updatedProduct }, // cюда один параметр можно
           { new: true }
         )
           .then(product => res.json(product))

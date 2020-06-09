@@ -43,9 +43,15 @@ const ContactInfoSchema = Yup.object().shape({
 
 const ContactInfo = () => {
 	const dispatch = useDispatch();
-	const { firstName, lastName, email, birthdate, address = {} } = useSelector(
-		state => state.auth.currentUser
-	);
+	const {
+		firstName,
+		lastName,
+		email,
+		birthdate,
+		telephone,
+		address = {},
+	} = useSelector(state => state.auth.currentUser);
+	const isLoading = useSelector(state => state.auth.isLoading);
 
 	const { city, street, houseNumber, flat } = address;
 
@@ -59,6 +65,7 @@ const ContactInfo = () => {
 					firstName,
 					lastName,
 					email,
+					telephone,
 					birthdate: birthdate || '',
 					address: {
 						city: city || '',
@@ -85,6 +92,7 @@ const ContactInfo = () => {
 									name="email"
 									label="Email"
 									target="form"
+									placeholder="example@mail.com"
 									onChange={handleChange}
 									onBlur={handleBlur}
 									value={values.email}
@@ -191,8 +199,10 @@ const ContactInfo = () => {
 						</FieldsWrapper>
 
 						<Button
-							type="submit"
 							onClick={handleSubmit}
+							isLoading={isLoading}
+							disabled={isLoading}
+							type="submit"
 							size="wide"
 							text="Submit changes "
 						/>

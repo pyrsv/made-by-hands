@@ -8,7 +8,7 @@ export const StyledLogo = styled.span`
 	text-transform: uppercase;
 	color: ${props => props.theme.maindark};
 	width: 20%;
-	@media (max-width: 1030px) {
+	@media (max-width: 1085px) {
 		width: 15%;
 		font-size: 30px;
 	}
