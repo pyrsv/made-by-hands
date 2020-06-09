@@ -10,8 +10,8 @@
     "client": "cd client && yarn start",
     "dev": "concurrently \"yarn client\" \"nodemon server.js\"",
     "build": "cd client && npm run build",
-    "heroku-postbuild": "cd client && npm start && npm run build",
-    "start": "node server.js"
+    "heroku-postbuild":"npm run install-client && npm run build",
+    "start":"node server.js"
   },
   "repository": {
     "type": "git",
@@ -42,7 +42,5 @@
   "devDependencies": {
     "nodemon": "^1.19.1"
   },
-  "engines": {
-    "node": "11.3.0"
-  }
+  "engines": {"node": "11.3.0"}
 }
