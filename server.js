@@ -30,7 +30,6 @@ const app = express();
 // Body parser middleware
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use('/', routes)
 
 // DB Config
 const db = require("./config/keys").mongoURI;
