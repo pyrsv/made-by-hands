@@ -12,6 +12,7 @@ import {
 	CartItemOldPrice,
 	DeleteItemFromCart,
 	CartItemColor,
+	CartItemPricePerOne,
 } from './styles';
 import PropTypes from 'prop-types';
 import {
@@ -67,6 +68,9 @@ export const CartItem = ({
 					{oldPrice && (
 						<CartItemOldPrice>{oldPrice * cartQuantity}</CartItemOldPrice>
 					)}
+					<CartItemPricePerOne>
+						<span>{price}₴</span> <span>x</span> <span>{cartQuantity}</span>
+					</CartItemPricePerOne>
 				</CartItemPrice>
 			</CartItemContainer>
 		</>

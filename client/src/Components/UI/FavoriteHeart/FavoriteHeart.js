@@ -1,8 +1,7 @@
-import React from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { HeartWrapper } from './styles';
-
 
 const FavoriteHeart = ({ isFavorite, onClick }) => {
 	const iconType = isFavorite ? 'fas' : 'far';
@@ -15,7 +14,11 @@ const FavoriteHeart = ({ isFavorite, onClick }) => {
 
 FavoriteHeart.propTypes = {
 	isFavorite: PropTypes.bool.isRequired,
-	onClick: PropTypes.func.isRequired,
+	onClick: PropTypes.func,
 };
 
-export default FavoriteHeart;
+FavoriteHeart.defaultProps = {
+	onClick: () => {},
+};
+
+export default memo(FavoriteHeart);

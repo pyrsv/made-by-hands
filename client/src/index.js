@@ -8,6 +8,7 @@ import { faEnvelope, far } from '@fortawesome/free-regular-svg-icons';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import store from './store/configreStore';
 import App from './App';
+import ScrollToTop from './Components/ScrollToTop/ScrollToTop';
 
 library.add(faEnvelope, fas, far);
 
@@ -25,6 +26,7 @@ ReactDOM.render(
 	<Provider store={store}>
 		<BrowserRouter>
 			<ThemeProvider theme={theme}>
+				<ScrollToTop />
 				<App />
 			</ThemeProvider>
 		</BrowserRouter>

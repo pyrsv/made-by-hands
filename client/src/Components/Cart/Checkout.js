@@ -4,33 +4,35 @@ import { Form, Formik } from 'formik';
 import * as yup from 'yup';
 import { string, number } from 'yup';
 import Button from '../UI/Button/Button';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import {
 	FlexContainer,
 	StyledFormColumn,
-	DisabledStyledButton,
 	StyledLabel,
 	StyledField,
 	ButtonWrapper,
 	ColumnOfInputs,
-	// FirstColumn,
 	StyledRadio,
 	FillTheFields,
 } from './styles';
 import PropTypes, { object } from 'prop-types';
 // import InputField from '../UI/InputFiels/InputField';
+import { placeOrder } from '../../store/actions/orderActions';
 
 const valid = {
 	name: string().required(),
 	surname: string().required(),
+	telephone: number().required().positive().integer(),
 	phone: number().required().positive().integer(),
+	email: string().email(),
 };
 
 const Checkout = ({ sumPrice, goods }) => {
 	const [isPostalPoints, togglePP] = useState({ showed: true });
 	const [isAddress, toggleAddress] = useState({ showed: false });
-
+	const dispatch = useDispatch();
 	const user = useSelector(state => state.auth.currentUser) || {};
+	const isFetching = useSelector(state => state.orders.isOrdersFetching);
 
 	if (user && !user.address) {
 		user.address = {};
@@ -56,6 +58,7 @@ const Checkout = ({ sumPrice, goods }) => {
 		valid.app = number().required();
 		values.delivery = '';
 	};
+
 	return (
 		<Formik
 			user
@@ -66,15 +69,15 @@ const Checkout = ({ sumPrice, goods }) => {
 			sumPrice
 			goods
 			initialValues={{
-				name: user.firstName || '',
-				surname: user.lastName || '',
-				phone: '',
+				firstName: user.firstName || '',
+				lastName: user.lastName || '',
+				email: user.email || '',
+				telephone: user.telephone || '',
 				delivery: 'point1',
 				city: user?.address.city || '',
 				house: user?.address.houseNumber || '',
 				app: user?.address.flat || '',
 				street: user?.address.street || '',
-
 				amountOfPayment: sumPrice,
 				items: goods,
 			}}
@@ -101,6 +104,19 @@ const Checkout = ({ sumPrice, goods }) => {
 			onSubmit={values => {
 				// eslint-disable-next-line no-console
 				console.log('submited data ', values);
+				const postalDelivery = {
+					city: `${values.city}`,
+					postalOffice: '',
+				};
+				const delivery = {
+					country: 'Ukraine',
+					city: `${values.city}`,
+					address: `${values.street} ${values.house}  ${values.app}`,
+				};
+				if (Object.keys(user).length > 1 && user.constructor === Object) {
+					values.items = null;
+				}
+				dispatch(placeOrder(values, postalDelivery, delivery, user));
 			}}
 		>
 			{({
@@ -117,12 +133,11 @@ const Checkout = ({ sumPrice, goods }) => {
 					<FillTheFields>Fill the fields</FillTheFields>
 					<FlexContainer>
 						<StyledFormColumn>
-							{/* <FirstColumn> */}
 							<StyledLabel>
 								{' '}
-								Enter your name
+								Enter your first name
 								<StyledField
-									name="name"
+									name="firstName"
 									onChange={handleChange}
 									onBlur={handleBlur}
 									target="form"
@@ -130,34 +145,49 @@ const Checkout = ({ sumPrice, goods }) => {
 								/>
 							</StyledLabel>
 
-							{errors.name && touched.name ? <div>{errors.name}</div> : null}
-							<StyledLabel>
-								{' '}
-								Enter your surname
-								<StyledField
-									name="surname"
-									onChange={handleChange}
-									onBlur={handleBlur}
-									target="form"
-									type="text"
-								/>
-							</StyledLabel>
-							{errors.surname && touched.surname ? (
-								<div>{errors.surname}</div>
+							{errors.firstName && touched.firstName ? (
+								<div>{errors.firstName}</div>
 							) : null}
-
+							<StyledLabel>
+								{' '}
+								Enter your last name
+								<StyledField
+									name="lastName"
+									onChange={handleChange}
+									onBlur={handleBlur}
+									target="form"
+									type="text"
+								/>
+							</StyledLabel>
+							{errors.lastName && touched.lastName ? (
+								<div>{errors.lastName}</div>
+							) : null}
+							<StyledLabel>
+								{' '}
+								Enter your email
+								<StyledField
+									name="email"
+									onChange={handleChange}
+									onBlur={handleBlur}
+									target="form"
+									type="email"
+								/>
+							</StyledLabel>
+							{errors.email && touched.email ? <div>{errors.email}</div> : null}
 							<StyledLabel>
 								{' '}
 								Enter your phone number
 								<StyledField
-									name="phone"
+									name="telephone"
 									onChange={handleChange}
 									onBlur={handleBlur}
 									target="form"
 									type="text"
 								/>
 							</StyledLabel>
-							{errors.phone && touched.phone ? <div>{errors.phone}</div> : null}
+							{errors.telephone && touched.telephone ? (
+								<div>{errors.telephone}</div>
+							) : null}
 							{/* </FirstColumn> */}
 						</StyledFormColumn>
 
@@ -269,12 +299,19 @@ const Checkout = ({ sumPrice, goods }) => {
 						</StyledFormColumn>
 					</FlexContainer>
 					<ButtonWrapper>
-						{isValid ? (
-							<Button onClick={submitForm} text="checkout" />
+						{isValid && !isFetching ? (
+							<Button
+								onClick={submitForm}
+								text="checkout"
+								disabled={!isValid}
+							/>
 						) : (
-							<DisabledStyledButton type="submit" disabled>
-								Checkout
-							</DisabledStyledButton>
+							<Button
+								onClick={submitForm}
+								text="checkout"
+								disabled={!isValid}
+								color="#f0f0f0"
+							/>
 						)}
 					</ButtonWrapper>
 				</Form>

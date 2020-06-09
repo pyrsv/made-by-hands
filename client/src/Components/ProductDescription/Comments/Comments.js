@@ -13,7 +13,7 @@ const Comments = ({ id }) => {
 
 	useEffect(() => {
 		dispatch(getRatingAndCommentsInfo(id));
-	}, [id]);
+	}, [id, dispatch]);
 	let arrayOfComments = useSelector(state => state.comments.comments);
 	arrayOfComments = arrayOfComments && arrayOfComments.reverse();
 
