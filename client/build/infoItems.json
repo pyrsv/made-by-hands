@@ -1,0 +1,24 @@
+{"infoItems": [
+    {
+        "_id": "1",
+        "customId": "bagInfoCarousel",
+        "imageUrl": "https://baltic-grlk5lagedl.stackpathdns.com/production/baltic/images/1561118804824258-lv.gif?w=1920&h=800&fit=clip&crop=faces&fm=gif&auto=compress",
+        "title": "What women’s bags are in our store right now ?",
+        "description": "-20% for the entire collection"
+    },
+    {
+        "_id": "2",
+        "customId": "bagInfoCarousel",
+        "imageUrl": "https://davidjones.com.ua/image/cache/catalog/banner3_compressed-1920x835.jpg.pagespeed.ce.nCf_p9FKV-.jpg?w=1920&h=800&fit=clip&crop=faces&fm=gif&auto=compress",
+        "title": "See all men's bags this season",
+        "description": "-20% for the entire collection"
+    },
+    {
+        "_id": "3",
+        "customId": "bagInfoCarousel",
+        "imageUrl": "https://russia-grlk5lagedl.stackpathdns.com/production/russia/images/1501065339781246-preview1.jpg?w=1920&h=800&fit=fill&crop=faces&fm=pjpg&auto=compress",
+        "title": "You can buy these bags at a bargain price",
+        "description": "-20% for the entire collection"
+    }
+    
+]}
