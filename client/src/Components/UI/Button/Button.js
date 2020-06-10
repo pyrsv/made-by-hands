@@ -1,20 +1,9 @@
-import React, { memo } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { StyledButton, Icon, PreloaderContainer } from './styles';
-import Preloader from '../Preloader/Preloader';
+import { StyledButton, Icon } from './styles';
 
-const Button = ({
-	text,
-	onClick,
-	color,
-	size,
-	type,
-	icon,
-	disabled,
-	isLoading,
-	styledDisabled,
-}) => {
+const Button = ({ text, onClick, color, size, type, icon, disabled }) => {
 	return (
 		<StyledButton
 			disabled={disabled}
@@ -22,21 +11,12 @@ const Button = ({
 			size={size}
 			color={color}
 			onClick={onClick}
-			styledDisabled={styledDisabled}
 		>
-			{isLoading ? (
-				<PreloaderContainer>
-					<Preloader size={24} color="#fff" />
-				</PreloaderContainer>
-			) : (
-				<>
-					<span>{text}</span>
-					{icon && (
-						<Icon>
-							<FontAwesomeIcon icon={['far', icon]} />
-						</Icon>
-					)}
-				</>
+			<span>{text}</span>
+			{icon && (
+				<Icon>
+					<FontAwesomeIcon icon={['far', icon]} />
+				</Icon>
 			)}
 		</StyledButton>
 	);
@@ -50,8 +30,6 @@ Button.propTypes = {
 	type: PropTypes.string,
 	icon: PropTypes.string,
 	disabled: PropTypes.bool,
-	isLoading: PropTypes.bool,
-	styledDisabled: PropTypes.bool,
 };
 
 Button.defaultProps = {
@@ -60,8 +38,6 @@ Button.defaultProps = {
 	size: 'default',
 	icon: null,
 	disabled: false,
-	isLoading: false,
-	styledDisabled: false,
 };
 
-export default memo(Button);
+export default Button;
