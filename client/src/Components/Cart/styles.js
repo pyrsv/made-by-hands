@@ -168,26 +168,6 @@ export const StyledFormColumn = styled.div`
 	width: 28%;
 `;
 
-export const DisabledStyledButton = styled.button`
-	display: inline-block;
-	position: relative;
-	box-sizing: border-box;
-	border-radius: 4px;
-	font-size: 16px;
-	min-width: 127px;
-	cursor: pointer;
-	width: ${props => (props.size === 'wide' ? '100%' : 'auto')};
-	padding: 8px 12px;
-	text-transform: ${props =>
-		props.color === 'dark' ? 'uppercase' : 'titlecase'};
-	font-weight: ${props => (props.color === 'dark' ? '600' : '500')};
-	font-family: 'Raleway', sans-serif;
-	background-color: #f0f0f0;
-	color: #6d6d6d;
-	border: 1px solid #6d6d6d;
-	outline: none;
-`;
-
 export const StyledField = styled(Field)`
 	display: inline-block;
 	border: 1px solid #16161c;
@@ -244,4 +224,9 @@ export const FillTheFields = styled.div`
 	margin: 20px 0;
 	text-transform: capitalize;
 	color: ${props => props.theme.mainDark};
+`;
+
+export const CartItemPricePerOne = styled.div`
+	font-size: 14px;
+	margin-top: 5px;
 `;
