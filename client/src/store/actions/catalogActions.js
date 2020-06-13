@@ -68,7 +68,7 @@ export const getFilteredProducts = config => dispatch => {
 	dispatch(getFilteredProductsInit());
 	dispatch(updateConfig(config));
 	axios
-		.get('/products/filter/', {
+		.get('/api/products/filter/', {
 			params: {
 				...config,
 			},
@@ -90,7 +90,7 @@ export const getFilteredProducts = config => dispatch => {
 
 export const loadMoreAction = config => dispatch => {
 	axios
-		.get('/products/filter', {
+		.get('/api/products/filter', {
 			params: {
 				...config,
 			},
@@ -104,7 +104,7 @@ export const searchProducts = query => dispatch => {
 	dispatch(searchProductsInit());
 
 	axios
-		.post('/products/search', { query })
+		.post('/api/products/search', { query })
 		.then(res => {
 			checkProductsForCartAndFavorites(res.data).then(
 				productsWithCartAndFavorites => {

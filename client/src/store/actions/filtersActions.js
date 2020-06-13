@@ -56,7 +56,7 @@ const getBrandsFail = err => ({
 export const getCategories = () => dispatch => {
 	dispatch(getCategoriesInit());
 	axios
-		.get('/catalog')
+		.get('/api/catalog')
 		.then(response => {
 			dispatch(getCategoriesSuccess(response.data));
 		})
@@ -68,7 +68,7 @@ export const getCategories = () => dispatch => {
 export const getColors = () => dispatch => {
 	dispatch(getColorsInit());
 	axios
-		.get('/colors')
+		.get('/api/colors')
 		.then(response => {
 			dispatch(getColorsSuccess(response.data));
 		})
@@ -80,7 +80,7 @@ export const getColors = () => dispatch => {
 export const getBrands = () => dispatch => {
 	dispatch(getBrandsInit());
 	axios
-		.get('/filters/brand')
+		.get('/api/filters/brand')
 		.then(response => {
 			dispatch(getBrandsSuccess(response.data));
 		})

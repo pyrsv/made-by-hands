@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export const handleUserLogin = async (loginOrEmail, password) => {
 	const data = { loginOrEmail, password };
-	return axios.post('/customers/login', JSON.stringify(data), {
+	return axios.post('/api/customers/login', JSON.stringify(data), {
 		headers: {
 			'Content-Type': 'application/json',
 		},
@@ -10,7 +10,7 @@ export const handleUserLogin = async (loginOrEmail, password) => {
 };
 
 export const handleGetUser = async () => {
-	return axios.get('customers/customer', {
+	return axios.get('/api/customers/customer', {
 		headers: {
 			'Content-Type': 'application/json',
 		},
@@ -23,7 +23,7 @@ export const checkProductsForCartAndFavorites = async products => {
 	}
 
 	return axios
-		.all([axios.get('/cart'), axios.get('/wishlist')])
+		.all([axios.get('/api/cart'), axios.get('/api/wishlist')])
 		.then(
 			axios.spread((...res) => {
 				const cart = res[0].data.products;

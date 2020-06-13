@@ -23,7 +23,7 @@ const getArrivalsInit = () => ({
 export const getItemsForCarousel = () => dispatch => {
 	dispatch(getArrivalsInit);
 	axios
-		.get('/products/filter', {
+		.get('/api/products/filter', {
 			params: {
 				perPage: '6',
 				sort: '-date',

@@ -27,7 +27,7 @@ export const placeOrder = (
 
 	if (!user._id) {
 		axios
-			.post('/orders', {
+			.post('/api/orders', {
 				email: `${values.email}`,
 				mobile: `${values.phone}`,
 				deliveryAddress: JSON.stringify(delivery),
@@ -55,7 +55,7 @@ export const placeOrder = (
 			});
 	} else {
 		axios
-			.post('/orders', {
+			.post('/api/orders', {
 				customerId: `${user._id}`,
 				email: `${values.email}`,
 				mobile: `${values.phone}`,
