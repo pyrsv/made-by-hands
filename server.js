@@ -48,25 +48,25 @@ app.use(passport.initialize());
 require("./config/passport")(passport);
 
 // Use Routes
-app.use("api/configs", globalConfigs);
-app.use("api/customers", customers);
-app.use("api/catalog", catalog);
-app.use("api/products", products);
-app.use("api/colors", colors);
-app.use("api/sizes", sizes);
-app.use("api/filters", filters);
-app.use("api/subscribers", subscribers);
-app.use("api/cart", cart);
-app.use("api/orders", orders);
-app.use("api/links", links);
-app.use("api/pages", pages);
-app.use("api/slides", slides);
-app.use("api/wishlist", wishlist);
-app.use("api/comments", comments);
-app.use("api/shipping-methods", shippingMethods);
-app.use("api/payment-methods", paymentMethods);
-app.use("api/partners", partners);
-app.use("api/", mainRoute);
+app.use("/api/configs", globalConfigs);
+app.use("/api/customers", customers);
+app.use("/api/catalog", catalog);
+app.use("/api/products", products);
+app.use("/api/colors", colors);
+app.use("/api/sizes", sizes);
+app.use("/api/filters", filters);
+app.use("/api/subscribers", subscribers);
+app.use("/api/cart", cart);
+app.use("/api/orders", orders);
+app.use("/api/links", links);
+app.use("/api/pages", pages);
+app.use("/api/slides", slides);
+app.use("/api/wishlist", wishlist);
+app.use("/api/comments", comments);
+app.use("/api/shipping-methods", shippingMethods);
+app.use("/api/payment-methods", paymentMethods);
+app.use("/api/partners", partners);
+app.use("/api/", mainRoute);
 
 // Server static assets if in production
 if (process.env.NODE_ENV === "production") {
