@@ -167,7 +167,9 @@ const Header = () => {
 							</HamburgerWrapper>
 							<Logo />
 							<HeaderButtons onSearchClick={() => setSearch(!isSearch)} />
-							{isSearch && <SearchField />}
+							{isSearch && (
+								<SearchField onToggle={() => setSearch(!isSearch)} />
+							)}
 						</>
 					)}
 				</Container>
@@ -188,6 +190,12 @@ const Header = () => {
 						onDropdownLinkClick={() => handleDropdownLinkClick('profile')}
 						onLinkClick={() => dispatch(closeNav())}
 					/>
+					<Phone href="tel:+62896706255135">
+						<PhoneIcon>
+							<FontAwesomeIcon icon={['fas', 'phone-volume']} />
+						</PhoneIcon>
+						+38 (050) 960-28-85
+					</Phone>
 				</Drawer>
 			)}
 			{isModal && <AuthModal onToggle={() => dispatch(toggleModal())} />}

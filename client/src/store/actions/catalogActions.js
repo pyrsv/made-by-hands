@@ -7,6 +7,9 @@ import {
 	LOAD_MORE_PRODUCTS,
 	SET_PRODUCT_TO_CART,
 	SET_PRODUCT_TO_WISHLIST,
+	SEARCH_PRODUCTS_INIT,
+	SEARCH_PRODUCTS_ERROR,
+	SEARCH_PRODUCTS_SUCCESS,
 } from '../types/catalogTypes';
 import { checkProductsForCartAndFavorites } from '../../utils/API';
 
@@ -47,6 +50,20 @@ export const setProductToWishlist = id => ({
 	payload: id,
 });
 
+const searchProductsInit = () => ({
+	type: SEARCH_PRODUCTS_INIT,
+});
+
+const searchProductsSuccess = products => ({
+	type: SEARCH_PRODUCTS_SUCCESS,
+	payload: products,
+});
+
+const searchProductsError = err => ({
+	type: SEARCH_PRODUCTS_ERROR,
+	payload: err,
+});
+
 export const getFilteredProducts = config => dispatch => {
 	dispatch(getFilteredProductsInit());
 	dispatch(updateConfig(config));
@@ -81,4 +98,19 @@ export const loadMoreAction = config => dispatch => {
 		.then(response => {
 			dispatch(loadMoreProducts(response.data.products));
 		});
+};
+
+export const searchProducts = query => dispatch => {
+	dispatch(searchProductsInit());
+
+	axios
+		.post('/products/search', { query })
+		.then(res => {
+			checkProductsForCartAndFavorites(res.data).then(
+				productsWithCartAndFavorites => {
+					dispatch(searchProductsSuccess(productsWithCartAndFavorites));
+				}
+			);
+		})
+		.catch(err => dispatch(searchProductsError(err)));
 };

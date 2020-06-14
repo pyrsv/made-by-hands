@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import { TextareaContainer, Textarea, Label } from './styles';
 
@@ -47,4 +47,4 @@ TextareaField.defaultProps = {
 	required: false,
 };
 
-export default TextareaField;
+export default memo(TextareaField);

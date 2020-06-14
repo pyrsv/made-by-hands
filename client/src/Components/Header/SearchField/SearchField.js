@@ -1,75 +1,66 @@
 import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import InputField from '../../UI/InputFiels/InputField';
-import { SearchButton, SearchForm } from './styles';
+import PropTypes from 'prop-types';
+import { useHistory } from 'react-router-dom';
 import { Formik } from 'formik';
-import { NavLink } from 'react-router-dom';
-import { getSearchProduct } from './getSearchProduct';
-import { useDispatch } from 'react-redux';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useSelector } from 'react-redux';
+import Backdrop from '../../UI/Backdrop/Backdrop';
+import CloseButton from '../../UI/CloseButton/CloseButton';
+import {
+	SearchButton,
+	SearchForm,
+	SearchInput,
+	CloseButtonWrapper,
+} from './styles';
 
-// const SearchField = () => {
-// 	return (
-// 		<SearchForm>
-// 			<InputField
-// 				type="text"
-// 				name="header-search"
-// 				onChange={() => {}}
-// 				placeholder="Search"
-// 				target="search"
-// 				value=""
-// 			/>
-// 			<SearchButton>
-// 				<FontAwesomeIcon icon={['fas', 'search']} />
-// 			</SearchButton>
-// 		</SearchForm>
-// 	);
-// };
+const SearchField = ({ onToggle }) => {
+	const history = useHistory();
+	const isHeaderMobile = useSelector(state => state.UI.isHeaderMobile);
+	const isMobile = useSelector(state => state.UI.isMobile);
 
-// export default SearchField;
-
-const SearchField = () => {
-	const dispatch = useDispatch();
+	const handleSearchSubmit = ({ search }) => {
+		history.push(`/search?query=${encodeURI(search.trim())}`);
+		onToggle();
+	};
 
 	return (
-		<SearchForm>
-			<Formik
-				initialValues={{ headerSearch: '' }}
-				onSubmit={values => {
-					dispatch(getSearchProduct(values.headerSearch));
-					getSearchProduct(values.headerSearch);
-				}}
-			>
-				{({ handleSubmit, handleChange }) => (
+		<>
+			<Formik initialValues={{ search: '' }} onSubmit={handleSearchSubmit}>
+				{({ values, handleSubmit, handleChange }) => (
 					<SearchForm onSubmit={handleSubmit}>
-						<InputField
+						<SearchInput
 							type="text"
-							name="headerSearch"
-							placeholder="Search"
+							name="search"
 							onChange={handleChange}
-							required
-						>
-							{/* <DebounceInput
-								minLength={1}
-								debounceTimeout={100}
-								onChange={event => console.log(event.target.value)}
-							/> */}
-						</InputField>
+							placeholder="Search"
+							target="search"
+							value={values.search}
+						/>
+						<SearchButton>
+							<FontAwesomeIcon
+								size={isHeaderMobile && !isMobile && '2x'}
+								icon={['fas', 'search']}
+							/>
+						</SearchButton>
 
-						<NavLink
-							to={`/catalog?brand=${setTimeout(
-								getSearchProduct(handleSubmit),
-								2000
-							)}`}
-						>
-							<SearchButton>
-								<FontAwesomeIcon icon={['fas', 'search']} />
-							</SearchButton>
-						</NavLink>
+						{(isMobile || isHeaderMobile) && (
+							<CloseButtonWrapper>
+								<CloseButton
+									size={isHeaderMobile && !isMobile ? 32 : 22}
+									onCLick={onToggle}
+								/>
+							</CloseButtonWrapper>
+						)}
 					</SearchForm>
 				)}
 			</Formik>
-		</SearchForm>
+			{(isMobile || isHeaderMobile) && <Backdrop onClick={onToggle} />}
+		</>
 	);
+};
+
+SearchField.propTypes = {
+	onToggle: PropTypes.func.isRequired,
 };
 
 export default SearchField;
