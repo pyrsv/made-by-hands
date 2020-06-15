@@ -47,7 +47,7 @@ const SearchField = ({ onToggle }) => {
 							<CloseButtonWrapper>
 								<CloseButton
 									size={isHeaderMobile && !isMobile ? 32 : 22}
-									onCLick={onToggle}
+									onClick={onToggle}
 								/>
 							</CloseButtonWrapper>
 						)}
