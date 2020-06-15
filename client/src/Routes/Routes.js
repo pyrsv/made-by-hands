@@ -6,6 +6,7 @@ import ProfilePage from '../Pages/ProfilePage';
 import IndexPage from '../Pages/IndexPage';
 import ProductPage from '../Pages/ProductPage';
 import SearchPage from '../Pages/SearchPage';
+import SalesPage from '../Pages/SalesPage';
 import NoMatchPage from '../Pages/NoMatchPage';
 import ProtectedRoute from '../HOC/ProtectedRoute/ProtectedRoute';
 import AuthModal from '../Components/AuthModal/AuthModal';
@@ -27,6 +28,9 @@ const Routes = () => {
 				</Route>
 				<Route path="/search">
 					<SearchPage />
+				</Route>
+				<Route path="/sales">
+					<SalesPage />
 				</Route>
 				<ProtectedRoute path="/profile">
 					<ProfilePage />
