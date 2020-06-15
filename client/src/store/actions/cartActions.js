@@ -17,7 +17,7 @@ export const setCartAction = data => ({
 
 export const addToCart = (id, itemNo) => dispatch => {
 	axios
-		.put(`/cart/${id}`)
+		.put(`/api/cart/${id}`)
 		.then(result => {
 			dispatch(setCartAction(result.data.products));
 		})
@@ -25,7 +25,7 @@ export const addToCart = (id, itemNo) => dispatch => {
 			if (!localStorage.getItem('cart')) {
 				localStorage.setItem('cart', []);
 			}
-			axios.get(`/products/${itemNo}`).then(result => {
+			axios.get(`/api/products/${itemNo}`).then(result => {
 				const requiredItem = result.data;
 				const LSItems = JSON.parse(localStorage.getItem('cart'));
 				let inLS = false;
@@ -52,12 +52,13 @@ export const addToCart = (id, itemNo) => dispatch => {
 
 export const deleteFromCart = (id, itemNo) => dispatch => {
 	axios
-		.delete(`/cart/product/${id}`)
+		.delete(`/api/cart/product/${id}`)
 		.then(result => {
 			dispatch(setCartAction(result.data.products));
 		})
+
 		.catch(() => {
-			axios.get(`/products/${itemNo}`).then(result => {
+			axios.get(`/api/products/${itemNo}`).then(result => {
 				const requiredItem = result.data;
 				const itemsFromLS = JSON.parse(localStorage.getItem('cart'));
 				// eslint-disable-next-line array-callback-return
@@ -83,17 +84,17 @@ export const deleteFromCart = (id, itemNo) => dispatch => {
 export const deleteAllTheSameItems = (id, itemNo, btn) => dispatch => {
 	btn.current.setAttribute('disabled', 'disabled');
 	axios
-		.delete(`/cart/${id}`)
+		.delete(`/api/cart/${id}`)
 		.then(result => {
 			let data = result.data.products;
 			if (result.data.products[0].product._id === id) {
 				data = [];
-				axios.delete(`/cart`);
+				axios.delete(`/api/cart`);
 			}
 			dispatch(setCartAction(data));
 		})
 		.catch(err => {
-			axios.get(`/products/${itemNo}`).then(result => {
+			axios.get(`/api/products/${itemNo}`).then(result => {
 				const requiredItem = result.data;
 				const itemsFromLS = JSON.parse(localStorage.getItem('cart'));
 				const filtered = itemsFromLS.filter(item => {
@@ -128,7 +129,7 @@ export const updateCart = cartFromServer => dispatch => {
 	});
 
 	axios
-		.put('/cart', { products })
+		.put('/api/cart', { products })
 		.then(result => {
 			dispatch(setCartAction(result.data.products));
 		})

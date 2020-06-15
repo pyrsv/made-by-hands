@@ -65,20 +65,20 @@ export const getUser = () => dispatch => {
 		handleGetUser(token)
 			.then(customer => {
 				axios
-					.get('/cart')
+					.get('/api/cart')
 					.then(result => {
 						if (!result.data) {
-							axios.post('/cart');
+							axios.post('/api/cart');
 						} else {
 							dispatch(setCartAction(result.data.products));
 						}
 					})
 					.catch(err => err);
 				axios
-					.get('/wishlist')
+					.get('/api/wishlist')
 					.then(result => {
 						if (!result.data) {
-							axios.post('/wishlist');
+							axios.post('/api/wishlist');
 						} else {
 							dispatch(setWishlist(result.data.products));
 						}
@@ -108,27 +108,21 @@ export const userLogin = ({ loginOrEmail, password }) => dispatch => {
 			setAuthToken(token);
 			handleGetUser()
 				.then(customer => {
-					axios
-						.get('/cart')
-						.then(result => {
-							if (!result.data) {
-								axios.post('/cart');
-							} else {
-								dispatch(setCartAction(result.data.products));
-							}
-							dispatch(updateCart(result.data));
-						})
-						.catch(err => err);
-					axios
-						.get('/wishlist')
-						.then(result => {
-							if (!result.data) {
-								axios.post('/wishlist');
-							} else {
-								dispatch(setWishlist(result.data.products));
-							}
-						})
-						.catch(err => err);
+					axios.get('/api/cart').then(result => {
+						if (!result.data) {
+							axios.post('/api/cart');
+						} else {
+							dispatch(setCartAction(result.data.products));
+						}
+						dispatch(updateCart(result.data));
+					});
+					axios.get('/api/wishlist').then(result => {
+						if (!result.data) {
+							axios.post('/api/wishlist');
+						} else {
+							dispatch(setWishlist(result.data.products));
+						}
+					});
 
 					dispatch(userLoginSuccess(customer.data));
 				})
@@ -148,7 +142,7 @@ export const userLogin = ({ loginOrEmail, password }) => dispatch => {
 export const userRegister = data => async dispatch => {
 	dispatch(userLoginInit());
 	axios
-		.post('/customers', JSON.stringify(data), {
+		.post('/api/customers', JSON.stringify(data), {
 			headers: {
 				'Content-Type': 'application/json',
 			},
@@ -158,17 +152,15 @@ export const userRegister = data => async dispatch => {
 			handleUserLogin(login, password)
 				.then(res => {
 					setAuthToken(res.data.token);
-					axios
-						.get('/cart')
-						.then(result => {
-							if (!result.data) {
-								axios.post('/cart');
-							} else {
-								dispatch(setCartAction(result.data.products));
-							}
-						})
-						.catch(err => err);
-					axios.post('/wishlist');
+
+					axios.get('/api/cart').then(result => {
+						if (!result.data) {
+							axios.post('/api/cart');
+						} else {
+							dispatch(setCartAction(result.data.products));
+						}
+					});
+					axios.post('/api/wishlist');
 					dispatch(userLoginSuccess(customer.data));
 				})
 				.catch(err => {
@@ -187,7 +179,7 @@ export const userRegister = data => async dispatch => {
 export const updateUser = data => dispatch => {
 	dispatch(userUpdateInit());
 	axios
-		.put('/customers', JSON.stringify(data), {
+		.put('/api/customers', JSON.stringify(data), {
 			headers: {
 				'Content-Type': 'application/json',
 			},

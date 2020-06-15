@@ -7,7 +7,7 @@ const setRatingAndCommentsInfo = data => ({
 });
 
 export const getRatingAndCommentsInfo = id => dispatch => {
-	axios.get(`/comments/product/${id}`).then(res => {
+	axios.get(`/api/comments/product/${id}`).then(res => {
 		dispatch(setRatingAndCommentsInfo(res.data));
 	});
 };
