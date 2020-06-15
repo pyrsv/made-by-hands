@@ -10,13 +10,13 @@ export const setWishlist = array => {
 };
 
 export const addToWishlist = id => dispatch => {
-	axios.put(`/wishlist/${id}`).then(result => {
+	axios.put(`/api/wishlist/${id}`).then(result => {
 		dispatch(setWishlist(result.data.products));
 		// console.log(result.data.products)
 	});
 };
 export const deleteFromWishlist = id => dispatch => {
-	axios.delete(`/wishlist/${id}`).then(result => {
+	axios.delete(`/api/wishlist/${id}`).then(result => {
 		dispatch(setWishlist(result.data.products));
 
 		// console.log(result.data.products)
