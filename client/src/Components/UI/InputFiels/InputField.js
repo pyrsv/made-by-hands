@@ -29,7 +29,7 @@ const InputField = ({
 				value={value}
 				isInvalid={error && touched}
 			/>
-			{touched && error && <ErrorMessage>{error}</ErrorMessage>}
+			{touched && error && <ErrorMessage message={error}>{error}</ErrorMessage>}
 		</InputContainer>
 	);
 };
@@ -44,7 +44,7 @@ InputField.propTypes = {
 	value: PropTypes.string.isRequired,
 	target: PropTypes.oneOf(['form', 'search']).isRequired,
 	touched: PropTypes.bool,
-	error: PropTypes.bool,
+	error: PropTypes.string,
 };
 
 InputField.defaultProps = {
@@ -52,7 +52,7 @@ InputField.defaultProps = {
 	placeholder: '',
 	required: false,
 	touched: false,
-	error: false,
+	error: '',
 };
 
 export default memo(InputField);

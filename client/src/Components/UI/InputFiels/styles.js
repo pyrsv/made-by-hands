@@ -1,9 +1,14 @@
 import styled from 'styled-components';
 
+const isMessageLong = message => message.length > 30;
+
 export const InputContainer = styled.div`
 	position: relative;
 	font-family: 'Raleway', sans-serif;
 	margin-bottom: ${props => (props.target === 'form' ? '20px' : 0)};
+	@media (max-width: 420px) {
+		margin-bottom: ${props => (props.target === 'form' ? '25px' : 0)};
+	}
 `;
 
 export const Input = styled.input`
@@ -38,6 +43,10 @@ export const ErrorMessage = styled.span`
 	font-size: 14px;
 	color: ${props => props.theme.accentRed};
 	animation: show 0.2s ease-in;
+	@media (max-width: 420px) {
+		font-size: ${props => (isMessageLong(props.message) ? '12px' : '14px')};
+		bottom: ${props => (isMessageLong(props.message) ? '-25px' : '-17px')};
+	}
 
 	@keyframes show {
 		0% {

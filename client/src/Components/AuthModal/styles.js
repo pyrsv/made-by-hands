@@ -12,6 +12,10 @@ export const ModalWrapper = styled.div`
 	border-radius: 4px;
 	z-index: 999;
 	@media (max-width: 576px) {
+		min-width: 375px;
+	}
+
+	@media (max-width: 420px) {
 		min-width: 300px;
 	}
 `;

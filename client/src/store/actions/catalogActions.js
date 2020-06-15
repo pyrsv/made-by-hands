@@ -74,16 +74,16 @@ export const getFilteredProducts = config => dispatch => {
 			},
 		})
 		.then(response => {
-			checkProductsForCartAndFavorites(response.data.products).then(
-				productsWithCartAndFavorites => {
+			checkProductsForCartAndFavorites(response.data.products)
+				.then(productsWithCartAndFavorites => {
 					dispatch(
 						getFilteredProductsSuccess(
 							productsWithCartAndFavorites,
 							response.data.productsQuantity
 						)
 					);
-				}
-			);
+				})
+				.catch(err => err);
 		})
 		.catch(err => dispatch(getFilteredProductsError(err)));
 };
@@ -113,4 +113,27 @@ export const searchProducts = query => dispatch => {
 			);
 		})
 		.catch(err => dispatch(searchProductsError(err)));
+};
+
+export const getProductsOnSale = config => dispatch => {
+	dispatch(getFilteredProductsInit());
+	axios
+		.get('/products/sales/', {
+			params: {
+				...config,
+			},
+		})
+		.then(response => {
+			checkProductsForCartAndFavorites(response.data.products).then(
+				productsWithCartAndFavorites => {
+					dispatch(
+						getFilteredProductsSuccess(
+							productsWithCartAndFavorites,
+							response.data.productsQuantity
+						)
+					);
+				}
+			);
+		})
+		.catch(err => dispatch(getFilteredProductsError(err)));
 };

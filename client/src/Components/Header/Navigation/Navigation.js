@@ -25,7 +25,7 @@ const Navigation = ({
 					/>
 				</MenuItem>
 				<MenuItem onClick={onLinkClick}>
-					<NavLink to="/">Sales</NavLink>
+					<NavLink to="/sales">Sales</NavLink>
 				</MenuItem>
 				<MenuItem onClick={onLinkClick}>
 					<NavLink to="/">Gallery</NavLink>
