@@ -73,7 +73,7 @@ export const getUser = () => dispatch => {
 							dispatch(setCartAction(result.data.products));
 						}
 					})
-					.catch();
+					.catch(err => err);
 				axios
 					.get('/wishlist')
 					.then(result => {
@@ -83,7 +83,7 @@ export const getUser = () => dispatch => {
 							dispatch(setWishlist(result.data.products));
 						}
 					})
-					.catch();
+					.catch(err => err);
 				dispatch(userLoginSuccess(customer.data));
 			})
 			.catch(() => {
@@ -108,21 +108,27 @@ export const userLogin = ({ loginOrEmail, password }) => dispatch => {
 			setAuthToken(token);
 			handleGetUser()
 				.then(customer => {
-					axios.get('/cart').then(result => {
-						if (!result.data) {
-							axios.post('/cart');
-						} else {
-							dispatch(setCartAction(result.data.products));
-						}
-						dispatch(updateCart(result.data));
-					});
-					axios.get('/wishlist').then(result => {
-						if (!result.data) {
-							axios.post('/wishlist');
-						} else {
-							dispatch(setWishlist(result.data.products));
-						}
-					});
+					axios
+						.get('/cart')
+						.then(result => {
+							if (!result.data) {
+								axios.post('/cart');
+							} else {
+								dispatch(setCartAction(result.data.products));
+							}
+							dispatch(updateCart(result.data));
+						})
+						.catch(err => err);
+					axios
+						.get('/wishlist')
+						.then(result => {
+							if (!result.data) {
+								axios.post('/wishlist');
+							} else {
+								dispatch(setWishlist(result.data.products));
+							}
+						})
+						.catch(err => err);
 
 					dispatch(userLoginSuccess(customer.data));
 				})
@@ -152,13 +158,16 @@ export const userRegister = data => async dispatch => {
 			handleUserLogin(login, password)
 				.then(res => {
 					setAuthToken(res.data.token);
-					axios.get('/cart').then(result => {
-						if (!result.data) {
-							axios.post('/cart');
-						} else {
-							dispatch(setCartAction(result.data.products));
-						}
-					});
+					axios
+						.get('/cart')
+						.then(result => {
+							if (!result.data) {
+								axios.post('/cart');
+							} else {
+								dispatch(setCartAction(result.data.products));
+							}
+						})
+						.catch(err => err);
 					axios.post('/wishlist');
 					dispatch(userLoginSuccess(customer.data));
 				})
