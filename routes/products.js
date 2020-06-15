@@ -12,21 +12,22 @@ const {
   getProducts,
   getProductById,
   getProductsFilterParams,
-  searchProducts
+  searchProducts,
+  getProductsOnSale,
 } = require("../controllers/products");
 
 // Configurations for multer
 const storage = multer.diskStorage({
   // Destination, where files should be stored (image url)
-  destination: function(req, file, cb) {
+  destination: function (req, file, cb) {
     var newDestination = req.headers.path; // We sen image url in header ("path"), when making axios request
     fse.mkdirsSync(newDestination); // We creating folder in destination, specified in headers "path"
     cb(null, newDestination); // Saving file
   },
 
-  filename: function(req, file, cb) {
+  filename: function (req, file, cb) {
     cb(null, file.originalname); // We accept original file-name
-  }
+  },
 });
 
 const fileFilter = (req, file, cb) => {
@@ -46,9 +47,9 @@ const fileFilter = (req, file, cb) => {
 const upload = multer({
   storage: storage,
   limits: {
-    fileSize: 1024 * 1024 * 3 // Max size 5MB
+    fileSize: 1024 * 1024 * 3, // Max size 5MB
   },
-  fileFilter: fileFilter
+  fileFilter: fileFilter,
 });
 
 // @route   POST /products/images
@@ -88,6 +89,11 @@ router.get("/", getProducts);
 // @desc    GET appropriate filtered products
 // @access  Public
 router.get("/filter", getProductsFilterParams);
+
+// @route   GET /products/sales
+// @desc    GET products on
+// @access  Public
+router.get("/sales", getProductsOnSale);
 
 // @route   POST /products/search
 // @desc    POST appropriate to search query products
