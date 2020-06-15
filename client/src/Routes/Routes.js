@@ -9,6 +9,8 @@ import SearchPage from '../Pages/SearchPage';
 import NoMatchPage from '../Pages/NoMatchPage';
 import ProtectedRoute from '../HOC/ProtectedRoute/ProtectedRoute';
 import AuthModal from '../Components/AuthModal/AuthModal';
+import CorporateOrders from '../Components/Footer/FooterComponents/CorporateOrders/CorporateOrders';
+import CooperationsWithUs from '../Components/Footer/CooperationWithUs/CooperationWithUs';
 
 const Routes = () => {
 	const location = useLocation();
@@ -18,6 +20,12 @@ const Routes = () => {
 			<Switch location={background || location}>
 				<Route exact path="/">
 					<IndexPage />
+				</Route>
+				<Route exact path="/Corporate_orders">
+					<CorporateOrders />
+				</Route>
+				<Route exact path="/Cooperation_with_us">
+					<CooperationsWithUs />
 				</Route>
 				<Route path="/cart">
 					<CartPage />
@@ -39,6 +47,7 @@ const Routes = () => {
 						);
 					}}
 				/>
+
 				<Route path="*">
 					<NoMatchPage />
 				</Route>

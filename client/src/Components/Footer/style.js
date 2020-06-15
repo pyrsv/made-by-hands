@@ -5,6 +5,11 @@ export const Wrapper = styled.div`
 	overflow: hidden;
 `;
 
+export const TitleFooterText = styled.h2`
+	font-size: 16px;
+	font-weight: bold;
+`;
+
 export const FooterContainer = styled.section`
 	display: flex;
 	align-items: center;

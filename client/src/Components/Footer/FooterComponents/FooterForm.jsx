@@ -1,10 +1,10 @@
 import React from 'react';
 import { Formik } from 'formik';
-import Button from '../UI/Button/Button';
-import InputField from '../UI/InputFiels/InputField';
-import { FooterSection } from './style';
-import { FooterText } from './FooterText/FooterText';
-import { SetSubscriberEmail } from '../../utils/setSubscriberEmail';
+import Button from '../../UI/Button/Button';
+import InputField from '../../UI/InputFiels/InputField';
+import { FooterSection, TitleFooterText } from '../style';
+import { FooterText } from '../FooterText/FooterText';
+import { SetSubscriberEmail } from '../../../utils/setSubscriberEmail';
 
 const FooterForm = () => (
 	<div>
@@ -36,10 +36,10 @@ const FooterForm = () => (
 			}) => (
 				<form onSubmit={handleSubmit}>
 					<FooterSection>
-						<FooterText
-							type="title"
-							text="Subscribe and get first all the best!"
-						/>
+						<TitleFooterText>
+							Subscribe and get first all the best!
+						</TitleFooterText>
+
 						<InputField
 							type="email"
 							name="email"

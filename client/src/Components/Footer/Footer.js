@@ -8,9 +8,10 @@ import {
 	FootLine,
 	IconSocNet,
 	IconPay,
+	TitleFooterText,
 } from './style';
 import { FooterText } from './FooterText/FooterText';
-import FooterForm from './FooterForm';
+import FooterForm from './FooterComponents/FooterForm';
 
 const Footer = () => {
 	return (
@@ -22,9 +23,9 @@ const Footer = () => {
 					</FooterSection>
 
 					<FooterSection>
-						<FooterText type="title" text="Partners" />
+						<TitleFooterText>Partners</TitleFooterText>
 						<FooterText
-							href="/Cooperation"
+							href="/Cooperation_with_us"
 							type="link"
 							text="Cooperation with us"
 						/>
@@ -33,8 +34,8 @@ const Footer = () => {
 							type="link"
 							text="Corporate orders"
 						/>
+						<TitleFooterText>Help</TitleFooterText>
 
-						<FooterText type="title" text="Help" />
 						<FooterText
 							href="/Deliver_and_payment"
 							type="link"
@@ -48,7 +49,8 @@ const Footer = () => {
 					</FooterSection>
 
 					<FooterSection>
-						<FooterText text="Stay connected" />
+						<TitleFooterText>Stay connected</TitleFooterText>
+
 						<FooterContainer>
 							<IconSocNet
 								href="https://www.instagram.com/"
@@ -71,7 +73,8 @@ const Footer = () => {
 								backgroundPoss="-168px -82px"
 							/>
 						</FooterContainer>
-						<FooterText text="Making payments" />
+						<TitleFooterText>Making payments</TitleFooterText>
+
 						<FooterContainer>
 							<IconPay />
 						</FooterContainer>
