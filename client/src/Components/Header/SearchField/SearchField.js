@@ -37,10 +37,7 @@ const SearchField = ({ onToggle }) => {
 							value={values.search}
 						/>
 						<SearchButton>
-							<FontAwesomeIcon
-								size={isHeaderMobile && !isMobile && '2x'}
-								icon={['fas', 'search']}
-							/>
+							<FontAwesomeIcon size="1x" icon={['fas', 'search']} />
 						</SearchButton>
 
 						{(isMobile || isHeaderMobile) && (
@@ -60,7 +57,11 @@ const SearchField = ({ onToggle }) => {
 };
 
 SearchField.propTypes = {
-	onToggle: PropTypes.func.isRequired,
+	onToggle: PropTypes.func,
+};
+
+SearchField.defaultProps = {
+	onToggle: () => {},
 };
 
 export default SearchField;
