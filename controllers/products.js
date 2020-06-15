@@ -162,15 +162,21 @@ exports.getProductsOnSale = async (req, res, next) => {
   const perPage = Number(req.query.perPage);
   const startPage = Number(req.query.startPage);
 
-  Product.find({ previousPrice: { $exists: true } })
-    .skip(startPage * perPage - perPage)
-    .limit(perPage)
-    .then((products) => res.send(products))
-    .catch((err) =>
-      res.status(400).json({
-        message: `Error happened on server: "${err}" `,
-      })
-    );
+  try {
+    const products = await Product.find({ previousPrice: { $exists: true } })
+      .skip(startPage * perPage - perPage)
+      .limit(perPage);
+
+    const productsQuantity = await Product.find({
+      previousPrice: { $exists: true },
+    });
+
+    res.json({ products, productsQuantity: productsQuantity.length });
+  } catch (err) {
+    res.status(400).json({
+      message: `Error happened on server: "${err}" `,
+    });
+  }
 };
 
 exports.searchProducts = async (req, res, next) => {
