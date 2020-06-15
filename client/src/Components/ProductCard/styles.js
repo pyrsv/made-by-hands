@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export const Card = styled.div`
+	position: relative;
 	margin: 0 auto;
 	max-width: 370px;
 	font-family: 'Raleway', sans-serif;
@@ -42,6 +43,13 @@ export const ProductName = styled.p`
 		line-height: 18px;
 		font-weight: 600;
 		padding-right: 5px;
+	}
+
+	&:hover {
+		text-decoration: underline;
+	}
+	&:active {
+		text-decoration: underline;
 	}
 `;
 
