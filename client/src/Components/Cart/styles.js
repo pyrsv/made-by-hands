@@ -225,3 +225,8 @@ export const FillTheFields = styled.div`
 	text-transform: capitalize;
 	color: ${props => props.theme.mainDark};
 `;
+
+export const CartItemPricePerOne = styled.div`
+	font-size: 14px;
+	margin-top: 5px;
+`;

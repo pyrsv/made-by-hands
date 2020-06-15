@@ -47,6 +47,7 @@ const AuthForm = () => {
 								touched={touched.loginOrEmail}
 								error={errors.loginOrEmail}
 								helperText={errors.loginOrEmail}
+								placeholder="example@mail.com"
 								required
 							/>
 							<InputField
@@ -70,6 +71,7 @@ const AuthForm = () => {
 							type="submit"
 							size="wide"
 							onClick={() => {}}
+							isLoading={isLoading}
 						/>
 						{loginError &&
 							Object.values(loginError).map(message => (

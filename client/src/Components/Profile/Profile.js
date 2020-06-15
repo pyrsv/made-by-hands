@@ -5,6 +5,7 @@ import Title from '../UI/Title/title';
 import ProfileNavigation from './ProfileNavigation/ProfileNavigation';
 import Wishlist from './Wishlist/Wishlist';
 import ContactInfo from './ContactInfo/ContactInfo';
+import OrdersList from './OrdersList/OrdersList';
 
 const Profile = () => {
 	const { path } = useRouteMatch();
@@ -20,7 +21,9 @@ const Profile = () => {
 				<Route path={`${path}/wishlist`}>
 					<Wishlist />
 				</Route>
-				<Route path={`${path}/orders`}>Orders</Route>
+				<Route path={`${path}/orders`}>
+					<OrdersList />
+				</Route>
 			</Switch>
 		</LayoutContainer>
 	);

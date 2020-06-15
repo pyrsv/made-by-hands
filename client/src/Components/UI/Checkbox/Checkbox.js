@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import {
 	CheckboxContainer,
@@ -39,4 +39,4 @@ Checkbox.defaultProps = {
 	type: 'default',
 	cssValue: '#000000',
 };
-export default Checkbox;
+export default memo(Checkbox);

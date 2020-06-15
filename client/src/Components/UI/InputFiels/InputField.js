@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import { InputContainer, Input, Label, ErrorMessage } from './styles';
 
@@ -55,4 +55,4 @@ InputField.defaultProps = {
 	error: '',
 };
 
-export default InputField;
+export default memo(InputField);

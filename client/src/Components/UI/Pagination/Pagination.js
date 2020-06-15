@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, memo } from 'react';
 import { Ul, Li, Nav, Button, Link, Current } from './styles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import PropTypes from 'prop-types';
@@ -71,4 +71,4 @@ Pagination.defaultProps = {
 	portionSize: 3,
 };
 
-export default Pagination;
+export default memo(Pagination);

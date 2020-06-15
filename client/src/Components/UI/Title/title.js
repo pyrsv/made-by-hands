@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import { StyledTitle } from './styles';
 
@@ -19,4 +19,4 @@ Title.defaultProps = {
 	color: 'white',
 };
 
-export default Title;
+export default memo(Title);
