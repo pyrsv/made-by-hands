@@ -5,15 +5,16 @@ export const WishlistContainer = styled.div`
 `;
 
 export const WishlistItemImage = styled.img`
-	height: 100%;
-	width: auto;
+	height: auto;
+	width: 100%;
+	object-fit: cover;
 `;
 
 export const WishlistItemContainer = styled.div`
 	position: relative;
 	display: flex;
 	padding: 24px 0;
-	border-bottom: 1px solid ${props => props.theme.mainDark};
+	border-bottom: 1px solid ${props => props.theme.accentRed};
 	@media (max-width: 576px) {
 		flex-direction: column;
 		justify-content: center;
@@ -45,6 +46,7 @@ export const WishlistItemName = styled.span`
 	font-style: normal;
 	font-weight: bold;
 	font-size: 22px;
+	line-height: 26px;
 	text-align: center;
 `;
 
@@ -54,7 +56,7 @@ export const WishlistItemPrice = styled.div`
 	flex-direction: column;
 	justify-content: space-between;
 	height: 56px;
-	font-family: Gabriela;
+	font-family: Arial, Helvetica, sans-serif;
 	font-style: normal;
 	font-weight: normal;
 	font-size: 24px;
@@ -67,24 +69,20 @@ export const WishlistItemPrice = styled.div`
 
 export const ButtonInWishlist = styled.div`
 	position: absolute;
-	right: 5%;
+	right: 0;
 	top: 50%;
 	transform: translate(0, -50%);
 	@media (max-width: 576px) {
 		position: static;
 	}
 `;
-export const DeleteItemFromWishlist = styled.button`
+export const DeleteItemFromWishlist = styled.span`
 	display: inline-block;
 	position: absolute;
 	top: 5%;
 	right: 0;
-	font-weight: bold;
-	background: #fffcfc;
 	border: none;
 	outline: none;
-	border-radius: 4px;
-	color: ${props => props.theme.mainDark};
 `;
 
 export const WishlistItemImageContainer = styled.div`

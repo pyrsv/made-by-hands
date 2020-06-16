@@ -48,9 +48,10 @@ const WishlistItem = ({ name, currentPrice, image, isInCart, id, itemNo }) => {
 						type="wide"
 						color="dark"
 						text={isInCart ? 'In Cart' : 'Buy'}
-						icon="shopping-basket"
+						icon="shopping-cart"
 						onClick={handleCartButtonClick}
 						disabled={isInCart}
+						iconPrefix="fas"
 					/>
 				</ButtonInWishlist>
 				<DeleteItemFromWishlist>
