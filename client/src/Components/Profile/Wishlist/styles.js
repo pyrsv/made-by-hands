@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 export const WishlistContainer = styled.div`
-	background: ${props => props.theme.lightPink};
 	padding-bottom: 26px;
 `;
 

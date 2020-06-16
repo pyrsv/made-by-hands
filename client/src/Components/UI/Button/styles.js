@@ -38,7 +38,8 @@ export const Icon = styled.i`
 	position: relative;
 	width: 16px;
 	height: 16px;
-	color: inherit;
+	color: ${props =>
+		props.color === 'dark' ? '#000000' : props.theme.mainDark};
 	margin-left: 5px;
 	bottom: -1px;
 `;

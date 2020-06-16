@@ -10,6 +10,7 @@ import {
 	WishlistItemImageContainer,
 } from './styles';
 import Button from '../../UI/Button/Button';
+import CloseBtn from '../../UI/CloseButton/CloseButton';
 import { useDispatch } from 'react-redux';
 import { setProductToCart } from '../../../store/actions/catalogActions';
 import { addToCart } from '../../../store/actions/cartActions';
@@ -18,6 +19,7 @@ import PropTypes from 'prop-types';
 
 const WishlistItem = ({ name, currentPrice, image, isInCart, id, itemNo }) => {
 	const dispatch = useDispatch();
+
 	const handleCartButtonClick = () => {
 		dispatch(addToCart(id, itemNo));
 		dispatch(setProductToCart(id));
@@ -46,14 +48,16 @@ const WishlistItem = ({ name, currentPrice, image, isInCart, id, itemNo }) => {
 						type="wide"
 						color="dark"
 						text={isInCart ? 'In Cart' : 'Buy'}
+						icon="shopping-basket"
 						onClick={handleCartButtonClick}
 						disabled={isInCart}
 					/>
 				</ButtonInWishlist>
-				<DeleteItemFromWishlist
-					onClick={() => dispatch(deleteFromWishlist(id))}
-				>
-					X
+				<DeleteItemFromWishlist>
+					<CloseBtn
+						onClick={() => dispatch(deleteFromWishlist(id))}
+						size="22"
+					/>
 				</DeleteItemFromWishlist>
 			</WishlistItemContainer>
 		</>
