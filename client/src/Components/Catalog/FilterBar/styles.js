@@ -6,9 +6,9 @@ export const FilterWrapper = styled.div`
 
 export const FiltersContainer = styled.div`
 	align-self: start;
-	border: 1px solid ${props => props.theme.mainDark};
+	/* border: 1px solid ${props => props.theme.mainDark}; */
 	border-radius: 4px;
-	padding: 10px;
+	padding: 10px 10px 60px 10px;
 `;
 
 export const Title = styled.h3`
