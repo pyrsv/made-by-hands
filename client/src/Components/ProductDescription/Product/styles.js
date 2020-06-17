@@ -21,7 +21,7 @@ export const GridContainer = styled.div`
 	grid-template-areas: "photo title" "text title" ". title";
 	@media screen and (max-width: 576px) {
 		grid-template-columns: 1fr;
-		grid-template-areas: "title" "photo" "textDescription" "allInfo";
+		grid-template-areas: "title" "photo" "allInfo" "textDescription";
 	}
 	grid-column-gap: 20px;
 `;
@@ -29,7 +29,7 @@ export const GridContainer = styled.div`
 export const TitleContainer = styled.div`
 	grid-area: title;
 	@media screen and (max-width: 576px) {
-		justify-self: center;
+		justify-content: space-between;
 	}
 `;
 export const AllInfo = styled.div`
@@ -40,7 +40,7 @@ export const AllInfo = styled.div`
 	}
 	@media screen and (max-width: 576px) {
 		grid-area: allInfo;
-		margin-top: 10px;
+		margin-top: 20px;
 	}
 `;
 
@@ -56,6 +56,7 @@ export const DescriptionArea = styled.div`
 		margin: 20px 0 0 0;
 		grid-area: textDescription;
 		max-width: 100%;
+		margin-top: 0px;
 	}
 `;
 

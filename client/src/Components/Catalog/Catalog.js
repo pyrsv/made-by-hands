@@ -5,7 +5,7 @@ import Title from '../UI/Title/title';
 import FilterButtons from './FilterButtons/FilterButtons';
 import FilterBar from './FilterBar/FilterBar';
 import Drawer from '../UI/Drawer/Drawer';
-import ProductsList from '../ProductsList/ProductsList';
+import CatalogList from './CatalogList/CatalogList';
 import { toggleFilters } from '../../store/actions/UIActions';
 
 import { CatalogContainer, Content } from './styles';
@@ -33,7 +33,7 @@ const Catalog = () => {
 					) : (
 						<FilterBar />
 					)}
-					<ProductsList />
+					<CatalogList />
 				</Content>
 			</LayoutContainer>
 		</CatalogContainer>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import RatingStars from '../../UI/RatingStars/RatingStars';
-import SetModalRating from './SetModalRating';
+import ModalRating from './ModalRating/ModalRating';
 import Button from '../../UI/Button/Button';
 import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
@@ -37,7 +37,7 @@ const Rating = ({ id }) => {
 				</Comments>
 			</RatingDiv>
 			<Button onClick={toggleModal} text="write feedback" />
-			{isModalOpen && <SetModalRating id={id} toggleModal={toggleModal} />}
+			{isModalOpen && <ModalRating id={id} toggleModal={toggleModal} />}
 		</>
 	);
 };

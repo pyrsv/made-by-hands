@@ -8,7 +8,6 @@ import Rating from '../Rating/Rating';
 import Comments from '../Comments/Comments';
 import { useSelector } from 'react-redux';
 import { NavLink, useLocation } from 'react-router-dom';
-
 import {
 	GridContainer,
 	DescriptionArea,
@@ -36,7 +35,6 @@ const Product = ({
 }) => {
 	const location = useLocation();
 	const user = useSelector(state => state.auth.currentUser);
-
 	return (
 		<GridContainer>
 			<DescriptionPageCarousel imageUrls={imageUrls} />

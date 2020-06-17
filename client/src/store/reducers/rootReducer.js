@@ -8,6 +8,7 @@ import { filtersReducer } from './filtersReducer';
 import { wishlistReducer } from './wishlistReducer';
 import { ratingReducer } from './ratingReducer';
 import { ordersReducer } from './ordersReducer';
+import { searchReducer } from './searchReducer';
 
 const rootReducer = combineReducers({
 	carouselArrivals: carouselArrivalsReducer,
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
 	wishlistReducer,
 	rating: ratingReducer,
 	orders: ordersReducer,
+	search: searchReducer,
 });
 
 export default rootReducer;
