@@ -4,6 +4,7 @@ import { useLocation, useHistory } from 'react-router-dom';
 import { Formik } from 'formik';
 import querystring from 'query-string';
 import { getColors, getBrands } from '../../../store/actions/filtersActions';
+import { toggleFilters } from '../../../store/actions/UIActions';
 import { getInitialFields } from '../../../utils/getFilterFields';
 import Button from '../../UI/Button/Button';
 import PriceRange from '../PriceRange/PriceRange';
@@ -21,6 +22,8 @@ const FilterBar = () => {
 	const categories = useSelector(state => state.filters.categories);
 	const color = useSelector(state => state.filters.colors);
 	const brand = useSelector(state => state.filters.brands);
+
+	const isMobile = useSelector(state => state.UI.isHeaderMobile);
 
 	const isCategoriesLoading = useSelector(
 		state => state.filters.isCategoriesFetching
@@ -69,6 +72,9 @@ const FilterBar = () => {
 		history.push({
 			search: `?${str}`,
 		});
+		if (isMobile) {
+			dispatch(toggleFilters());
+		}
 	};
 
 	return (
