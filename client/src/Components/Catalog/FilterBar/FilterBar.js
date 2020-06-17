@@ -108,7 +108,7 @@ const FilterBar = () => {
 									fieldsKey="brand"
 									setValue={setFieldValue}
 									checkboxType="default"
-									isLoading={isBrandsLoading}
+									isLoading={isColorsLoading}
 								/>
 								<FilterGroup
 									name="Colors"
@@ -117,9 +117,9 @@ const FilterBar = () => {
 									fieldsKey="color"
 									setValue={setFieldValue}
 									checkboxType="color"
-									isLoading={isColorsLoading}
+									isLoading={isBrandsLoading}
 								/>
-								<FilterGroup narrow name="Price">
+								<FilterGroup name="Price">
 									<PriceRange changeRange={handleChangePrice} />
 								</FilterGroup>
 

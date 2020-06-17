@@ -32,17 +32,7 @@ const CatalogList = () => {
 
 	return (
 		<>
-			{products.length > 0 ? (
-				<ProductsList
-					products={products}
-					productsQuantity={productsQuantity}
-					queryParams={currentParams}
-					startPage={startPage}
-					perPage={perPage}
-					isProductsFetching={isProductsFetching}
-					scrollable
-				/>
-			) : (
+			{products.length < 0 && !isProductsFetching ? (
 				<div>
 					<NoMatchPlaceholder>
 						We didn&apos;t found products on your query :(.
@@ -52,6 +42,16 @@ const CatalogList = () => {
 						<StyledLink to="/catalog">catalog.</StyledLink>
 					</NoMatchPlaceholder>
 				</div>
+			) : (
+				<ProductsList
+					products={products}
+					productsQuantity={productsQuantity}
+					queryParams={currentParams}
+					startPage={startPage}
+					perPage={perPage}
+					isProductsFetching={isProductsFetching}
+					scrollable
+				/>
 			)}
 		</>
 	);

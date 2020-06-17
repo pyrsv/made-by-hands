@@ -18,10 +18,9 @@ const FilterGroup = ({
 	checkboxType,
 	children,
 	isLoading,
-	narrow,
 }) => {
 	return (
-		<FiltersWrapper narrow={narrow}>
+		<FiltersWrapper>
 			<FiltersName>{name}</FiltersName>
 			<CheckboxesWrapper>
 				{isLoading ? (
@@ -45,7 +44,8 @@ const FilterGroup = ({
 					})
 				)}
 			</CheckboxesWrapper>
-			{children}
+
+			{!isLoading && children}
 		</FiltersWrapper>
 	);
 };
@@ -62,7 +62,6 @@ FilterGroup.propTypes = {
 		PropTypes.node,
 	]),
 	isLoading: PropTypes.bool,
-	narrow: PropTypes.bool,
 };
 
 FilterGroup.defaultProps = {
@@ -73,7 +72,6 @@ FilterGroup.defaultProps = {
 	checkboxType: '',
 	children: <></>,
 	isLoading: false,
-	narrow: false,
 };
 
 export default FilterGroup;
