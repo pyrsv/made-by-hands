@@ -7,6 +7,7 @@ import {
 	getFilteredProducts,
 	updateConfig,
 } from '../../../store/actions/catalogActions';
+import { NoMatchPlaceholder, StyledLink } from './styles';
 
 const CatalogList = () => {
 	const dispatch = useDispatch();
@@ -30,15 +31,29 @@ const CatalogList = () => {
 	}, [location, dispatch, perPage, currentParams]);
 
 	return (
-		<ProductsList
-			products={products}
-			productsQuantity={productsQuantity}
-			queryParams={currentParams}
-			startPage={startPage}
-			perPage={perPage}
-			isProductsFetching={isProductsFetching}
-			scrollable
-		/>
+		<>
+			{products.length > 0 ? (
+				<ProductsList
+					products={products}
+					productsQuantity={productsQuantity}
+					queryParams={currentParams}
+					startPage={startPage}
+					perPage={perPage}
+					isProductsFetching={isProductsFetching}
+					scrollable
+				/>
+			) : (
+				<div>
+					<NoMatchPlaceholder>
+						We didn&apos;t found products on your query :(.
+					</NoMatchPlaceholder>
+					<NoMatchPlaceholder>
+						But you can still discover our&nbsp;
+						<StyledLink to="/catalog">catalog.</StyledLink>
+					</NoMatchPlaceholder>
+				</div>
+			)}
+		</>
 	);
 };
 
