@@ -113,7 +113,7 @@ const FilterBar = () => {
 									checkboxType="color"
 									isLoading={isColorsLoading}
 								/>
-								<FilterGroup name="Price">
+								<FilterGroup narrow name="Price">
 									<PriceRange changeRange={handleChangePrice} />
 								</FilterGroup>
 

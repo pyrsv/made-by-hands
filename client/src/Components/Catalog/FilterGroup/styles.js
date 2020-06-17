@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 export const FiltersWrapper = styled.div`
 	padding: 15px 0;
+	min-height: ${props => (props.narrow ? 'auto' : '80px')};
 `;
 
 export const FiltersName = styled.h4`
@@ -14,7 +15,6 @@ export const FiltersName = styled.h4`
 
 export const CheckboxesWrapper = styled.div`
 	position: relative;
-	min-height: 80px;
 `;
 
 export const PreloaderContainer = styled.div`
