@@ -9,15 +9,11 @@ export const Comments = styled.span`
 		font-size: 18px;
 	}
 	@media screen and (max-width: 768px) {
-		font-size: 16px;
+		font-size: 18px;
 		padding-left: 10px;
 	}
 	@media screen and (max-width: 576px) {
-		font-size: 14px;
-	}
-	@media screen and (max-width: 480px) {
-		font-size: 10px;
-		padding-left: 5px;
+		padding-left: 10px;
 	}
 `;
 
