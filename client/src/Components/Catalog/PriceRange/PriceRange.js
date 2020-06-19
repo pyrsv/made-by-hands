@@ -5,13 +5,13 @@ import 'react-input-range/lib/css/index.css';
 import './styles.scss';
 import { Wrapper } from './styles';
 
-const PriceRange = ({ changeRange, minPriceDB, maxPriceDB }) => {
+const PriceRange = ({ changeRange, minPrice, maxPrice }) => {
 	const [range, setValue] = useState({
-		value: { min: minPriceDB, max: maxPriceDB },
+		value: { min: minPrice, max: maxPrice },
 	});
 	useEffect(() => {
-		setValue({ value: { min: minPriceDB, max: maxPriceDB } });
-	}, [minPriceDB, maxPriceDB]);
+		setValue({ value: { min: minPrice, max: maxPrice } });
+	}, [minPrice, maxPrice]);
 	return (
 		<Wrapper>
 			<InputRange
@@ -29,8 +29,8 @@ const PriceRange = ({ changeRange, minPriceDB, maxPriceDB }) => {
 
 PriceRange.propTypes = {
 	changeRange: PropTypes.func.isRequired,
-	minPriceDB: PropTypes.number.isRequired,
-	maxPriceDB: PropTypes.number.isRequired,
+	minPrice: PropTypes.number.isRequired,
+	maxPrice: PropTypes.number.isRequired,
 };
 
 export default PriceRange;

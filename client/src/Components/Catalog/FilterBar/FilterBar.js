@@ -10,6 +10,8 @@ import Button from '../../UI/Button/Button';
 import PriceRange from '../PriceRange/PriceRange';
 import FilterGroup from '../FilterGroup/FilterGroup';
 import { FiltersContainer, Title, FilterWrapper } from './styles';
+import Preloader from '../../UI/Preloader/Preloader';
+import { PreloaderContainer } from '../FilterGroup/styles';
 
 const FilterBar = () => {
 	const dispatch = useDispatch();
@@ -17,19 +19,34 @@ const FilterBar = () => {
 	const history = useHistory();
 
 	const [fields, setFields] = useState({});
-	const [priceRange, setPriceRange] = useState({ minPrice: 0, maxPrice: 2000 });
 
 	const categories = useSelector(state => state.filters.categories);
 	const color = useSelector(state => state.filters.colors);
 	const brand = useSelector(state => state.filters.brands);
 	const minPriceDB = useSelector(state => state.filters.minPrice);
 	const maxPriceDB = useSelector(state => state.filters.maxPrice);
+	const [priceRange, setPriceRange] = useState({
+		minPrice: minPriceDB,
+		maxPrice: maxPriceDB,
+	});
+
 	const isMobile = useSelector(state => state.UI.isHeaderMobile);
 	const isCategoriesLoading = useSelector(
 		state => state.filters.isCategoriesFetching
 	);
 	const isColorsLoading = useSelector(state => state.filters.isColorsFetching);
 	const isBrandsLoading = useSelector(state => state.filters.isBrandsFetching);
+	const isPriceLoading = useSelector(
+		state => state.filters.isPriceRangeFetching
+	);
+
+	const handleChangePrice = (min, max) => {
+		setPriceRange({ minPrice: min, maxPrice: max });
+	};
+
+	useEffect(() => {
+		handleChangePrice(minPriceDB, maxPriceDB);
+	}, [minPriceDB, maxPriceDB]);
 
 	useEffect(() => {
 		if (!color.length || !brand.length) {
@@ -48,10 +65,6 @@ const FilterBar = () => {
 		});
 		setFields(initialFields);
 	}, [categories, color, brand, location.search]);
-
-	const handleChangePrice = (min, max) => {
-		setPriceRange({ minPrice: min, maxPrice: max });
-	};
 
 	const handleFilterSubmit = values => {
 		const params = Object.entries(values).reduce((obj, [key, value]) => {
@@ -120,11 +133,17 @@ const FilterBar = () => {
 									isLoading={isBrandsLoading}
 								/>
 								<FilterGroup name="Price">
-									<PriceRange
-										changeRange={handleChangePrice}
-										minPriceDB={minPriceDB}
-										maxPriceDB={maxPriceDB}
-									/>
+									{isPriceLoading ? (
+										<PreloaderContainer>
+											<Preloader size={40} />
+										</PreloaderContainer>
+									) : (
+										<PriceRange
+											changeRange={handleChangePrice}
+											minPrice={priceRange.minPrice}
+											maxPrice={priceRange.maxPrice}
+										/>
+									)}
 								</FilterGroup>
 
 								<Button type="Submit" text="Show" onClick={() => {}} />
