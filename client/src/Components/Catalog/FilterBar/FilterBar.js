@@ -22,9 +22,9 @@ const FilterBar = () => {
 	const categories = useSelector(state => state.filters.categories);
 	const color = useSelector(state => state.filters.colors);
 	const brand = useSelector(state => state.filters.brands);
-
+	const minPriceDB = useSelector(state => state.filters.minPrice);
+	const maxPriceDB = useSelector(state => state.filters.maxPrice);
 	const isMobile = useSelector(state => state.UI.isHeaderMobile);
-
 	const isCategoriesLoading = useSelector(
 		state => state.filters.isCategoriesFetching
 	);
@@ -120,7 +120,11 @@ const FilterBar = () => {
 									isLoading={isBrandsLoading}
 								/>
 								<FilterGroup name="Price">
-									<PriceRange changeRange={handleChangePrice} />
+									<PriceRange
+										changeRange={handleChangePrice}
+										minPriceDB={minPriceDB}
+										maxPriceDB={maxPriceDB}
+									/>
 								</FilterGroup>
 
 								<Button type="Submit" text="Show" onClick={() => {}} />
