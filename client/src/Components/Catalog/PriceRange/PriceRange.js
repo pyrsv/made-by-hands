@@ -5,7 +5,13 @@ import 'react-input-range/lib/css/index.css';
 import './styles.scss';
 import { Wrapper } from './styles';
 
-const PriceRange = ({ changeRange, minPrice, maxPrice }) => {
+const PriceRange = ({
+	changeRange,
+	minPrice,
+	maxPrice,
+	mostExpensive,
+	mostCheap,
+}) => {
 	const [range, setValue] = useState({
 		value: { min: minPrice, max: maxPrice },
 	});
@@ -16,8 +22,8 @@ const PriceRange = ({ changeRange, minPrice, maxPrice }) => {
 		<Wrapper>
 			<InputRange
 				formatLabel={value => `${value}₴`}
-				maxValue={2000}
-				minValue={0}
+				maxValue={mostExpensive}
+				minValue={mostCheap}
 				value={range.value}
 				onChange={value => setValue({ value })}
 				onChangeComplete={() => changeRange(range.value.min, range.value.max)}
@@ -31,6 +37,8 @@ PriceRange.propTypes = {
 	changeRange: PropTypes.func.isRequired,
 	minPrice: PropTypes.number.isRequired,
 	maxPrice: PropTypes.number.isRequired,
+	mostCheap: PropTypes.number.isRequired,
+	mostExpensive: PropTypes.number.isRequired,
 };
 
 export default PriceRange;

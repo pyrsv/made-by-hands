@@ -142,6 +142,8 @@ const FilterBar = () => {
 											changeRange={handleChangePrice}
 											minPrice={priceRange.minPrice}
 											maxPrice={priceRange.maxPrice}
+											mostCheap={minPriceDB}
+											mostExpensive={maxPriceDB}
 										/>
 									)}
 								</FilterGroup>
