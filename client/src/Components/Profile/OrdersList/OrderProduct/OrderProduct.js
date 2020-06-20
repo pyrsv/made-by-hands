@@ -18,7 +18,7 @@ const OrderProduct = ({ name, price, quantity, image }) => {
 				<ProductName>{name}</ProductName>
 				<ProductDetails>
 					<ProductQuantity ProductQuantity>{quantity} pcs.</ProductQuantity>
-					<ProductPrice>{price}€</ProductPrice>
+					<ProductPrice>{price}₴</ProductPrice>
 				</ProductDetails>
 			</ProductInfo>
 		</Product>
