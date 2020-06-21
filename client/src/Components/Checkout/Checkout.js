@@ -43,21 +43,22 @@ const Checkout = () => {
 		checkoutData.email = values.email;
 		checkoutData.postalDelivery = !isAddressDelivery
 			? {
-					city: `${values.city}`,
-					postalOffice: '',
+					city: values.deliveryCity,
+					postalOffice: values.deliveryPoint,
 			  }
 			: null;
 		checkoutData.deliveryAddress = isAddressDelivery
-			? {
+			? JSON.stringify({
 					country: 'Ukraine',
-					city: `${values.city}`,
+					city: values.city,
 					address: `${values.street} ${values.house}, fl.${values.app}`,
-			  }
+			  })
 			: null;
 		checkoutData.letterSubject = 'Thank you for order!';
+		checkoutData.status = 'Pending';
 		checkoutData.letterHtml =
 			'<h1>Your order is placed. OrderNo is 023689452.</h1>';
-		axios.post('/api/orders', checkoutData);
+		axios.post('/api/orders', checkoutData).catch(err => err);
 	};
 
 	const showPostalPoints = errors => {
@@ -88,7 +89,8 @@ const Checkout = () => {
 					lastName: user.lastName || '',
 					email: user.email || '',
 					telephone: user.telephone || '',
-					delivery: 'point1',
+					deliveryPoint: 'point1',
+					deliveryCity: 'Kyiv',
 					city: user?.address.city || '',
 					house: user?.address.houseNumber || '',
 					app: user?.address.flat || '',
@@ -117,10 +119,8 @@ const Checkout = () => {
 				onSubmit={handleFormSubmit}
 			>
 				{({
-					// field,
 					errors,
 					touched,
-					// submitForm,
 					values,
 					handleBlur,
 					handleChange,
@@ -213,16 +213,27 @@ const Checkout = () => {
 										Choose postal delivery point
 										<Field
 											as="select"
-											name="delivery"
+											name="postalCity"
 											value={values.delivery}
 											onChange={handleChange}
 											onBlur={handleBlur}
-											target="form"
 											type="select"
 										>
-											<option value="point1"> point 1</option>
-											<option value="point2"> point 2</option>
-											<option value="point3"> point 3</option>
+											<option value="Kyiv"> Kyiv</option>
+											<option value="Lviv"> Lviv</option>
+											<option value="Odessa"> Odessa</option>
+										</Field>
+										<Field
+											as="select"
+											name="postalPoint"
+											value={values.delivery}
+											onChange={handleChange}
+											onBlur={handleBlur}
+											type="select"
+										>
+											<option value="point1"> Point 1</option>
+											<option value="point2"> Point 2</option>
+											<option value="point3"> Point 3</option>
 										</Field>
 									</label>
 								) : (

@@ -1,29 +1,39 @@
-// import React, { useState, useEffect } from 'react';
 import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import Order from './Order/Order';
-import { OrdersWrapper } from './styles';
+import Preloader from '../../UI/Preloader/Preloader';
+import { OrdersWrapper, Placeholder, PreloaderContainer } from './styles';
 
 const OrdersList = () => {
 	const [orders, setOrders] = useState([]);
-	// const [isFetching, setFetching] = useState(false);
+	const [isFetching, setFetching] = useState(false);
 	useEffect(() => {
-		// setFetching(true);
-		fetch('./mock.json', {
-			headers: {
-				Accept: 'application/json',
-			},
-		})
-			.then(res => res.json())
+		setFetching(true);
+		axios
+			.get('/api/orders')
 			.then(res => {
-				// setFetching(true);
-				setOrders(res);
-			});
+				setFetching(false);
+				setOrders(res.data);
+			})
+			.catch(err => err);
 	}, []);
+
+	if (isFetching) {
+		return (
+			<OrdersWrapper>
+				<PreloaderContainer>
+					<Preloader size={80} />
+				</PreloaderContainer>
+			</OrdersWrapper>
+		);
+	}
 	return (
 		<OrdersWrapper>
-			{orders.map(order => (
-				<Order key={order._id} {...order} />
-			))}
+			{orders.length > 0 && !isFetching ? (
+				orders.map(order => <Order key={order._id} {...order} />)
+			) : (
+				<Placeholder>You have no orders yet</Placeholder>
+			)}
 		</OrdersWrapper>
 	);
 };
