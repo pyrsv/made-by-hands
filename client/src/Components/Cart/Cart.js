@@ -39,6 +39,7 @@ export const Cart = () => {
 									oldPrice={product.previousPrice}
 									type="olive"
 									itemNo={product.itemNo}
+									quantity={product.quantity}
 									cartQuantity={cartQuantity}
 									color={product.color}
 								>
