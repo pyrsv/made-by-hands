@@ -20,6 +20,7 @@ const Checkout = () => {
 	const dispatch = useDispatch();
 	const [isAddressDelivery, setAddressDelivery] = useState(false);
 	const [isCheckoutSuccess, setCheckoutSuccess] = useState(false);
+	const [isLoading, setLoading] = useState(false);
 	const [orderNo, setOrderNo] = useState(null);
 	const user = useSelector(state => state.auth.currentUser) || {};
 	const products = useSelector(state => state.cartReducer.currentCart) || {};
@@ -64,14 +65,18 @@ const Checkout = () => {
 		checkoutData.status = 'Pending';
 		checkoutData.letterHtml =
 			'<h1>Your order is placed. OrderNo is 023689452.</h1>';
+		setLoading(true);
 		axios
 			.post('/api/orders', checkoutData)
 			.then(res => {
 				setOrderNo(res.data.order.orderNo);
 				setCheckoutSuccess(true);
 				dispatch(clearCart());
+				setLoading(false);
 			})
-			.catch(err => err);
+			.catch(() => {
+				setLoading(false);
+			});
 	};
 
 	return (
@@ -83,6 +88,7 @@ const Checkout = () => {
 					<Title text="checkout" color="dark" />
 					<CheckoutWrapper>
 						<CheckoutForm
+							isLoading={isLoading}
 							user={user}
 							isAddressDelivery={isAddressDelivery}
 							showPostal={() => setAddressDelivery(false)}

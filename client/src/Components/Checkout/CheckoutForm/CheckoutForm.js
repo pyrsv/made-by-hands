@@ -21,6 +21,7 @@ const CheckoutForm = ({
 	showPostal,
 	showAddress,
 	onFormSubmit,
+	isLoading,
 }) => {
 	const checkoutSchema = Yup.object().shape({
 		firstName: Yup.string()
@@ -249,6 +250,7 @@ const CheckoutForm = ({
 								text="checkout"
 								color="dark"
 								size="wide"
+								isLoading={isLoading}
 							/>
 						</FormColumn>
 					</StyledForm>
@@ -266,6 +268,7 @@ CheckoutForm.propTypes = {
 	showPostal: PropTypes.func.isRequired,
 	showAddress: PropTypes.func.isRequired,
 	onFormSubmit: PropTypes.func.isRequired,
+	isLoading: PropTypes.bool.isRequired,
 };
 
 export default CheckoutForm;
