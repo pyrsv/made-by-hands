@@ -21,7 +21,7 @@ const PriceRange = ({
 	return (
 		<Wrapper>
 			<InputRange
-				formatLabel={value => `${value}€`}
+				formatLabel={value => `${value}₴`}
 				maxValue={mostExpensive}
 				minValue={mostCheap}
 				value={range.value}
