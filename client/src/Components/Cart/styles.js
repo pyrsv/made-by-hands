@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { Field } from 'formik';
 
 export const CartContainer = styled.div`
 	padding-bottom: 26px;
@@ -142,81 +141,9 @@ export const CartIsEmpty = styled.div`
 	margin-top: 20px;
 `;
 
-export const FlexContainer = styled.div`
-	display: flex;
-	justify-content: space-between;
-	border: 1px solid ${props => props.theme.mainDark};
-	padding: 2% 2% 0 2%;
-	margin-bottom: 10px;
-	border-radius: 4px;
-	position: relative;
-	/* background: ${props => props.theme.whiteBackground}; */
-	height: 287px;
-`;
-
-export const StyledFormColumn = styled.div`
-	display: flex;
-	flex-direction: column;
-	margin-bottom: 26px;
-	width: 28%;
-`;
-
-export const StyledField = styled(Field)`
-	display: inline-block;
-	border: 1px solid #16161c;
-	box-sizing: border-box;
-	border-radius: 4px;
-	padding: 6px 12px;
-	font-family: Raleway;
-	font-size: 16px;
-	outline: none;
-	background-color: transparent;
-	width: 100%;
-	margin-bottom: 6px;
-	margin-top: 6px;
-`;
-export const StyledLabel = styled.label`
-	font-family: 'Raleway', sans-serif;
-	font-weight: 500;
-	font-size: 14px;
-	text-align: center;
-	margin-top: 6px;
-`;
-export const StyledRadio = styled.label`
-	margin-bottom: 10px;
-	margin-top: 35px;
-	font-family: 'Raleway', sans-serif;
-	font-weight: 500;
-	font-size: 22px;
-	line-height: 16px;
-	text-align: left;
-`;
-
-export const ButtonWrapper = styled.div`
-	display: flex;
-	justify-content: center;
-`;
-
-export const ColumnOfInputs = styled.div`
-	display: flex;
-	flex-direction: column;
-	position: relative;
-	/* top: 5%; */
-`;
 export const FirstColumn = styled.div`
 	margin-top: 34px;
 	text-align: center;
-`;
-
-export const FillTheFields = styled.div`
-	font-family: 'Raleway', sans-serif;
-	font-weight: 700;
-	font-size: 36px;
-	display: block;
-	text-align: left;
-	margin: 20px 0;
-	text-transform: capitalize;
-	color: ${props => props.theme.mainDark};
 `;
 
 export const CartItemPricePerOne = styled.div`
