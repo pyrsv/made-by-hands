@@ -37,7 +37,7 @@ const RegisterSchema = Yup.object().shape({
 	telephone: Yup.string()
 		.required('Phone number is required')
 		.matches(/^\+380\d{3}\d{2}\d{2}\d{2}$/, {
-			message: 'Enter phone number in format +380XXXXXXXXX',
+			message: 'Enter phone in format +380XXXXXXXXX',
 		}),
 });
 
