@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const InputContainer = styled.div`
 	position: relative;
 	font-family: 'Raleway', sans-serif;
-	margin-bottom: ${props => (props.target === 'form' ? '20px' : 0)};
+	margin-bottom: ${props => (props.target === 'form' ? '25px' : 0)};
 `;
 
 export const Input = styled.input`
@@ -35,7 +35,7 @@ export const ErrorMessage = styled.span`
 	position: absolute;
 	left: 0;
 	bottom: -17px;
-	font-size: 14px;
+	font-size: ${props => (props.length > 40 ? '12px' : '14px')};
 	color: ${props => props.theme.accentRed};
 	animation: show 0.2s ease-in;
 
