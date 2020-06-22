@@ -66,15 +66,15 @@ const Order = ({
 					<OrderPricing>
 						<OrderPricingItem>
 							<span>Order sum:</span>
-							<span>{totalSum}€</span>
+							<span>{totalSum}₴</span>
 						</OrderPricingItem>
 						<OrderPricingItem>
 							<span>Delivery:</span>
-							<span>{deliveryAddress ? '50€' : '30€'}</span>
+							<span>{deliveryAddress ? '50₴' : '30₴'}</span>
 						</OrderPricingItem>
 						<OrderPricingItem bold>
 							<span>Total:</span>
-							<span>{totalSum + (deliveryAddress ? 50 : 30)}€</span>
+							<span>{totalSum + (deliveryAddress ? 50 : 30)}₴</span>
 						</OrderPricingItem>
 					</OrderPricing>
 				</OrderSummary>

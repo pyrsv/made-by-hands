@@ -94,8 +94,8 @@ const ProductCard = ({
 						disabled={isInCart}
 					/>
 					<PriceContainer>
-						{oldPrice && <OldPrice>{oldPrice}€</OldPrice>}
-						<Price discounted={oldPrice && true}>{price}€</Price>
+						{oldPrice && <OldPrice>{oldPrice}₴</OldPrice>}
+						<Price discounted={oldPrice && true}>{price}₴</Price>
 					</PriceContainer>
 				</CardInfoRow>
 			</CardInfo>

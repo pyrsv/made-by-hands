@@ -17,7 +17,7 @@ const getFilteredProductsInit = () => ({
 	type: GET_FILTERED_PRODUCTS_INIT,
 });
 
-const getFilteredProductsSuccess = (products, productsQuantity) => ({
+export const getFilteredProductsSuccess = (products, productsQuantity) => ({
 	type: GET_FILTERED_PRODUCTS_SUCCESS,
 	payload: {
 		products,

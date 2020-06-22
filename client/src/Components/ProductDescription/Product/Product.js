@@ -67,8 +67,8 @@ const Product = ({
 					<Rating id={id} />
 				</BlockText>
 				<BlockText>
-					{previousPrice && <OldPrice>{previousPrice}€</OldPrice>}
-					<Price discounted={previousPrice && true}>{currentPrice}€</Price>
+					{previousPrice && <OldPrice>{previousPrice}₴</OldPrice>}
+					<Price discounted={previousPrice && true}>{currentPrice}₴</Price>
 				</BlockText>
 				<BlockText>
 					<Parametrs parameters={parameters} />
