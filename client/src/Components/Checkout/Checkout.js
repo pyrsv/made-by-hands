@@ -5,7 +5,15 @@ import Title from '../UI/Title/title';
 import LayoutContainer from '../LayoutContainer/LayoutContainer';
 import CheckoutSumbit from './CheckoutSubmit/CheckoutSubmit';
 import CheckoutForm from './CheckoutForm/CheckoutForm';
-import {} from './styles';
+import ProductListThumb from '../ProductListThumb/ProductListThumb';
+import {
+	CheckoutWrapper,
+	CheckoutSubheading,
+	ProductsWrapper,
+	CheckoutSummary,
+	CheckoutSummaryItem,
+	OrderWrapper,
+} from './styles';
 
 const Checkout = () => {
 	const [isAddressDelivery, setAddressDelivery] = useState(false);
@@ -13,6 +21,10 @@ const Checkout = () => {
 	const [orderNo, setOrderNo] = useState(null);
 	const user = useSelector(state => state.auth.currentUser) || {};
 	const products = useSelector(state => state.cartReducer.currentCart) || {};
+	const totalSum = products.reduce((sum, product) => {
+		sum += product.product.currentPrice * product.cartQuantity;
+		return sum;
+	}, 0);
 
 	if (user && !user.address) {
 		user.address = {};
@@ -66,13 +78,39 @@ const Checkout = () => {
 			) : (
 				<>
 					<Title text="checkout" color="dark" />
-					<CheckoutForm
-						user={user}
-						isAddressDelivery={isAddressDelivery}
-						showPostal={() => setAddressDelivery(false)}
-						showAddress={() => setAddressDelivery(true)}
-						onFormSubmit={handleFormSubmit}
-					/>
+					<CheckoutWrapper>
+						<CheckoutForm
+							user={user}
+							isAddressDelivery={isAddressDelivery}
+							showPostal={() => setAddressDelivery(false)}
+							showAddress={() => setAddressDelivery(true)}
+							onFormSubmit={handleFormSubmit}
+						/>
+						<OrderWrapper>
+							<CheckoutSubheading>Your order</CheckoutSubheading>
+							<ProductsWrapper>
+								<ProductListThumb size="large" products={products} />
+								<CheckoutSummary>
+									<CheckoutSummaryItem>
+										<span>Order sum:</span>
+										<span>{totalSum}₴</span>
+									</CheckoutSummaryItem>
+									<CheckoutSummaryItem>
+										<span>Delivery:</span>
+										<span>{isAddressDelivery ? '50₴' : 'by Post tariff'}</span>
+									</CheckoutSummaryItem>
+									<CheckoutSummaryItem bold>
+										<span>Total:</span>
+										<span>
+											{`${totalSum + (isAddressDelivery ? 50 : 0)}₴ ${
+												!isAddressDelivery ? ' + delivery' : ''
+											}`}
+										</span>
+									</CheckoutSummaryItem>
+								</CheckoutSummary>
+							</ProductsWrapper>
+						</OrderWrapper>
+					</CheckoutWrapper>
 				</>
 			)}
 		</LayoutContainer>

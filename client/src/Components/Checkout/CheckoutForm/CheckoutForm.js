@@ -1,10 +1,19 @@
 import React from 'react';
-import { Formik, Field } from 'formik';
+import { Formik } from 'formik';
 import * as Yup from 'yup';
 import Button from '../../UI/Button/Button';
+import RadioButton from '../../UI/RadioButton/RadioButton';
 import InputField from '../../UI/InputFiels/InputField';
 import PropTypes from 'prop-types';
-import {} from './styles';
+import {
+	FormColumn,
+	StyledForm,
+	DeliveryOptions,
+	DeliveryItem,
+	DeliveryItemRadioButton,
+	StyledSelect,
+	CheckoutSubheading,
+} from './styles';
 
 const CheckoutForm = ({
 	user,
@@ -13,7 +22,6 @@ const CheckoutForm = ({
 	showAddress,
 	onFormSubmit,
 }) => {
-	// console.log(isAddressDelivery);
 	const checkoutSchema = Yup.object().shape({
 		firstName: Yup.string()
 			.matches(/^[a-zA-Zа-яА-Я]+$/, {
@@ -77,174 +85,173 @@ const CheckoutForm = ({
 				handleSubmit,
 			}) => {
 				return (
-					<form onSubmit={handleSubmit}>
-						<p>Fill the fields</p>
-						<div>
-							<div>
-								<InputField
-									name="firstName"
-									onChange={handleChange}
-									onBlur={handleBlur}
-									target="form"
-									type="text"
-									label="First Name"
-									value={values.firstName}
-									touched={touched.firstName}
-									error={errors.firstName}
-									helperText={errors.firstName}
-								/>
-								<InputField
-									name="lastName"
-									onChange={handleChange}
-									onBlur={handleBlur}
-									target="form"
-									type="text"
-									label="Last Name"
-									value={values.lastName}
-									touched={touched.lastName}
-									error={errors.lastName}
-									helperText={errors.lastName}
-								/>
-								<InputField
-									name="email"
-									onChange={handleChange}
-									onBlur={handleBlur}
-									target="form"
-									type="text"
-									label="Email"
-									value={values.email}
-									touched={touched.email}
-									error={errors.email}
-									helperText={errors.email}
-								/>
-								<InputField
-									name="telephone"
-									onChange={handleChange}
-									onBlur={handleBlur}
-									target="form"
-									type="text"
-									label="Phone number"
-									value={values.telephone}
-									touched={touched.telephone}
-									error={errors.telephone}
-									helperText={errors.telephone}
-								/>
-							</div>
+					<StyledForm onSubmit={handleSubmit}>
+						<FormColumn>
+							<CheckoutSubheading>Enter your details</CheckoutSubheading>
+							<InputField
+								name="firstName"
+								onChange={handleChange}
+								onBlur={handleBlur}
+								target="form"
+								type="text"
+								label="First Name"
+								value={values.firstName}
+								touched={touched.firstName}
+								error={errors.firstName}
+								helperText={errors.firstName}
+							/>
+							<InputField
+								name="lastName"
+								onChange={handleChange}
+								onBlur={handleBlur}
+								target="form"
+								type="text"
+								label="Last Name"
+								value={values.lastName}
+								touched={touched.lastName}
+								error={errors.lastName}
+								helperText={errors.lastName}
+							/>
+							<InputField
+								name="email"
+								onChange={handleChange}
+								onBlur={handleBlur}
+								target="form"
+								type="text"
+								label="Email"
+								value={values.email}
+								touched={touched.email}
+								error={errors.email}
+								helperText={errors.email}
+							/>
+							<InputField
+								name="telephone"
+								onChange={handleChange}
+								onBlur={handleBlur}
+								target="form"
+								type="text"
+								label="Phone number"
+								value={values.telephone}
+								touched={touched.telephone}
+								error={errors.telephone}
+								helperText={errors.telephone}
+							/>
+						</FormColumn>
 
-							<div>
-								<div>
-									<input
-										checked={!isAddressDelivery}
-										value="postal"
-										type="radio"
-										text="Delivery to postal point"
-										name="delivery"
-										onChange={showPostal}
-									/>
-									Delivery to the post
-								</div>
-								<div>
-									<input
-										checked={isAddressDelivery}
-										value="address"
-										type="radio"
-										text="Delivery to your address"
-										name="delivery"
-										onChange={showAddress}
-									/>
-									Delivery to your address
-								</div>
-							</div>
-							<div>
-								{!isAddressDelivery ? (
-									// eslint-disable-next-line jsx-a11y/label-has-associated-control
-									<label>
-										Choose postal delivery point
-										<Field
-											as="select"
-											name="delivery.postalCity"
-											value={values.delivery.deliveryCity}
-											onChange={handleChange}
-											onBlur={handleBlur}
-											type="select"
-										>
-											<option value="Kyiv"> Kyiv</option>
-											<option value="Lviv"> Lviv</option>
-											<option value="Odessa"> Odessa</option>
-										</Field>
-										<Field
-											as="select"
-											name="delivery.deliveryPoint"
-											value={values.delivery.deliveryPoint}
-											onChange={handleChange}
-											onBlur={handleBlur}
-											type="select"
-										>
-											<option value="1"> Point 1</option>
-											<option value="2"> Point 2</option>
-											<option value="3"> Point 3</option>
-										</Field>
-									</label>
-								) : (
-									<div>
-										<InputField
-											name="delivery.city"
-											onChange={handleChange}
-											onBlur={handleBlur}
-											target="form"
-											type="text"
-											label="City"
-											value={values.delivery.city}
-											touched={touched.delivery?.city}
-											error={errors.delivery?.city}
-										/>
-										<InputField
-											name="delivery.street"
-											onChange={handleChange}
-											onBlur={handleBlur}
-											target="form"
-											type="text"
-											label="Street"
-											value={values.delivery.street}
-											touched={touched.delivery?.street}
-											error={errors.delivery?.street}
-										/>
-										<InputField
-											name="delivery.house"
-											onChange={handleChange}
-											onBlur={handleBlur}
-											target="form"
-											type="text"
-											label="House number"
-											value={values.delivery.house}
-											touched={touched.delivery?.house}
-											error={errors.delivery?.house}
-										/>
+						<FormColumn>
+							<DeliveryOptions>
+								<CheckoutSubheading>Choose delivery option</CheckoutSubheading>
 
-										<InputField
-											name="delivery.app"
-											onChange={handleChange}
-											onBlur={handleBlur}
-											target="form"
-											type="text"
-											label="Flat number"
-											value={values.delivery.app}
-											touched={touched.delivery?.app}
-											error={errors.delivery?.app}
+								<DeliveryItem>
+									<DeliveryItemRadioButton>
+										<RadioButton
+											id="postalCheck"
+											value="postal"
+											onChange={showPostal}
+											isSelected={!isAddressDelivery}
+											label="Postal delivery"
 										/>
-									</div>
-								)}
-							</div>
-						</div>
-						<div>
+									</DeliveryItemRadioButton>
+									{!isAddressDelivery && (
+										<>
+											<StyledSelect
+												as="select"
+												name="delivery.postalCity"
+												value={values.delivery.deliveryCity}
+												onChange={handleChange}
+												onBlur={handleBlur}
+												type="select"
+											>
+												<option value="Kyiv"> Kyiv</option>
+												<option value="Lviv"> Lviv</option>
+												<option value="Odessa"> Odessa</option>
+											</StyledSelect>
+											<StyledSelect
+												as="select"
+												name="delivery.deliveryPoint"
+												value={values.delivery.deliveryPoint}
+												onChange={handleChange}
+												onBlur={handleBlur}
+												type="select"
+											>
+												<option value="1"> Point 1</option>
+												<option value="2"> Point 2</option>
+												<option value="3"> Point 3</option>
+											</StyledSelect>
+										</>
+									)}
+								</DeliveryItem>
+
+								<DeliveryItem>
+									<DeliveryItemRadioButton>
+										<RadioButton
+											id="addressCheck"
+											value="address"
+											onChange={showAddress}
+											isSelected={isAddressDelivery}
+											label="Сouier delivery"
+										/>
+									</DeliveryItemRadioButton>
+									{isAddressDelivery && (
+										<div>
+											<InputField
+												name="delivery.city"
+												onChange={handleChange}
+												onBlur={handleBlur}
+												target="form"
+												type="text"
+												label="City"
+												value={values.delivery.city}
+												touched={touched.delivery?.city}
+												error={errors.delivery?.city}
+											/>
+											<InputField
+												name="delivery.street"
+												onChange={handleChange}
+												onBlur={handleBlur}
+												target="form"
+												type="text"
+												label="Street"
+												value={values.delivery.street}
+												touched={touched.delivery?.street}
+												error={errors.delivery?.street}
+											/>
+											<InputField
+												name="delivery.house"
+												onChange={handleChange}
+												onBlur={handleBlur}
+												target="form"
+												type="text"
+												label="House number"
+												value={values.delivery.house}
+												touched={touched.delivery?.house}
+												error={errors.delivery?.house}
+											/>
+
+											<InputField
+												name="delivery.app"
+												onChange={handleChange}
+												onBlur={handleBlur}
+												target="form"
+												type="text"
+												label="Flat number"
+												value={values.delivery.app}
+												touched={touched.delivery?.app}
+												error={errors.delivery?.app}
+											/>
+										</div>
+									)}
+								</DeliveryItem>
+							</DeliveryOptions>
 							<Button
 								onClick={() => {}}
 								type="submit"
 								text="checkout"
 								color="dark"
+								size="wide"
 							/>
-						</div>
-					</form>
+						</FormColumn>
+					</StyledForm>
 				);
 			}}
 		</Formik>

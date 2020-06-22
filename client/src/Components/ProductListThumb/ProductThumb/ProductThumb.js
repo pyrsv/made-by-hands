@@ -11,13 +11,13 @@ import {
 	ProductDetails,
 } from './styles';
 
-const ProductThumb = ({ name, price, quantity, image, itemNo }) => {
+const ProductThumb = ({ name, price, quantity, image, itemNo, size }) => {
 	return (
 		<NavLink to={`/products/${itemNo}`}>
 			<Product>
-				<ProductImage src={image} alt={name} />
-				<ProductInfo>
-					<ProductName>{name}</ProductName>
+				<ProductImage src={image} alt={name} size={size} />
+				<ProductInfo size={size}>
+					<ProductName size={size}>{name}</ProductName>
 					<ProductDetails>
 						<ProductQuantity ProductQuantity>{quantity} pcs.</ProductQuantity>
 						<ProductPrice>{price}€</ProductPrice>
@@ -34,6 +34,7 @@ ProductThumb.propTypes = {
 	quantity: PropTypes.string.isRequired,
 	image: PropTypes.string.isRequired,
 	itemNo: PropTypes.string.isRequired,
+	size: PropTypes.string.isRequired,
 };
 
 export default ProductThumb;

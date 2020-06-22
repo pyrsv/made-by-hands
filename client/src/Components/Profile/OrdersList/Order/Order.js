@@ -36,27 +36,8 @@ const Order = ({
 			</OrderData>
 			<OrderInfo>
 				<OrderProductsList>
-					<ProductListThumb products={products} />
+					<ProductListThumb products={products} size="small" />
 				</OrderProductsList>
-
-				{/* <OrderProductsList>
-					{products.map(product => {
-						const {
-							name,
-							currentPrice,
-							imageUrls: [image],
-						} = product.product;
-						return (
-							<OrderProduct
-								key={product._id}
-								name={name}
-								price={currentPrice}
-								image={image}
-								quantity={product.cartQuantity}
-							/>
-						);
-					})}
-				</OrderProductsList> */}
 				<OrderDelivery>
 					<DeliveryInfo>
 						{firstName} {lastName}

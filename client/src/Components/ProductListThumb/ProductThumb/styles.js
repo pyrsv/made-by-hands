@@ -6,18 +6,18 @@ export const Product = styled.div`
 `;
 
 export const ProductImage = styled.img`
-	width: 50px;
+	width: ${props => (props.size === 'large' ? '70px' : '50px')};
 	height: auto;
-	margin-right: 8px;
+	margin-right: ${props => (props.size === 'large' ? '10px' : '8px')};
 `;
 
 export const ProductInfo = styled.div`
-	font-size: 12px;
+	font-size: ${props => (props.size === 'large' ? '14px' : '12px')};
 `;
 export const ProductName = styled.p`
 	text-transform: capitalize;
 	font-weight: 600;
-	margin-bottom: 8px;
+	margin-bottom: ${props => (props.size === 'large' ? '10px' : '8px')};
 `;
 
 export const ProductDetails = styled.div`
