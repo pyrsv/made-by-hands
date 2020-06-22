@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import OrderProduct from '../OrderProduct/OrderProduct';
+import ProductListThumb from '../../../ProductListThumb/ProductListThumb';
 import {
 	OrderContainer,
 	OrderInfo,
@@ -36,6 +36,10 @@ const Order = ({
 			</OrderData>
 			<OrderInfo>
 				<OrderProductsList>
+					<ProductListThumb products={products} />
+				</OrderProductsList>
+
+				{/* <OrderProductsList>
 					{products.map(product => {
 						const {
 							name,
@@ -52,7 +56,7 @@ const Order = ({
 							/>
 						);
 					})}
-				</OrderProductsList>
+				</OrderProductsList> */}
 				<OrderDelivery>
 					<DeliveryInfo>
 						{firstName} {lastName}

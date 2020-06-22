@@ -23,6 +23,7 @@ export const OrderData = styled.div`
 	font-size: 14px;
 	margin-bottom: 17px;
 `;
+
 export const OrderProductsList = styled.div`
 	grid-area: products;
 `;
