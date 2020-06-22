@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Preloader from '../Preloader/Preloader';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { StyledButton, Icon } from './styles';
+import { StyledButton, Icon, PreloaderContainer } from './styles';
 
 const Button = ({
 	text,
@@ -12,6 +13,7 @@ const Button = ({
 	icon,
 	disabled,
 	iconPrefix,
+	isLoading,
 }) => {
 	return (
 		<StyledButton
@@ -20,12 +22,21 @@ const Button = ({
 			size={size}
 			color={color}
 			onClick={onClick}
+			isLoading={isLoading}
 		>
-			<span>{text}</span>
-			{icon && (
-				<Icon>
-					<FontAwesomeIcon icon={[iconPrefix, icon]} />
-				</Icon>
+			{isLoading ? (
+				<PreloaderContainer>
+					<Preloader size={24} color="#fff" />
+				</PreloaderContainer>
+			) : (
+				<>
+					<span>{text}</span>
+					{icon && (
+						<Icon>
+							<FontAwesomeIcon icon={[iconPrefix, icon]} />
+						</Icon>
+					)}
+				</>
 			)}
 		</StyledButton>
 	);
@@ -40,6 +51,7 @@ Button.propTypes = {
 	icon: PropTypes.string,
 	disabled: PropTypes.bool,
 	iconPrefix: PropTypes.string,
+	isLoading: PropTypes.bool,
 };
 
 Button.defaultProps = {
@@ -49,6 +61,7 @@ Button.defaultProps = {
 	icon: null,
 	disabled: false,
 	iconPrefix: 'far',
+	isLoading: false,
 };
 
 export default Button;
