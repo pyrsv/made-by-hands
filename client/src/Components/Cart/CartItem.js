@@ -27,6 +27,7 @@ export const CartItem = ({
 	name,
 	img,
 	price,
+	quantity,
 	cartQuantity,
 	color,
 }) => {
@@ -56,7 +57,10 @@ export const CartItem = ({
 						-
 					</QuantityButton>
 					<CartItemQuantity>{cartQuantity}</CartItemQuantity>
-					<QuantityButton onClick={() => dispatch(addToCart(id, itemNo))}>
+					<QuantityButton
+						disabled={cartQuantity >= quantity}
+						onClick={() => dispatch(addToCart(id, itemNo))}
+					>
 						+
 					</QuantityButton>
 				</QuantityContainer>
@@ -78,5 +82,6 @@ CartItem.propTypes = {
 	img: PropTypes.string.isRequired,
 	price: PropTypes.number.isRequired,
 	cartQuantity: PropTypes.number.isRequired,
+	quantity: PropTypes.number.isRequired,
 	color: PropTypes.string.isRequired,
 };
