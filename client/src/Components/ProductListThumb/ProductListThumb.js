@@ -7,6 +7,7 @@ const ProductListThumb = ({ products }) => {
 	return products.map(product => {
 		const {
 			name,
+			itemNo,
 			currentPrice,
 			imageUrls: [image],
 		} = product.product;
@@ -16,6 +17,7 @@ const ProductListThumb = ({ products }) => {
 				name={name}
 				price={currentPrice}
 				image={image}
+				itemNo={itemNo}
 				quantity={product.cartQuantity}
 			/>
 		);
