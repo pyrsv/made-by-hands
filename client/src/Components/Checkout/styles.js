@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 export const CheckoutWrapper = styled.div`
 	display: grid;
+	padding-bottom: 80px;
 	grid-template-columns: 3fr 1fr;
 
 	@media (max-width: 992px) {
@@ -11,6 +12,8 @@ export const CheckoutWrapper = styled.div`
 	}
 
 	@media (max-width: 576px) {
+		padding-bottom: 40px;
+
 		grid-template-columns: 1fr;
 	}
 `;
