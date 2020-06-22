@@ -20,7 +20,7 @@ const ProductThumb = ({ name, price, quantity, image, itemNo, size }) => {
 					<ProductName size={size}>{name}</ProductName>
 					<ProductDetails>
 						<ProductQuantity ProductQuantity>{quantity} pcs.</ProductQuantity>
-						<ProductPrice>{price}€</ProductPrice>
+						<ProductPrice>{price}₴</ProductPrice>
 					</ProductDetails>
 				</ProductInfo>
 			</Product>

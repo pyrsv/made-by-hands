@@ -13,6 +13,7 @@ export const ProductImage = styled.img`
 
 export const ProductInfo = styled.div`
 	font-size: ${props => (props.size === 'large' ? '14px' : '12px')};
+	width: 100%;
 `;
 export const ProductName = styled.p`
 	text-transform: capitalize;
