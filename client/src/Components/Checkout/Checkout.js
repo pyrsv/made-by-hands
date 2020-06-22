@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import Title from '../UI/Title/title';
 import LayoutContainer from '../LayoutContainer/LayoutContainer';
 import CheckoutSumbit from './CheckoutSubmit/CheckoutSubmit';
 import CheckoutForm from './CheckoutForm/CheckoutForm';
 import ProductListThumb from '../ProductListThumb/ProductListThumb';
+import { clearCart } from '../../store/actions/cartActions';
 import {
 	CheckoutWrapper,
 	CheckoutSubheading,
@@ -16,6 +17,7 @@ import {
 } from './styles';
 
 const Checkout = () => {
+	const dispatch = useDispatch();
 	const [isAddressDelivery, setAddressDelivery] = useState(false);
 	const [isCheckoutSuccess, setCheckoutSuccess] = useState(false);
 	const [orderNo, setOrderNo] = useState(null);
@@ -67,6 +69,7 @@ const Checkout = () => {
 			.then(res => {
 				setOrderNo(res.data.order.orderNo);
 				setCheckoutSuccess(true);
+				dispatch(clearCart());
 			})
 			.catch(err => err);
 	};
