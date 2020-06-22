@@ -8,6 +8,9 @@ import {
 	GET_COLORS_FAIL,
 	GET_COLORS_INIT,
 	GET_COLORS_SUCCESS,
+	GET_PRICE_RANGE_ERROR,
+	GET_PRICE_RANGE_INIT,
+	GET_PRICE_RANGE_SUCCESS,
 } from '../types/filtersTypes';
 
 const initialState = {
@@ -17,7 +20,10 @@ const initialState = {
 	isCategoriesFetching: false,
 	isColorsFetching: false,
 	isBrandsFetching: false,
+	isPriceRangeFetching: false,
 	error: null,
+	minPrice: 0,
+	maxPrice: 0,
 };
 
 export const filtersReducer = (state = initialState, { type, payload }) => {
@@ -40,6 +46,17 @@ export const filtersReducer = (state = initialState, { type, payload }) => {
 			return { ...state, isBrandsFetching: false, brands: payload };
 		case GET_BRANDS_FAIL:
 			return { ...state, isBrandsFetching: false, error: payload };
+		case GET_PRICE_RANGE_INIT:
+			return { ...state, isPriceRangeFetching: true, error: null };
+		case GET_PRICE_RANGE_SUCCESS:
+			return {
+				...state,
+				isPriceRangeFetching: false,
+				minPrice: payload.minPrice,
+				maxPrice: payload.maxPrice,
+			};
+		case GET_PRICE_RANGE_ERROR:
+			return { ...state, isPriceRangeFetching: false, error: payload };
 
 		default:
 			return state;

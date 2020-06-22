@@ -44,7 +44,8 @@ const FilterGroup = ({
 					})
 				)}
 			</CheckboxesWrapper>
-			{children}
+
+			{!isLoading && children}
 		</FiltersWrapper>
 	);
 };

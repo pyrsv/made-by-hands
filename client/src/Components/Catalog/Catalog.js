@@ -7,11 +7,12 @@ import FilterBar from './FilterBar/FilterBar';
 import Drawer from '../UI/Drawer/Drawer';
 import CatalogList from './CatalogList/CatalogList';
 import { toggleFilters } from '../../store/actions/UIActions';
-
 import { CatalogContainer, Content } from './styles';
+import { getPriceRange } from '../../store/actions/filtersActions';
 
 const Catalog = () => {
 	const dispatch = useDispatch();
+	dispatch(getPriceRange());
 	const isTablet = useSelector(state => state.UI.isHeaderMobile);
 	const isFilters = useSelector(state => state.UI.isDrawer);
 

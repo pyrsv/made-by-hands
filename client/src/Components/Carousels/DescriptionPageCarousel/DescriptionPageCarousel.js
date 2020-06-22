@@ -18,6 +18,7 @@ const DescriptionPageCarousel = ({ imageUrls }) => {
 				items={images}
 				showPlayButton={false}
 				thumbnailPosition="left"
+				showFullscreenButton={false}
 			/>
 		</>
 	);

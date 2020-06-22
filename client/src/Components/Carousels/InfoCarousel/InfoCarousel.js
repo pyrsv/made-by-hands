@@ -17,7 +17,7 @@ const InfoCarousel = () => {
 	const [items, setItems] = useState([]);
 
 	const takeInfo = () => {
-		axios.get('./slides').then(res => {
+		axios.get('/api/slides').then(res => {
 			setItems(res.data);
 		});
 	};

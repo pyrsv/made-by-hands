@@ -2,6 +2,7 @@ import React from 'react';
 import { Switch, Route, useLocation } from 'react-router-dom';
 import CartPage from '../Pages/CartPage';
 import CatalogPage from '../Pages/CatalogPage';
+import CheckoutPage from '../Pages/CheckoutPage';
 import ProfilePage from '../Pages/ProfilePage';
 import IndexPage from '../Pages/IndexPage';
 import ProductPage from '../Pages/ProductPage';
@@ -39,6 +40,9 @@ const Routes = () => {
 				</Route>
 				<Route path="/sales">
 					<SalesPage />
+				</Route>
+				<Route path="/checkout">
+					<CheckoutPage />
 				</Route>
 				<ProtectedRoute path="/profile">
 					<ProfilePage />

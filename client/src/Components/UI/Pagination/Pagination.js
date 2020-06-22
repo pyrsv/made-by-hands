@@ -1,4 +1,4 @@
-import React, { useState, memo } from 'react';
+import React, { useState } from 'react';
 import { Ul, Li, Nav, Button, Link, Current } from './styles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import PropTypes from 'prop-types';
@@ -21,6 +21,10 @@ const Pagination = ({
 	const [numberOfPortion, setNumberOfPortion] = useState(1);
 	const leftNumberOfPortion = (numberOfPortion - 1) * itemsPerPage + 1;
 	const rightNumberOfPortion = numberOfPortion * itemsPerPage;
+
+	if (pagesCount <= 1) {
+		return <div />;
+	}
 
 	return (
 		<Nav>
@@ -71,4 +75,4 @@ Pagination.defaultProps = {
 	portionSize: 3,
 };
 
-export default memo(Pagination);
+export default Pagination;

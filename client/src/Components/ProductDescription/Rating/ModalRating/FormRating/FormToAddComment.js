@@ -3,22 +3,20 @@ import Button from '../../../../UI/Button/Button';
 import TextareaField from '../../../../UI/TextareaFiels/TextareaFiels';
 import { Formik } from 'formik';
 import PropTypes from 'prop-types';
-import axios from 'axios';
 import { useDispatch } from 'react-redux';
-import { getRatingAndCommentsInfo } from '../../../../../store/actions/commentAction';
+import { postNewRatingAndComments } from '../../../../../store/actions/ratingAction';
 
 const FormToAddComment = ({ rating, id, toggleModal }) => {
 	const dispatch = useDispatch();
 	const postCommentAndRate = content => {
-		axios
-			.post('/comments', { product: id, content, rating })
-			.then(() => dispatch(getRatingAndCommentsInfo(id)), toggleModal());
+		dispatch(postNewRatingAndComments(id, content, rating));
+		toggleModal();
 	};
 
 	return (
 		<div>
 			<Formik
-				initialValues={{ content: '' }}
+				initialValues={{ content: undefined }}
 				onSubmit={values => {
 					postCommentAndRate(values.content);
 				}}
@@ -36,7 +34,7 @@ const FormToAddComment = ({ rating, id, toggleModal }) => {
 							required
 						/>
 
-						<Button text="send" type="submit" size="wide" />
+						<Button text="send" onClick={() => {}} type="submit" size="wide" />
 					</form>
 				)}
 			</Formik>

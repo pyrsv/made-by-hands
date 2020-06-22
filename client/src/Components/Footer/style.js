@@ -43,10 +43,10 @@ export const IconSocNet = styled.a`
 	width: ${props => (props.width ? props.width : '30px')};
 	margin: 3px;
 	cursor: pointer;
-	background-image: url("./social-icons-png-vk-4.png");
+	background-image: url('./social-icons-png-vk-4.png');
 	background-position: ${props => props.backgroundPoss};
-	background-size: cover
-	background-repeat:no-repeat;
+	background-size: cover;
+	background-repeat: no-repeat;
 `;
 
 export const IconPay = styled.a`
