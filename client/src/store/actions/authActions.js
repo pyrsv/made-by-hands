@@ -1,6 +1,10 @@
 import axios from 'axios';
 import setAuthToken from '../../utils/setAuthToken';
-import { handleUserLogin, handleGetUser } from '../../utils/API';
+import {
+	handleUserLogin,
+	handleGetUser,
+	checkProductsForCartAndFavorites,
+} from '../../utils/API';
 // eslint-disable-next-line import/no-cycle
 import { setCartAction, updateCart } from './cartActions';
 import { setWishlist } from './wishActions';
@@ -75,7 +79,9 @@ export const getUser = () => dispatch => {
 						if (!result.data) {
 							axios.post('/api/wishlist');
 						} else {
-							dispatch(setWishlist(result.data.products));
+							checkProductsForCartAndFavorites(
+								result.data.products
+							).then(products => dispatch(setWishlist(products)));
 						}
 					})
 					.catch();
@@ -116,7 +122,9 @@ export const userLogin = ({ loginOrEmail, password }) => dispatch => {
 						if (!result.data) {
 							axios.post('/api/wishlist');
 						} else {
-							dispatch(setWishlist(result.data.products));
+							checkProductsForCartAndFavorites(
+								result.data.products
+							).then(products => dispatch(setWishlist(products)));
 						}
 					});
 
