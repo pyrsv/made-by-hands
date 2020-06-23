@@ -55,5 +55,4 @@ export const CarouselTitle = styled.p`
 
 export const InfoCarouselContainer = styled.div`
 	padding: 20px 0;
-	background-color: #f9ecef;
 `;
