@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
 	CartItemContainer,
 	CartItemImage,
@@ -32,13 +32,15 @@ export const CartItem = ({
 	color,
 }) => {
 	const btn = useRef();
-
+	const isCartFetching = useSelector(state => state.cartReducer.isCartFetching);
 	const dispatch = useDispatch();
+
 	return (
 		<>
 			<CartItemContainer>
 				<DeleteItemFromCart ref={btn}>
 					<CloseButton
+						disabled={isCartFetching}
 						onClick={() => dispatch(deleteAllTheSameItems(id, itemNo, btn))}
 					/>
 				</DeleteItemFromCart>
@@ -51,14 +53,14 @@ export const CartItem = ({
 				</CartItemInfo>
 				<QuantityContainer>
 					<QuantityButton
-						disabled={cartQuantity === 1}
+						disabled={cartQuantity === 1 || isCartFetching}
 						onClick={() => dispatch(deleteFromCart(id, itemNo))}
 					>
 						-
 					</QuantityButton>
 					<CartItemQuantity>{cartQuantity}</CartItemQuantity>
 					<QuantityButton
-						disabled={cartQuantity >= quantity}
+						disabled={cartQuantity >= quantity || isCartFetching}
 						onClick={() => dispatch(addToCart(id, itemNo))}
 					>
 						+
