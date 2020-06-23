@@ -159,6 +159,7 @@ const RegisterForm = () => {
 							type="submit"
 							size="wide"
 						/>
+
 						{authError && typeof authError !== 'object' && (
 							<ErrorContainer>
 								<FormErrorMessage error={authError} />
