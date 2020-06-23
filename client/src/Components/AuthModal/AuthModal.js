@@ -59,7 +59,7 @@ const AuthModal = () => {
 		<>
 			<ModalWrapper>
 				<Header>
-					<Title>Login</Title>
+					<Title>{form.login ? 'Login' : 'Register'}</Title>
 					<CloseButton onClick={handeleModalClose} />
 				</Header>
 				<Content>

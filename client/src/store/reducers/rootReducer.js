@@ -7,7 +7,6 @@ import { UIReducer } from './UIReducer';
 import { filtersReducer } from './filtersReducer';
 import { wishlistReducer } from './wishlistReducer';
 import { ratingReducer } from './ratingReducer';
-import { ordersReducer } from './ordersReducer';
 
 const rootReducer = combineReducers({
 	carouselArrivals: carouselArrivalsReducer,
@@ -18,7 +17,6 @@ const rootReducer = combineReducers({
 	filters: filtersReducer,
 	wishlistReducer,
 	rating: ratingReducer,
-	orders: ordersReducer,
 });
 
 export default rootReducer;

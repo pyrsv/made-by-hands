@@ -166,3 +166,15 @@ export const updateCart = cartFromServer => dispatch => {
 			dispatch(updateCartError(err));
 		});
 };
+
+export const clearCart = () => dispatch => {
+	axios
+		.delete('/api/cart')
+		.then(() => {
+			dispatch(setCartAction([]));
+			if (localStorage.getItem('cart')) {
+				localStorage.setItem('cart', []);
+			}
+		})
+		.catch(err => err);
+};
