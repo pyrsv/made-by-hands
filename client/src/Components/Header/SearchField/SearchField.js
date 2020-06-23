@@ -37,7 +37,10 @@ const SearchField = ({ onToggle }) => {
 							value={values.search}
 						/>
 						<SearchButton>
-							<FontAwesomeIcon size="1x" icon={['fas', 'search']} />
+							<FontAwesomeIcon
+								size={isHeaderMobile && !isMobile ? '2x' : '1x'}
+								icon={['fas', 'search']}
+							/>
 						</SearchButton>
 
 						{(isMobile || isHeaderMobile) && (

@@ -17,7 +17,7 @@ const getFilteredProductsInit = () => ({
 	type: GET_FILTERED_PRODUCTS_INIT,
 });
 
-const getFilteredProductsSuccess = (products, productsQuantity) => ({
+export const getFilteredProductsSuccess = (products, productsQuantity) => ({
 	type: GET_FILTERED_PRODUCTS_SUCCESS,
 	payload: {
 		products,
@@ -96,7 +96,27 @@ export const loadMoreAction = config => dispatch => {
 			},
 		})
 		.then(response => {
-			dispatch(loadMoreProducts(response.data.products));
+			checkProductsForCartAndFavorites(response.data.products).then(
+				productsWithCartAndFavorites => {
+					dispatch(loadMoreProducts(productsWithCartAndFavorites));
+				}
+			);
+		});
+};
+
+export const loadMoreOnSaleAction = config => dispatch => {
+	axios
+		.get('/api/products/sales', {
+			params: {
+				...config,
+			},
+		})
+		.then(response => {
+			checkProductsForCartAndFavorites(response.data.products).then(
+				productsWithCartAndFavorites => {
+					dispatch(loadMoreProducts(productsWithCartAndFavorites));
+				}
+			);
 		});
 };
 
@@ -118,7 +138,7 @@ export const searchProducts = query => dispatch => {
 export const getProductsOnSale = config => dispatch => {
 	dispatch(getFilteredProductsInit());
 	axios
-		.get('/products/sales/', {
+		.get('/api/products/sales/', {
 			params: {
 				...config,
 			},
@@ -135,5 +155,7 @@ export const getProductsOnSale = config => dispatch => {
 				}
 			);
 		})
-		.catch(err => dispatch(getFilteredProductsError(err)));
+		.catch(err => {
+			dispatch(getFilteredProductsError(err));
+		});
 };

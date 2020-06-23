@@ -13,6 +13,7 @@ const InputField = ({
 	target,
 	touched,
 	error,
+	onBlur,
 }) => {
 	return (
 		<InputContainer target={target}>
@@ -26,10 +27,13 @@ const InputField = ({
 				type={type}
 				placeholder={placeholder}
 				onChange={onChange}
+				onBlur={onBlur}
 				value={value}
 				isInvalid={error && touched}
 			/>
-			{touched && error && <ErrorMessage message={error}>{error}</ErrorMessage>}
+			{touched && error && (
+				<ErrorMessage length={error.length}>{error}</ErrorMessage>
+			)}
 		</InputContainer>
 	);
 };
@@ -45,6 +49,7 @@ InputField.propTypes = {
 	target: PropTypes.oneOf(['form', 'search']).isRequired,
 	touched: PropTypes.bool,
 	error: PropTypes.string,
+	onBlur: PropTypes.func.isRequired,
 };
 
 InputField.defaultProps = {

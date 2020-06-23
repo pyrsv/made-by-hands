@@ -5,7 +5,7 @@ import * as Yup from 'yup';
 import Button from '../../UI/Button/Button';
 import InputField from '../../UI/InputFiels/InputField';
 import FormErrorMessage from '../../UI/FormErrorMessage/FormErrorMessage';
-import { FormFields, StyledForm } from './styles';
+import { FormFields, ErrorContainer, StyledRegisterForm } from './styles';
 import { userRegister } from '../../../store/actions/authActions';
 
 const RegisterSchema = Yup.object().shape({
@@ -14,7 +14,14 @@ const RegisterSchema = Yup.object().shape({
 		.required('Login is required')
 		.min(3, 'Login must be between 3 and 10 characters')
 		.max(10, 'Login must be between 3 and 10 characters'),
-	password: Yup.string().required('Password is required'),
+	password: Yup.string()
+		.matches(/^[a-zA-Z0-9]+$/, {
+			message: 'Allowed characters for password is a-z, A-Z, 0-9.',
+		})
+		.min(7, 'Password must be between 7 and 30 characters')
+		.max(30, 'Password must be between 7 and 30 characters')
+		.required('Password is required'),
+
 	firstName: Yup.string()
 		.required('First name is required')
 		.matches(/^[a-zA-Zа-яА-Я]+$/, {
@@ -32,14 +39,17 @@ const RegisterSchema = Yup.object().shape({
 	telephone: Yup.string()
 		.required('Phone number is required')
 		.matches(/^\+380\d{3}\d{2}\d{2}\d{2}$/, {
-			message: 'Enter phone number in format +380XXXXXXXXX',
+			message: 'Enter phone in format +380XXXXXXXXX',
 		}),
 });
 
 const RegisterForm = () => {
 	const dispatch = useDispatch();
 	const isLoading = useSelector(state => state.auth.isLoading);
-	const registerError = useSelector(state => state.auth.error);
+
+	const authError = Object.values(
+		useSelector(state => state.auth.error || {})
+	)[0];
 
 	return (
 		<div>
@@ -65,6 +75,7 @@ const RegisterForm = () => {
 					errors,
 					touched,
 				}) => (
+					<StyledRegisterForm onSubmit={handleSubmit}>
 					<StyledForm type="register" onSubmit={handleSubmit}>
 						<FormFields>
 							<InputField
@@ -150,11 +161,13 @@ const RegisterForm = () => {
 							type="submit"
 							size="wide"
 						/>
-						{registerError &&
-							Object.values(registerError).map(message => (
-								<FormErrorMessage key={message} text={message} />
-							))}
-					</StyledForm>
+						{authError && typeof authError !== 'object' && (
+							<ErrorContainer>
+								<FormErrorMessage error={authError} />
+							</ErrorContainer>
+						)}
+					</StyledRegisterForm>
+
 				)}
 			</Formik>
 		</div>

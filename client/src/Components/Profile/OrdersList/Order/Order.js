@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import OrderProduct from '../OrderProduct/OrderProduct';
+import ProductListThumb from '../../../ProductListThumb/ProductListThumb';
 import {
 	OrderContainer,
 	OrderInfo,
@@ -36,22 +36,7 @@ const Order = ({
 			</OrderData>
 			<OrderInfo>
 				<OrderProductsList>
-					{products.map(product => {
-						const {
-							name,
-							currentPrice,
-							imageUrls: [image],
-						} = product.product;
-						return (
-							<OrderProduct
-								key={product._id}
-								name={name}
-								price={currentPrice}
-								image={image}
-								quantity={product.cartQuantity}
-							/>
-						);
-					})}
+					<ProductListThumb products={products} size="small" />
 				</OrderProductsList>
 				<OrderDelivery>
 					<DeliveryInfo>
@@ -81,15 +66,15 @@ const Order = ({
 					<OrderPricing>
 						<OrderPricingItem>
 							<span>Order sum:</span>
-							<span>{totalSum}€</span>
+							<span>{totalSum}₴</span>
 						</OrderPricingItem>
 						<OrderPricingItem>
 							<span>Delivery:</span>
-							<span>{deliveryAddress ? '50€' : '30€'}</span>
+							<span>{deliveryAddress ? '50₴' : '30₴'}</span>
 						</OrderPricingItem>
 						<OrderPricingItem bold>
 							<span>Total:</span>
-							<span>{totalSum + (deliveryAddress ? 50 : 30)}€</span>
+							<span>{totalSum + (deliveryAddress ? 50 : 30)}₴</span>
 						</OrderPricingItem>
 					</OrderPricing>
 				</OrderSummary>

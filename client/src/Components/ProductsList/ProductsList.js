@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import InfiniteScroll from 'react-infinite-scroller';
 import { useDispatch } from 'react-redux';
-import { loadMoreAction } from '../../store/actions/catalogActions';
 import ProductCard from '../ProductCard/ProductCard';
 import Preloader from '../UI/Preloader/Preloader';
 import ListSkeleton from './ListSkeleton/ListSkeleton';
@@ -16,6 +15,7 @@ const ProductsList = ({
 	perPage,
 	isProductsFetching,
 	scrollable,
+	loadAction,
 }) => {
 	const dispatch = useDispatch();
 
@@ -26,7 +26,7 @@ const ProductsList = ({
 		<InfiniteScroll
 			threshold={150}
 			loadMore={() =>
-				dispatch(loadMoreAction({ perPage, startPage, ...queryParams }))
+				dispatch(loadAction({ perPage, startPage, ...queryParams }))
 			}
 			hasMore={products.length < productsQuantity && !isProductsFetching}
 			loader={
@@ -102,6 +102,7 @@ ProductsList.propTypes = {
 	queryParams: PropTypes.objectOf(PropTypes.string),
 	startPage: PropTypes.number,
 	perPage: PropTypes.number,
+	loadAction: PropTypes.func,
 };
 
 ProductsList.defaultProps = {
@@ -109,6 +110,7 @@ ProductsList.defaultProps = {
 	queryParams: {},
 	startPage: 1,
 	perPage: 12,
+	loadAction: () => {},
 };
 
 export default ProductsList;

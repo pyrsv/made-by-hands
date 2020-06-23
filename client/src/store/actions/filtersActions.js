@@ -9,6 +9,9 @@ import {
 	GET_COLORS_FAIL,
 	GET_COLORS_INIT,
 	GET_COLORS_SUCCESS,
+	GET_PRICE_RANGE_ERROR,
+	GET_PRICE_RANGE_INIT,
+	GET_PRICE_RANGE_SUCCESS,
 } from '../types/filtersTypes';
 
 const getCategoriesInit = () => ({
@@ -53,6 +56,19 @@ const getBrandsFail = err => ({
 	payload: err,
 });
 
+const getPriceRangeInit = () => ({
+	type: GET_PRICE_RANGE_INIT,
+});
+
+const getPriceRangeSuccess = pricerange => ({
+	type: GET_PRICE_RANGE_SUCCESS,
+	payload: pricerange,
+});
+
+const getPriceRangeError = () => ({
+	type: GET_PRICE_RANGE_ERROR,
+});
+
 export const getCategories = () => dispatch => {
 	dispatch(getCategoriesInit());
 	axios
@@ -86,5 +102,17 @@ export const getBrands = () => dispatch => {
 		})
 		.catch(err => {
 			dispatch(getBrandsFail(err.response));
+		});
+};
+
+export const getPriceRange = () => dispatch => {
+	dispatch(getPriceRangeInit());
+	axios
+		.get('/api/products/pricerange')
+		.then(response => {
+			dispatch(getPriceRangeSuccess(response.data));
+		})
+		.catch(err => {
+			dispatch(getPriceRangeError(err.response));
 		});
 };

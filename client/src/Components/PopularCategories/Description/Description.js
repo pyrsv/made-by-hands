@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import {
 	Image,
 	StyledImageContainer,
@@ -10,17 +11,17 @@ import {
 import Button from '../../UI/Button/Button';
 import PropTypes from 'prop-types';
 
-const Description = ({ name, image, description, isReverse }) => {
-	const changePage = () => {
-		window.location.assign('https://www.google.com/');
-	};
+const Description = ({ name, image, description, isReverse, url }) => {
+	const currentUrl = `/catalog?categories=${url}`;
 
 	return isReverse ? (
 		<GridContainer>
 			<StyledTextContainer>
 				<Name>{name}</Name>
 				<Text>{description}</Text>
-				<Button text="More" onClick={() => changePage()} />
+				<NavLink to={currentUrl}>
+					<Button text="More" onClick={currentUrl} />
+				</NavLink>
 			</StyledTextContainer>
 
 			<StyledImageContainer>
@@ -36,7 +37,9 @@ const Description = ({ name, image, description, isReverse }) => {
 			<StyledTextContainer>
 				<Name>{name}</Name>
 				<Text>{description}</Text>
-				<Button text="More" onClick={() => changePage()} />
+				<NavLink to={currentUrl}>
+					<Button text="More" onClick={currentUrl} />
+				</NavLink>
 			</StyledTextContainer>
 		</GridContainer>
 	);
@@ -44,6 +47,7 @@ const Description = ({ name, image, description, isReverse }) => {
 
 Description.propTypes = {
 	name: PropTypes.string.isRequired,
+	url: PropTypes.string.isRequired,
 	image: PropTypes.string.isRequired,
 	description: PropTypes.string.isRequired,
 	isReverse: PropTypes.bool.isRequired,

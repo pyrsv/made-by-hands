@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { checkProductsForCartAndFavorites } from '../../utils/API';
 
 export const SET_WISHLIST = 'SET_WISHLIST';
 
@@ -11,8 +12,9 @@ export const setWishlist = array => {
 
 export const addToWishlist = id => dispatch => {
 	axios.put(`/api/wishlist/${id}`).then(result => {
-		dispatch(setWishlist(result.data.products));
-		// console.log(result.data.products)
+		checkProductsForCartAndFavorites(result.data.products).then(products => {
+			dispatch(setWishlist(products));
+		});
 	});
 };
 export const deleteFromWishlist = id => dispatch => {

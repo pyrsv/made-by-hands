@@ -21,7 +21,7 @@ const Sales = () => {
 	useEffect(() => {
 		dispatch(getProductsOnSale({ perPage, startPage: 1 }));
 		return () => dispatch(updateConfig({ perPage: 12, startPage: 1 }));
-	}, []);
+	}, [dispatch]);
 
 	return (
 		<section>

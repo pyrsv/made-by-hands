@@ -88,9 +88,11 @@ const Header = () => {
 	const profileRoutes = [
 		<NavLink to="/profile/contact-info">contact info</NavLink>,
 		<NavLink to="/profile/wishlist">wishlist</NavLink>,
+		<NavLink to="/profile/orders">orders</NavLink>,
 		<span
 			role="button"
 			tabIndex="0"
+			style={{ color: '#DE3019;' }}
 			onKeyDown={() => dispatch(userLogout())}
 			onClick={() => dispatch(userLogout())}
 		>
@@ -165,7 +167,9 @@ const Header = () => {
 									animationDuration={0.3}
 								/>
 							</HamburgerWrapper>
-							<Logo />
+							<NavLink to="/">
+								<Logo />
+							</NavLink>
 							<HeaderButtons onSearchClick={() => setSearch(!isSearch)} />
 							{isSearch && (
 								<SearchField onToggle={() => setSearch(!isSearch)} />

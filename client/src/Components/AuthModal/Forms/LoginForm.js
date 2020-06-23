@@ -5,18 +5,23 @@ import InputField from '../../UI/InputFiels/InputField';
 import FormErrorMessage from '../../UI/FormErrorMessage/FormErrorMessage';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import { FormFields, StyledForm } from './styles';
+import { FormFields, ErrorContainer, StyledForm } from './styles';
+
 import { userLogin } from '../../../store/actions/authActions';
 
 const LoginSchema = Yup.object().shape({
 	loginOrEmail: Yup.string().required('Enter your login or email'),
-	password: Yup.string().min(7, 'Password should have at least 7 charachters'),
+	password: Yup.string()
+		.min(7, 'Password should have at least 7 charachters')
+		.required('Password is required'),
 });
 
 const AuthForm = () => {
 	const dispatch = useDispatch();
 	const isLoading = useSelector(state => state.auth.isLoading);
-	const loginError = useSelector(state => state.auth.error);
+	const authError = Object.values(
+		useSelector(state => state.auth.error || {})
+	)[0];
 	return (
 		<div>
 			<Formik
@@ -73,10 +78,12 @@ const AuthForm = () => {
 							onClick={() => {}}
 							isLoading={isLoading}
 						/>
-						{loginError &&
-							Object.values(loginError).map(message => (
-								<FormErrorMessage key={message} text={message} />
-							))}
+						{authError && typeof authError !== 'object' && (
+							<ErrorContainer>
+								<FormErrorMessage error={authError} />
+							</ErrorContainer>
+						)}
+
 					</StyledForm>
 				)}
 			</Formik>

@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Message } from './styles';
+import { ErrorMessage } from './styles';
 
-const FormErrorMessage = ({ text }) => {
-	return <Message>{text}</Message>;
+const FormErrorMessage = ({ error }) => {
+	return <ErrorMessage>{error}</ErrorMessage>;
 };
 
 FormErrorMessage.propTypes = {
-	text: PropTypes.string.isRequired,
+	error: PropTypes.string.isRequired,
 };
 
 export default FormErrorMessage;

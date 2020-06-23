@@ -12,7 +12,4 @@ export const CommentTitle = styled.p`
 		font-size: 16px;
 		padding-bottom: 10px;
 	}
-	@media screen and (max-width: 320px) {
-		font-size: 14px;
-	}
 `;

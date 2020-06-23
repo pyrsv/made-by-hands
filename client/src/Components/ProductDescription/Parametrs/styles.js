@@ -5,10 +5,7 @@ export const ParamText = styled.p`
 	display: inline-block;
 	padding-bottom: 5px;
 	@media screen and (max-width: 768px) {
-		font-size: 14px;
-	}
-	@media screen and (max-width: 480px) {
-		font-size: 12px;
+		font-size: 16px;
 	}
 `;
 
@@ -19,13 +16,9 @@ export const Li = styled.li`
 	margin-top: 5px;
 	font-family: 'Open Sans', sans-serif;
 	@media screen and (max-width: 768px) {
-		font-size: 14px;
-	}
-	@media screen and (max-width: 576px) {
-		font-size: 12px;
+		font-size: 16px;
 	}
 	@media screen and (max-width: 480px) {
-		font-size: 11px;
 		line-height: 15px;
 	}
 `;

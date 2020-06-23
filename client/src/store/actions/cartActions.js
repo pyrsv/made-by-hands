@@ -1,9 +1,13 @@
-import { SET_CART } from '../types/cartTypes';
+import { SET_CART, CART_INIT, UPDATE_CART_ERROR } from '../types/cartTypes';
 import axios from 'axios';
 // eslint-disable-next-line import/no-cycle
 import { userLoginError } from './authActions';
+import { checkProductsForCartAndFavorites } from '../../utils/API';
+import { setWishlist } from './wishActions';
 
-export const UPDATE_CART_ERROR = 'UPDATE_CART_ERROR';
+export const cartInit = () => ({
+	type: CART_INIT,
+});
 
 export const updateCartError = error => ({
 	type: UPDATE_CART_ERROR,
@@ -16,6 +20,7 @@ export const setCartAction = data => ({
 });
 
 export const addToCart = (id, itemNo) => dispatch => {
+	dispatch(cartInit());
 	axios
 		.put(`/api/cart/${id}`)
 		.then(result => {
@@ -47,10 +52,18 @@ export const addToCart = (id, itemNo) => dispatch => {
 				localStorage.setItem('cart', JSON.stringify(LSItems));
 				dispatch(setCartAction(LSItems));
 			});
-		});
+		})
+		.then(
+			axios.get(`/api/wishlist`).then(res =>
+				checkProductsForCartAndFavorites(res.data.products).then(products => {
+					dispatch(setWishlist(products));
+				})
+			)
+		);
 };
 
 export const deleteFromCart = (id, itemNo) => dispatch => {
+	dispatch(cartInit());
 	axios
 		.delete(`/api/cart/product/${id}`)
 		.then(result => {
@@ -78,10 +91,18 @@ export const deleteFromCart = (id, itemNo) => dispatch => {
 					}
 				});
 			});
-		});
+		})
+		.then(
+			axios.get(`/api/wishlist`).then(res =>
+				checkProductsForCartAndFavorites(res.data.products).then(products => {
+					dispatch(setWishlist(products));
+				})
+			)
+		);
 };
 
 export const deleteAllTheSameItems = (id, itemNo, btn) => dispatch => {
+	dispatch(cartInit());
 	btn.current.setAttribute('disabled', 'disabled');
 	axios
 		.delete(`/api/cart/${id}`)
@@ -104,10 +125,18 @@ export const deleteAllTheSameItems = (id, itemNo, btn) => dispatch => {
 				dispatch(setCartAction(filtered));
 				dispatch(userLoginError(err));
 			});
-		});
+		})
+		.then(
+			axios.get(`/api/wishlist`).then(res =>
+				checkProductsForCartAndFavorites(res.data.products).then(products => {
+					dispatch(setWishlist(products));
+				})
+			)
+		);
 };
 
 export const updateCart = cartFromServer => dispatch => {
+	dispatch(cartInit());
 	const localCart = JSON.parse(localStorage.getItem('cart')) || [];
 
 	const products = [
@@ -136,4 +165,16 @@ export const updateCart = cartFromServer => dispatch => {
 		.catch(err => {
 			dispatch(updateCartError(err));
 		});
+};
+
+export const clearCart = () => dispatch => {
+	axios
+		.delete('/api/cart')
+		.then(() => {
+			dispatch(setCartAction([]));
+			if (localStorage.getItem('cart')) {
+				localStorage.setItem('cart', []);
+			}
+		})
+		.catch(err => err);
 };

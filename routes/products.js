@@ -14,6 +14,7 @@ const {
   getProductsFilterParams,
   searchProducts,
   getProductsOnSale,
+  getPriceRange,
 } = require("../controllers/products");
 
 // Configurations for multer
@@ -91,9 +92,14 @@ router.get("/", getProducts);
 router.get("/filter", getProductsFilterParams);
 
 // @route   GET /products/sales
-// @desc    GET products on
+// @desc    GET products on sale
 // @access  Public
 router.get("/sales", getProductsOnSale);
+
+// @route   GET /pricerange
+// @desc    GET min and max price
+// @access  Public
+router.get("/pricerange", getPriceRange);
 
 // @route   POST /products/search
 // @desc    POST appropriate to search query products

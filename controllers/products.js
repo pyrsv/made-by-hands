@@ -179,6 +179,21 @@ exports.getProductsOnSale = async (req, res, next) => {
   }
 };
 
+exports.getPriceRange = async (req, res, next) => {
+  try {
+    const products = await Product.find().sort("currentPrice");
+    const priceRange = {
+      minPrice: Math.floor(products[0].currentPrice),
+      maxPrice: Math.ceil(products[products.length - 1].currentPrice),
+    };
+    res.json(priceRange);
+  } catch (err) {
+    res.status(400).json({
+      message: `Error happened on server: "${err}" `,
+    });
+  }
+};
+
 exports.searchProducts = async (req, res, next) => {
   if (!req.body.query) {
     res.status(400).json({ message: "Query string is empty" });

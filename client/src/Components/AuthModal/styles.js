@@ -2,6 +2,8 @@ import styled from 'styled-components';
 
 export const ModalWrapper = styled.div`
 	position: fixed;
+	max-height: 100vh;
+	overflow-y: auto;
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
@@ -17,6 +19,7 @@ export const ModalWrapper = styled.div`
 
 	@media (max-width: 420px) {
 		min-width: 300px;
+		padding: 20px;
 	}
 `;
 

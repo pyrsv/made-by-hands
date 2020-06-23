@@ -1,20 +1,20 @@
 import React, { useRef } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
 	CartItemContainer,
 	CartItemImage,
 	CartItemInfo,
 	CartItemPrice,
 	CartItemQuantity,
-	DecreaseQuantity,
-	IncreaseQuantity,
+	QuantityButton,
 	QuantityContainer,
-	CartItemOldPrice,
 	DeleteItemFromCart,
+	ColorValue,
 	CartItemColor,
 	CartItemPricePerOne,
 } from './styles';
 import PropTypes from 'prop-types';
+import CloseButton from '../UI/CloseButton/CloseButton';
 import {
 	addToCart,
 	deleteFromCart,
@@ -26,50 +26,50 @@ export const CartItem = ({
 	id,
 	name,
 	img,
-	oldPrice,
 	price,
-	// type,
-	// isInCart,
-	// isFavorite,
+	quantity,
 	cartQuantity,
 	color,
 }) => {
 	const btn = useRef();
-
+	const isCartFetching = useSelector(state => state.cartReducer.isCartFetching);
 	const dispatch = useDispatch();
+
 	return (
 		<>
 			<CartItemContainer>
-				<DeleteItemFromCart
-					ref={btn}
-					onClick={() => dispatch(deleteAllTheSameItems(id, itemNo, btn))}
-				>
-					X
+				<DeleteItemFromCart ref={btn}>
+					<CloseButton
+						disabled={isCartFetching}
+						onClick={() => dispatch(deleteAllTheSameItems(id, itemNo, btn))}
+					/>
 				</DeleteItemFromCart>
 				<CartItemImage src={img} alt={name} />
 				<CartItemInfo>
 					<span>{name}</span>
-					<CartItemColor>color: {color}</CartItemColor>{' '}
+					<CartItemColor>
+						color: <ColorValue>{color}</ColorValue>
+					</CartItemColor>
 				</CartItemInfo>
 				<QuantityContainer>
-					<DecreaseQuantity
-						disabled={cartQuantity === 1}
+					<QuantityButton
+						disabled={cartQuantity === 1 || isCartFetching}
 						onClick={() => dispatch(deleteFromCart(id, itemNo))}
 					>
 						-
-					</DecreaseQuantity>
+					</QuantityButton>
 					<CartItemQuantity>{cartQuantity}</CartItemQuantity>
-					<IncreaseQuantity onClick={() => dispatch(addToCart(id, itemNo))}>
+					<QuantityButton
+						disabled={cartQuantity >= quantity || isCartFetching}
+						onClick={() => dispatch(addToCart(id, itemNo))}
+					>
 						+
-					</IncreaseQuantity>
+					</QuantityButton>
 				</QuantityContainer>
 				<CartItemPrice>
-					{price * cartQuantity}₴{' '}
-					{oldPrice && (
-						<CartItemOldPrice>{oldPrice * cartQuantity}</CartItemOldPrice>
-					)}
+					{price * cartQuantity}₴
 					<CartItemPricePerOne>
-						<span>{price}₴</span> <span>x</span> <span>{cartQuantity}</span>
+						{cartQuantity} x {price}₴
 					</CartItemPricePerOne>
 				</CartItemPrice>
 			</CartItemContainer>
@@ -82,11 +82,8 @@ CartItem.propTypes = {
 	itemNo: PropTypes.string.isRequired,
 	name: PropTypes.string.isRequired,
 	img: PropTypes.string.isRequired,
-	oldPrice: PropTypes.oneOfType([PropTypes.number, PropTypes.object]),
 	price: PropTypes.number.isRequired,
 	cartQuantity: PropTypes.number.isRequired,
+	quantity: PropTypes.number.isRequired,
 	color: PropTypes.string.isRequired,
-};
-CartItem.defaultProps = {
-	oldPrice: null,
 };

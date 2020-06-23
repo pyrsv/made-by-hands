@@ -1,6 +1,10 @@
 import axios from 'axios';
 import setAuthToken from '../../utils/setAuthToken';
-import { handleUserLogin, handleGetUser } from '../../utils/API';
+import {
+	handleUserLogin,
+	handleGetUser,
+	checkProductsForCartAndFavorites,
+} from '../../utils/API';
 // eslint-disable-next-line import/no-cycle
 import { setCartAction, updateCart } from './cartActions';
 import { setWishlist } from './wishActions';
@@ -12,12 +16,10 @@ import {
 	USER_UPDATE_INIT,
 	USER_UPDATE_ERROR,
 	USER_UPDATE_SUCCESS,
-	RESET_USER_AUTH_ERROR,
+	PASSWORD_UPDATE_ERROR,
+	PASSWORD_UPDATE_INIT,
+	PASSWORD_UPDATE_SUCCESS,
 } from '../types/authTypes';
-
-export const resetUserAuthError = () => ({
-	type: RESET_USER_AUTH_ERROR,
-});
 
 const userUpdateInit = () => ({
 	type: USER_UPDATE_INIT,
@@ -45,6 +47,20 @@ export const userLoginSuccess = user => ({
 export const userLoginError = error => ({
 	type: USER_LOGIN_ERROR,
 	payload: error,
+});
+
+const updatePasswordInit = () => ({
+	type: PASSWORD_UPDATE_INIT,
+});
+
+const updatePasswordSuccess = customer => ({
+	type: PASSWORD_UPDATE_SUCCESS,
+	payload: customer,
+});
+
+export const updatePasswordError = err => ({
+	type: PASSWORD_UPDATE_ERROR,
+	payload: err,
 });
 
 export const userLogout = () => dispatch => {
@@ -80,7 +96,9 @@ export const getUser = () => dispatch => {
 						if (!result.data) {
 							axios.post('/api/wishlist');
 						} else {
-							dispatch(setWishlist(result.data.products));
+							checkProductsForCartAndFavorites(
+								result.data.products
+							).then(products => dispatch(setWishlist(products)));
 						}
 					})
 					.catch(err => err);
@@ -120,7 +138,9 @@ export const userLogin = ({ loginOrEmail, password }) => dispatch => {
 						if (!result.data) {
 							axios.post('/api/wishlist');
 						} else {
-							dispatch(setWishlist(result.data.products));
+							checkProductsForCartAndFavorites(
+								result.data.products
+							).then(products => dispatch(setWishlist(products)));
 						}
 					});
 
@@ -186,4 +206,18 @@ export const updateUser = data => dispatch => {
 		})
 		.then(customer => dispatch(userUpdateSuccess(customer.data)))
 		.catch(err => dispatch(userUpdateError(err.response.data)));
+};
+
+export const updatePassword = passwords => dispatch => {
+	dispatch(updatePasswordInit());
+	axios
+		.put('/api/customers/password', passwords)
+		.then(res => {
+			if (Object.keys(res.data).length > 1) {
+				dispatch(updatePasswordSuccess(res.data.customer));
+			} else {
+				dispatch(updatePasswordError(res.data));
+			}
+		})
+		.catch(err => dispatch(userUpdateError(err)));
 };

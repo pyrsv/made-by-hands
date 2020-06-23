@@ -6,13 +6,17 @@ import {
 	USER_UPDATE_INIT,
 	USER_UPDATE_ERROR,
 	USER_UPDATE_SUCCESS,
-	RESET_USER_AUTH_ERROR,
+	PASSWORD_UPDATE_ERROR,
+	PASSWORD_UPDATE_INIT,
+	PASSWORD_UPDATE_SUCCESS,
 } from '../types/authTypes';
 
 const initialState = {
 	currentUser: null,
 	isLoading: false,
 	error: null,
+	isPasswordLoading: false,
+	passwordError: null,
 };
 
 export const authReducer = (state = initialState, { type, payload }) => {
@@ -31,8 +35,21 @@ export const authReducer = (state = initialState, { type, payload }) => {
 			return { ...state, error: payload, isLoading: false };
 		case USER_LOGOUT:
 			return { ...state, currentUser: null };
-		case RESET_USER_AUTH_ERROR:
-			return { ...state, error: null };
+		case PASSWORD_UPDATE_INIT:
+			return { ...state, isPasswordLoading: true, passwordError: null };
+		case PASSWORD_UPDATE_SUCCESS:
+			return {
+				...state,
+				isPasswordLoading: false,
+				passwordError: null,
+				currentUser: payload,
+			};
+		case PASSWORD_UPDATE_ERROR:
+			return {
+				...state,
+				isPasswordLoading: false,
+				passwordError: payload,
+			};
 		default:
 			return state;
 	}

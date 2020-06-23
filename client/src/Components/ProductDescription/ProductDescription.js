@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, memo } from 'react';
 import LayoutContainer from '../LayoutContainer/LayoutContainer';
 import PropTypes from 'prop-types';
 import axios from 'axios';
@@ -21,7 +21,7 @@ const ProductDescription = ({ productNoParam }) => {
 	const dispatch = useDispatch();
 
 	const getProduct = param => {
-		axios.get(`/products/${param}`).then(res => {
+		axios.get(`/api/products/${param}`).then(res => {
 			checkProductsForCartAndFavorites(res.data).then(product => {
 				setItem(product[0]);
 			});
@@ -47,7 +47,7 @@ const ProductDescription = ({ productNoParam }) => {
 
 	useEffect(() => {
 		getProduct(productNoParam);
-	}, [productNoParam, item.isInCart, item.isFavorite]);
+	}, [productNoParam]);
 
 	return (
 		<ProductDescriptionContainer>
@@ -66,7 +66,6 @@ const ProductDescription = ({ productNoParam }) => {
 						isInCart={item.isInCart}
 						parameters={item.parameters}
 						isFavorite={item.isFavorite}
-						itemNo={item.itemNo}
 						id={item._id}
 					/>
 				)}
@@ -79,4 +78,4 @@ ProductDescription.propTypes = {
 	productNoParam: PropTypes.string.isRequired,
 };
 
-export default ProductDescription;
+export default memo(ProductDescription);

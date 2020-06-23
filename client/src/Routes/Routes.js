@@ -2,6 +2,7 @@ import React from 'react';
 import { Switch, Route, useLocation } from 'react-router-dom';
 import CartPage from '../Pages/CartPage';
 import CatalogPage from '../Pages/CatalogPage';
+import CheckoutPage from '../Pages/CheckoutPage';
 import ProfilePage from '../Pages/ProfilePage';
 import IndexPage from '../Pages/IndexPage';
 import ProductPage from '../Pages/ProductPage';
@@ -10,6 +11,8 @@ import SalesPage from '../Pages/SalesPage';
 import NoMatchPage from '../Pages/NoMatchPage';
 import ProtectedRoute from '../HOC/ProtectedRoute/ProtectedRoute';
 import AuthModal from '../Components/AuthModal/AuthModal';
+import CorporateOrders from '../Components/Footer/FooterComponents/CorporateOrders/CorporateOrders';
+import CooperationsWithUs from '../Components/Footer/CooperationWithUs/CooperationWithUs';
 
 const Routes = () => {
 	const location = useLocation();
@@ -19,6 +22,12 @@ const Routes = () => {
 			<Switch location={background || location}>
 				<Route exact path="/">
 					<IndexPage />
+				</Route>
+				<Route exact path="/Corporate_orders">
+					<CorporateOrders />
+				</Route>
+				<Route exact path="/Cooperation_with_us">
+					<CooperationsWithUs />
 				</Route>
 				<Route path="/cart">
 					<CartPage />
@@ -32,6 +41,9 @@ const Routes = () => {
 				<Route path="/sales">
 					<SalesPage />
 				</Route>
+				<Route path="/checkout">
+					<CheckoutPage />
+				</Route>
 				<ProtectedRoute path="/profile">
 					<ProfilePage />
 				</ProtectedRoute>
@@ -43,6 +55,7 @@ const Routes = () => {
 						);
 					}}
 				/>
+
 				<Route path="*">
 					<NoMatchPage />
 				</Route>

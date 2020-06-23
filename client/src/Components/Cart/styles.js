@@ -1,19 +1,16 @@
 import styled from 'styled-components';
-import { Field } from 'formik';
 
 export const CartContainer = styled.div`
-	background: ${props => props.theme.lightPink};
 	padding-bottom: 26px;
 `;
 
 export const CartItemListContainer = styled.div`
 	border-bottom: 1px solid #d8846c;
-	background: ${props => props.theme.lightPink};
 `;
 
 export const CartItemContainer = styled.div`
 	position: relative;
-	border-top: 1px solid ${props => props.theme.mainDark};
+	border-top: 1px solid ${props => props.theme.accentRed};
 	display: flex;
 	justify-content: space-between;
 	height: 210px;
@@ -55,43 +52,35 @@ export const QuantityContainer = styled.div`
 	display: flex;
 	align-items: center;
 	margin-left: 100px;
+	min-width: 117px;
+	border-radius: 4px;
+	overflow: hidden;
 	@media (max-width: 576px) {
 		margin-left: 0;
 	}
 `;
 
 export const CartItemQuantity = styled.div`
-	height: 39px;
-	width: 39px;
 	background: #fffcfc;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	font-family: Gabriela, sans-serif;
-	font-style: normal;
-	font-weight: normal;
-	font-size: 14px;
-	line-height: 15px;
-`;
-
-export const DecreaseQuantity = styled.button`
-	background: #fffcfc;
-	border-bottom-left-radius: 4px;
-	border-top-left-radius: 4px;
-	height: 39px;
+	padding: 8px 0;
 	width: 39px;
-	border: none;
+	text-align: center;
 	border-right: 1px solid #747a82;
+	border-left: 1px solid #747a82;
+
+	font-size: 14px;
+	line-height: 22px;
 `;
 
-export const IncreaseQuantity = styled.button`
-	background: #fffcfc;
-	border-bottom-right-radius: 4px;
-	border-top-right-radius: 4px;
-	height: 39px;
+export const QuantityButton = styled.button`
 	width: 39px;
+	padding: 8px 0;
+	font-family: Gabriela, sans-serif;
+	font-weight: 300;
+	background: #fffcfc;
 	border: none;
-	border-left: 1px solid #747a82;
+	line-height: 22px;
+	font-size: 28px;
 `;
 
 export const CartItemPrice = styled.div`
@@ -121,22 +110,25 @@ export const SumContainer = styled.div`
 
 export const DeleteItemFromCart = styled.button`
 	display: inline-block;
+
 	position: absolute;
+	background-color: transparent;
+	outline: none;
+	border: none;
 	top: 5%;
 	right: 0;
-	font-weight: bold;
-	background: #fffcfc;
-	border: none;
-	outline: none;
-	border-radius: 4px;
-	color: ${props => props.theme.mainDark};
 `;
 
 export const CartItemColor = styled.span`
+	font-size: 16px;
 	margin-top: 45px;
 	@media (max-width: 576px) {
 		margin-top: 15px;
 	}
+`;
+
+export const ColorValue = styled.span`
+	text-transform: uppercase;
 `;
 
 export const CartIsEmpty = styled.div`
@@ -149,81 +141,9 @@ export const CartIsEmpty = styled.div`
 	margin-top: 20px;
 `;
 
-export const FlexContainer = styled.div`
-	display: flex;
-	justify-content: space-between;
-	border: 1px solid ${props => props.theme.mainDark};
-	padding: 2% 2% 0 2%;
-	margin-bottom: 10px;
-	border-radius: 4px;
-	position: relative;
-	/* background: ${props => props.theme.whiteBackground}; */
-	height: 287px;
-`;
-
-export const StyledFormColumn = styled.div`
-	display: flex;
-	flex-direction: column;
-	margin-bottom: 26px;
-	width: 28%;
-`;
-
-export const StyledField = styled(Field)`
-	display: inline-block;
-	border: 1px solid #16161c;
-	box-sizing: border-box;
-	border-radius: 4px;
-	padding: 6px 12px;
-	font-family: Raleway;
-	font-size: 16px;
-	outline: none;
-	background-color: transparent;
-	width: 100%;
-	margin-bottom: 6px;
-	margin-top: 6px;
-`;
-export const StyledLabel = styled.label`
-	font-family: 'Raleway', sans-serif;
-	font-weight: 500;
-	font-size: 14px;
-	text-align: center;
-	margin-top: 6px;
-`;
-export const StyledRadio = styled.label`
-	margin-bottom: 10px;
-	margin-top: 35px;
-	font-family: 'Raleway', sans-serif;
-	font-weight: 500;
-	font-size: 22px;
-	line-height: 16px;
-	text-align: left;
-`;
-
-export const ButtonWrapper = styled.div`
-	display: flex;
-	justify-content: center;
-`;
-
-export const ColumnOfInputs = styled.div`
-	display: flex;
-	flex-direction: column;
-	position: relative;
-	/* top: 5%; */
-`;
 export const FirstColumn = styled.div`
 	margin-top: 34px;
 	text-align: center;
-`;
-
-export const FillTheFields = styled.div`
-	font-family: 'Raleway', sans-serif;
-	font-weight: 700;
-	font-size: 36px;
-	display: block;
-	text-align: left;
-	margin: 20px 0;
-	text-transform: capitalize;
-	color: ${props => props.theme.mainDark};
 `;
 
 export const CartItemPricePerOne = styled.div`
