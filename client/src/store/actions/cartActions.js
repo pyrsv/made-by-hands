@@ -2,6 +2,8 @@ import { SET_CART } from '../types/cartTypes';
 import axios from 'axios';
 // eslint-disable-next-line import/no-cycle
 import { userLoginError } from './authActions';
+import { checkProductsForCartAndFavorites } from '../../utils/API';
+import { setWishlist } from './wishActions';
 
 export const UPDATE_CART_ERROR = 'UPDATE_CART_ERROR';
 
@@ -20,6 +22,10 @@ export const addToCart = (id, itemNo) => dispatch => {
 		.put(`/api/cart/${id}`)
 		.then(result => {
 			dispatch(setCartAction(result.data.products));
+			// checkProductsForCartAndFavorites(result.data.products).then(products =>{
+			// 					console.log(products)
+			// 					setWishlist(products)}
+			// 				)
 		})
 		.catch(err => {
 			if (!localStorage.getItem('cart')) {
@@ -48,7 +54,14 @@ export const addToCart = (id, itemNo) => dispatch => {
 				dispatch(setCartAction(LSItems));
 				dispatch(userLoginError(err));
 			});
-		});
+		})
+		.then(
+			axios.get(`/api/wishlist`).then(res =>
+				checkProductsForCartAndFavorites(res.data.products).then(products => {
+					dispatch(setWishlist(products));
+				})
+			)
+		);
 };
 
 export const deleteFromCart = (id, itemNo) => dispatch => {
@@ -80,7 +93,14 @@ export const deleteFromCart = (id, itemNo) => dispatch => {
 
 				dispatch(userLoginError(err));
 			});
-		});
+		})
+		.then(
+			axios.get(`/api/wishlist`).then(res =>
+				checkProductsForCartAndFavorites(res.data.products).then(products => {
+					dispatch(setWishlist(products));
+				})
+			)
+		);
 };
 
 export const deleteAllTheSameItems = (id, itemNo, btn) => dispatch => {
@@ -106,7 +126,14 @@ export const deleteAllTheSameItems = (id, itemNo, btn) => dispatch => {
 				dispatch(setCartAction(filtered));
 				dispatch(userLoginError(err));
 			});
-		});
+		})
+		.then(
+			axios.get(`/api/wishlist`).then(res =>
+				checkProductsForCartAndFavorites(res.data.products).then(products => {
+					dispatch(setWishlist(products));
+				})
+			)
+		);
 };
 
 export const updateCart = cartFromServer => dispatch => {
