@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import ErrorPage from '../../Pages/ErrorPage';
 
 class ErrorBoundary extends React.Component {
 	constructor(props) {
@@ -11,12 +12,14 @@ class ErrorBoundary extends React.Component {
 		return { hasError: true };
 	}
 
-	componentDidCatch() {}
+	componentDidCatch() {
+		this.setState({ hasError: true });
+	}
 
 	render() {
 		// eslint-disable-next-line react/destructuring-assignment
 		if (this.state.hasError) {
-			return <h1>Что-то пошло не так.</h1>;
+			return <ErrorPage />;
 		}
 
 		// eslint-disable-next-line react/destructuring-assignment
