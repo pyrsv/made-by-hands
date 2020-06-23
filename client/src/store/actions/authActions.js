@@ -89,7 +89,7 @@ export const getUser = () => dispatch => {
 							dispatch(setCartAction(result.data.products));
 						}
 					})
-					.catch();
+					.catch(err => err);
 				axios
 					.get('/api/wishlist')
 					.then(result => {
@@ -101,15 +101,14 @@ export const getUser = () => dispatch => {
 							).then(products => dispatch(setWishlist(products)));
 						}
 					})
-					.catch();
+					.catch(err => err);
 				dispatch(userLoginSuccess(customer.data));
 			})
-			.catch(err => {
+			.catch(() => {
 				if (!localStorage.getItem('cart')) {
 					localStorage.setItem('cart', '[]');
 				}
 				dispatch(setCartAction(JSON.parse(localStorage.getItem('cart'))));
-				dispatch(userLoginError(err));
 			});
 	} else {
 		if (!localStorage.getItem('cart')) {
@@ -173,6 +172,7 @@ export const userRegister = data => async dispatch => {
 			handleUserLogin(login, password)
 				.then(res => {
 					setAuthToken(res.data.token);
+
 					axios.get('/api/cart').then(result => {
 						if (!result.data) {
 							axios.post('/api/cart');
@@ -184,7 +184,7 @@ export const userRegister = data => async dispatch => {
 					dispatch(userLoginSuccess(customer.data));
 				})
 				.catch(err => {
-					dispatch(userLoginError(err));
+					dispatch(userLoginError(err.response.data));
 				});
 		})
 		.catch(err => {
@@ -205,7 +205,7 @@ export const updateUser = data => dispatch => {
 			},
 		})
 		.then(customer => dispatch(userUpdateSuccess(customer.data)))
-		.catch(err => dispatch(userUpdateError(err)));
+		.catch(err => dispatch(userUpdateError(err.response.data)));
 };
 
 export const updatePassword = passwords => dispatch => {

@@ -22,7 +22,7 @@ const initialState = {
 export const authReducer = (state = initialState, { type, payload }) => {
 	switch (type) {
 		case USER_LOGIN_INIT:
-			return { ...state, isLoading: true };
+			return { ...state, isLoading: true, error: null };
 		case USER_LOGIN_SUCCESS:
 			return { ...state, currentUser: payload, error: null, isLoading: false };
 		case USER_LOGIN_ERROR:

@@ -5,7 +5,6 @@ import * as Yup from 'yup';
 import Button from '../../UI/Button/Button';
 import InputField from '../../UI/InputFiels/InputField';
 import FormErrorMessage from '../../UI/FormErrorMessage/FormErrorMessage';
-
 import { FormFields, ErrorContainer, StyledRegisterForm } from './styles';
 import { userRegister } from '../../../store/actions/authActions';
 
@@ -22,6 +21,7 @@ const RegisterSchema = Yup.object().shape({
 		.min(7, 'Password must be between 7 and 30 characters')
 		.max(30, 'Password must be between 7 and 30 characters')
 		.required('Password is required'),
+
 	firstName: Yup.string()
 		.required('First name is required')
 		.matches(/^[a-zA-Zа-яА-Я]+$/, {
@@ -46,6 +46,7 @@ const RegisterSchema = Yup.object().shape({
 const RegisterForm = () => {
 	const dispatch = useDispatch();
 	const isLoading = useSelector(state => state.auth.isLoading);
+
 	const authError = Object.values(
 		useSelector(state => state.auth.error || {})
 	)[0];
@@ -75,6 +76,7 @@ const RegisterForm = () => {
 					touched,
 				}) => (
 					<StyledRegisterForm onSubmit={handleSubmit}>
+					<StyledForm type="register" onSubmit={handleSubmit}>
 						<FormFields>
 							<InputField
 								type="text"
@@ -159,13 +161,13 @@ const RegisterForm = () => {
 							type="submit"
 							size="wide"
 						/>
-
 						{authError && typeof authError !== 'object' && (
 							<ErrorContainer>
 								<FormErrorMessage error={authError} />
 							</ErrorContainer>
 						)}
 					</StyledRegisterForm>
+
 				)}
 			</Formik>
 		</div>

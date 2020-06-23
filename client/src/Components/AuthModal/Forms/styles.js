@@ -6,6 +6,12 @@ export const StyledForm = styled.form`
 
 export const FormFields = styled.div`
 	margin-bottom: 35px;
+	position: relative;
+`;
+
+export const StyledForm = styled.form`
+	position: relative;
+	margin-bottom: ${props => (props.type === 'register' ? '45px' : 0)};
 `;
 
 export const ErrorContainer = styled.div`

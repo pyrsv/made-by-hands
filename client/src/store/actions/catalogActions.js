@@ -74,16 +74,16 @@ export const getFilteredProducts = config => dispatch => {
 			},
 		})
 		.then(response => {
-			checkProductsForCartAndFavorites(response.data.products).then(
-				productsWithCartAndFavorites => {
+			checkProductsForCartAndFavorites(response.data.products)
+				.then(productsWithCartAndFavorites => {
 					dispatch(
 						getFilteredProductsSuccess(
 							productsWithCartAndFavorites,
 							response.data.productsQuantity
 						)
 					);
-				}
-			);
+				})
+				.catch(err => err);
 		})
 		.catch(err => dispatch(getFilteredProductsError(err)));
 };

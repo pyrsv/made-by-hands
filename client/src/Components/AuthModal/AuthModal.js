@@ -30,6 +30,7 @@ const AuthModal = () => {
 	const { from } = location.state;
 
 	useEffect(() => {
+		dispatch(resetUserAuthError());
 		dispatch(closeNav());
 		return () => dispatch(userLoginError(null));
 	}, [dispatch]);

@@ -6,6 +6,7 @@ import FormErrorMessage from '../../UI/FormErrorMessage/FormErrorMessage';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { FormFields, ErrorContainer, StyledForm } from './styles';
+
 import { userLogin } from '../../../store/actions/authActions';
 
 const LoginSchema = Yup.object().shape({
@@ -21,7 +22,6 @@ const AuthForm = () => {
 	const authError = Object.values(
 		useSelector(state => state.auth.error || {})
 	)[0];
-
 	return (
 		<div>
 			<Formik
@@ -83,6 +83,7 @@ const AuthForm = () => {
 								<FormErrorMessage error={authError} />
 							</ErrorContainer>
 						)}
+
 					</StyledForm>
 				)}
 			</Formik>
