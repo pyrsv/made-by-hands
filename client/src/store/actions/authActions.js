@@ -16,6 +16,9 @@ import {
 	USER_UPDATE_INIT,
 	USER_UPDATE_ERROR,
 	USER_UPDATE_SUCCESS,
+	PASSWORD_UPDATE_ERROR,
+	PASSWORD_UPDATE_INIT,
+	PASSWORD_UPDATE_SUCCESS,
 } from '../types/authTypes';
 
 const userUpdateInit = () => ({
@@ -44,6 +47,20 @@ export const userLoginSuccess = user => ({
 export const userLoginError = error => ({
 	type: USER_LOGIN_ERROR,
 	payload: error,
+});
+
+const updatePasswordInit = () => ({
+	type: PASSWORD_UPDATE_INIT,
+});
+
+const updatePasswordSuccess = customer => ({
+	type: PASSWORD_UPDATE_SUCCESS,
+	payload: customer,
+});
+
+export const updatePasswordError = err => ({
+	type: PASSWORD_UPDATE_ERROR,
+	payload: err,
 });
 
 export const userLogout = () => dispatch => {
@@ -175,7 +192,7 @@ export const userRegister = data => async dispatch => {
 				localStorage.setItem('cart', '[]');
 			}
 			dispatch(setCartAction(JSON.parse(localStorage.getItem('cart'))));
-			dispatch(userLoginError(err));
+			dispatch(userLoginError(err.response.data));
 		});
 };
 
@@ -188,5 +205,19 @@ export const updateUser = data => dispatch => {
 			},
 		})
 		.then(customer => dispatch(userUpdateSuccess(customer.data)))
+		.catch(err => dispatch(userUpdateError(err)));
+};
+
+export const updatePassword = passwords => dispatch => {
+	dispatch(updatePasswordInit());
+	axios
+		.put('/api/customers/password', passwords)
+		.then(res => {
+			if (Object.keys(res.data).length > 1) {
+				dispatch(updatePasswordSuccess(res.data.customer));
+			} else {
+				dispatch(updatePasswordError(res.data));
+			}
+		})
 		.catch(err => dispatch(userUpdateError(err)));
 };

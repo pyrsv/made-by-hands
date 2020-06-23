@@ -7,6 +7,7 @@ import CloseButton from '../UI/CloseButton/CloseButton';
 import Backdrop from '../UI/Backdrop/Backdrop';
 import querystring from 'query-string';
 import { closeNav } from '../../store/actions/UIActions';
+import { userLoginError } from '../../store/actions/authActions';
 import { setProductToWishlist } from '../../store/actions/catalogActions';
 import { addToWishlist } from '../../store/actions/wishActions';
 import {
@@ -30,6 +31,7 @@ const AuthModal = () => {
 
 	useEffect(() => {
 		dispatch(closeNav());
+		return () => dispatch(userLoginError(null));
 	}, [dispatch]);
 
 	useEffect(() => {
@@ -51,6 +53,7 @@ const AuthModal = () => {
 
 	const handleFormChange = () => {
 		setForm({ ...form, login: !form.login });
+		dispatch(userLoginError(null));
 	};
 
 	const handeleModalClose = () => history.goBack();

@@ -2,10 +2,15 @@ import styled from 'styled-components';
 
 export const StyledForm = styled.form`
 	position: relative;
-`;
+	width: 300px;
 
-export const FormFields = styled.div`
-	margin-bottom: 35px;
+	@media (max-width: 768px) {
+		width: 260px;
+	}
+
+	@media (max-width: 576px) {
+		width: 100%;
+	}
 `;
 
 export const ErrorContainer = styled.div`
@@ -13,6 +18,8 @@ export const ErrorContainer = styled.div`
 	bottom: -20px;
 `;
 
-export const StyledRegisterForm = styled(StyledForm)`
+export const Description = styled.p`
+	font-weight: 600;
+	font-size: 14px;
 	margin-bottom: 30px;
 `;

@@ -4,7 +4,9 @@ import { Formik } from 'formik';
 import * as Yup from 'yup';
 import Button from '../../UI/Button/Button';
 import InputField from '../../UI/InputFiels/InputField';
-import { FormFields } from './styles';
+import FormErrorMessage from '../../UI/FormErrorMessage/FormErrorMessage';
+
+import { FormFields, ErrorContainer, StyledRegisterForm } from './styles';
 import { userRegister } from '../../../store/actions/authActions';
 
 const RegisterSchema = Yup.object().shape({
@@ -44,6 +46,9 @@ const RegisterSchema = Yup.object().shape({
 const RegisterForm = () => {
 	const dispatch = useDispatch();
 	const isLoading = useSelector(state => state.auth.isLoading);
+	const authError = Object.values(
+		useSelector(state => state.auth.error || {})
+	)[0];
 
 	return (
 		<div>
@@ -69,7 +74,7 @@ const RegisterForm = () => {
 					errors,
 					touched,
 				}) => (
-					<form onSubmit={handleSubmit}>
+					<StyledRegisterForm onSubmit={handleSubmit}>
 						<FormFields>
 							<InputField
 								type="text"
@@ -154,7 +159,13 @@ const RegisterForm = () => {
 							type="submit"
 							size="wide"
 						/>
-					</form>
+
+						{authError && typeof authError !== 'object' && (
+							<ErrorContainer>
+								<FormErrorMessage error={authError} />
+							</ErrorContainer>
+						)}
+					</StyledRegisterForm>
 				)}
 			</Formik>
 		</div>
