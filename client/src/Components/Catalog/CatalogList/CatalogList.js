@@ -6,6 +6,7 @@ import ProductsList from '../../ProductsList/ProductsList';
 import {
 	getFilteredProducts,
 	updateConfig,
+	loadMoreAction,
 } from '../../../store/actions/catalogActions';
 import { NoMatchPlaceholder, StyledLink } from './styles';
 
@@ -50,6 +51,7 @@ const CatalogList = () => {
 					startPage={startPage}
 					perPage={perPage}
 					isProductsFetching={isProductsFetching}
+					loadAction={loadMoreAction}
 					scrollable
 				/>
 			)}

@@ -96,7 +96,27 @@ export const loadMoreAction = config => dispatch => {
 			},
 		})
 		.then(response => {
-			dispatch(loadMoreProducts(response.data.products));
+			checkProductsForCartAndFavorites(response.data.products).then(
+				productsWithCartAndFavorites => {
+					dispatch(loadMoreProducts(productsWithCartAndFavorites));
+				}
+			);
+		});
+};
+
+export const loadMoreOnSaleAction = config => dispatch => {
+	axios
+		.get('/api/products/sales', {
+			params: {
+				...config,
+			},
+		})
+		.then(response => {
+			checkProductsForCartAndFavorites(response.data.products).then(
+				productsWithCartAndFavorites => {
+					dispatch(loadMoreProducts(productsWithCartAndFavorites));
+				}
+			);
 		});
 };
 
