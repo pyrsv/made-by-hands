@@ -1,5 +1,9 @@
 .image-gallery-content{
     max-width: 500px;
+    grid-area: photo;
+    @media screen and (max-width: 576px) {
+        max-width: 100%;
+    }
     .image-gallery-slide-wrapper.left{
         .image-gallery-left-nav, .image-gallery-right-nav {
             padding: 0;
@@ -21,48 +25,16 @@
                     width: 20px;
                     padding: 0 10px;
                 }
-                @media screen and (max-width: 576px) {
-                    height: 20px;
-                    width: 10px;
-                    padding: 0 5px;
-                }
-                @media screen and (max-width: 480px) {
-                    height: 30px;
-                    width: 15px;
-                    padding: 0 10px;
-                }
                 &:hover{
                     color: #16161c;
                 }
-            }   
+            }
         }
-        @media screen and (max-width: 480px) {
+        
+        @media screen and (max-width: 576px) {
             width: 100% !important;
         }
-        .image-gallery-fullscreen-button{
-            &:hover {
-                color: #16161c;
-            }
-            @media screen and (max-width: 768px) {
-                padding: 5px;
-            }
-
-            @media screen and (max-width: 576px) {
-                padding: 5px;
-                .image-gallery-svg{
-                    width: 10px;
-                    height: 10px;
-                }
-            }
-            @media screen and (max-width: 480px) {
-                padding: 10px;
-                .image-gallery-svg{
-                    width: 20px;
-                    height: 20px;
-                }
-            }
-        }
-    } 
+    }
     .image-gallery-thumbnails-wrapper.left {
         @media screen and (max-width: 992px) {
                 max-height: 450px !important;
@@ -71,9 +43,6 @@
                 max-height: 340px !important;
             }
             @media screen and (max-width: 576px) {
-                max-height: 222px !important;
-            }
-            @media screen and (max-width: 480px) {
                 display: none;
             }
     }
@@ -86,7 +55,7 @@
                 border: 2px solid #16161c !important;
             }
         }
-            
+
     }
 
 }

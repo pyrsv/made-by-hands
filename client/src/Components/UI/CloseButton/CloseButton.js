@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Wrapper } from './styles';
@@ -20,4 +20,4 @@ CloseButton.defaultProps = {
 	size: 22,
 };
 
-export default CloseButton;
+export default memo(CloseButton);

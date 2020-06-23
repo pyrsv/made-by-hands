@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import { TextareaContainer, Textarea, Label } from './styles';
 
@@ -37,7 +37,7 @@ TextareaField.propTypes = {
 	name: PropTypes.string.isRequired,
 	onChange: PropTypes.func.isRequired,
 	type: PropTypes.string.isRequired,
-	value: PropTypes.string.isRequired,
+	value: PropTypes.string,
 	target: PropTypes.oneOf(['form', 'search']).isRequired,
 };
 
@@ -45,6 +45,7 @@ TextareaField.defaultProps = {
 	label: '',
 	placeholder: '',
 	required: false,
+	value: '',
 };
 
-export default TextareaField;
+export default memo(TextareaField);

@@ -1,17 +1,18 @@
-import React from 'react';
-import StarRatingComponent from 'react-star-rating-component';
+import React, { memo } from 'react';
+import ReactStars from 'react-stars';
 import PropTypes from 'prop-types';
 import './styles.scss';
 
 const RatingStars = ({ rating, edit = false, onStarClick }) => {
 	return (
-		<>
-			<StarRatingComponent
-				value={rating}
-				editing={edit}
-				onStarClick={onStarClick}
-			/>
-		</>
+		<ReactStars
+			className="ratingStar"
+			count={5}
+			onChange={onStarClick}
+			value={rating}
+			edit={edit}
+			color2="#ffd700"
+		/>
 	);
 };
 
@@ -27,4 +28,4 @@ RatingStars.defaultProps = {
 	onStarClick: () => {},
 };
 
-export default RatingStars;
+export default memo(RatingStars);

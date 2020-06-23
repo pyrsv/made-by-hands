@@ -1,6 +1,7 @@
 import React, { memo } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import DiscountIcon from './DisccountIcon/DiscountIcon';
 import Button from '../UI/Button/Button';
 import FavoriteHeart from '../UI/FavoriteHeart/FavoriteHeart';
 import {
@@ -54,12 +55,17 @@ const ProductCard = ({
 
 	return (
 		<Card>
+			{oldPrice && (
+				<DiscountIcon previousPrice={oldPrice} currentPrice={price} />
+			)}
 			<NavLink to={`/products/${itemNo}`}>
 				<CardImage src={img} alt={name} />
 			</NavLink>
 			<CardInfo type={type}>
 				<CardInfoRow>
-					<ProductName>{name}</ProductName>
+					<NavLink to={`/products/${itemNo}`}>
+						<ProductName>{name}</ProductName>
+					</NavLink>
 					{user ? (
 						<FavoriteHeart
 							isFavorite={isFavorite}
@@ -88,8 +94,8 @@ const ProductCard = ({
 						disabled={isInCart}
 					/>
 					<PriceContainer>
-						{oldPrice && <OldPrice>{oldPrice}€</OldPrice>}
-						<Price discounted={oldPrice && true}>{price}€</Price>
+						{oldPrice && <OldPrice>{oldPrice}₴</OldPrice>}
+						<Price discounted={oldPrice && true}>{price}₴</Price>
 					</PriceContainer>
 				</CardInfoRow>
 			</CardInfo>

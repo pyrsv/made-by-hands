@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import { loadMoreAction } from '../../store/actions/catalogActions';
 import ProductCard from '../ProductCard/ProductCard';
 import Preloader from '../UI/Preloader/Preloader';
+import ListSkeleton from './ListSkeleton/ListSkeleton';
 import { ProductsContainer, ProductsPreloader } from './styles';
 
 const ProductsList = ({
@@ -18,6 +19,9 @@ const ProductsList = ({
 }) => {
 	const dispatch = useDispatch();
 
+	if (isProductsFetching) {
+		return <ListSkeleton />;
+	}
 	return scrollable ? (
 		<InfiniteScroll
 			threshold={150}

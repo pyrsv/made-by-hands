@@ -9,7 +9,9 @@ import { userLogin } from '../../../store/actions/authActions';
 
 const LoginSchema = Yup.object().shape({
 	loginOrEmail: Yup.string().required('Enter your login or email'),
-	password: Yup.string().min(7, 'Password should have at least 7 charachters'),
+	password: Yup.string()
+		.min(7, 'Password should have at least 7 charachters')
+		.required('Password is required'),
 });
 
 const AuthForm = () => {
@@ -46,6 +48,7 @@ const AuthForm = () => {
 								touched={touched.loginOrEmail}
 								error={errors.loginOrEmail}
 								helperText={errors.loginOrEmail}
+								placeholder="example@mail.com"
 								required
 							/>
 							<InputField
@@ -69,6 +72,7 @@ const AuthForm = () => {
 							type="submit"
 							size="wide"
 							onClick={() => {}}
+							isLoading={isLoading}
 						/>
 					</form>
 				)}

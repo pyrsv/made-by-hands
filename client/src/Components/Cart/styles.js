@@ -2,18 +2,16 @@ import styled from 'styled-components';
 import { Field } from 'formik';
 
 export const CartContainer = styled.div`
-	background: ${props => props.theme.lightPink};
 	padding-bottom: 26px;
 `;
 
 export const CartItemListContainer = styled.div`
 	border-bottom: 1px solid #d8846c;
-	background: ${props => props.theme.lightPink};
 `;
 
 export const CartItemContainer = styled.div`
 	position: relative;
-	border-top: 1px solid ${props => props.theme.mainDark};
+	border-top: 1px solid ${props => props.theme.accentRed};
 	display: flex;
 	justify-content: space-between;
 	height: 210px;
@@ -55,43 +53,35 @@ export const QuantityContainer = styled.div`
 	display: flex;
 	align-items: center;
 	margin-left: 100px;
+	min-width: 117px;
+	border-radius: 4px;
+	overflow: hidden;
 	@media (max-width: 576px) {
 		margin-left: 0;
 	}
 `;
 
 export const CartItemQuantity = styled.div`
-	height: 39px;
-	width: 39px;
 	background: #fffcfc;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	font-family: Gabriela, sans-serif;
-	font-style: normal;
-	font-weight: normal;
-	font-size: 14px;
-	line-height: 15px;
-`;
-
-export const DecreaseQuantity = styled.button`
-	background: #fffcfc;
-	border-bottom-left-radius: 4px;
-	border-top-left-radius: 4px;
-	height: 39px;
+	padding: 8px 0;
 	width: 39px;
-	border: none;
+	text-align: center;
 	border-right: 1px solid #747a82;
+	border-left: 1px solid #747a82;
+
+	font-size: 14px;
+	line-height: 22px;
 `;
 
-export const IncreaseQuantity = styled.button`
-	background: #fffcfc;
-	border-bottom-right-radius: 4px;
-	border-top-right-radius: 4px;
-	height: 39px;
+export const QuantityButton = styled.button`
 	width: 39px;
+	padding: 8px 0;
+	font-family: Gabriela, sans-serif;
+	font-weight: 300;
+	background: #fffcfc;
 	border: none;
-	border-left: 1px solid #747a82;
+	line-height: 22px;
+	font-size: 28px;
 `;
 
 export const CartItemPrice = styled.div`
@@ -121,22 +111,25 @@ export const SumContainer = styled.div`
 
 export const DeleteItemFromCart = styled.button`
 	display: inline-block;
+
 	position: absolute;
+	background-color: transparent;
+	outline: none;
+	border: none;
 	top: 5%;
 	right: 0;
-	font-weight: bold;
-	background: #fffcfc;
-	border: none;
-	outline: none;
-	border-radius: 4px;
-	color: ${props => props.theme.mainDark};
 `;
 
 export const CartItemColor = styled.span`
+	font-size: 16px;
 	margin-top: 45px;
 	@media (max-width: 576px) {
 		margin-top: 15px;
 	}
+`;
+
+export const ColorValue = styled.span`
+	text-transform: uppercase;
 `;
 
 export const CartIsEmpty = styled.div`
@@ -224,4 +217,9 @@ export const FillTheFields = styled.div`
 	margin: 20px 0;
 	text-transform: capitalize;
 	color: ${props => props.theme.mainDark};
+`;
+
+export const CartItemPricePerOne = styled.div`
+	font-size: 14px;
+	margin-top: 5px;
 `;

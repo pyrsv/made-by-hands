@@ -5,10 +5,11 @@ export const ParamText = styled.p`
 	display: inline-block;
 	padding-bottom: 5px;
 	@media screen and (max-width: 768px) {
-		font-size: 14px;
+		font-size: 16px;
 	}
-	@media screen and (max-width: 480px) {
-		font-size: 12px;
+	@media screen and (max-width: 576px) {
+		line-height: 15px;
+		font-size: 18px;
 	}
 `;
 
@@ -19,13 +20,10 @@ export const Li = styled.li`
 	margin-top: 5px;
 	font-family: 'Open Sans', sans-serif;
 	@media screen and (max-width: 768px) {
-		font-size: 14px;
+		font-size: 16px;
 	}
 	@media screen and (max-width: 576px) {
-		font-size: 12px;
-	}
-	@media screen and (max-width: 480px) {
-		font-size: 11px;
 		line-height: 15px;
+		font-size: 18px;
 	}
 `;

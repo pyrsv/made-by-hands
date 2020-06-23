@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import LayoutContainer from '../../LayoutContainer/LayoutContainer';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import { Carousel } from 'react-responsive-carousel';
+import { NavLink } from 'react-router-dom';
 import axios from 'axios';
 import Button from '../../UI/Button/Button';
 import './stylesInfoCarousel.scss';
@@ -17,7 +18,7 @@ const InfoCarousel = () => {
 	const [items, setItems] = useState([]);
 
 	const takeInfo = () => {
-		axios.get('./slides').then(res => {
+		axios.get('/api/slides').then(res => {
 			setItems(res.data);
 		});
 	};
@@ -36,10 +37,6 @@ const InfoCarousel = () => {
 		takeInfo();
 	}, [setItems]);
 
-	const changePage = () => {
-		window.location.assign('https://www.google.com/');
-	};
-
 	return (
 		<InfoCarouselContainer>
 			<LayoutContainer>
@@ -57,7 +54,9 @@ const InfoCarousel = () => {
 									/>
 									<CarouselTextContainer>
 										<CarouselTitle>{item.title}</CarouselTitle>
-										<Button text="More details" onClick={() => changePage()} />
+										<NavLink to={item.url}>
+											<Button text="More details" />
+										</NavLink>
 									</CarouselTextContainer>
 								</SliderContainer>
 							);

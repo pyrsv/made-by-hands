@@ -31,12 +31,11 @@ export const UserName = styled.p`
 		font-size: 16px;
 	}
 	@media screen and (max-width: 480px) {
-		font-size: 14px;
 	}
 `;
 
 export const CommentContent = styled.p`
 	@media screen and (max-width: 480px) {
-		font-size: 12px;
+		// font-size: 12px;
 	}
 `;

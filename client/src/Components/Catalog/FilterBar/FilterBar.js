@@ -4,11 +4,14 @@ import { useLocation, useHistory } from 'react-router-dom';
 import { Formik } from 'formik';
 import querystring from 'query-string';
 import { getColors, getBrands } from '../../../store/actions/filtersActions';
+import { toggleFilters } from '../../../store/actions/UIActions';
 import { getInitialFields } from '../../../utils/getFilterFields';
 import Button from '../../UI/Button/Button';
 import PriceRange from '../PriceRange/PriceRange';
 import FilterGroup from '../FilterGroup/FilterGroup';
 import { FiltersContainer, Title, FilterWrapper } from './styles';
+import Preloader from '../../UI/Preloader/Preloader';
+import { PreloaderContainer } from '../FilterGroup/styles';
 
 const FilterBar = () => {
 	const dispatch = useDispatch();
@@ -16,17 +19,34 @@ const FilterBar = () => {
 	const history = useHistory();
 
 	const [fields, setFields] = useState({});
-	const [priceRange, setPriceRange] = useState({ minPrice: 0, maxPrice: 2000 });
 
 	const categories = useSelector(state => state.filters.categories);
 	const color = useSelector(state => state.filters.colors);
 	const brand = useSelector(state => state.filters.brands);
+	const minPriceDB = useSelector(state => state.filters.minPrice);
+	const maxPriceDB = useSelector(state => state.filters.maxPrice);
+	const [priceRange, setPriceRange] = useState({
+		minPrice: minPriceDB,
+		maxPrice: maxPriceDB,
+	});
 
+	const isMobile = useSelector(state => state.UI.isHeaderMobile);
 	const isCategoriesLoading = useSelector(
 		state => state.filters.isCategoriesFetching
 	);
 	const isColorsLoading = useSelector(state => state.filters.isColorsFetching);
 	const isBrandsLoading = useSelector(state => state.filters.isBrandsFetching);
+	const isPriceLoading = useSelector(
+		state => state.filters.isPriceRangeFetching
+	);
+
+	const handleChangePrice = (min, max) => {
+		setPriceRange({ minPrice: min, maxPrice: max });
+	};
+
+	useEffect(() => {
+		handleChangePrice(minPriceDB, maxPriceDB);
+	}, [minPriceDB, maxPriceDB]);
 
 	useEffect(() => {
 		if (!color.length || !brand.length) {
@@ -45,10 +65,6 @@ const FilterBar = () => {
 		});
 		setFields(initialFields);
 	}, [categories, color, brand, location.search]);
-
-	const handleChangePrice = (min, max) => {
-		setPriceRange({ minPrice: min, maxPrice: max });
-	};
 
 	const handleFilterSubmit = values => {
 		const params = Object.entries(values).reduce((obj, [key, value]) => {
@@ -69,6 +85,9 @@ const FilterBar = () => {
 		history.push({
 			search: `?${str}`,
 		});
+		if (isMobile) {
+			dispatch(toggleFilters());
+		}
 	};
 
 	return (
@@ -102,7 +121,7 @@ const FilterBar = () => {
 									fieldsKey="brand"
 									setValue={setFieldValue}
 									checkboxType="default"
-									isLoading={isBrandsLoading}
+									isLoading={isColorsLoading}
 								/>
 								<FilterGroup
 									name="Colors"
@@ -111,10 +130,22 @@ const FilterBar = () => {
 									fieldsKey="color"
 									setValue={setFieldValue}
 									checkboxType="color"
-									isLoading={isColorsLoading}
+									isLoading={isBrandsLoading}
 								/>
 								<FilterGroup name="Price">
-									<PriceRange changeRange={handleChangePrice} />
+									{isPriceLoading ? (
+										<PreloaderContainer>
+											<Preloader size={40} />
+										</PreloaderContainer>
+									) : (
+										<PriceRange
+											changeRange={handleChangePrice}
+											minPrice={priceRange.minPrice}
+											maxPrice={priceRange.maxPrice}
+											mostCheap={minPriceDB}
+											mostExpensive={maxPriceDB}
+										/>
+									)}
 								</FilterGroup>
 
 								<Button type="Submit" text="Show" onClick={() => {}} />

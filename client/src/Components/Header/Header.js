@@ -88,9 +88,11 @@ const Header = () => {
 	const profileRoutes = [
 		<NavLink to="/profile/contact-info">contact info</NavLink>,
 		<NavLink to="/profile/wishlist">wishlist</NavLink>,
+		<NavLink to="/profile/orders">orders</NavLink>,
 		<span
 			role="button"
 			tabIndex="0"
+			style={{ color: '#DE3019;' }}
 			onKeyDown={() => dispatch(userLogout())}
 			onClick={() => dispatch(userLogout())}
 		>
@@ -167,7 +169,9 @@ const Header = () => {
 							</HamburgerWrapper>
 							<Logo />
 							<HeaderButtons onSearchClick={() => setSearch(!isSearch)} />
-							{isSearch && <SearchField />}
+							{isSearch && (
+								<SearchField onToggle={() => setSearch(!isSearch)} />
+							)}
 						</>
 					)}
 				</Container>
@@ -188,6 +192,12 @@ const Header = () => {
 						onDropdownLinkClick={() => handleDropdownLinkClick('profile')}
 						onLinkClick={() => dispatch(closeNav())}
 					/>
+					<Phone href="tel:+62896706255135">
+						<PhoneIcon>
+							<FontAwesomeIcon icon={['fas', 'phone-volume']} />
+						</PhoneIcon>
+						+38 (050) 960-28-85
+					</Phone>
 				</Drawer>
 			)}
 			{isModal && <AuthModal onToggle={() => dispatch(toggleModal())} />}

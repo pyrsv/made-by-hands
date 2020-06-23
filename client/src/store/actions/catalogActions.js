@@ -7,6 +7,9 @@ import {
 	LOAD_MORE_PRODUCTS,
 	SET_PRODUCT_TO_CART,
 	SET_PRODUCT_TO_WISHLIST,
+	SEARCH_PRODUCTS_INIT,
+	SEARCH_PRODUCTS_ERROR,
+	SEARCH_PRODUCTS_SUCCESS,
 } from '../types/catalogTypes';
 import { checkProductsForCartAndFavorites } from '../../utils/API';
 
@@ -14,7 +17,7 @@ const getFilteredProductsInit = () => ({
 	type: GET_FILTERED_PRODUCTS_INIT,
 });
 
-const getFilteredProductsSuccess = (products, productsQuantity) => ({
+export const getFilteredProductsSuccess = (products, productsQuantity) => ({
 	type: GET_FILTERED_PRODUCTS_SUCCESS,
 	payload: {
 		products,
@@ -47,11 +50,25 @@ export const setProductToWishlist = id => ({
 	payload: id,
 });
 
+const searchProductsInit = () => ({
+	type: SEARCH_PRODUCTS_INIT,
+});
+
+const searchProductsSuccess = products => ({
+	type: SEARCH_PRODUCTS_SUCCESS,
+	payload: products,
+});
+
+const searchProductsError = err => ({
+	type: SEARCH_PRODUCTS_ERROR,
+	payload: err,
+});
+
 export const getFilteredProducts = config => dispatch => {
 	dispatch(getFilteredProductsInit());
 	dispatch(updateConfig(config));
 	axios
-		.get('/products/filter/', {
+		.get('/api/products/filter/', {
 			params: {
 				...config,
 			},
@@ -73,7 +90,7 @@ export const getFilteredProducts = config => dispatch => {
 
 export const loadMoreAction = config => dispatch => {
 	axios
-		.get('/products/filter', {
+		.get('/api/products/filter', {
 			params: {
 				...config,
 			},
@@ -81,4 +98,42 @@ export const loadMoreAction = config => dispatch => {
 		.then(response => {
 			dispatch(loadMoreProducts(response.data.products));
 		});
+};
+
+export const searchProducts = query => dispatch => {
+	dispatch(searchProductsInit());
+
+	axios
+		.post('/api/products/search', { query })
+		.then(res => {
+			checkProductsForCartAndFavorites(res.data).then(
+				productsWithCartAndFavorites => {
+					dispatch(searchProductsSuccess(productsWithCartAndFavorites));
+				}
+			);
+		})
+		.catch(err => dispatch(searchProductsError(err)));
+};
+
+export const getProductsOnSale = config => dispatch => {
+	dispatch(getFilteredProductsInit());
+	axios
+		.get('/products/sales/', {
+			params: {
+				...config,
+			},
+		})
+		.then(response => {
+			checkProductsForCartAndFavorites(response.data.products).then(
+				productsWithCartAndFavorites => {
+					dispatch(
+						getFilteredProductsSuccess(
+							productsWithCartAndFavorites,
+							response.data.productsQuantity
+						)
+					);
+				}
+			);
+		})
+		.catch(err => dispatch(getFilteredProductsError(err)));
 };

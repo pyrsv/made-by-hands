@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
+import { NavLink } from 'react-router-dom';
 import {
 	CartContainer,
 	CartItemListContainer,
@@ -9,7 +10,6 @@ import {
 import { CartItem } from './CartItem';
 import LayoutContainer from '../LayoutContainer/LayoutContainer';
 import Button from '../UI/Button/Button';
-import Checkout from './Checkout';
 import Title from '../UI/Title/title';
 
 export const Cart = () => {
@@ -22,23 +22,11 @@ export const Cart = () => {
 
 	sumPrice = sumPrice === 0 ? undefined : sumPrice;
 
-	const [isCheckout, toggleCheckout] = useState({ showed: false });
-
-	const checkoutToggler = () => {
-		toggleCheckout(prevState => ({
-			showed: !prevState.showed,
-		}));
-	};
-
 	return (
 		<>
 			<CartContainer>
 				<LayoutContainer>
-					{isCheckout.showed ? (
-						<Title text="Checkout" color="dark" />
-					) : (
-						<Title text="Cart" color="dark" />
-					)}
+					<Title text="Cart" color="dark" />
 					<CartItemListContainer>
 						{currentCart.map(({ cartQuantity, product }) => {
 							return (
@@ -51,6 +39,7 @@ export const Cart = () => {
 									oldPrice={product.previousPrice}
 									type="olive"
 									itemNo={product.itemNo}
+									quantity={product.quantity}
 									cartQuantity={cartQuantity}
 									color={product.color}
 								>
@@ -62,16 +51,20 @@ export const Cart = () => {
 					{sumPrice && <SumContainer>Total: {sumPrice}₴</SumContainer>}
 					{sumPrice && (
 						<SumContainer>
-							{!isCheckout.showed && (
-								<Button text="Proceed to checkout" onClick={checkoutToggler} />
-							)}
+							<NavLink to="/checkout">
+								<Button
+									text="Proceed to checkout"
+									onClick={() => {}}
+									color="dark"
+								/>
+							</NavLink>
 						</SumContainer>
 					)}
 					{!sumPrice && <CartIsEmpty>Cart is Empty</CartIsEmpty>}
 
-					{isCheckout.showed && (
+					{/* {isCheckout.showed && (
 						<Checkout sumPrice={sumPrice} goods={currentCart} />
-					)}
+					)} */}
 				</LayoutContainer>
 			</CartContainer>
 		</>

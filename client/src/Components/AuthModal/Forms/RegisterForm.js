@@ -13,7 +13,13 @@ const RegisterSchema = Yup.object().shape({
 		.required('Login is required')
 		.min(3, 'Login must be between 3 and 10 characters')
 		.max(10, 'Login must be between 3 and 10 characters'),
-	password: Yup.string(),
+	password: Yup.string()
+		.matches(/^[a-zA-Z0-9]+$/, {
+			message: 'Allowed characters for password is a-z, A-Z, 0-9.',
+		})
+		.min(7, 'Password must be between 7 and 30 characters')
+		.max(30, 'Password must be between 7 and 30 characters')
+		.required('Password is required'),
 	firstName: Yup.string()
 		.required('First name is required')
 		.matches(/^[a-zA-Zа-яА-Я]+$/, {
@@ -73,6 +79,7 @@ const RegisterForm = () => {
 								value={values.email}
 								error={errors.email}
 								touched={touched.email}
+								placeholder="example@mail.com"
 								target="form"
 								label="Email"
 								required
@@ -133,6 +140,7 @@ const RegisterForm = () => {
 								value={values.telephone}
 								error={errors.telephone}
 								touched={touched.telephone}
+								placeholder="+380XXXXXXXXXXX"
 								target="form"
 								label="Phone number"
 								required
@@ -141,6 +149,7 @@ const RegisterForm = () => {
 
 						<Button
 							disabled={isLoading}
+							isLoading={isLoading}
 							text="Register"
 							type="submit"
 							size="wide"

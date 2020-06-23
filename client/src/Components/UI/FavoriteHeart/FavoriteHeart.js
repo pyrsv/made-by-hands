@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { HeartWrapper } from './styles';
@@ -21,4 +21,4 @@ FavoriteHeart.defaultProps = {
 	onClick: () => {},
 };
 
-export default FavoriteHeart;
+export default memo(FavoriteHeart);

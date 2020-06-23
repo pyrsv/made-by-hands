@@ -6,14 +6,15 @@ import {
 	CartItemInfo,
 	CartItemPrice,
 	CartItemQuantity,
-	DecreaseQuantity,
-	IncreaseQuantity,
+	QuantityButton,
 	QuantityContainer,
-	CartItemOldPrice,
 	DeleteItemFromCart,
+	ColorValue,
 	CartItemColor,
+	CartItemPricePerOne,
 } from './styles';
 import PropTypes from 'prop-types';
+import CloseButton from '../UI/CloseButton/CloseButton';
 import {
 	addToCart,
 	deleteFromCart,
@@ -25,11 +26,8 @@ export const CartItem = ({
 	id,
 	name,
 	img,
-	oldPrice,
 	price,
-	// type,
-	// isInCart,
-	// isFavorite,
+	quantity,
 	cartQuantity,
 	color,
 }) => {
@@ -39,34 +37,38 @@ export const CartItem = ({
 	return (
 		<>
 			<CartItemContainer>
-				<DeleteItemFromCart
-					ref={btn}
-					onClick={() => dispatch(deleteAllTheSameItems(id, itemNo, btn))}
-				>
-					X
+				<DeleteItemFromCart ref={btn}>
+					<CloseButton
+						onClick={() => dispatch(deleteAllTheSameItems(id, itemNo, btn))}
+					/>
 				</DeleteItemFromCart>
 				<CartItemImage src={img} alt={name} />
 				<CartItemInfo>
 					<span>{name}</span>
-					<CartItemColor>color: {color}</CartItemColor>{' '}
+					<CartItemColor>
+						color: <ColorValue>{color}</ColorValue>
+					</CartItemColor>
 				</CartItemInfo>
 				<QuantityContainer>
-					<DecreaseQuantity
+					<QuantityButton
 						disabled={cartQuantity === 1}
 						onClick={() => dispatch(deleteFromCart(id, itemNo))}
 					>
 						-
-					</DecreaseQuantity>
+					</QuantityButton>
 					<CartItemQuantity>{cartQuantity}</CartItemQuantity>
-					<IncreaseQuantity onClick={() => dispatch(addToCart(id, itemNo))}>
+					<QuantityButton
+						disabled={cartQuantity >= quantity}
+						onClick={() => dispatch(addToCart(id, itemNo))}
+					>
 						+
-					</IncreaseQuantity>
+					</QuantityButton>
 				</QuantityContainer>
 				<CartItemPrice>
-					{price * cartQuantity}₴{' '}
-					{oldPrice && (
-						<CartItemOldPrice>{oldPrice * cartQuantity}</CartItemOldPrice>
-					)}
+					{price * cartQuantity}₴
+					<CartItemPricePerOne>
+						{cartQuantity} x {price}₴
+					</CartItemPricePerOne>
 				</CartItemPrice>
 			</CartItemContainer>
 		</>
@@ -78,11 +80,8 @@ CartItem.propTypes = {
 	itemNo: PropTypes.string.isRequired,
 	name: PropTypes.string.isRequired,
 	img: PropTypes.string.isRequired,
-	oldPrice: PropTypes.oneOfType([PropTypes.number, PropTypes.object]),
 	price: PropTypes.number.isRequired,
 	cartQuantity: PropTypes.number.isRequired,
+	quantity: PropTypes.number.isRequired,
 	color: PropTypes.string.isRequired,
-};
-CartItem.defaultProps = {
-	oldPrice: null,
 };
