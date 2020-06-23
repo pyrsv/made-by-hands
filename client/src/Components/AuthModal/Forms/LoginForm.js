@@ -2,9 +2,10 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Button from '../../UI/Button/Button';
 import InputField from '../../UI/InputFiels/InputField';
+import FormErrorMessage from '../../UI/FormErrorMessage/FormErrorMessage';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import { FormFields } from './styles';
+import { FormFields, ErrorContainer, StyledForm } from './styles';
 import { userLogin } from '../../../store/actions/authActions';
 
 const LoginSchema = Yup.object().shape({
@@ -17,6 +18,9 @@ const LoginSchema = Yup.object().shape({
 const AuthForm = () => {
 	const dispatch = useDispatch();
 	const isLoading = useSelector(state => state.auth.isLoading);
+	const authError = Object.values(
+		useSelector(state => state.auth.error || {})
+	)[0];
 
 	return (
 		<div>
@@ -35,7 +39,7 @@ const AuthForm = () => {
 					touched,
 					errors,
 				}) => (
-					<form onSubmit={handleSubmit}>
+					<StyledForm onSubmit={handleSubmit}>
 						<FormFields>
 							<InputField
 								type="text"
@@ -74,7 +78,12 @@ const AuthForm = () => {
 							onClick={() => {}}
 							isLoading={isLoading}
 						/>
-					</form>
+						{authError && typeof authError !== 'object' && (
+							<ErrorContainer>
+								<FormErrorMessage error={authError} />
+							</ErrorContainer>
+						)}
+					</StyledForm>
 				)}
 			</Formik>
 		</div>

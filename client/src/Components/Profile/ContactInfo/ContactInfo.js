@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import Button from '../../UI/Button/Button';
+import FormErrorMessage from '../../UI/FormErrorMessage/FormErrorMessage';
 import InputField from '../../UI/InputFiels/InputField';
 import {
 	InfoWrapper,
@@ -10,6 +11,7 @@ import {
 	Form,
 	FormColumn,
 	FieldsWrapper,
+	ErrorContainer,
 } from './styles';
 import { updateUser } from '../../../store/actions/authActions';
 
@@ -52,6 +54,9 @@ const ContactInfo = () => {
 		address = {},
 	} = useSelector(state => state.auth.currentUser);
 	const isLoading = useSelector(state => state.auth.isLoading);
+	const authError = Object.values(
+		useSelector(state => state.auth.error || {})
+	)[0];
 
 	const { city, street, houseNumber, flat } = address;
 
@@ -206,6 +211,11 @@ const ContactInfo = () => {
 							size="wide"
 							text="Submit changes "
 						/>
+						{authError && typeof authError !== 'object' && (
+							<ErrorContainer>
+								<FormErrorMessage error={authError} />
+							</ErrorContainer>
+						)}
 					</Form>
 				)}
 			</Formik>

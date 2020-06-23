@@ -20,6 +20,7 @@ export const FieldsWrapper = styled.div`
 
 export const Form = styled.form`
 	display: inline-block;
+	position: relative;
 	max-width: 768px;
 	@media (max-width: 768px) {
 		max-width: initial;
@@ -36,4 +37,9 @@ export const FormColumn = styled.div`
 			margin: 0;
 		}
 	}
+`;
+
+export const ErrorContainer = styled.div`
+	position: absolute;
+	bottom: -20px;
 `;

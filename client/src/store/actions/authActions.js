@@ -175,7 +175,7 @@ export const userRegister = data => async dispatch => {
 				localStorage.setItem('cart', '[]');
 			}
 			dispatch(setCartAction(JSON.parse(localStorage.getItem('cart'))));
-			dispatch(userLoginError(err));
+			dispatch(userLoginError(err.response.data));
 		});
 };
 
