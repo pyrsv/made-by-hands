@@ -9,11 +9,6 @@ export const FormFields = styled.div`
 	position: relative;
 `;
 
-export const StyledForm = styled.form`
-	position: relative;
-	margin-bottom: ${props => (props.type === 'register' ? '45px' : 0)};
-`;
-
 export const ErrorContainer = styled.div`
 	position: absolute;
 	bottom: -20px;

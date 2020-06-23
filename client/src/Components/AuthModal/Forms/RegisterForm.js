@@ -76,7 +76,6 @@ const RegisterForm = () => {
 					touched,
 				}) => (
 					<StyledRegisterForm onSubmit={handleSubmit}>
-					<StyledForm type="register" onSubmit={handleSubmit}>
 						<FormFields>
 							<InputField
 								type="text"
@@ -167,7 +166,6 @@ const RegisterForm = () => {
 							</ErrorContainer>
 						)}
 					</StyledRegisterForm>
-
 				)}
 			</Formik>
 		</div>
