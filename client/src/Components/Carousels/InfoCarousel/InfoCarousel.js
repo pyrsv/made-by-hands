@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { NavLink } from 'react-router-dom';
 import LayoutContainer from '../../LayoutContainer/LayoutContainer';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import { Carousel } from 'react-responsive-carousel';
@@ -36,9 +37,9 @@ const InfoCarousel = () => {
 		takeInfo();
 	}, [setItems]);
 
-	const changePage = () => {
-		window.location.assign('https://www.google.com/');
-	};
+	// const changePage = () => {
+	// 	window.location.assign('https://www.google.com/');
+	// };
 
 	return (
 		<InfoCarouselContainer>
@@ -57,7 +58,9 @@ const InfoCarousel = () => {
 									/>
 									<CarouselTextContainer>
 										<CarouselTitle>{item.title}</CarouselTitle>
-										<Button text="More details" onClick={() => changePage()} />
+										<NavLink to={item.url}>
+											<Button text="More details" onClick={() => {}} />
+										</NavLink>
 									</CarouselTextContainer>
 								</SliderContainer>
 							);
