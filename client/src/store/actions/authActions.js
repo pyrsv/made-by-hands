@@ -58,7 +58,7 @@ const updatePasswordSuccess = customer => ({
 	payload: customer,
 });
 
-const updatePasswordError = err => ({
+export const updatePasswordError = err => ({
 	type: PASSWORD_UPDATE_ERROR,
 	payload: err,
 });

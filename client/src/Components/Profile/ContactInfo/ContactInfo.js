@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
@@ -15,7 +15,11 @@ import {
 	ErrorContainer,
 	FormsGridConrainer,
 } from './styles';
-import { updateUser } from '../../../store/actions/authActions';
+import {
+	updateUser,
+	userLoginError,
+	updatePasswordError,
+} from '../../../store/actions/authActions';
 
 const ContactInfoSchema = Yup.object().shape({
 	firstName: Yup.string()
@@ -55,6 +59,12 @@ const ContactInfo = () => {
 		telephone,
 		address = {},
 	} = useSelector(state => state.auth.currentUser);
+	useEffect(() => {
+		return () => {
+			dispatch(userLoginError(null));
+			dispatch(updatePasswordError(null));
+		};
+	}, [dispatch]);
 	const isLoading = useSelector(state => state.auth.isLoading);
 	const authError = Object.values(
 		useSelector(state => state.auth.error || {})
