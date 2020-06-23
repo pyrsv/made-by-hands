@@ -167,7 +167,9 @@ const Header = () => {
 									animationDuration={0.3}
 								/>
 							</HamburgerWrapper>
-							<Logo />
+							<NavLink to="/">
+								<Logo />
+							</NavLink>
 							<HeaderButtons onSearchClick={() => setSearch(!isSearch)} />
 							{isSearch && (
 								<SearchField onToggle={() => setSearch(!isSearch)} />
