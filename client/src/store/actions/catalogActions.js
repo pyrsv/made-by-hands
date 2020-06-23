@@ -118,7 +118,7 @@ export const searchProducts = query => dispatch => {
 export const getProductsOnSale = config => dispatch => {
 	dispatch(getFilteredProductsInit());
 	axios
-		.get('/products/sales/', {
+		.get('/api/products/sales/', {
 			params: {
 				...config,
 			},
@@ -135,5 +135,7 @@ export const getProductsOnSale = config => dispatch => {
 				}
 			);
 		})
-		.catch(err => dispatch(getFilteredProductsError(err)));
+		.catch(err => {
+			dispatch(getFilteredProductsError(err));
+		});
 };

@@ -15,7 +15,6 @@ const Catalog = () => {
 	dispatch(getPriceRange());
 	const isTablet = useSelector(state => state.UI.isHeaderMobile);
 	const isFilters = useSelector(state => state.UI.isDrawer);
-
 	return (
 		<CatalogContainer>
 			<LayoutContainer>
