@@ -45,7 +45,6 @@ export const IconSocNet = styled.a`
 	cursor: pointer;
 	background-image: url('./social-icons-png-vk-4.png');
 	background-position: ${props => props.backgroundPoss};
-	background-size: cover;
 	background-repeat: no-repeat;
 `;
 
