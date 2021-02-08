@@ -13,7 +13,7 @@
     "type": "git",
     "url": "https://gitlab.com/dan-it/js-course-development/fe-final-backend.git"
   },
-  "author": "VadvA",
+  "author": "sariber",
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
