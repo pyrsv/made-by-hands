@@ -1,5 +1,5 @@
 {
-  "name": "fe-final-backend",
+  "name": "commerce",
   "version": "1.0.0",
   "description": "Back End code for final projects of Front End groups\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[DDANIT\u001b[3~ Front End groups",
   "main": "server.js",
@@ -13,7 +13,7 @@
     "type": "git",
     "url": "https://gitlab.com/dan-it/js-course-development/fe-final-backend.git"
   },
-  "author": "Saribeg",
+  "author": "VadvA",
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
